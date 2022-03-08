@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.customexception;
+package com.remittancemiddleware.remittancemiddleware.util.customexception;
 
 public class CustomBadRequestException extends RuntimeException {
 

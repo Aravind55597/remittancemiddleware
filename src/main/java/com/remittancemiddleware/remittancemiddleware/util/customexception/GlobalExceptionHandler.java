@@ -1,6 +1,8 @@
-package com.remittancemiddleware.remittancemiddleware.customexception;
+package com.remittancemiddleware.remittancemiddleware.util.customexception;
 
-import com.remittancemiddleware.remittancemiddleware.responsemodel.Response;
+import com.remittancemiddleware.remittancemiddleware.util.customexception.CustomBadRequestException;
+import com.remittancemiddleware.remittancemiddleware.util.customexception.CustomNotFoundException;
+import com.remittancemiddleware.remittancemiddleware.util.responsemodel.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

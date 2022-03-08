@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.responsemodel;
+package com.remittancemiddleware.remittancemiddleware.util.responsemodel;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
