@@ -6,10 +6,10 @@ name: Java CI with Maven
 on:
   push:
     branches: 
-      - master
+      - Test-Github-Workflow
   pull_request:
     branches:
-      - master
+      - Test-Github-Workflow
 
 jobs:
   build:
@@ -31,8 +31,8 @@ jobs:
         RDS_DEV_HOSTNAME: ${{ secrets.RDS_DEV_HOSTNAME }}
         RDS_DEV_NAME: ${{ secrets.RDS_DEV_NAME }}
         RDS_DEV_PASSWORD: ${{ secrets.RDS_DEV_PASSWORD }}
-        RDS_DEV_PORT: ${{ secrets.CODE_ENVIRONMENT }}
-        RDS_DEV_USERNAME: ${{ secrets.CODE_ENVIRONMENT_DEV }}
-        SERVER_PORT: ${{ secrets.CODE_ENVIRONMENT }}
+        RDS_DEV_PORT: ${{ secrets.RDS_DEV_PORT }}
+        RDS_DEV_USERNAME: ${{ secrets.RDS_DEV_USERNAME }}
+        SERVER_PORT: ${{ secrets.SERVER_PORT }}
         
       run: mvn -B package --file pom.xml
