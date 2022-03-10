@@ -26,7 +26,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       env:
-        CODE_ENVIRONMENT: ${{ secrets.CODE_ENVIRONMENT }}
+        CODE_ENVIRONMENT: ${{secrets.CODE_ENVIRONMENT_DEV }}
         HIBERNATE_DDL_AUTO: ${{ secrets.HIBERNATE_DDL_AUTO }}
         RDS_DEV_HOSTNAME: ${{ secrets.RDS_DEV_HOSTNAME }}
         RDS_DEV_NAME: ${{ secrets.RDS_DEV_NAME }}
