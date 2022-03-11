@@ -57,4 +57,4 @@ jobs:
           environment_name: Remittancemiddleware-env
           version_label: ${{github.SHA}}
           region: us-east-1
-          deployment_package: target/remittancemiddlewareg6.jar
+          deployment_package: remittancemiddlewareg6.jar
