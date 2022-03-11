@@ -23,9 +23,9 @@ jobs:
         CODE_ENVIRONMENT: ${{ secrets.CODE_ENVIRONMENT_DEV }}
         HIBERNATE_DDL_AUTO: ${{ secrets.HIBERNATE_DDL_AUTO }}
         RDS_HOSTNAME_DEV: ${{ secrets.RDS_HOSTNAME_DEV }}
-        RDS_DB_NAME_DEV: ${{secrets.RDS_DB_NAME_DEV }}
+        RDS_DB_NAME_DEV: ${{secrets.RDS_DB_NAME }}
         RDS_PASSWORD_DEV: ${{ secrets.RDS_PASSWORD_DEV }}
-        RDS_PORT_DEV: ${{ secrets.RDS_PORT_DEV }}
+        RDS_PORT_DEV: ${{ secrets.RDS_PORT }}
         RDS_USERNAME_DEV: ${{secrets.RDS_USERNAME_DEV }}
         SERVER_PORT: ${{ secrets.SERVER_PORT }}
         
