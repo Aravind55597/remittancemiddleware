@@ -39,7 +39,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: artifact
-          path: ./remittancemiddlewareg6.jar
+          path: ./target/remittancemiddleware-0.0.1-SNAPSHOT.jar
   deploy:
     needs: build
     name: Deploy
@@ -61,4 +61,4 @@ jobs:
           environment_name: Remittancemiddleware-env
           version_label: ${{github.SHA}}
           region: us-east-1
-          deployment_package: remittancemiddlewareg6.jar
+          deployment_package: remittancemiddleware-0.0.1-SNAPSHOT.jar
