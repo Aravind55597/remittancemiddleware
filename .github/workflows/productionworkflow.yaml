@@ -31,6 +31,10 @@ jobs:
           RDS_USERNAME_DEV: ${{secrets.RDS_USERNAME}}
           SERVER_PORT: ${{ secrets.SERVER_PORT }}
         run: mvn -B package -DskipTests --file pom.xml
+      - name: Show contents of the current working directory
+        run: ls -la
+      - name: Show contents of the target directory
+        run: ls -la target
       - name: Upload JAR
         uses: actions/upload-artifact@v2
         with:
