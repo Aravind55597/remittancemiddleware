@@ -20,14 +20,14 @@ jobs:
           java-version: '8'
       - name: Build with Maven
         env:
-        CODE_ENVIRONMENT: ${{ secrets.CODE_ENVIRONMENT_PROD}}
-        HIBERNATE_DDL_AUTO: ${{ secrets.HIBERNATE_DDL_AUTO }}
-        RDS_HOSTNAME_DEV: ${{ secrets.RDS_HOSTNAME}}
-        RDS_DB_NAME: ${{secrets.RDS_DB_NAME }}
-        RDS_PASSWORD_DEV: ${{ secrets.RDS_PASSWORD}}
-        RDS_PORT: ${{ secrets.RDS_PORT }}
-        RDS_USERNAME_DEV: ${{secrets.RDS_USERNAME}}
-        SERVER_PORT: ${{ secrets.SERVER_PORT }}
+          CODE_ENVIRONMENT: ${{ secrets.CODE_ENVIRONMENT_PROD}}
+          HIBERNATE_DDL_AUTO: ${{ secrets.HIBERNATE_DDL_AUTO }}
+          RDS_HOSTNAME_DEV: ${{ secrets.RDS_HOSTNAME}}
+          RDS_DB_NAME: ${{secrets.RDS_DB_NAME }}
+          RDS_PASSWORD_DEV: ${{ secrets.RDS_PASSWORD}}
+          RDS_PORT: ${{ secrets.RDS_PORT }}
+          RDS_USERNAME_DEV: ${{secrets.RDS_USERNAME}}
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
         run: mvn -B package -DskipTests --file pom.xml
       - name: Upload JAR
         uses: actions/upload-artifact@v2
