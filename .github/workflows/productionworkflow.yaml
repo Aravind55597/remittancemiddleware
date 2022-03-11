@@ -20,7 +20,7 @@ jobs:
           java-version: '8'
       - name: Build with Maven
         env:
-        CODE_ENVIRONMENT: ${{ secrets.CODE_ENVIRONMENT}}
+        CODE_ENVIRONMENT: ${{ secrets.CODE_ENVIRONMENT_PROD}}
         HIBERNATE_DDL_AUTO: ${{ secrets.HIBERNATE_DDL_AUTO }}
         RDS_HOSTNAME_DEV: ${{ secrets.RDS_HOSTNAME}}
         RDS_DB_NAME: ${{secrets.RDS_DB_NAME }}
