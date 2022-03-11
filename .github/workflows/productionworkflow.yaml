@@ -20,20 +20,20 @@ jobs:
           java-version: '8'
       - name: Build with Maven
         env:
-          CODE_ENVIRONMENT: ${{ secrets.CODE_ENVIRONMENT_PROD }}
-          HIBERNATE_DDL_AUTO: ${{ secrets.HIBERNATE_DDL_AUTO }}
-          RDS_HOSTNAME: ${{ secrets.RDS_HOSTNAME }}
-          RDS_DB_NAME: ${{secrets.RDS_NAME }}
-          RDS_PASSWORD: ${{ secrets.RDS_PASSWORD }}
-          RDS_PORT: ${{ secrets.RDS_PORT }}
-          RDS_USERNAME: ${{secrets.RDS_USERNAME }}
-          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+        CODE_ENVIRONMENT: ${{ secrets.CODE_ENVIRONMENT}}
+        HIBERNATE_DDL_AUTO: ${{ secrets.HIBERNATE_DDL_AUTO }}
+        RDS_HOSTNAME_DEV: ${{ secrets.RDS_HOSTNAME}}
+        RDS_DB_NAME: ${{secrets.RDS_DB_NAME }}
+        RDS_PASSWORD_DEV: ${{ secrets.RDS_PASSWORD}}
+        RDS_PORT: ${{ secrets.RDS_PORT }}
+        RDS_USERNAME_DEV: ${{secrets.RDS_USERNAME}}
+        SERVER_PORT: ${{ secrets.SERVER_PORT }}
         run: mvn -B package -DskipTests --file pom.xml
       - name: Upload JAR
         uses: actions/upload-artifact@v2
         with:
           name: artifact
-          path: target/tweet_scheduler-0.0.1-SNAPSHOT.jar
+          path: target/remittancemiddlewareg6.jar
   deploy:
     needs: build
     name: Deploy
@@ -49,10 +49,10 @@ jobs:
         with:
           aws_access_key: ${{secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{secrets.AWS_SECRET_ACCESS_KEY }}
-          #aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}
-#          use_existing_version_if_available: false
-#          application_name: autocluck
-#          environment_name: Autocluck-env
-#          version_label: ${{github.SHA}}
-#          region: us-east-1
-#          deployment_package: tweet_scheduler-0.0.1-SNAPSHOT.jar
+#          aws_session_token: ${{ secrets.AWS_SESSION_TOKEN }}
+          use_existing_version_if_available: false
+          application_name: remittancemiddleware
+          environment_name: Remittancemiddleware-env
+          version_label: ${{github.SHA}}
+          region: us-east-1
+          deployment_package: target/remittancemiddlewareg6.jar
