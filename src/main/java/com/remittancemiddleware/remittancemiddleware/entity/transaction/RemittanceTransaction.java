@@ -2,6 +2,7 @@ package com.remittancemiddleware.remittancemiddleware.entity.transaction;
 
 
 
+import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import com.remittancemiddleware.remittancemiddleware.entity.map.SenderMap;
 import com.remittancemiddleware.remittancemiddleware.enums.RemittancePurpose;
 
@@ -43,5 +44,10 @@ public class RemittanceTransaction  implements Serializable{
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "receiver_ID")
     private Receiver receiver;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,
+            CascadeType.DETACH,CascadeType.REFRESH})
+    @JoinColumn(name="company_ID")
+    private Company company;
 
 }
