@@ -15,7 +15,6 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(name = "party_map_id")
 public class SenderMap extends PartyMap{
 
-
     //primary key will be party Id
 
     private String senderSourceOfFunds ;

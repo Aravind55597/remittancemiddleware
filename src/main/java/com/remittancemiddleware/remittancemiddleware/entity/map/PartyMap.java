@@ -34,7 +34,7 @@ abstract public class PartyMap {
 
 
     @OneToOne
-    @JoinColumn(name = "identification_id")
+    @JoinColumn(name = "identification_map_id")
     private IdentificationMap identification;
 
     @OneToOne

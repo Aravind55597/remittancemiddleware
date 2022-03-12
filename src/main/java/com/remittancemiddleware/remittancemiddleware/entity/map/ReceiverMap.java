@@ -21,6 +21,7 @@ public class ReceiverMap extends PartyMap {
 
     private String receiverType ;
 
+    //this should be removed
     private String receiverMobileNumber;
 
     @OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
