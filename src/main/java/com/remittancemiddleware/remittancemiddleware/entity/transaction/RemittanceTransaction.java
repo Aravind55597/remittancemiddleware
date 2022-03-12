@@ -3,6 +3,8 @@ package com.remittancemiddleware.remittancemiddleware.entity.transaction;
 
 
 import com.remittancemiddleware.remittancemiddleware.entity.map.SenderMap;
+import com.remittancemiddleware.remittancemiddleware.enums.RemittancePurpose;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,19 +23,18 @@ public class RemittanceTransaction  implements Serializable{
     private int id;
 
 
-    //remittancePurpose enum
+    private RemittancePurpose remittancePurpose; //remittancePurpose enum // done
+
+    private long remittanceAmount; //remittanceAmount enum // nope, remittance amount is just amount
+
+    private String senderCurrency; //senderCurency enum // nope should be using standard currency notation i.e. 3 letter string
 
 
-    //remittanceAmount enum
+    private String payoutCurrency; //payoutCurrency enum // no enum, same as above
 
-    //senderCurency enum
+    private String sourceType; //sourceType enum // hard code value as it was hard coded from a hidden field
 
-
-    //payoutCurrency enum
-
-    //sourceType enum
-
-    //segment
+    private String segment; //segment // hard code value, same reason as above
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "sender_ID")
