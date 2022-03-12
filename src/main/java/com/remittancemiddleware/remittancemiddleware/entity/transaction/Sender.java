@@ -24,14 +24,14 @@ public class Sender  extends Party{
 
     public SenderBeneficiaryRelationship senderBeneficiaryRelationship; //    enum senderBeneficiaryRelationship; // done
 
-    public Sender(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, int mobileNumber, SourceOfFunds sourceOfFunds, SenderBeneficiaryRelationship senderBeneficiaryRelationship) {
+    public Sender(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, int mobileNumber, String sourceOfFunds, String senderBeneficiaryRelationship) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationality = nationality;
         this.currency = currency;
         this.dateOfBirth = dateOfBirth;
         this.mobileNumber = mobileNumber;
-        this.sourceOfFunds = sourceOfFunds;
-        this.senderBeneficiaryRelationship = senderBeneficiaryRelationship;
+        this.sourceOfFunds = SourceOfFunds.valueOf(sourceOfFunds.toUpperCase());
+        this.senderBeneficiaryRelationship = SenderBeneficiaryRelationship.valueOf(senderBeneficiaryRelationship.toUpperCase());
     }
 }
