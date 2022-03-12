@@ -37,7 +37,7 @@ public class RemittanceMap implements Serializable {
 //    @JoinColumn(name="party_map_id")
     @OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
     @JoinColumn(name = "receiver_map_id")
-    private SenderMap receiverMap;
+    private ReceiverMap receiverMap;
 
 
 }
