@@ -31,6 +31,6 @@ public class User {
     @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,
             CascadeType.DETACH,CascadeType.REFRESH})
     @JoinColumn(name="company_id")
-    private Company company = new Company();
+    private Company company ;
 
 }
