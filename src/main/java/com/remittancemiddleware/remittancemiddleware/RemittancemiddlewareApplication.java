@@ -20,18 +20,18 @@ public class RemittancemiddlewareApplication {
 
 
 
-	@Bean
-	public CommandLineRunner demoData(CompanyDAO companyDAO , RemittanceMapDAO remittanceMapDAO, UserDAO userDAO) {
-		return args -> {
-
-			RemittanceMap remittanceMap = new RemittanceMap();
-			ReceiverMap recevierMap = new ReceiverMap();
-			SenderMap senderMap = new SenderMap();
-
-			recevierMap.setReceiverType("ReceiverType");
-			recevierMap.setReceiverMobileNumber("");
-		};
-	}
+//	@Bean
+//	public CommandLineRunner demoData(CompanyDAO companyDAO , RemittanceMapDAO remittanceMapDAO, UserDAO userDAO) {
+//		return args -> {
+//
+//			RemittanceMap remittanceMap = new RemittanceMap();
+//			ReceiverMap recevierMap = new ReceiverMap();
+//			SenderMap senderMap = new SenderMap();
+//
+//			recevierMap.setReceiverType("ReceiverType");
+//			recevierMap.setReceiverMobileNumber("");
+//		};
+//	}
 
 	//	@Bean
 	//	public mapperService mapperService(){
