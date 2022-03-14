@@ -7,8 +7,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
-
+import java.util.Date;
 
 
 @Entity
@@ -20,10 +19,22 @@ import javax.persistence.Table;
 public class Receiver  extends Party {
 
 
-    // enum receiverType
+    private String receiverType; // enum receiverType // nope for enum, hard code default field value "bank_account" from excel
 
 
     //this should be removed ?
 
     private int receiverMobileNumber;
+
+
+    public Receiver(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, int mobileNumber, String receiverType, int receiverMobileNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.nationality = nationality;
+        this.currency = currency;
+        this.dateOfBirth = dateOfBirth;
+        this.mobileNumber = mobileNumber;
+        this.receiverType = receiverType;
+        this.receiverMobileNumber = receiverMobileNumber;
+    }
 }

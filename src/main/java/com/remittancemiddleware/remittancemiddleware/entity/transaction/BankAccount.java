@@ -25,5 +25,8 @@ public class BankAccount  implements Serializable {
     @JoinColumn(name = "party_id")
     private Party party;
 
-
+    public BankAccount(String bankName, int bankAccountNumber) {
+        this.bankName = bankName;
+        this.bankAccountNumber = bankAccountNumber;
+    }
 }

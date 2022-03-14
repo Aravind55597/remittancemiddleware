@@ -19,35 +19,35 @@ import java.util.Date;
 public abstract class Party  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    protected int id; // change from private to protected for inheritance
 
-    private String firstName ;
+    protected String firstName ;
 
-    private String lastName ;
+    protected String lastName ;
 
-    private String nationality;
+    protected String nationality;
+    // what is this currency for btw? there is payoutCurrency, senderCurrency
+    protected String currency; //   Currency enum // Nope don't need, currency has standard notation, just need to ensure all caps
 
-    //   Currency enum
+    protected Date dateOfBirth;
 
-    private Date dateOfBirth;
-
-    private int mobileNumber;
+    protected int mobileNumber;
 
 
 
 
     @OneToOne
     @JoinColumn(name = "identification_id")
-    private Identification identification;
+    protected Identification identification;
 
     @OneToOne
     @JoinColumn(name = "bank_account_id")
-    private BankAccount bankAccount;
+    protected BankAccount bankAccount;
 
 
     @OneToOne
     @JoinColumn(name = "address_id")
-    private Address address;
+    protected Address address;
 
 
 
