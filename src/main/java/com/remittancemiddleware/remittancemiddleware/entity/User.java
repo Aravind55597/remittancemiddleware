@@ -28,8 +28,7 @@ public class User {
 
     private String lastName;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,
-            CascadeType.DETACH,CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name="company_id")
     private Company company ;
 

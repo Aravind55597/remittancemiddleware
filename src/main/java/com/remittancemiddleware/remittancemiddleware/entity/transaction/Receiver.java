@@ -23,6 +23,7 @@ public class Receiver  extends Party {
 
 
     //this should be removed ?
+    private String payoutCurrency; //payoutCurrency enum // no enum, same as above
 
 
     public Receiver(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, int mobileNumber, String receiverType, int receiverMobileNumber) {

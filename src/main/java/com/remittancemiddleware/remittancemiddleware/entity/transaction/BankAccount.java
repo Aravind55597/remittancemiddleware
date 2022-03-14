@@ -18,15 +18,16 @@ public class BankAccount  implements Serializable {
 
     private String bankName;
 
-    private int bankAccountNumber;
+    private String branchName;
+
+    private int accountNumber;
 
 
-    @OneToOne
-    @JoinColumn(name = "party_id")
+    @OneToOne(mappedBy = "bankAccount")
     private Party party;
 
-    public BankAccount(String bankName, int bankAccountNumber) {
+    public BankAccount(String bankName,String branchName, int accountNumber) {
         this.bankName = bankName;
-        this.bankAccountNumber = bankAccountNumber;
+        this.accountNumber = accountNumber;
     }
 }

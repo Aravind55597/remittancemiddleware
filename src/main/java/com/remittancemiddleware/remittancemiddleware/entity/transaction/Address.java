@@ -18,24 +18,24 @@ public class Address  implements Serializable {
 
     private String addressLine;
 
-    private String addressCity; //Address city enum? // no enum
+    private String city; //Address city enum? // no enum
 
-    private String addressCountry; //addressCountry enum? // no enum, use standard country code
+    private String country; //addressCountry enum? // no enum, use standard country code
 
-    private String addressState; //addressState enum? // no enum, use input string
+    private String state; //addressState enum? // no enum, use input string
 
-    private int addressZipCode;
+    private int zipCode;
 
 
     @OneToOne
     @JoinColumn(name = "party_id")
     private Party party;
 
-    public Address(String addressLine, String addressCity, String addressCountry, String addressState, int addressZipCode) {
+    public Address(String addressLine, String city, String country, String state, int zipCode) {
         this.addressLine = addressLine;
-        this.addressCity = addressCity;
-        this.addressCountry = addressCountry;
-        this.addressState = addressState;
-        this.addressZipCode = addressZipCode;
+        this.city = city;
+        this.country = country;
+        this.state = state;
+        this.zipCode = zipCode;
     }
 }

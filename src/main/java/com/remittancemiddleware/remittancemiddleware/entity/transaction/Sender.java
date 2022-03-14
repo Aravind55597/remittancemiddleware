@@ -1,14 +1,12 @@
 package com.remittancemiddleware.remittancemiddleware.entity.transaction;
 
-import com.remittancemiddleware.remittancemiddleware.enums.SenderBeneficiaryRelationship;
+import com.remittancemiddleware.remittancemiddleware.enums.BeneficiaryRelationship;
 import com.remittancemiddleware.remittancemiddleware.enums.SourceOfFunds;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 
@@ -22,16 +20,19 @@ public class Sender  extends Party{
     public SourceOfFunds sourceOfFunds; //    enum senderSourceOfFunds ; // done
 
 
-    public SenderBeneficiaryRelationship senderBeneficiaryRelationship; //    enum senderBeneficiaryRelationship; // done
+    private String senderCurrency; //senderCurency enum // nope should be using standard currency notation i.e. 3 letter string
 
-    public Sender(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, int mobileNumber, String sourceOfFunds, String senderBeneficiaryRelationship) {
+    @Enumerated(EnumType.STRING)
+    public BeneficiaryRelationship beneficiaryRelationship; //    enum senderBeneficiaryRelationship; // done
+
+    public Sender(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, int mobileNumber, SourceOfFunds sourceOfFunds, BeneficiaryRelationship  beneficiaryRelationship) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationality = nationality;
         this.currency = currency;
         this.dateOfBirth = dateOfBirth;
         this.mobileNumber = mobileNumber;
-        this.sourceOfFunds = SourceOfFunds.valueOf(sourceOfFunds.toUpperCase());
-        this.senderBeneficiaryRelationship = SenderBeneficiaryRelationship.valueOf(senderBeneficiaryRelationship.toUpperCase());
+        this.sourceOfFunds = sourceOfFunds;
+        this.beneficiaryRelationship = beneficiaryRelationship;
     }
 }

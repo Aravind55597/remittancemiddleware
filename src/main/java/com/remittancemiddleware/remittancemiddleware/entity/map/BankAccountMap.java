@@ -17,6 +17,8 @@ public class BankAccountMap {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String bankName;
+
     private String branchName;
 
     private String accountNumber;

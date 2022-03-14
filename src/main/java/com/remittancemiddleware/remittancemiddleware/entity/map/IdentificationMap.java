@@ -21,6 +21,8 @@ public class IdentificationMap {
 
     private String idType;
 
+    private int idNumber;
+
     private String issuingCountry;
 
     @OneToOne(mappedBy = "identificationMap")

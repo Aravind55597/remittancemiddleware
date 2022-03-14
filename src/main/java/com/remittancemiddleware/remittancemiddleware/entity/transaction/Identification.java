@@ -19,9 +19,9 @@ public class Identification  implements Serializable {
 
     private int idNumber;
 
-    @OneToOne
-    @JoinColumn(name = "party_id")
+    @OneToOne(mappedBy = "identification")
     private Party party;
+
     private IdType idType; //enum idType // done
 
     private String issuingCountry; //enum issuing country? // nope, using standard country code

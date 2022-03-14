@@ -32,15 +32,15 @@ abstract public class PartyMap {
     private String mobileNumber;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
     @JoinColumn(name = "identification_map_id")
     private IdentificationMap identificationMap;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
     @JoinColumn(name = "bank_account_map_id")
     private BankAccountMap bankAccountMap;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
     @JoinColumn(name = "address_map_id")
     private AddressMap addressMap;
 

@@ -1,5 +1,5 @@
 package com.remittancemiddleware.remittancemiddleware.enums;
 
-public enum SenderBeneficiaryRelationship {
+public enum BeneficiaryRelationship {
     EMPLOYEE, FAMILY, FRIENDS, SELF, SELLER, OTHERS
 }

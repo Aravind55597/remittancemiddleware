@@ -23,30 +23,26 @@ public class RemittanceTransaction  implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Enumerated(EnumType.STRING)
+    private RemittancePurpose purpose; //remittancePurpose enum // done
 
-    private RemittancePurpose remittancePurpose; //remittancePurpose enum // done
-
-    private long remittanceAmount; //remittanceAmount enum // nope, remittance amount is just amount
-
-    private String senderCurrency; //senderCurency enum // nope should be using standard currency notation i.e. 3 letter string
-
-
-    private String payoutCurrency; //payoutCurrency enum // no enum, same as above
+    private long amount; //remittanceAmount enum // nope, remittance amount is just amount
 
     private String sourceType; //sourceType enum // hard code value as it was hard coded from a hidden field
 
     private String segment; //segment // hard code value, same reason as above
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    private String paymentMode;
+
+    @OneToOne(cascade = {CascadeType.ALL},orphanRemoval=true)
     @JoinColumn(name = "sender_ID")
     private Sender sender;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.ALL},orphanRemoval=true)
     @JoinColumn(name = "receiver_ID")
     private Receiver receiver;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,
-            CascadeType.DETACH,CascadeType.REFRESH})
+    @ManyToOne
     @JoinColumn(name="company_ID")
     private Company company;
 

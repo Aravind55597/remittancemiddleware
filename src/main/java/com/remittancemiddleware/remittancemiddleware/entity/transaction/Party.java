@@ -33,16 +33,16 @@ public abstract class Party  implements Serializable {
 
     protected int mobileNumber;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
     @JoinColumn(name = "identification_id")
     protected Identification identification;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
     @JoinColumn(name = "bank_account_id")
     protected BankAccount bankAccount;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
     @JoinColumn(name = "address_id")
     protected Address address;
 

@@ -23,23 +23,29 @@ public class Company implements Serializable {
 
     private String companyName;
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company" , cascade = CascadeType.ALL)
     private List<User> users ;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "remittance_map_id")
     private RemittanceMap remittanceMap;
 
-    @OneToMany(mappedBy = "company") // not sure if this is correct, but i added for you, pls check - clarence
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "company")
     private List<RemittanceTransaction> remittanceTransactions;
 
-    public Company(String companyName) {
-        this.companyName = companyName;
-    }
 
     public void addUser(User user){
         if(this.users==null){
             this.users=new ArrayList<User>();
         }
         this.users.add(user);
+    }
+    public void addRemittanceTransaction(RemittanceTransaction remittanceTransactions){
+        if(this.remittanceTransactions==null){
+            this.remittanceTransactions=new ArrayList<RemittanceTransaction>();
+        }
+        this.remittanceTransactions.add(remittanceTransactions);
     }
 
 
