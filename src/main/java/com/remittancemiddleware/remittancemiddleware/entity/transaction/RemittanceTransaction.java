@@ -6,6 +6,7 @@ import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import com.remittancemiddleware.remittancemiddleware.entity.map.SenderMap;
 import com.remittancemiddleware.remittancemiddleware.enums.RemittancePurpose;
 
+import com.remittancemiddleware.remittancemiddleware.enums.TransactionStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,6 +34,8 @@ public class RemittanceTransaction  implements Serializable{
     private String segment; //segment // hard code value, same reason as above
 
     private String paymentMode;
+
+    private TransactionStatus transactionStatus;
 
     @OneToOne(cascade = {CascadeType.ALL},orphanRemoval=true)
     @JoinColumn(name = "sender_ID")
