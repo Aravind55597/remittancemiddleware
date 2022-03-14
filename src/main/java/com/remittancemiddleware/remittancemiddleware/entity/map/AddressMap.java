@@ -25,18 +25,16 @@ public class AddressMap {
     private String addressLine;
 
 
-    private String addressCity;
+    private String city;
 
-    private String addressCountry;
+    private String country;
 
 
-    private String addressState;
+    private String state;
 
-    private String addressZipCode;
+    private String zipCode;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "party_map_id")
+    @OneToOne(mappedBy = "addressMap")
     private PartyMap partyMap;
-
 
 }

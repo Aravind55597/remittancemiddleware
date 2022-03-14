@@ -24,8 +24,6 @@ public class Receiver  extends Party {
 
     //this should be removed ?
 
-    private int receiverMobileNumber;
-
 
     public Receiver(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, int mobileNumber, String receiverType, int receiverMobileNumber) {
         this.firstName = firstName;
@@ -35,6 +33,5 @@ public class Receiver  extends Party {
         this.dateOfBirth = dateOfBirth;
         this.mobileNumber = mobileNumber;
         this.receiverType = receiverType;
-        this.receiverMobileNumber = receiverMobileNumber;
     }
 }

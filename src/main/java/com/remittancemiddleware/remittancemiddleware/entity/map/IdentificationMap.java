@@ -23,8 +23,7 @@ public class IdentificationMap {
 
     private String issuingCountry;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "party_map_id")
+    @OneToOne(mappedBy = "identificationMap")
     private PartyMap partyMap;
 
 }

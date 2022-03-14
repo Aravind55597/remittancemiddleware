@@ -17,13 +17,12 @@ public class BankAccountMap {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String bankBranchName;
+    private String branchName;
 
-    private String bankAccountNumber;
+    private String accountNumber;
 
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "party_map_id")
+    @OneToOne(mappedBy = "bankAccountMap")
     private PartyMap partyMap;
 
 

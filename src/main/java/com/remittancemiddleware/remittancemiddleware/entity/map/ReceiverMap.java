@@ -16,16 +16,13 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(name = "party_map_id")
 public class ReceiverMap extends PartyMap {
 
-
     //primary key will be id from party
 
-    private String receiverType ;
+    private String type ;
 
-    //this should be removed
-    private String receiverMobileNumber;
+    private String payoutCurrency;
 
-    @OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-    @JoinColumn(name="ssot_map_id")
+    @OneToOne(mappedBy = "receiverMap")
     private RemittanceMap remittanceMap;
 
 

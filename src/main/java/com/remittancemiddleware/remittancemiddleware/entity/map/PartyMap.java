@@ -26,22 +26,21 @@ abstract public class PartyMap {
 
     private String currency;
 
-    private String address;
 
     private String dateOfBirth;
 
     private String mobileNumber;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "identification_map_id")
-    private IdentificationMap identification;
+    private IdentificationMap identificationMap;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "bank_account_map_id")
     private BankAccountMap bankAccountMap;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_map_id")
     private AddressMap addressMap;
 

@@ -17,16 +17,14 @@ public class SenderMap extends PartyMap{
 
     //primary key will be party Id
 
-    private String senderSourceOfFunds ;
+    private String sourceOfFunds ;
+
+    private String senderCurrency ;
+
+    private String beneficiaryRelationship;
 
 
-    private String senderBeneficiaryRelationship;
-
-    @OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-    @JoinColumn(name="ssot_map_id")
+    @OneToOne(mappedBy = "senderMap")
     private RemittanceMap remittanceMap;
-
-
-
 
 }

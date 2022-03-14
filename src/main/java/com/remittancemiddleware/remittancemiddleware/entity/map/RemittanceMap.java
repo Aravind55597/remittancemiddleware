@@ -19,23 +19,22 @@ public class RemittanceMap implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String remittancePurpose;
+    private String purpose;
 
-    private String remittanceAmount;
-
-    private String senderCurrency ;
+    private String amount;
+    
 
     private String paymentMode;
 
-//    @OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-//    @JoinColumn(name="party_map_id")
-    @OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    private String sourceType;
+
+    private String segment;
+
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "sender_map_id")
     private SenderMap senderMap;
 
-//    @OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-//    @JoinColumn(name="party_map_id")
-    @OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "receiver_map_id")
     private ReceiverMap receiverMap;
 

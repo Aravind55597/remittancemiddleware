@@ -33,9 +33,6 @@ public abstract class Party  implements Serializable {
 
     protected int mobileNumber;
 
-
-
-
     @OneToOne
     @JoinColumn(name = "identification_id")
     protected Identification identification;
