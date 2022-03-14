@@ -22,13 +22,14 @@ public class Identification  implements Serializable {
     @OneToOne(mappedBy = "identification")
     private Party party;
 
+    @Enumerated(EnumType.STRING)
     private IdType idType; //enum idType // done
 
     private String issuingCountry; //enum issuing country? // nope, using standard country code
 
-    public Identification(int idNumber, String idType, String issuingCountry) {
+    public Identification(int idNumber, IdType idType, String issuingCountry) {
         this.idNumber = idNumber;
-        this.idType = IdType.valueOf(idType.toUpperCase());
+        this.idType = idType;
         this.issuingCountry = issuingCountry;
     }
 }

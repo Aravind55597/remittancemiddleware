@@ -35,6 +35,7 @@ public class RemittanceTransaction  implements Serializable{
 
     private String paymentMode;
 
+    @Enumerated(EnumType.STRING)
     private TransactionStatus transactionStatus;
 
     @OneToOne(cascade = {CascadeType.ALL},orphanRemoval=true)

@@ -17,6 +17,7 @@ import java.util.Date;
 @PrimaryKeyJoinColumn(name = "party_id")
 public class Sender  extends Party{
 
+    @Enumerated(EnumType.STRING)
     public SourceOfFunds sourceOfFunds; //    enum senderSourceOfFunds ; // done
 
 
