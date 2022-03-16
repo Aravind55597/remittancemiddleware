@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.util.customexception;
+package com.remittancemiddleware.remittancemiddleware.customexception;
 
 public class CustomNotFoundException extends RuntimeException{
 

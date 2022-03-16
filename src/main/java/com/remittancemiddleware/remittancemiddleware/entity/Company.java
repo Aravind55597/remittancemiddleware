@@ -1,6 +1,7 @@
 package com.remittancemiddleware.remittancemiddleware.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.remittancemiddleware.remittancemiddleware.entity.map.RemittanceMap;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
 import lombok.Getter;
@@ -29,7 +30,6 @@ public class Company implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "remittance_map_id")
     private RemittanceMap remittanceMap;
-
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "company")
     private List<RemittanceTransaction> remittanceTransactions;

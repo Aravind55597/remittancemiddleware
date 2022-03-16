@@ -6,6 +6,7 @@ import com.remittancemiddleware.remittancemiddleware.dao.UserDAO;
 import com.remittancemiddleware.remittancemiddleware.entity.map.ReceiverMap;
 import com.remittancemiddleware.remittancemiddleware.entity.map.RemittanceMap;
 import com.remittancemiddleware.remittancemiddleware.entity.map.SenderMap;
+import okhttp3.OkHttpClient;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,6 +17,14 @@ public class RemittancemiddlewareApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RemittancemiddlewareApplication.class, args);
+	}
+
+
+
+	//injecting http client for API calls
+	@Bean
+	public OkHttpClient okHttpClient() {
+		return new OkHttpClient();
 	}
 
 

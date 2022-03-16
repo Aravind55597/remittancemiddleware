@@ -1,8 +1,6 @@
-package com.remittancemiddleware.remittancemiddleware.util.customexception;
+package com.remittancemiddleware.remittancemiddleware.customexception;
 
-import com.remittancemiddleware.remittancemiddleware.util.customexception.CustomBadRequestException;
-import com.remittancemiddleware.remittancemiddleware.util.customexception.CustomNotFoundException;
-import com.remittancemiddleware.remittancemiddleware.util.responsemodel.Response;
+import com.remittancemiddleware.remittancemiddleware.dataclass.CustomResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,10 +12,10 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     //BAD REQUEST 400
-    public ResponseEntity<Response> handleException(CustomBadRequestException exc){
+    public ResponseEntity<CustomResponse> handleException(CustomBadRequestException exc){
 
         //create CustomerErrorResponse
-        Response error = new Response(
+        CustomResponse error = new CustomResponse(
                 exc.getMessage(),
                 HttpStatus.BAD_REQUEST
         );
@@ -28,10 +26,10 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     //NOT FOUND 404
-    public ResponseEntity<Response> handleException(CustomNotFoundException exc){
+    public ResponseEntity<CustomResponse> handleException(CustomNotFoundException exc){
 
         //create CustomerErrorResponse
-        Response error = new Response(
+        CustomResponse error = new CustomResponse(
                 exc.getMessage(),
                 HttpStatus.NOT_FOUND
         );
@@ -42,10 +40,10 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     //INTERNAL SERVER ERROR 500
-    public ResponseEntity<Response> handleException(Exception exc){
+    public ResponseEntity<CustomResponse> handleException(Exception exc){
 
         //create CustomerErrorResponse
-        Response error = new Response(
+        CustomResponse error = new CustomResponse(
                 exc.getMessage(),
                 HttpStatus.INTERNAL_SERVER_ERROR
         );
