@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 @SpringBootApplication
 public class RemittancemiddlewareApplication {
@@ -23,7 +24,22 @@ public class RemittancemiddlewareApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RemittancemiddlewareApplication.class, args);
 	}
+	@Bean
+	public CommandLineRunner demoData(RemittanceTransactionDAO rTranDAO){
+		return args -> {
 
+			List<RemittanceTransaction> data = rTranDAO.findByTransactionStatusAndCompanyId(TransactionStatus.SUCCESSFUL, 1);
+
+			System.out.println(data);
+			for(RemittanceTransaction rt: data){
+				System.out.println(rt.getTransactionStatus());
+			}
+
+			System.out.println(data.get(0).getCompany().getCompanyName());
+//			System.out.println(data.get(0).getTransactionStatus());
+
+		};
+	}
 
 /*
 	@Bean
