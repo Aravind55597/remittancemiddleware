@@ -4,6 +4,7 @@ package com.remittancemiddleware.remittancemiddleware.entity.transaction;
 
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import com.remittancemiddleware.remittancemiddleware.entity.map.SenderMap;
+import com.remittancemiddleware.remittancemiddleware.enums.RemittanceCompany;
 import com.remittancemiddleware.remittancemiddleware.enums.RemittancePurpose;
 
 import com.remittancemiddleware.remittancemiddleware.enums.TransactionStatus;
@@ -28,6 +29,9 @@ public class RemittanceTransaction  implements Serializable{
     private RemittancePurpose purpose; //remittancePurpose enum // done
 
     private long amount; //remittanceAmount enum // nope, remittance amount is just amount
+
+    @Enumerated(EnumType.STRING)
+    private RemittanceCompany remittanceCompany;
 
     private String sourceType; //sourceType enum // hard code value as it was hard coded from a hidden field
 

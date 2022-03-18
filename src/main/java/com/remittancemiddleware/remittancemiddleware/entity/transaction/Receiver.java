@@ -26,7 +26,7 @@ public class Receiver  extends Party {
     private String payoutCurrency; //payoutCurrency enum // no enum, same as above
 
 
-    public Receiver(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, int mobileNumber, String receiverType, int receiverMobileNumber) {
+    public Receiver(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, String mobileNumber, String receiverType) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationality = nationality;
