@@ -31,7 +31,7 @@ public abstract class Party  implements Serializable {
 
     protected Date dateOfBirth;
 
-    protected int mobileNumber;
+    protected String mobileNumber;
 
     @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
     @JoinColumn(name = "identification_id")

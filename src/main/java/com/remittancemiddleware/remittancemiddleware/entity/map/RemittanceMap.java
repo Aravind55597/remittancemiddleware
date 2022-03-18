@@ -24,8 +24,9 @@ public class RemittanceMap implements Serializable {
 
     private String amount;
 
-
     private String paymentMode;
+
+    private String remittanceCompany;
 
     private String sourceType;
 
