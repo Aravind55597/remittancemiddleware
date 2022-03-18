@@ -17,7 +17,7 @@ public class Identification  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int idNumber;
+    private String idNumber;
 
     @OneToOne(mappedBy = "identification")
     private Party party;
@@ -27,7 +27,7 @@ public class Identification  implements Serializable {
 
     private String issuingCountry; //enum issuing country? // nope, using standard country code
 
-    public Identification(int idNumber, IdType idType, String issuingCountry) {
+    public Identification(String idNumber, IdType idType, String issuingCountry) {
         this.idNumber = idNumber;
         this.idType = idType;
         this.issuingCountry = issuingCountry;
