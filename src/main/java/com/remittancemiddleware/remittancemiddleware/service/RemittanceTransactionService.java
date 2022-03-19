@@ -1,12 +1,13 @@
-package com.remittancemiddleware.remittancemiddleware.dao;
+package com.remittancemiddleware.remittancemiddleware.service;
 
+import com.remittancemiddleware.remittancemiddleware.entity.User;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
 import com.remittancemiddleware.remittancemiddleware.enums.TransactionStatus;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface RemittanceTransactionDAO extends JpaRepository<RemittanceTransaction, Integer> {
+public interface RemittanceTransactionService {
     List<RemittanceTransaction> findByTransactionStatusAndCompanyId(TransactionStatus status, int companyId);
-    List<RemittanceTransaction> findByCompanyId(int companyId);
+    List<RemittanceTransaction> findByCompanyId(int userId);
+    TransactionStatus getTransactionStatus(String status);
 }

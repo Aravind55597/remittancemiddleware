@@ -1,6 +1,7 @@
 package com.remittancemiddleware.remittancemiddleware.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,6 +32,11 @@ public class User {
     @ManyToOne
     @JoinColumn(name="company_id")
     private Company company ;
+
+    @JsonBackReference
+    public Company getCompany(){
+        return company;
+    }
 
     public User(String email, String password, String firstName, String lastName) {
         this.email = email;
