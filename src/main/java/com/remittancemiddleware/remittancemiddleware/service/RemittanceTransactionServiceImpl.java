@@ -6,6 +6,8 @@ import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import com.remittancemiddleware.remittancemiddleware.entity.User;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
 import com.remittancemiddleware.remittancemiddleware.enums.TransactionStatus;
+import com.remittancemiddleware.remittancemiddleware.util.customexception.CustomNotFoundException;
+import com.remittancemiddleware.remittancemiddleware.util.customexception.GlobalExceptionHandler;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +24,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
     }
 
     @Override
-    public List<RemittanceTransaction> findByTransactionStatusAndCompanyId(TransactionStatus status, int userId) throws RuntimeException {
+    public List<RemittanceTransaction> findByTransactionStatusAndCompanyId(TransactionStatus status, int userId) throws CustomNotFoundException {
 
         Optional<User> result = userDAO.findById(userId);
 
@@ -33,7 +35,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
         }
         else {
             // we didn't find the user
-            throw new RuntimeException("Did not find user id - " + userId);
+            throw new CustomNotFoundException("Did not find user id - " + userId);
         }
         Company company = theUser.getCompany();
         int companyId = company.getId();
@@ -42,7 +44,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
     }
 
     @Override
-    public List<RemittanceTransaction> findByCompanyId(int userId) throws RuntimeException {
+    public List<RemittanceTransaction> findByCompanyId(int userId) throws CustomNotFoundException {
         Optional<User> result = userDAO.findById(userId);
 
         User theUser = null;
@@ -52,7 +54,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
         }
         else {
             // we didn't find the user
-            throw new RuntimeException("Did not find user id - " + userId);
+            throw new CustomNotFoundException("Did not find user id - " + userId);
         }
         Company company = theUser.getCompany();
         int companyId = company.getId();
@@ -61,7 +63,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
     }
 
     @Override
-    public TransactionStatus getTransactionStatus(String status) throws RuntimeException{
+    public TransactionStatus getTransactionStatus(String status) throws CustomNotFoundException{
         TransactionStatus transactionStatus = null;
         if (status.equals("SUCCESSFUL")){
             transactionStatus = TransactionStatus.SUCCESSFUL;
@@ -72,7 +74,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
         } else if (status.equals("REJECTED")){
             transactionStatus = TransactionStatus.REJECTED;
         } else{
-            throw new RuntimeException("Incorrect status input - " + status);
+            throw new CustomNotFoundException("Incorrect status input - " + status);
         }
 
         return transactionStatus;
