@@ -2,6 +2,7 @@ package com.remittancemiddleware.remittancemiddleware.entity.transaction;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittanceCompany;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittancePurpose;
@@ -45,12 +46,28 @@ public class RemittanceTransaction  implements Serializable{
     @JoinColumn(name = "sender_ID")
     private Sender sender;
 
+    @JsonBackReference
+    public Sender getSender(){
+        return sender;
+    }
+
     @OneToOne(cascade = {CascadeType.ALL},orphanRemoval=true)
     @JoinColumn(name = "receiver_ID")
     private Receiver receiver;
 
+    @JsonBackReference
+    public Receiver getReceiver(){
+        return receiver;
+    }
+
     @ManyToOne
     @JoinColumn(name="company_ID")
     private Company company;
+
+    @JsonBackReference
+    public Company getCompany() {
+        return company;
+    }
+
 
 }
