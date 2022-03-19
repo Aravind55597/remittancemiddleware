@@ -1,5 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.controller;
 
+import com.remittancemiddleware.remittancemiddleware.entity.User;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
 import com.remittancemiddleware.remittancemiddleware.enums.TransactionStatus;
 import com.remittancemiddleware.remittancemiddleware.service.RemittanceTransactionService;
@@ -16,6 +17,20 @@ public class RemittanceTransactionController {
     @Autowired
     public RemittanceTransactionController(RemittanceTransactionService theRemittanceTransactionService){
         this.remittanceTransactionService = theRemittanceTransactionService;
+    }
+
+    // add mapping for GET /user/{userId}
+
+    @GetMapping("/remittanceTransaction/{userId}")
+    public User getUser(@PathVariable int userId) {
+
+        User theUser = remittanceTransactionService.findById(userId);
+
+        if (theUser == null) {
+            throw new RuntimeException("User id not found - " + userId);
+        }
+
+        return theUser;
     }
 
     @GetMapping("/remittanceTransaction/getTransactionsByStatus")
