@@ -1,6 +1,8 @@
 package com.remittancemiddleware.remittancemiddleware;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.remittancemiddleware.remittancemiddleware.dao.RemittanceTransactionDAO;
+import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.FinanceNow;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
 import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToRemittanceNowMapper;
 import okhttp3.OkHttpClient;
@@ -40,20 +42,22 @@ public class RemittancemiddlewareApplication {
 
 	//ALLOWS YOU TO TEST SERVICES BY RUNNING THE APP -> REMEMBER TO COMMENT IT OUT BEFORE PUSHING IT
 	//this can't run
-	@Bean
-	@Transactional
-	public CommandLineRunner demoData(SSOTToRemittanceNowMapper mapper , RemittanceTransactionDAO rtDAO){
-		return args -> {
-
-			RemittanceTransaction rt = rtDAO.getById(7);
-
+//	@Bean
+//	@Transactional
+//	public CommandLineRunner demoData(SSOTToRemittanceNowMapper mapper , RemittanceTransactionDAO rtDAO, ObjectMapper objectMapper){
+//		return args -> {
+//
+//			RemittanceTransaction rt = rtDAO.findById(7).get();
+//
 //			FinanceNow result = mapper.MapSSOT(rt);
-
-			System.out.println(rt);
-
-
-		};
-	}
+//
+//			String gvar = objectMapper.writeValueAsString(result);
+//
+//			System.out.println(gvar);
+//
+//
+//		};
+//	}
 //
 //	@Transactional
 //	public void runTest(SSOTToRemittanceNowMapper mapper , RemittanceTransactionDAO rtDAO){

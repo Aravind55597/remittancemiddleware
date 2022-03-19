@@ -3,6 +3,8 @@ package com.remittancemiddleware.remittancemiddleware.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.remittancemiddleware.remittancemiddleware.dataclass.sandbox.SandboxResponse;
+import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
+import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTMapper;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -79,7 +81,7 @@ public class SandboxAPIServiceImpl implements SandboxAPIService {
     //TODO Need to add submission
 //    //need to create a class for remittancenow
 //    @Override
-//    public <T> SandboxResponse sendTransactionsToSandbox(T remittance) throws IOException {
+//    public <T extends SSOTMapper<T>> SandboxResponse sendTransactionsToSandbox(RemittanceTransaction remittance) throws IOException {
 //        SandboxResponse sandboxAccessTokenResponse = this.authenticate();
 //        String accessToken = sandboxAccessTokenResponse.getAccessToken();
 //
@@ -103,7 +105,7 @@ public class SandboxAPIServiceImpl implements SandboxAPIService {
 //
 //        return sandboxResponse;
 //    }
-//
+
 
 
 

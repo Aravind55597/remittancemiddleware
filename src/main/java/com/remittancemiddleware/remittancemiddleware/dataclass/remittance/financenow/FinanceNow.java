@@ -1,11 +1,14 @@
 package com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow;
 
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@JsonNaming(PropertyNamingStrategies.UpperCamelCaseStrategy.class)
 public class FinanceNow {
 
     private String bankAccountNumber;
@@ -57,33 +60,5 @@ public class FinanceNow {
 
     private String receiverNationality;
 
-    @Override
-    public String toString() {
-        return "FinanceNow{" +
-                "bankAccountNumber='" + bankAccountNumber + '\'' +
-                ", paymentMode='" + paymentMode + '\'' +
-                ", payoutCurrency='" + payoutCurrency + '\'' +
-                ", purposeOfRemittance='" + purposeOfRemittance + '\'' +
-                ", receiverAddress='" + receiverAddress + '\'' +
-                ", receiverCity='" + receiverCity + '\'' +
-                ", receiverCountry='" + receiverCountry + '\'' +
-                ", receiverFirstName='" + receiverFirstName + '\'' +
-                ", receiverIdNumber='" + receiverIdNumber + '\'' +
-                ", receiverIdType='" + receiverIdType + '\'' +
-                ", receiverLastName='" + receiverLastName + '\'' +
-                ", senderAddress='" + senderAddress + '\'' +
-                ", senderBeneficiaryRelationship='" + senderBeneficiaryRelationship + '\'' +
-                ", senderCity='" + senderCity + '\'' +
-                ", senderCountry='" + senderCountry + '\'' +
-                ", senderDateOfBirth='" + senderDateOfBirth + '\'' +
-                ", senderFirstName='" + senderFirstName + '\'' +
-                ", senderIdNumber='" + senderIdNumber + '\'' +
-                ", senderIdType='" + senderIdType + '\'' +
-                ", senderLastName='" + senderLastName + '\'' +
-                ", senderNationality='" + senderNationality + '\'' +
-                ", senderSourceOfFund='" + senderSourceOfFund + '\'' +
-                ", senderState='" + senderState + '\'' +
-                ", receiverNationality='" + receiverNationality + '\'' +
-                '}';
-    }
+
 }
