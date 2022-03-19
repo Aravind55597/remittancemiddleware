@@ -1,6 +1,7 @@
 package com.remittancemiddleware.remittancemiddleware.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.remittancemiddleware.remittancemiddleware.entity.map.RemittanceMap;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
 import lombok.Getter;
@@ -26,6 +27,11 @@ public class Company implements Serializable {
     @OneToMany(mappedBy = "company" , cascade = CascadeType.ALL)
     private List<User> users ;
 
+    @JsonManagedReference
+    public List<User> getUsers(){
+        return users;
+    }
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "remittance_map_id")
     private RemittanceMap remittanceMap;
@@ -33,6 +39,11 @@ public class Company implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "company")
     private List<RemittanceTransaction> remittanceTransactions;
+
+    @JsonManagedReference
+    public List<RemittanceTransaction> getRemittanceTransactions(){
+        return remittanceTransactions;
+    }
 
 
     public void addUser(User user){
