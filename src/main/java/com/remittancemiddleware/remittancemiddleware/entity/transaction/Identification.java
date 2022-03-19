@@ -1,6 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.entity.transaction;
 
-import com.remittancemiddleware.remittancemiddleware.enums.IdType;
+import com.remittancemiddleware.remittancemiddleware.entity.enums.IdType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

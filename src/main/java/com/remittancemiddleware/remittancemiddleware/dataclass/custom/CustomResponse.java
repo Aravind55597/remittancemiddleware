@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.dataclass;
+package com.remittancemiddleware.remittancemiddleware.dataclass.custom;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

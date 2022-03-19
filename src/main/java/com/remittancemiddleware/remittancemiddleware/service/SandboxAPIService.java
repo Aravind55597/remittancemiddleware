@@ -1,7 +1,7 @@
 package com.remittancemiddleware.remittancemiddleware.service;
 
 
-import com.remittancemiddleware.remittancemiddleware.dataclass.SandboxResponse;
+import com.remittancemiddleware.remittancemiddleware.dataclass.sandbox.SandboxResponse;
 
 import java.io.IOException;
 

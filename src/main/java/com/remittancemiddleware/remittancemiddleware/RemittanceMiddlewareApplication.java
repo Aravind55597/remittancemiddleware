@@ -1,5 +1,7 @@
 package com.remittancemiddleware.remittancemiddleware;
 
+import com.remittancemiddleware.remittancemiddleware.dataclass.sandbox.SandboxResponse;
+import com.remittancemiddleware.remittancemiddleware.service.SandboxAPIService;
 import okhttp3.OkHttpClient;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -7,11 +9,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 
+//https://www.javaguides.net/2018/11/spring-data-jpa-query-creation-from-method-names.html
+//spring data jpa reference
 @SpringBootApplication
-public class RemittancemiddlewareApplication {
+public class RemittanceMiddlewareApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RemittancemiddlewareApplication.class, args);
+		SpringApplication.run(RemittanceMiddlewareApplication.class, args);
 	}
 
 	//injecting http client for API calls
@@ -21,6 +25,19 @@ public class RemittancemiddlewareApplication {
 	}
 
 
+
+
+//	@Bean
+//	public CommandLineRunner demoData(SandboxAPIService apiService){
+//		return args -> {
+//
+//		SandboxResponse response = apiService.authenticate();
+//
+//		System.out.println(response.getAccessToken());
+//
+//
+//		};
+//	}
 /*
 	@Bean
 	public CommandLineRunner demoData(CompanyDAO companyDAO , RemittanceMapDAO remittanceMapDAO, UserDAO userDAO, RemittanceTransactionDAO remittanceTransactionDAO) {

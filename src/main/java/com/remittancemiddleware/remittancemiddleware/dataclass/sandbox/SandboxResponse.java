@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.dataclass;
+package com.remittancemiddleware.remittancemiddleware.dataclass.sandbox;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -2,7 +2,7 @@ package com.remittancemiddleware.remittancemiddleware.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.remittancemiddleware.remittancemiddleware.dataclass.SandboxResponse;
+import com.remittancemiddleware.remittancemiddleware.dataclass.sandbox.SandboxResponse;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,14 +35,15 @@ public class SandboxAPIServiceImpl implements SandboxAPIService {
         this.sandboxBaseUrl=sandboxBaseUrl;
     }
 
+    //works
     @Override
     public SandboxResponse testConnection() throws IOException {
-        RequestBody formBody = new FormBody.Builder()
+        RequestBody requestBody = new FormBody.Builder()
                 .build();
 
         Request request = new Request.Builder()
                 .url(sandboxBaseUrl + "/smu_sandbox")
-                .post(formBody)
+                .post(requestBody)
                 .build();
 
         Call call = okHttpClient.newCall(request);
@@ -53,11 +54,12 @@ public class SandboxAPIServiceImpl implements SandboxAPIService {
         return sandboxResponse;
     }
 
+    //works
     @Override
     public SandboxResponse authenticate() throws IOException {
         RequestBody requestBody = new FormBody.Builder()
-                .add("username", sandboxPassword)
-                .add("password", sandboxUsername)
+                .add("username", sandboxUsername)
+                .add("password", sandboxPassword)
                 .build();
 
         Request request = new Request.Builder()
@@ -73,19 +75,24 @@ public class SandboxAPIServiceImpl implements SandboxAPIService {
         return sandboxResponse;
     }
 
+
+//    //need to create a class for remittancenow
 //    @Override
 //    public <T> SandboxResponse sendTransactionsToSandbox(T remittance) throws IOException {
 //        SandboxResponse sandboxAccessTokenResponse = this.authenticate();
 //        String accessToken = sandboxAccessTokenResponse.getAccessToken();
 //
-//        RequestBody formBody = new FormBody.Builder()
-//                .add("access_token",accessToken)
+//        String jsonInString = objectMapper.writeValueAsString();
 //
+//        RequestBody requestBody = new FormBody.Builder()
+//                .add("access_token",accessToken)
+//                .add("api_name","financenow")
+//                .add("payload","")
 //                .build();
 //
 //        Request request = new Request.Builder()
 //                .url(sandboxBaseUrl + "/smu_send_transaction")
-//                .post(formBody)
+//                .post(requestBody)
 //                .build();
 //
 //        Call call = okHttpClient.newCall(request);
@@ -95,7 +102,7 @@ public class SandboxAPIServiceImpl implements SandboxAPIService {
 //
 //        return sandboxResponse;
 //    }
-
+//
 
 
 
