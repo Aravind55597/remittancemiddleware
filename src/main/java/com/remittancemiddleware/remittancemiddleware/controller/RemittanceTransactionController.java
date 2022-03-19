@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/remittanceTransaction")
 public class RemittanceTransactionController {
     private RemittanceTransactionService remittanceTransactionService;
 
@@ -20,13 +20,13 @@ public class RemittanceTransactionController {
     }
 
 
-    @GetMapping("/remittanceTransaction/getTransactionsByUser")
+    @GetMapping("/getTransactionsByUser")
     public List<RemittanceTransaction> getTransactionsByStatus(@RequestParam int userId){
         List<RemittanceTransaction> remittanceTransaction = remittanceTransactionService.findByCompanyId(userId);
         return remittanceTransaction;
     }
 
-    @GetMapping("/remittanceTransaction/getTransactionsByStatus")
+    @GetMapping("/getTransactionsByStatus")
     public List<RemittanceTransaction> getTransactionsByStatus(@RequestParam String status, @RequestParam int userId){
         TransactionStatus transactionStatus = null;
         if (status.equals("SUCCESSFUL")){
