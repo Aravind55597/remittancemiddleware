@@ -1,8 +1,8 @@
 package com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.enumdata;
 
-public enum PurposeOfRemittance {
+public enum PurposeOfRemittanceRN {
     BUSINESS_EXPENSES("16"),
-    CONSTRUCTION("12"),
+    CONSTRUCTION_LAND_PURCHASE_MORTGAGE_REPAYMENTS("12"),
     DONATION("05"),
     EDUCATION("03"),
     FAMILY_EXPENSES("02"),
@@ -13,7 +13,7 @@ public enum PurposeOfRemittance {
 
     private String data;
 
-    PurposeOfRemittance(String data) {
+    PurposeOfRemittanceRN(String data) {
         this.data = data;
     }
 

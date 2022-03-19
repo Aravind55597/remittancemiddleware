@@ -1,6 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.enumdata;
 
-public enum IdType {
+public enum IdTypeRN {
 
 
     COMPANY_REGISTRATION("05"),
@@ -11,7 +11,7 @@ public enum IdType {
 
     private String data;
 
-    IdType(String data) {
+    IdTypeRN(String data) {
         this.data = data;
     }
 

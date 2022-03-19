@@ -11,4 +11,6 @@ public interface RemittanceTransactionDAO extends JpaRepository<RemittanceTransa
 
     List<RemittanceTransaction> findByTransactionStatusAndCompanyId(TransactionStatus status,int id);
 
+
+
 }

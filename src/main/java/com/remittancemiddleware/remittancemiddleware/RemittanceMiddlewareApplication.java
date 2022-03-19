@@ -1,12 +1,20 @@
 package com.remittancemiddleware.remittancemiddleware;
 
+import com.remittancemiddleware.remittancemiddleware.dao.RemittanceTransactionDAO;
+import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.FinanceNow;
 import com.remittancemiddleware.remittancemiddleware.dataclass.sandbox.SandboxResponse;
+import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
 import com.remittancemiddleware.remittancemiddleware.service.SandboxAPIService;
+import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToRemittanceNowMapper;
 import okhttp3.OkHttpClient;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.annotation.Transactional;
+
+
+import java.text.SimpleDateFormat;
 
 
 //https://www.javaguides.net/2018/11/spring-data-jpa-query-creation-from-method-names.html
@@ -16,6 +24,7 @@ public class RemittanceMiddlewareApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RemittanceMiddlewareApplication.class, args);
+
 	}
 
 	//injecting http client for API calls
@@ -24,20 +33,46 @@ public class RemittanceMiddlewareApplication {
 		return new OkHttpClient();
 	}
 
+	//injecting simpleDateFormat
+	@Bean
+	SimpleDateFormat simpleDateFormat(){
+		return new SimpleDateFormat("dd-MM-yyyy");
+	}
 
 
 
-//	@Bean
-//	public CommandLineRunner demoData(SandboxAPIService apiService){
-//		return args -> {
+	//ALLOWS YOU TO TEST SERVICES BY RUNNING THE APP -> REMEMBER TO COMMENT IT OUT BEFORE PUSHING IT
+	//this can't run
+	@Bean
+	@Transactional
+	public CommandLineRunner demoData(SSOTToRemittanceNowMapper mapper , RemittanceTransactionDAO rtDAO){
+		return args -> {
+
+			RemittanceTransaction rt = rtDAO.getById(7);
+
+//			FinanceNow result = mapper.MapSSOT(rt);
+
+			System.out.println(rt);
+
+
+		};
+	}
 //
-//		SandboxResponse response = apiService.authenticate();
+//	@Transactional
+//	public void runTest(SSOTToRemittanceNowMapper mapper , RemittanceTransactionDAO rtDAO){
+//		RemittanceTransaction rt = rtDAO.getById(7);
 //
-//		System.out.println(response.getAccessToken());
+//		FinanceNow result = mapper.MapSSOT(rt);
+//
+//		System.out.println(result);
 //
 //
-//		};
 //	}
+
+
+
+
+
 /*
 	@Bean
 	public CommandLineRunner demoData(CompanyDAO companyDAO , RemittanceMapDAO remittanceMapDAO, UserDAO userDAO, RemittanceTransactionDAO remittanceTransactionDAO) {

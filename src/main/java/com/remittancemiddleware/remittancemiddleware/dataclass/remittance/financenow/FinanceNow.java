@@ -57,5 +57,33 @@ public class FinanceNow {
 
     private String receiverNationality;
 
-
+    @Override
+    public String toString() {
+        return "FinanceNow{" +
+                "bankAccountNumber='" + bankAccountNumber + '\'' +
+                ", paymentMode='" + paymentMode + '\'' +
+                ", payoutCurrency='" + payoutCurrency + '\'' +
+                ", purposeOfRemittance='" + purposeOfRemittance + '\'' +
+                ", receiverAddress='" + receiverAddress + '\'' +
+                ", receiverCity='" + receiverCity + '\'' +
+                ", receiverCountry='" + receiverCountry + '\'' +
+                ", receiverFirstName='" + receiverFirstName + '\'' +
+                ", receiverIdNumber='" + receiverIdNumber + '\'' +
+                ", receiverIdType='" + receiverIdType + '\'' +
+                ", receiverLastName='" + receiverLastName + '\'' +
+                ", senderAddress='" + senderAddress + '\'' +
+                ", senderBeneficiaryRelationship='" + senderBeneficiaryRelationship + '\'' +
+                ", senderCity='" + senderCity + '\'' +
+                ", senderCountry='" + senderCountry + '\'' +
+                ", senderDateOfBirth='" + senderDateOfBirth + '\'' +
+                ", senderFirstName='" + senderFirstName + '\'' +
+                ", senderIdNumber='" + senderIdNumber + '\'' +
+                ", senderIdType='" + senderIdType + '\'' +
+                ", senderLastName='" + senderLastName + '\'' +
+                ", senderNationality='" + senderNationality + '\'' +
+                ", senderSourceOfFund='" + senderSourceOfFund + '\'' +
+                ", senderState='" + senderState + '\'' +
+                ", receiverNationality='" + receiverNationality + '\'' +
+                '}';
+    }
 }

@@ -1,6 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.enumdata;
 
-public enum SenderBeneficiaryRelationship {
+public enum SenderBeneficiaryRelationshipRN {
     EMPLOYEE("04"),
     FAMILY("01"),
     FRIENDS("02"),
@@ -14,7 +14,7 @@ public enum SenderBeneficiaryRelationship {
 
     private String data;
 
-    SenderBeneficiaryRelationship(String data) {
+    SenderBeneficiaryRelationshipRN(String data) {
         this.data = data;
     }
 

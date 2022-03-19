@@ -1,9 +1,9 @@
 package com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.enumdata;
 
-public enum SenderSourceOfFund {
+public enum SenderSourceOfFundRN {
 
     BUSINESS_AND_INVESTMENT("02"),
-    CRYPTOCURRENCY_OR_OTHER_DIGITAL_PAYMENT_TOKENS("07"),
+    DIGITAL_PAYMENT_TOKENS("07"),
     DONATION("06"),
     FRIENDS_AND_FAMILY("04"),
     OTHER("99"),
@@ -12,7 +12,7 @@ public enum SenderSourceOfFund {
 
     private String data;
 
-    SenderSourceOfFund(String data) {
+    SenderSourceOfFundRN(String data) {
         this.data = data;
     }
 
