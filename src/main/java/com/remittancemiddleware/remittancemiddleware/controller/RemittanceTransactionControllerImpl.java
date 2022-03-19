@@ -1,7 +1,7 @@
 package com.remittancemiddleware.remittancemiddleware.controller;
 
+import com.remittancemiddleware.remittancemiddleware.entity.enumdata.TransactionStatus;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
-import com.remittancemiddleware.remittancemiddleware.enums.TransactionStatus;
 import com.remittancemiddleware.remittancemiddleware.service.RemittanceTransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

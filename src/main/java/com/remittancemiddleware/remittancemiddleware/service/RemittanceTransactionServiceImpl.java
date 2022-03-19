@@ -1,13 +1,13 @@
 package com.remittancemiddleware.remittancemiddleware.service;
 
+import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFoundException;
 import com.remittancemiddleware.remittancemiddleware.dao.RemittanceTransactionDAO;
 import com.remittancemiddleware.remittancemiddleware.dao.UserDAO;
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import com.remittancemiddleware.remittancemiddleware.entity.User;
+import com.remittancemiddleware.remittancemiddleware.entity.enumdata.TransactionStatus;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
-import com.remittancemiddleware.remittancemiddleware.enums.TransactionStatus;
-import com.remittancemiddleware.remittancemiddleware.util.customexception.CustomNotFoundException;
-import com.remittancemiddleware.remittancemiddleware.util.customexception.GlobalExceptionHandler;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;

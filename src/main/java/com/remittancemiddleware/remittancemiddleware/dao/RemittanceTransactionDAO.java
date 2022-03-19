@@ -1,5 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.dao;
 
+import com.remittancemiddleware.remittancemiddleware.entity.enumdata.TransactionStatus;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 
