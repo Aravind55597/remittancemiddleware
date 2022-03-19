@@ -20,23 +20,14 @@ public class RemittanceTransactionControllerImpl implements RemittanceTransactio
 
 
     @GetMapping("/getTransactionsByUser")
-    public List<RemittanceTransaction> getTransactionsByStatus(@RequestParam int userId){
+    public List<RemittanceTransaction> getTransactionsByUser(@RequestParam int userId){
         List<RemittanceTransaction> remittanceTransaction = remittanceTransactionService.findByCompanyId(userId);
         return remittanceTransaction;
     }
 
     @GetMapping("/getTransactionsByStatus")
     public List<RemittanceTransaction> getTransactionsByStatus(@RequestParam String status, @RequestParam int userId){
-        TransactionStatus transactionStatus = null;
-        if (status.equals("SUCCESSFUL")){
-            transactionStatus = TransactionStatus.SUCCESSFUL;
-        } else if (status.equals("PENDING_AML")){
-            transactionStatus = TransactionStatus.PENDING_AML;
-        } else if (status.equals("PENDING_COMPLIANCE_CHECKS")){
-            transactionStatus = TransactionStatus.PENDING_COMPLIANCE_CHECKS;
-        } else if (status.equals("REJECTED")){
-            transactionStatus = TransactionStatus.REJECTED;
-        }
+        TransactionStatus transactionStatus = remittanceTransactionService.getTransactionStatus(status);
 
         List<RemittanceTransaction> remittanceTransaction = remittanceTransactionService.findByTransactionStatusAndCompanyId(transactionStatus, userId);
         return remittanceTransaction;

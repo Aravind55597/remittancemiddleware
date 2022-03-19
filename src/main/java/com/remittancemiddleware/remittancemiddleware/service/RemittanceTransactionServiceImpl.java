@@ -22,7 +22,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
     }
 
     @Override
-    public List<RemittanceTransaction> findByTransactionStatusAndCompanyId(TransactionStatus status, int userId) {
+    public List<RemittanceTransaction> findByTransactionStatusAndCompanyId(TransactionStatus status, int userId) throws RuntimeException {
 
         Optional<User> result = userDAO.findById(userId);
 
@@ -42,7 +42,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
     }
 
     @Override
-    public List<RemittanceTransaction> findByCompanyId(int userId) {
+    public List<RemittanceTransaction> findByCompanyId(int userId) throws RuntimeException {
         Optional<User> result = userDAO.findById(userId);
 
         User theUser = null;
@@ -59,4 +59,24 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
         return remittanceTransactionDAO.findByCompanyId(companyId);
     }
+
+    @Override
+    public TransactionStatus getTransactionStatus(String status) throws RuntimeException{
+        TransactionStatus transactionStatus = null;
+        if (status.equals("SUCCESSFUL")){
+            transactionStatus = TransactionStatus.SUCCESSFUL;
+        } else if (status.equals("PENDING_AML")){
+            transactionStatus = TransactionStatus.PENDING_AML;
+        } else if (status.equals("PENDING_COMPLIANCE_CHECKS")){
+            transactionStatus = TransactionStatus.PENDING_COMPLIANCE_CHECKS;
+        } else if (status.equals("REJECTED")){
+            transactionStatus = TransactionStatus.REJECTED;
+        } else{
+            throw new RuntimeException("Incorrect status input - " + status);
+        }
+
+        return transactionStatus;
+    }
+
+
 }
