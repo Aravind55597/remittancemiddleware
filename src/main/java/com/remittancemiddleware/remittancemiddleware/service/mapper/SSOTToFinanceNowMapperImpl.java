@@ -1,7 +1,7 @@
 package com.remittancemiddleware.remittancemiddleware.service.mapper;
 
 import com.remittancemiddleware.remittancemiddleware.customexception.CustomMappingException;
-import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.FinanceNow;
+import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.FinanceNowData;
 import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.enumdata.*;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.BeneficiaryRelationship;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.IdType;
@@ -17,21 +17,21 @@ import java.text.SimpleDateFormat;
 
 @Service
 @Transactional
-public class SSOTToRemittanceNowMapperImpl implements SSOTToRemittanceNowMapper {
+public class SSOTToFinanceNowMapperImpl implements SSOTToFinanceNowMapper {
 
 
     private SimpleDateFormat simpleDateFormat;
 
     @Autowired
-    public SSOTToRemittanceNowMapperImpl(SimpleDateFormat simpleDateFormat){
+    public SSOTToFinanceNowMapperImpl(SimpleDateFormat simpleDateFormat){
         this.simpleDateFormat=simpleDateFormat;
     }
 
 
     @Override
-    public FinanceNow MapSSOT(RemittanceTransaction ssot) throws CustomMappingException{
+    public FinanceNowData MapSSOT(RemittanceTransaction ssot) throws CustomMappingException{
         try{
-            FinanceNow result = new FinanceNow();
+            FinanceNowData result = new FinanceNowData();
 
             result.setPaymentMode(ssot.getPaymentMode());
 
@@ -54,7 +54,7 @@ public class SSOTToRemittanceNowMapperImpl implements SSOTToRemittanceNowMapper 
 
 
 
-    void setSenderValues(RemittanceTransaction ssot, FinanceNow result) throws NullPointerException , CustomMappingException {
+    void setSenderValues(RemittanceTransaction ssot, FinanceNowData result) throws NullPointerException , CustomMappingException {
         result.setSenderFirstName(ssot.getSender().getFirstName());
 
         result.setSenderLastName(ssot.getSender().getLastName());
@@ -85,7 +85,7 @@ public class SSOTToRemittanceNowMapperImpl implements SSOTToRemittanceNowMapper 
 
     }
 
-    void setReceiverValues(RemittanceTransaction ssot, FinanceNow result) throws NullPointerException , CustomMappingException{
+    void setReceiverValues(RemittanceTransaction ssot, FinanceNowData result) throws NullPointerException , CustomMappingException{
 
         result.setReceiverFirstName(ssot.getReceiver().getFirstName());
 
@@ -109,7 +109,7 @@ public class SSOTToRemittanceNowMapperImpl implements SSOTToRemittanceNowMapper 
     }
 
 
-    void setRemittanceValues(RemittanceTransaction ssot, FinanceNow result) throws NullPointerException , CustomMappingException{
+    void setRemittanceValues(RemittanceTransaction ssot, FinanceNowData result) throws NullPointerException , CustomMappingException{
 
     }
 

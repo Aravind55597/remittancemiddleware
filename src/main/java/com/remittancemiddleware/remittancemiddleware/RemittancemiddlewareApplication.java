@@ -2,9 +2,10 @@ package com.remittancemiddleware.remittancemiddleware;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.remittancemiddleware.remittancemiddleware.dao.RemittanceTransactionDAO;
-import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.FinanceNow;
+import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.FinanceNowData;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
-import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToRemittanceNowMapper;
+import com.remittancemiddleware.remittancemiddleware.service.SandboxAPIService;
+import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToFinanceNowMapper;
 import okhttp3.OkHttpClient;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -41,34 +42,19 @@ public class RemittancemiddlewareApplication {
 
 
 	//ALLOWS YOU TO TEST SERVICES BY RUNNING THE APP -> REMEMBER TO COMMENT IT OUT BEFORE PUSHING IT
-	//this can't run
 //	@Bean
 //	@Transactional
-//	public CommandLineRunner demoData(SSOTToRemittanceNowMapper mapper , RemittanceTransactionDAO rtDAO, ObjectMapper objectMapper){
+//	public CommandLineRunner demoData(SSOTToFinanceNowMapper mapper , RemittanceTransactionDAO rtDAO, ObjectMapper objectMapper, SandboxAPIService sandService){
 //		return args -> {
 //
-//			RemittanceTransaction rt = rtDAO.findById(7).get();
+//			RemittanceTransaction rt = rtDAO.findById(8).get();
 //
-//			FinanceNow result = mapper.MapSSOT(rt);
+//			FinanceNowData result = mapper.MapSSOT(rt);
 //
-//			String gvar = objectMapper.writeValueAsString(result);
-//
-//			System.out.println(gvar);
-//
-//
+//			System.out.println(sandService.sendTransactionToSandbox(result));
 //		};
 //	}
-//
-//	@Transactional
-//	public void runTest(SSOTToRemittanceNowMapper mapper , RemittanceTransactionDAO rtDAO){
-//		RemittanceTransaction rt = rtDAO.getById(7);
-//
-//		FinanceNow result = mapper.MapSSOT(rt);
-//
-//		System.out.println(result);
-//
-//
-//	}
+
 
 
 

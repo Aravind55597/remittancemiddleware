@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonNaming(PropertyNamingStrategies.UpperCamelCaseStrategy.class)
-public class FinanceNow {
+public class FinanceNowData {
 
     private String bankAccountNumber;
 

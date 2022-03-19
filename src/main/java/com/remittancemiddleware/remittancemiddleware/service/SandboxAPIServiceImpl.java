@@ -2,9 +2,9 @@ package com.remittancemiddleware.remittancemiddleware.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.FinanceNowData;
+import com.remittancemiddleware.remittancemiddleware.dataclass.sandbox.SandBoxRequest;
 import com.remittancemiddleware.remittancemiddleware.dataclass.sandbox.SandboxResponse;
-import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
-import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTMapper;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +24,8 @@ public class SandboxAPIServiceImpl implements SandboxAPIService {
     private OkHttpClient okHttpClient;
 
     private ObjectMapper objectMapper;
+
+
 
     @Autowired
     public SandboxAPIServiceImpl(OkHttpClient okHttpClient , ObjectMapper objectMapper,
@@ -78,33 +80,33 @@ public class SandboxAPIServiceImpl implements SandboxAPIService {
     }
 
 
-    //TODO Need to add submission
-//    //need to create a class for remittancenow
-//    @Override
-//    public <T extends SSOTMapper<T>> SandboxResponse sendTransactionsToSandbox(RemittanceTransaction remittance) throws IOException {
-//        SandboxResponse sandboxAccessTokenResponse = this.authenticate();
-//        String accessToken = sandboxAccessTokenResponse.getAccessToken();
-//
-//        String jsonInString = objectMapper.writeValueAsString();
-//
-//        RequestBody requestBody = new FormBody.Builder()
-//                .add("access_token",accessToken)
-//                .add("api_name","financenow")
-//                .add("payload","")
-//                .build();
-//
-//        Request request = new Request.Builder()
-//                .url(sandboxBaseUrl + "/smu_send_transaction")
-//                .post(requestBody)
-//                .build();
-//
-//        Call call = okHttpClient.newCall(request);
-//        ResponseBody responseBody = call.execute().body();
-//
-//        SandboxResponse sandboxResponse = objectMapper.readValue(responseBody.string(), SandboxResponse.class);
-//
-//        return sandboxResponse;
-//    }
+
+    public <T> SandboxResponse sendTransactionToSandbox(T payload) throws IOException {
+        SandboxResponse sandboxAccessTokenResponse = this.authenticate();
+
+        String accessToken = sandboxAccessTokenResponse.getAccessToken();
+
+        SandBoxRequest<T> sandBoxRequest = new SandBoxRequest(accessToken,"financenow", payload);
+
+        String json = objectMapper.writeValueAsString(sandBoxRequest);
+
+        RequestBody requestBody = RequestBody.create(json,MediaType.parse("application/json; charset=utf-8"));
+
+        Request request = new Request.Builder()
+                .url(sandboxBaseUrl + "/smu_send_transaction")
+                .post(requestBody)
+                .build();
+
+        Call call = okHttpClient.newCall(request);
+
+        ResponseBody responseBody = call.execute().body();
+
+        SandboxResponse sandboxResponse = objectMapper.readValue(responseBody.string(), SandboxResponse.class);
+
+        return sandboxResponse;
+    }
+
+
 
 
 
