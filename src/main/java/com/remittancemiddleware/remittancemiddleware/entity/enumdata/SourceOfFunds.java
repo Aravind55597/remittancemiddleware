@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.entity.enums;
+package com.remittancemiddleware.remittancemiddleware.entity.enumdata;
 
 public enum SourceOfFunds {
     INVESTMENT,REAL_ESTATE,BUSINESS_REVENUE, DIGITAL_PAYMENT_TOKENS,

@@ -3,10 +3,10 @@ package com.remittancemiddleware.remittancemiddleware.entity.transaction;
 
 
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
-import com.remittancemiddleware.remittancemiddleware.entity.enums.RemittanceCompany;
-import com.remittancemiddleware.remittancemiddleware.entity.enums.RemittancePurpose;
+import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittanceCompany;
+import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittancePurpose;
 
-import com.remittancemiddleware.remittancemiddleware.entity.enums.TransactionStatus;
+import com.remittancemiddleware.remittancemiddleware.entity.enumdata.TransactionStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.entity.enums;
+package com.remittancemiddleware.remittancemiddleware.entity.enumdata;
 
 public enum RemittancePurpose {
     FAMILY_EXPENSES, CHARITY_DONATION, PAYMENT_FOR_SERVICES, TRAVEL_EXPENSES, PERSONAL_ASSET_ALLOCATION,

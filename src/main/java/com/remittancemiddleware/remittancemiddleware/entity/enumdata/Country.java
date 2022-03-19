@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.entity.enums;
+package com.remittancemiddleware.remittancemiddleware.entity.enumdata;
 
 public enum Country {
     SINGAPORE, MALAYSIA, CHINA, INDIA, AFGHANISTAN, ALBANIA, ALGERIA, UNITED_STATES_OF_AMERICA, AMERICAN_SAMOA,

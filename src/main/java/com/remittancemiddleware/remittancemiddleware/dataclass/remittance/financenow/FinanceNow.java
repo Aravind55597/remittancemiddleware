@@ -14,6 +14,7 @@ public class FinanceNow {
 
     private String payoutCurrency;
 
+    //Data from PurposeOfRemittance enum
     private String purposeOfRemittance;
 
     private String receiverAddress;
@@ -30,16 +31,13 @@ public class FinanceNow {
 
     private String receiverLastName;
 
-
     private String senderAddress;
 
     private String senderBeneficiaryRelationship;
 
     private String senderCity;
 
-
     private String senderCountry;
-
 
     private String senderDateOfBirth;
 
@@ -47,37 +45,17 @@ public class FinanceNow {
 
     private String senderIdNumber;
 
-
     private String senderIdType;
 
-
     private String senderLastName;
-
 
     private String senderNationality;
 
     private String senderSourceOfFund;
 
-
     private String senderState;
 
-
     private String receiverNationality;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }
