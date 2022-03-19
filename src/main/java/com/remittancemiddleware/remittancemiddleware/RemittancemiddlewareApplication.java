@@ -1,10 +1,7 @@
 package com.remittancemiddleware.remittancemiddleware;
 
 import com.remittancemiddleware.remittancemiddleware.dao.RemittanceTransactionDAO;
-import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.FinanceNow;
-import com.remittancemiddleware.remittancemiddleware.dataclass.sandbox.SandboxResponse;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
-import com.remittancemiddleware.remittancemiddleware.service.SandboxAPIService;
 import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToRemittanceNowMapper;
 import okhttp3.OkHttpClient;
 import org.springframework.boot.CommandLineRunner;
@@ -20,10 +17,10 @@ import java.text.SimpleDateFormat;
 //https://www.javaguides.net/2018/11/spring-data-jpa-query-creation-from-method-names.html
 //spring data jpa reference
 @SpringBootApplication
-public class RemittanceMiddlewareApplication {
+public class RemittancemiddlewareApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RemittanceMiddlewareApplication.class, args);
+		SpringApplication.run(RemittancemiddlewareApplication.class, args);
 
 	}
 
