@@ -57,4 +57,23 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
         return theUser;
     }
+
+    @Override
+    public List<RemittanceTransaction> findByCompanyId(int userId) {
+        Optional<User> result = userDAO.findById(userId);
+
+        User theUser = null;
+
+        if (result.isPresent()) {
+            theUser = result.get();
+        }
+        else {
+            // we didn't find the user
+            throw new RuntimeException("Did not find user id - " + userId);
+        }
+        Company company = theUser.getCompany();
+        int companyId = company.getId();
+
+        return remittanceTransactionDAO.findByCompanyId(companyId);
+    }
 }

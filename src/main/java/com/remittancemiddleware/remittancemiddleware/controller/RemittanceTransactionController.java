@@ -33,6 +33,12 @@ public class RemittanceTransactionController {
         return theUser;
     }
 
+    @GetMapping("/remittanceTransaction/getTransactionsByUser")
+    public List<RemittanceTransaction> getTransactionsByStatus(@RequestParam int userId){
+        List<RemittanceTransaction> remittanceTransaction = remittanceTransactionService.findByCompanyId(userId);
+        return remittanceTransaction;
+    }
+
     @GetMapping("/remittanceTransaction/getTransactionsByStatus")
     public List<RemittanceTransaction> getTransactionsByStatus(@RequestParam String status, @RequestParam int userId){
         TransactionStatus transactionStatus = null;
