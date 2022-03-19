@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface RemittanceTransactionService {
     List<RemittanceTransaction> findByTransactionStatusAndCompanyId(TransactionStatus status, int companyId);
-    User findById(int userId);
     List<RemittanceTransaction> findByCompanyId(int userId);
 }

@@ -19,19 +19,6 @@ public class RemittanceTransactionController {
         this.remittanceTransactionService = theRemittanceTransactionService;
     }
 
-    // add mapping for GET /user/{userId}
-
-    @GetMapping("/remittanceTransaction/{userId}")
-    public User getUser(@PathVariable int userId) {
-
-        User theUser = remittanceTransactionService.findById(userId);
-
-        if (theUser == null) {
-            throw new RuntimeException("User id not found - " + userId);
-        }
-
-        return theUser;
-    }
 
     @GetMapping("/remittanceTransaction/getTransactionsByUser")
     public List<RemittanceTransaction> getTransactionsByStatus(@RequestParam int userId){
