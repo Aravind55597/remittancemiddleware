@@ -3,9 +3,11 @@ package com.remittancemiddleware.remittancemiddleware;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.remittancemiddleware.remittancemiddleware.dao.RemittanceTransactionDAO;
 import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.FinanceNowData;
+import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.paymentgo.PaymentGoData;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
 import com.remittancemiddleware.remittancemiddleware.service.SandboxAPIService;
 import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToFinanceNowMapper;
+import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToPaymentGoMapper;
 import okhttp3.OkHttpClient;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -44,14 +46,17 @@ public class RemittancemiddlewareApplication {
 	//ALLOWS YOU TO TEST SERVICES BY RUNNING THE APP -> REMEMBER TO COMMENT IT OUT BEFORE PUSHING IT
 //	@Bean
 //	@Transactional
-//	public CommandLineRunner demoData(SSOTToFinanceNowMapper mapper , RemittanceTransactionDAO rtDAO, ObjectMapper objectMapper, SandboxAPIService sandService){
+//	public CommandLineRunner demoData(SSOTToPaymentGoMapper mapper , RemittanceTransactionDAO rtDAO, ObjectMapper objectMapper, SandboxAPIService sandService){
 //		return args -> {
 //
-//			RemittanceTransaction rt = rtDAO.findById(8).get();
+//			RemittanceTransaction rt = rtDAO.findById(4).get();
 //
-//			FinanceNowData result = mapper.MapSSOT(rt);
+//			PaymentGoData result = mapper.MapSSOT(rt);
 //
-//			System.out.println(sandService.sendTransactionToSandbox(result,"financenow"));
+//			System.out.println(result.toString());
+//
+//			System.out.println(sandService.sendTransactionToSandbox(result,"paymentgo"));
+//
 //		};
 //	}
 
