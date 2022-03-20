@@ -3,7 +3,7 @@ package com.remittancemiddleware.remittancemiddleware.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.remittancemiddleware.remittancemiddleware.dao.CompanyDAO;
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
-import com.remittancemiddleware.remittancemiddleware.util.customexception.CustomNotFoundException;
+import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
