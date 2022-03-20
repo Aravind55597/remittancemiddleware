@@ -4,11 +4,10 @@ package com.remittancemiddleware.remittancemiddleware.entity.transaction;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
-import com.remittancemiddleware.remittancemiddleware.entity.map.SenderMap;
-import com.remittancemiddleware.remittancemiddleware.enums.RemittanceCompany;
-import com.remittancemiddleware.remittancemiddleware.enums.RemittancePurpose;
+import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittanceCompany;
+import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittancePurpose;
 
-import com.remittancemiddleware.remittancemiddleware.enums.TransactionStatus;
+import com.remittancemiddleware.remittancemiddleware.entity.enumdata.TransactionStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

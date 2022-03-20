@@ -1,7 +1,7 @@
 package com.remittancemiddleware.remittancemiddleware.entity.transaction;
 
-import com.remittancemiddleware.remittancemiddleware.enums.BeneficiaryRelationship;
-import com.remittancemiddleware.remittancemiddleware.enums.SourceOfFunds;
+import com.remittancemiddleware.remittancemiddleware.entity.enumdata.BeneficiaryRelationship;
+import com.remittancemiddleware.remittancemiddleware.entity.enumdata.SourceOfFunds;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

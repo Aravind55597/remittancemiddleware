@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.util.responsemodel;
+package com.remittancemiddleware.remittancemiddleware.dataclass.custom;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Response<T> {
+public class CustomResponse<T> {
     private T data ;
     private Boolean succeeded ;
     private String message ;
@@ -16,7 +16,7 @@ public class Response<T> {
 
 
     //Success response with message
-    public Response(T data, String msg)
+    public CustomResponse(T data, String msg)
     {
         this.succeeded = true;
         this.message = msg;
@@ -25,7 +25,7 @@ public class Response<T> {
     }
 
     //Success response without message
-    public Response(T data)
+    public CustomResponse(T data)
     {
         this.succeeded = true;
         this.message = "";
@@ -36,7 +36,7 @@ public class Response<T> {
 
 
     //Error response
-    public Response(String errorMsg , HttpStatus httpStatus)
+    public CustomResponse(String errorMsg , HttpStatus httpStatus)
     {
         this.succeeded = false;
         this.message = errorMsg;

@@ -1,45 +1,64 @@
 package com.remittancemiddleware.remittancemiddleware;
 
-import com.remittancemiddleware.remittancemiddleware.dao.CompanyDAO;
-import com.remittancemiddleware.remittancemiddleware.dao.RemittanceMapDAO;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.remittancemiddleware.remittancemiddleware.dao.RemittanceTransactionDAO;
-import com.remittancemiddleware.remittancemiddleware.dao.UserDAO;
-import com.remittancemiddleware.remittancemiddleware.entity.Company;
-import com.remittancemiddleware.remittancemiddleware.entity.User;
-import com.remittancemiddleware.remittancemiddleware.entity.map.*;
-import com.remittancemiddleware.remittancemiddleware.entity.transaction.*;
-import com.remittancemiddleware.remittancemiddleware.enums.*;
+import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.FinanceNowData;
+import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
+import com.remittancemiddleware.remittancemiddleware.service.SandboxAPIService;
+import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToFinanceNowMapper;
+import okhttp3.OkHttpClient;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
 
+import java.text.SimpleDateFormat;
+
+
+//https://www.javaguides.net/2018/11/spring-data-jpa-query-creation-from-method-names.html
+//spring data jpa reference
 @SpringBootApplication
 public class RemittancemiddlewareApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RemittancemiddlewareApplication.class, args);
+
 	}
+
+	//injecting http client for API calls
 	@Bean
-	public CommandLineRunner demoData(RemittanceTransactionDAO rTranDAO){
-		return args -> {
-
-			List<RemittanceTransaction> data = rTranDAO.findByTransactionStatusAndCompanyId(TransactionStatus.SUCCESSFUL, 1);
-
-			System.out.println(data);
-			for(RemittanceTransaction rt: data){
-				System.out.println(rt.getTransactionStatus());
-			}
-
-			System.out.println(data.get(0).getCompany().getCompanyName());
-//			System.out.println(data.get(0).getTransactionStatus());
-
-		};
+	public OkHttpClient okHttpClient() {
+		return new OkHttpClient();
 	}
+
+	//injecting simpleDateFormat
+	@Bean
+	SimpleDateFormat simpleDateFormat(){
+		return new SimpleDateFormat("dd-MM-yyyy");
+	}
+
+
+
+	//ALLOWS YOU TO TEST SERVICES BY RUNNING THE APP -> REMEMBER TO COMMENT IT OUT BEFORE PUSHING IT
+//	@Bean
+//	@Transactional
+//	public CommandLineRunner demoData(SSOTToFinanceNowMapper mapper , RemittanceTransactionDAO rtDAO, ObjectMapper objectMapper, SandboxAPIService sandService){
+//		return args -> {
+//
+//			RemittanceTransaction rt = rtDAO.findById(8).get();
+//
+//			FinanceNowData result = mapper.MapSSOT(rt);
+//
+//			System.out.println(sandService.sendTransactionToSandbox(result,"financenow"));
+//		};
+//	}
+
+
+
+
+
 
 /*
 	@Bean
