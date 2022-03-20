@@ -30,9 +30,9 @@ jobs:
           RDS_PORT: ${{ secrets.RDS_PORT }}
           RDS_USERNAME_DEV: ${{secrets.RDS_USERNAME}}
           SERVER_PORT: ${{ secrets.SERVER_PORT }}
-          SANDBOX_PASSWORD:${{ secrets.SANDBOX_PASSWORD }}
-          SANDBOX_USERNAME: ${{SANDBOX_USERNAME}}
-          SANDBOX_BASE_URL:${{SANDBOX_BASE_URL}}
+          SANDBOX_USERNAME: ${{secrets.SANDBOX_USERNAME}}
+          SANDBOX_PASSWORD: ${{secrets.SANDBOX_PASSWORD}}
+          SANDBOX_BASE_URL: ${{secrets.SANDBOX_BASE_URL}}
         run: mvn -B package -DskipTests --file pom.xml
       - name: Show contents of the current working directory
         run: ls -la
