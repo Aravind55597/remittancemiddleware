@@ -51,7 +51,7 @@ public class RemittancemiddlewareApplication {
 //
 //			FinanceNowData result = mapper.MapSSOT(rt);
 //
-//			System.out.println(sandService.sendTransactionToSandbox(result));
+//			System.out.println(sandService.sendTransactionToSandbox(result,"financenow"));
 //		};
 //	}
 

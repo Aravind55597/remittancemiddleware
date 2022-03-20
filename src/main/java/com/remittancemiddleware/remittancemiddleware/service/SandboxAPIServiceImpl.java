@@ -81,12 +81,12 @@ public class SandboxAPIServiceImpl implements SandboxAPIService {
 
 
 
-    public <T> SandboxResponse sendTransactionToSandbox(T payload) throws IOException {
+    public <T> SandboxResponse sendTransactionToSandbox(T payload , String apiName) throws IOException {
         SandboxResponse sandboxAccessTokenResponse = this.authenticate();
 
         String accessToken = sandboxAccessTokenResponse.getAccessToken();
 
-        SandBoxRequest<T> sandBoxRequest = new SandBoxRequest(accessToken,"financenow", payload);
+        SandBoxRequest<T> sandBoxRequest = new SandBoxRequest(accessToken,apiName, payload);
 
         String json = objectMapper.writeValueAsString(sandBoxRequest);
 

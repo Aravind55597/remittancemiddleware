@@ -13,6 +13,6 @@ public interface SandboxAPIService {
     public SandboxResponse authenticate() throws IOException;
 
 
-    public <T> SandboxResponse sendTransactionToSandbox(T payload) throws IOException;
+    public <T> SandboxResponse sendTransactionToSandbox(T payload , String apiName) throws IOException;
 
 }
