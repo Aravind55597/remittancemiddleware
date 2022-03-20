@@ -3,7 +3,7 @@ package com.remittancemiddleware.remittancemiddleware.controller;
 import com.remittancemiddleware.remittancemiddleware.entity.User;
 import com.remittancemiddleware.remittancemiddleware.service.UserService;
 import com.remittancemiddleware.remittancemiddleware.service.UserServiceImpl;
-import com.remittancemiddleware.remittancemiddleware.util.customexception.CustomNotFoundException;
+import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

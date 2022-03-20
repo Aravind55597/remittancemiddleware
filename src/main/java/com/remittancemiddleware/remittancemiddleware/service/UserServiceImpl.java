@@ -5,7 +5,7 @@ import com.remittancemiddleware.remittancemiddleware.dao.CompanyDAO;
 import com.remittancemiddleware.remittancemiddleware.dao.UserDAO;
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import com.remittancemiddleware.remittancemiddleware.entity.User;
-import com.remittancemiddleware.remittancemiddleware.util.customexception.CustomNotFoundException;
+import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
