@@ -72,15 +72,15 @@ public class SSOTToEverywhereRemitMapperImpl implements SSOTToEverywhereRemitMap
 
         result.setSenderIdCountry(ssot.getSender().getIdentification().getIssuingCountry());
 
-        result.setSenderCurrency("");
+        result.setSenderCurrency(ssot.getSender().getSenderCurrency());
 
-        result.setSenderCountry("SGP");
+        result.setSenderCountry(ssot.getSender().getSenderRemittanceCountry());
     }
 
     void setReceiverValues(RemittanceTransaction ssot, EverywhereRemitData result) throws NullPointerException , CustomMappingException{
         result.setRecipientAccountNumber(ssot.getReceiver().getBankAccount().getAccountNumber());
         
-        result.setRecipientCurrency("CNY");
+        result.setRecipientCurrency(ssot.getReceiver().getPayoutCurrency());
 
         result.setRecipientCountry(ssot.getReceiver().getReceiverRemittanceCountry());
 
@@ -90,17 +90,16 @@ public class SSOTToEverywhereRemitMapperImpl implements SSOTToEverywhereRemitMap
 
         result.setRecipientMobileNumber(ssot.getSender().getMobileNumber());
 
-        result.setRecipientType("bank_account");
+        result.setRecipientType(ssot.getReceiver().getReceiverType());
 
-        result.setRecipientCountry("CHN");
+        result.setRecipientCountry(ssot.getReceiver().getReceiverRemittanceCountry());
 
     }
 
 
     void setRemittanceValues(RemittanceTransaction ssot, EverywhereRemitData result) throws NullPointerException , CustomMappingException{
-        result.setSourceType("partner");
-
-        result.setSegment("individual");
+        result.setSourceType(ssot.getSourceType());
+        result.setSegment(ssot.getSegment());
         result.setUnits(ssot.getAmount());
     }
 

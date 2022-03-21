@@ -45,7 +45,7 @@ public class EverywhereRemitData {
 
     private String recipientMobileNumber; //
 
-    private String units; //
+    private Long units; //
 
     private String sourceType; //
 
