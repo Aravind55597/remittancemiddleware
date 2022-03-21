@@ -33,15 +33,11 @@ public class SSOTToFinanceNowMapperImpl implements SSOTToFinanceNowMapper {
         try{
             FinanceNowData result = new FinanceNowData();
 
-            result.setPaymentMode(ssot.getPaymentMode());
-
-            result.setPurposeOfRemittance(this.convertRemittancePurpose(ssot.getPurpose()));
+            this.setRemittanceValues(ssot,result);
 
             this.setSenderValues(ssot,result);
 
             this.setReceiverValues(ssot,result);
-
-            this.setRemittanceValues(ssot,result);
 
             return result;
         }
@@ -111,6 +107,11 @@ public class SSOTToFinanceNowMapperImpl implements SSOTToFinanceNowMapper {
 
     void setRemittanceValues(RemittanceTransaction ssot, FinanceNowData result) throws NullPointerException , CustomMappingException{
 
+        result.setPaymentMode(ssot.getPaymentMode());
+
+        result.setPurposeOfRemittance(this.convertRemittancePurpose(ssot.getPurpose()));
+
+        result.setPaymentAmount(ssot.getAmount().toString());
     }
 
     public String convertCountry(String countrySSOT) throws CustomMappingException {
