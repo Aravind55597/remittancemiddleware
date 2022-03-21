@@ -22,7 +22,7 @@ public class RemittanceMap implements Serializable {
 
     private String purpose;
 
-    private String amount;
+    private Long amount;
 
     private String paymentMode;
 
