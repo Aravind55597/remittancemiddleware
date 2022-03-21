@@ -20,6 +20,7 @@ public class Sender  extends Party{
     @Enumerated(EnumType.STRING)
     public SourceOfFunds sourceOfFunds; //    enum senderSourceOfFunds ; // done
 
+    private String senderRemittanceCountry;
 
     private String senderCurrency; //senderCurency enum // nope should be using standard currency notation i.e. 3 letter string
 

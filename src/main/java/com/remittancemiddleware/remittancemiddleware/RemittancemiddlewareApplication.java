@@ -2,10 +2,13 @@ package com.remittancemiddleware.remittancemiddleware;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.remittancemiddleware.remittancemiddleware.dao.RemittanceTransactionDAO;
+import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.everywhereremit.EverywhereRemitData;
 import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.FinanceNowData;
 import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.paymentgo.PaymentGoData;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
 import com.remittancemiddleware.remittancemiddleware.service.SandboxAPIService;
+import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToEverywhereRemitMapper;
+import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToEverywhereRemitMapperImpl;
 import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToFinanceNowMapper;
 import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToPaymentGoMapper;
 import okhttp3.OkHttpClient;
@@ -42,6 +45,8 @@ public class RemittancemiddlewareApplication {
 	}
 
 
+	// Note: Take note of input parameters, before you test
+	// Change input mapper object types to the one being tested e.g. EverywhereRemit, and get correct Id of the corresponding transaction before you test
 
 	//ALLOWS YOU TO TEST SERVICES BY RUNNING THE APP -> REMEMBER TO COMMENT IT OUT BEFORE PUSHING IT
 //	@Bean

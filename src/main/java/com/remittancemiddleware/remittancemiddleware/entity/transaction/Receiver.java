@@ -21,6 +21,7 @@ public class Receiver  extends Party {
 
     private String receiverType; // enum receiverType // nope for enum, hard code default field value "bank_account" from excel
 
+    private String receiverRemittanceCountry;
 
     //this should be removed ?
     private String payoutCurrency; //payoutCurrency enum // no enum, same as above

@@ -28,7 +28,7 @@ public class RemittanceTransaction  implements Serializable{
     @Enumerated(EnumType.STRING)
     private RemittancePurpose purpose; //remittancePurpose enum // done
 
-    private long amount; //remittanceAmount enum // nope, remittance amount is just amount
+    private String amount; //remittanceAmount enum // nope, remittance amount is just amount // set amount from Long to String?
 
     @Enumerated(EnumType.STRING)
     private RemittanceCompany remittanceCompany;

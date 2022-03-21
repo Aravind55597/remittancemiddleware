@@ -22,6 +22,8 @@ public class ReceiverMap extends PartyMap {
 
     private String payoutCurrency;
 
+    private String receiverRemittanceCountry; // added from misplaced receiverCountry previously
+
     @OneToOne(mappedBy = "receiverMap")
     private RemittanceMap remittanceMap;
 
