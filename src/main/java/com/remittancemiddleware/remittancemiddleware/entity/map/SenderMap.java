@@ -17,7 +17,9 @@ public class SenderMap extends PartyMap{
 
     //primary key will be party Id
 
-    private String sourceOfFunds ;
+    private String sourceOfFunds;
+
+    private String senderRemittanceCountry; // added for sender_address_country("SGP") hidden field for EverywhereRemit
 
     private String senderCurrency ;
 
