@@ -83,6 +83,7 @@ public class RemittancemiddlewareApplication {
 
 
 //Drop remittance schema and add remittance schema. Before you run the app if you want to add new test data - SupportedCountry can't have duplicate phillipines.
+/*
 	@Bean
 	public CommandLineRunner demoData(RemittanceCompanyDAO remittanceCompanyDAO, RemittanceMapApiDAO remittanceMapApiDAO, SupportedCountryDAO supportedCountryDAO, CompanyDAO companyDAO , RemittanceMapDAO remittanceMapDAO, UserDAO userDAO, RemittanceTransactionDAO remittanceTransactionDAO) {
 		return args -> {
@@ -648,7 +649,7 @@ public class RemittancemiddlewareApplication {
 //			remittanceMapApiDAO.save(remittanceMapApiPG);
 		};
 	}
-
+*/
 
 
 	//	@Bean

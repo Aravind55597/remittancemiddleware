@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonIgnoreProperties({"users", "remittanceMap", "remittanceTransactions"})
+@JsonIgnoreProperties({"users", "remittanceMaps", "remittanceTransactions"})
 public class Company implements Serializable {
 
 
@@ -37,6 +37,7 @@ public class Company implements Serializable {
 
     //__________________________________________________________________________________
     //TODO JSON MANAGED REFERENCE
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "company", fetch = FetchType.LAZY)
     private List<RemittanceMap> remittanceMaps;
    //__________________________________________________________________________________

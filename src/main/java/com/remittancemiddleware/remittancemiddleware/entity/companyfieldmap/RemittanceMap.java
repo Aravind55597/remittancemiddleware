@@ -2,6 +2,7 @@ package com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap.SenderMapApi;
 import lombok.Getter;
@@ -41,6 +42,7 @@ public class RemittanceMap implements Serializable {
     @JoinColumn(name = "receiver_map_id")
     private ReceiverMap receiverMap;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="company_id")
     private Company company;
