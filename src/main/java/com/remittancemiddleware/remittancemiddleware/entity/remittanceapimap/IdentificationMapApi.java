@@ -25,6 +25,6 @@ public class IdentificationMapApi implements Serializable {
 
     private String issuingCountry;
 
-    @OneToOne(mappedBy = "identificationMapApi")
-    private PartyMapApi partyMapApi;
+//    @OneToOne(mappedBy = "identificationMapApi")
+//    private PartyMapApi partyMapApi;
 }

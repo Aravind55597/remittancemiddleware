@@ -4,4 +4,5 @@ import com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap.Rem
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RemittanceMapApiDAO extends JpaRepository<RemittanceMapApi, Integer> {
+
 }

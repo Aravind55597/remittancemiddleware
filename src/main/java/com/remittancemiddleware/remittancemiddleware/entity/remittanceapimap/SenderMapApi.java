@@ -24,6 +24,6 @@ public class SenderMapApi extends PartyMapApi implements Serializable {
 
     private String beneficiaryRelationship;
 
-    @OneToOne(mappedBy = "senderMapApi")
-    private RemittanceMapApi remittanceMapApi;
+//    @OneToOne(mappedBy = "senderMapApi")
+//    private RemittanceMapApi remittanceMapApi;
 }

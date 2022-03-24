@@ -39,7 +39,7 @@ public class RemittanceMapApi implements Serializable {
     @JoinColumn(name = "receiver_map_api_id")
     private ReceiverMapApi receiverMapApi;
 
-    @OneToOne(mappedBy= "remittanceMapApi")
-    private RemittanceCompany remittanceCompany;
+//    @OneToOne(mappedBy= "remittanceMapApi")
+//    private RemittanceCompany remittanceCompany;
 
 }

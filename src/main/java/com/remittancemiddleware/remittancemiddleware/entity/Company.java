@@ -50,7 +50,6 @@ public class Company implements Serializable {
         this.companyName = companyName;
     }
 
-    @JsonManagedReference
     public List<RemittanceTransaction> getRemittanceTransactions(){
         return remittanceTransactions;
     }

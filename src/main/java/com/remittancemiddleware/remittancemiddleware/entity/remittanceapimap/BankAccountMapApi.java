@@ -27,6 +27,6 @@ public class BankAccountMapApi implements Serializable {
     private String accountNumber;
 
 
-    @OneToOne(mappedBy = "bankAccountMapApi")
-    private PartyMapApi partyMapApi;
+//    @OneToOne(mappedBy = "bankAccountMapApi")
+//    private PartyMapApi partyMapApi;
 }

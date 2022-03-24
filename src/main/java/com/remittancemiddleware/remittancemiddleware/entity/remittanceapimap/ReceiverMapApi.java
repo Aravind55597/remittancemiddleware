@@ -22,8 +22,8 @@ public class ReceiverMapApi extends PartyMapApi implements Serializable {
 
     private String receiverRemittanceCountry; // added from misplaced receiverCountry previously
 
-    @OneToOne(mappedBy = "receiverMapApi")
-    private RemittanceMapApi remittanceMapApi;
+//    @OneToOne(mappedBy = "receiverMapApi")
+//    private RemittanceMapApi remittanceMapApi;
 
 
 

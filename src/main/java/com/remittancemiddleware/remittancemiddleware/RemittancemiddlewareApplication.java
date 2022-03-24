@@ -83,7 +83,7 @@ public class RemittancemiddlewareApplication {
 
 
 //Drop remittance schema and add remittance schema. Before you run the app if you want to add new test data - SupportedCountry can't have duplicate phillipines.
-/*
+
 	@Bean
 	public CommandLineRunner demoData(RemittanceCompanyDAO remittanceCompanyDAO, RemittanceMapApiDAO remittanceMapApiDAO, SupportedCountryDAO supportedCountryDAO, CompanyDAO companyDAO , RemittanceMapDAO remittanceMapDAO, UserDAO userDAO, RemittanceTransactionDAO remittanceTransactionDAO) {
 		return args -> {
@@ -180,151 +180,153 @@ public class RemittancemiddlewareApplication {
 			supportedCountryPHL.addRemittanceCompanies(remittanceCompanyFN);
 //-------------------------------------------------------------------------------------------------------------
 			//Sender Test data - ER
-			senderMapApiER.setFirstName("First Name");
-			senderMapApiER.setLastName("Last Name");
-			senderMapApiER.setNationality("Nationality");
-			senderMapApiER.setCurrency("Receiver Currency");
-			senderMapApiER.setDateOfBirth("Birthday");
-			senderMapApiER.setMobileNumber("Phone Number");
+			senderMapApiER.setFirstName("Sender_legal_name_first");
+			senderMapApiER.setLastName("Sender_legal_name_last");
+			senderMapApiER.setNationality("Sender_nationality");
+			senderMapApiER.setCurrency("Recipient_currency");
+			senderMapApiER.setDateOfBirth("Sender_date_of_birth");
+			senderMapApiER.setMobileNumber("");
 			senderMapApiER.setIdentificationMapApi(identificationMapApiSenderER);
 			senderMapApiER.setBankAccountMapApi(bankAccountMapApiSenderER);
 			senderMapApiER.setAddressMapApi(addressMapApiSenderER);
-			senderMapApiER.setSourceOfFunds("Source of Funds");
-			senderMapApiER.setSenderCurrency("Sender Currency");
-			senderMapApiER.setBeneficiaryRelationship("Relation");
-			senderMapApiER.setRemittanceMapApi(remittanceMapApiER);
+			senderMapApiER.setSourceOfFunds("Source_of_funds");
+			senderMapApiER.setSenderCurrency("Sender_currency");
+			senderMapApiER.setBeneficiaryRelationship("");
+//			senderMapApiER.setRemittanceMapApi(remittanceMapApiER);
 //
 //			//Receiver Test data - ER
-			receiverMapApiER.setFirstName("First Name");
-			receiverMapApiER.setLastName("Last Name");
-			receiverMapApiER.setNationality("Nationality");
-			receiverMapApiER.setCurrency("Receiver Currency");
+			receiverMapApiER.setFirstName("Recipient_legal_name_first");
+			receiverMapApiER.setLastName("Recipient_legal_name_last");
+			receiverMapApiER.setNationality(null);
+			receiverMapApiER.setCurrency("Recipient_currency");
 			receiverMapApiER.setDateOfBirth("Birthday");
 			receiverMapApiER.setMobileNumber("Phone Number");
 			receiverMapApiER.setIdentificationMapApi(identificationMapApiReceiverER);
 			receiverMapApiER.setBankAccountMapApi(bankAccountMapApiReceiverER);
 			receiverMapApiER.setAddressMapApi(addressMapApiReceiverER);
-			receiverMapApiER.setType("");
-			receiverMapApiER.setPayoutCurrency("Receive Currency");
-			receiverMapApiER.setRemittanceMapApi(remittanceMapApiER);
+			receiverMapApiER.setType("Recipient_type");
+			receiverMapApiER.setPayoutCurrency("Recipient_currency");
+//			receiverMapApiER.setRemittanceMapApi(remittanceMapApiER);
 
-			addressMapApiSenderER.setAddressLine("Address");
-			addressMapApiSenderER.setCity("City");
-			addressMapApiSenderER.setCountry("Country");
-			addressMapApiSenderER.setState("State");
-			addressMapApiSenderER.setZipCode("Postal Code");
-			addressMapApiSenderER.setPartyMapApi(senderMapApiER);
+			addressMapApiSenderER.setAddressLine("Sender_address_line");
+			addressMapApiSenderER.setCity("Sender_address_city");
+			addressMapApiSenderER.setCountry("Sender_address_country");
+			addressMapApiSenderER.setState(null);
+			addressMapApiSenderER.setZipCode(null);
+//			addressMapApiSenderER.setPartyMapApi(senderMapApiER);
 
-			addressMapApiReceiverER.setAddressLine("Address");
-			addressMapApiReceiverER.setCity("City");
-			addressMapApiReceiverER.setCountry("Country");
-			addressMapApiReceiverER.setState("State");
-			addressMapApiReceiverER.setZipCode("Postal Code");
-			addressMapApiReceiverER.setPartyMapApi(receiverMapApiER);
+			addressMapApiReceiverER.setAddressLine(null);
+			addressMapApiReceiverER.setCity(null);
+			addressMapApiReceiverER.setCountry(null);
+			addressMapApiReceiverER.setState(null);
+			addressMapApiReceiverER.setZipCode(null);
+//			addressMapApiReceiverER.setPartyMapApi(receiverMapApiER);
 
-			bankAccountMapApiSenderER.setBankName("Bank");
-			bankAccountMapApiSenderER.setBranchName("Branch");
-			bankAccountMapApiSenderER.setAccountNumber("Account No");
-			bankAccountMapApiSenderER.setPartyMapApi(senderMapApiER);
+			bankAccountMapApiSenderER.setBankName(null);
+			bankAccountMapApiSenderER.setBranchName(null);
+			bankAccountMapApiSenderER.setAccountNumber(null);
+//			bankAccountMapApiSenderER.setPartyMapApi(senderMapApiER);
 
-			bankAccountMapApiReceiverER.setBankName("Bank");
-			bankAccountMapApiReceiverER.setBranchName("Branch");
-			bankAccountMapApiReceiverER.setAccountNumber("Account No");
-			bankAccountMapApiReceiverER.setPartyMapApi(receiverMapApiER);
+			bankAccountMapApiReceiverER.setBankName(null);
+			bankAccountMapApiReceiverER.setBranchName(null);
+			bankAccountMapApiReceiverER.setAccountNumber(null);
+//			bankAccountMapApiReceiverER.setPartyMapApi(receiverMapApiER);
 
-			identificationMapApiSenderER.setIdType("Identity Type");
-			identificationMapApiSenderER.setIdNumber("Identity Number");
-			identificationMapApiSenderER.setIssuingCountry("Country of Issue");
-			identificationMapApiSenderER.setPartyMapApi(senderMapApiER);
+			identificationMapApiSenderER.setIdType("Sender_id_type");
+			identificationMapApiSenderER.setIdNumber("Sender_id_number");
+			identificationMapApiSenderER.setIssuingCountry("Sender_id_country");
+//			identificationMapApiSenderER.setPartyMapApi(senderMapApiER);
 
-			identificationMapApiReceiverER.setIdType("Identity Type");
-			identificationMapApiReceiverER.setIdNumber("Identity Number");
-			identificationMapApiReceiverER.setIssuingCountry("Country of Issue");
-			identificationMapApiReceiverER.setPartyMapApi(receiverMapApiER);
+			identificationMapApiReceiverER.setIdType(null);
+			identificationMapApiReceiverER.setIdNumber(null);
+			identificationMapApiReceiverER.setIssuingCountry(null);
+//			identificationMapApiReceiverER.setPartyMapApi(receiverMapApiER);
 
-			remittanceMapApiER.setPurpose("Remittance Purpose");
-			remittanceMapApiER.setAmount("999");
-			remittanceMapApiER.setPaymentMode("Mode of Payment");
-			remittanceMapApiER.setRemittanceCompany(remittanceCompanyER);
-			remittanceMapApiER.setSourceType("Source of Funds");
-			remittanceMapApiER.setSegment("");
+			remittanceMapApiER.setPurpose("Remiitance_purpose");
+			remittanceMapApiER.setAmount(null);
+			remittanceMapApiER.setPaymentMode(null);
+//			remittanceMapApiER.setRemittanceCompany(remittanceCompanyER);
+			remittanceMapApiER.setSourceType("Source_of_funds");
+			remittanceMapApiER.setSegment(null);
 			remittanceMapApiER.setSenderMapApi(senderMapApiER);
 			remittanceMapApiER.setReceiverMapApi(receiverMapApiER);
-			remittanceMapApiER.setRemittanceCompany(remittanceCompanyER);
+//			remittanceMapApiER.setRemittanceCompany(remittanceCompanyER);
 
 // ---------------------------------------------------------------------------------------------------------------
 //			Sender Test data - FN
-			senderMapApiFN.setFirstName("First Name");
-			senderMapApiFN.setLastName("Last Name");
-			senderMapApiFN.setNationality("Nationality");
-			senderMapApiFN.setCurrency("Receiver Currency");
-			senderMapApiFN.setDateOfBirth("Birthday");
-			senderMapApiFN.setMobileNumber("Phone Number");
+			senderMapApiFN.setFirstName("SenderFirstName");
+			senderMapApiFN.setLastName("SenderLastName");
+			senderMapApiFN.setNationality("SenderNationality");
+			senderMapApiFN.setCurrency(null);
+			senderMapApiFN.setDateOfBirth("SenderDateOfBirth");
+			senderMapApiFN.setMobileNumber(null);
 			senderMapApiFN.setIdentificationMapApi(identificationMapApiSenderFN);
 			senderMapApiFN.setBankAccountMapApi(bankAccountMapApiSenderFN);
 			senderMapApiFN.setAddressMapApi(addressMapApiSenderFN);
-			senderMapApiFN.setSourceOfFunds("Source of Funds");
-			senderMapApiFN.setSenderCurrency("Sender Currency");
-			senderMapApiFN.setBeneficiaryRelationship("Relation");
-			senderMapApiFN.setRemittanceMapApi(remittanceMapApiFN);
+			senderMapApiFN.setSourceOfFunds("SenderSourceOfFund");
+			senderMapApiFN.setSenderCurrency(null);
+			senderMapApiFN.setBeneficiaryRelationship("SenderBeneficiaryRelationship");
+//			senderMapApiFN.setRemittanceMapApi(remittanceMapApiFN);
 //
 //			//Receiver Test data - FN
-			receiverMapApiFN.setFirstName("First Name");
-			receiverMapApiFN.setLastName("Last Name");
-			receiverMapApiFN.setNationality("Nationality");
-			receiverMapApiFN.setCurrency("Receiver Currency");
-			receiverMapApiFN.setDateOfBirth("Birthday");
-			receiverMapApiFN.setMobileNumber("Phone Number");
+			receiverMapApiFN.setFirstName("ReceiverFirstName");
+			receiverMapApiFN.setLastName("ReceiverLastName");
+			receiverMapApiFN.setNationality("ReceiverNationality");
+			receiverMapApiFN.setCurrency(null);
+			receiverMapApiFN.setDateOfBirth(null);
+			receiverMapApiFN.setMobileNumber(null);
 			receiverMapApiFN.setIdentificationMapApi(identificationMapApiReceiverFN);
 			receiverMapApiFN.setBankAccountMapApi(bankAccountMapApiReceiverFN);
 			receiverMapApiFN.setAddressMapApi(addressMapApiReceiverFN);
-			receiverMapApiFN.setType("");
-			receiverMapApiFN.setPayoutCurrency("Receive Currency");
-			receiverMapApiFN.setRemittanceMapApi(remittanceMapApiFN);
+			receiverMapApiFN.setType(null);
+			receiverMapApiFN.setPayoutCurrency("PayoutCurrency");
+//			receiverMapApiFN.setRemittanceMapApi(remittanceMapApiFN);
 
-			addressMapApiSenderFN.setAddressLine("Address");
-			addressMapApiSenderFN.setCity("City");
-			addressMapApiSenderFN.setCountry("Country");
-			addressMapApiSenderFN.setState("State");
-			addressMapApiSenderFN.setZipCode("Postal Code");
-			addressMapApiSenderFN.setPartyMapApi(senderMapApiFN);
+			addressMapApiSenderFN.setAddressLine("SenderAddress");
+			addressMapApiSenderFN.setCity("SenderCity");
+			addressMapApiSenderFN.setCountry("SenderCountry");
+			addressMapApiSenderFN.setState("SenderState");
+			addressMapApiSenderFN.setZipCode(null);
+//			addressMapApiSenderFN.setPartyMapApi(senderMapApiFN);
 
-			addressMapApiReceiverFN.setAddressLine("Address");
-			addressMapApiReceiverFN.setCity("City");
-			addressMapApiReceiverFN.setCountry("Country");
-			addressMapApiReceiverFN.setState("State");
-			addressMapApiReceiverFN.setZipCode("Postal Code");
-			addressMapApiReceiverFN.setPartyMapApi(receiverMapApiFN);
+			addressMapApiReceiverFN.setAddressLine("ReceiverAddress");
+			addressMapApiReceiverFN.setCity("ReceiverCity");
+			addressMapApiReceiverFN.setCountry("ReceiverCountry");
+			addressMapApiReceiverFN.setState(null);
+			addressMapApiReceiverFN.setZipCode(null);
+//			addressMapApiReceiverFN.setPartyMapApi(receiverMapApiFN);
 
-			bankAccountMapApiSenderFN.setBankName("Bank");
-			bankAccountMapApiSenderFN.setBranchName("Branch");
-			bankAccountMapApiSenderFN.setAccountNumber("Account No");
-			bankAccountMapApiSenderFN.setPartyMapApi(senderMapApiFN);
+			bankAccountMapApiSenderFN.setBankName(null);
+			bankAccountMapApiSenderFN.setBranchName(null);
+			bankAccountMapApiSenderFN.setAccountNumber(null);
+//			bankAccountMapApiSenderFN.setPartyMapApi(senderMapApiFN);
 
-			bankAccountMapApiReceiverFN.setBankName("Bank");
-			bankAccountMapApiReceiverFN.setBranchName("Branch");
-			bankAccountMapApiReceiverFN.setAccountNumber("Account No");
-			bankAccountMapApiReceiverFN.setPartyMapApi(receiverMapApiFN);
+			bankAccountMapApiReceiverFN.setBankName(null);
+			bankAccountMapApiReceiverFN.setBranchName(null);
+			bankAccountMapApiReceiverFN.setAccountNumber("BankAccountNumber ");
+//			bankAccountMapApiReceiverFN.setPartyMapApi(receiverMapApiFN);
 
 			identificationMapApiSenderFN.setIdType("Identity Type");
 			identificationMapApiSenderFN.setIdNumber("Identity Number");
 			identificationMapApiSenderFN.setIssuingCountry("Country of Issue");
-			identificationMapApiSenderFN.setPartyMapApi(senderMapApiFN);
+//			identificationMapApiSenderFN.setPartyMapApi(senderMapApiFN);
 
-			identificationMapApiReceiverFN.setIdType("Identity Type");
-			identificationMapApiReceiverFN.setIdNumber("Identity Number");
-			identificationMapApiReceiverFN.setIssuingCountry("Country of Issue");
-			identificationMapApiReceiverFN.setPartyMapApi(receiverMapApiFN);
+			identificationMapApiReceiverFN.setIdType("SenderIdType");
+			identificationMapApiReceiverFN.setIdNumber("SenderIdNumber");
+			identificationMapApiReceiverFN.setIssuingCountry(null);
+//			identificationMapApiReceiverFN.setPartyMapApi(receiverMapApiFN);
 
-			remittanceMapApiFN.setPurpose("Remittance Purpose");
-			remittanceMapApiFN.setAmount("999");
-			remittanceMapApiFN.setPaymentMode("Mode of Payment");
-			remittanceMapApiFN.setRemittanceCompany(remittanceCompanyFN);
-			remittanceMapApiFN.setSourceType("Source of Funds");
-			remittanceMapApiFN.setSegment("");
+			remittanceMapApiFN.setPurpose("PurposeOfRemittance");
+			remittanceMapApiFN.setAmount(null);
+			remittanceMapApiFN.setPaymentMode("PaymentMode");
+//			remittanceMapApiFN.setRemittanceCompany(remittanceCompanyFN);
+			remittanceMapApiFN.setSourceType(null);
+			remittanceMapApiFN.setSegment(null);
 			remittanceMapApiFN.setSenderMapApi(senderMapApiFN);
 			remittanceMapApiFN.setReceiverMapApi(receiverMapApiFN);
-			remittanceMapApiFN.setRemittanceCompany(remittanceCompanyFN);
+//			remittanceMapApiFN.setRemittanceCompany(remittanceCompanyFN);
+
+
 //
 //			remittanceMapApiPG.setPurpose("Remittance Purpose");
 //			remittanceMapApiPG.setAmount("999");
@@ -649,7 +651,7 @@ public class RemittancemiddlewareApplication {
 //			remittanceMapApiDAO.save(remittanceMapApiPG);
 		};
 	}
-*/
+
 
 
 	//	@Bean

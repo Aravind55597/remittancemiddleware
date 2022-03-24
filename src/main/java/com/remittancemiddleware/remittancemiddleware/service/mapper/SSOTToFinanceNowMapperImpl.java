@@ -51,6 +51,23 @@ public class SSOTToFinanceNowMapperImpl implements SSOTToFinanceNowMapper {
 
 
     void setSenderValues(RemittanceTransaction ssot, FinanceNowData result) throws NullPointerException , CustomMappingException {
+
+        //get remittanceMap Object
+
+        //remitMap.get(senderFirstNsme) -> csv header
+
+        //find the index of the csv header
+
+        //find value at the index -> get "john"
+
+        //transaction.setFIrstName("john)
+
+
+
+
+
+
+        //dict.put(remittanceMapDAO.get("financeNow").getSendderFirstNmse(),ssot.getSender().getFirstName())
         result.setSenderFirstName(ssot.getSender().getFirstName());
 
         result.setSenderLastName(ssot.getSender().getLastName());

@@ -28,8 +28,8 @@ public class AddressMapApi implements Serializable {
 
     private String zipCode;
 
-    @OneToOne(mappedBy = "addressMapApi")
-    private PartyMapApi partyMapApi;
+//    @OneToOne(mappedBy = "addressMapApi")
+//    private PartyMapApi partyMapApi;
 
 
 }

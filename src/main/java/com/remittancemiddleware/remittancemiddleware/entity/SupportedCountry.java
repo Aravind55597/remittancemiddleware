@@ -1,6 +1,8 @@
 package com.remittancemiddleware.remittancemiddleware.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +17,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@JsonIgnoreProperties({"remittanceCompanies"})
 public class SupportedCountry implements Serializable {
 
 
@@ -25,7 +28,6 @@ public class SupportedCountry implements Serializable {
     //3 letter code name
     @Column(unique=true)
     private String ibanName;
-
 
     @ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
     @JoinTable(
