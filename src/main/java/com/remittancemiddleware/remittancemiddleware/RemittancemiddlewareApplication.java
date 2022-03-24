@@ -2,15 +2,10 @@ package com.remittancemiddleware.remittancemiddleware;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.remittancemiddleware.remittancemiddleware.dao.RemittanceTransactionDAO;
-import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.everywhereremit.EverywhereRemitData;
 import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.FinanceNowData;
-import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.paymentgo.PaymentGoData;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
 import com.remittancemiddleware.remittancemiddleware.service.SandboxAPIService;
-import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToEverywhereRemitMapper;
-import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToEverywhereRemitMapperImpl;
 import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToFinanceNowMapper;
-import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToPaymentGoMapper;
 import okhttp3.OkHttpClient;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -51,16 +46,16 @@ public class RemittancemiddlewareApplication {
 	//ALLOWS YOU TO TEST SERVICES BY RUNNING THE APP -> REMEMBER TO COMMENT IT OUT BEFORE PUSHING IT
 //	@Bean
 //	@Transactional
-//	public CommandLineRunner demoData(SSOTToPaymentGoMapper mapper , RemittanceTransactionDAO rtDAO, ObjectMapper objectMapper, SandboxAPIService sandService){
+//	public CommandLineRunner demoData(SSOTToFinanceNowMapper mapper , RemittanceTransactionDAO rtDAO, ObjectMapper objectMapper, SandboxAPIService sandService){
 //		return args -> {
 //
-//			RemittanceTransaction rt = rtDAO.findById(4).get();
+//			RemittanceTransaction rt = rtDAO.findById(7).get();
 //
-//			PaymentGoData result = mapper.MapSSOT(rt);
+//			FinanceNowData result = mapper.MapSSOT(rt);
 //
 //			System.out.println(result.toString());
 //
-//			System.out.println(sandService.sendTransactionToSandbox(result,"paymentgo"));
+//			System.out.println(sandService.sendTransactionToSandbox(result,"financenow"));
 //
 //		};
 //	}

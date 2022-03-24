@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.controller;
+package com.remittancemiddleware.remittancemiddleware.restcontroller;
 
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
 
@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api")

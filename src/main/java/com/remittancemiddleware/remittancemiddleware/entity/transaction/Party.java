@@ -1,8 +1,5 @@
 package com.remittancemiddleware.remittancemiddleware.entity.transaction;
 
-import com.remittancemiddleware.remittancemiddleware.entity.map.AddressMap;
-import com.remittancemiddleware.remittancemiddleware.entity.map.BankAccountMap;
-import com.remittancemiddleware.remittancemiddleware.entity.map.IdentificationMap;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

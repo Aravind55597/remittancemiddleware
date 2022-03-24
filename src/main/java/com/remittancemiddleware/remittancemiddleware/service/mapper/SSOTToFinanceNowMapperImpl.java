@@ -99,7 +99,6 @@ public class SSOTToFinanceNowMapperImpl implements SSOTToFinanceNowMapper {
 
         result.setReceiverCountry(this.convertCountry(ssot.getReceiver().getAddress().getCountry()));
 
-
         result.setBankAccountNumber(ssot.getReceiver().getBankAccount().getAccountNumber());
 
     }

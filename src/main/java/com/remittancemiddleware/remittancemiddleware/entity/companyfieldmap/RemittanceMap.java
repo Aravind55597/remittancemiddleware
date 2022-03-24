@@ -1,8 +1,9 @@
-package com.remittancemiddleware.remittancemiddleware.entity.map;
+package com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap;
 
 
 
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
+import com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap.SenderMapApi;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -40,8 +41,12 @@ public class RemittanceMap implements Serializable {
     @JoinColumn(name = "receiver_map_id")
     private ReceiverMap receiverMap;
 
-    @OneToOne(mappedBy = "remittanceMap")
-    private Company company ;
+    @ManyToOne
+    @JoinColumn(name="company_id")
+    private Company company;
+
+
+    private String destinationCountry;
 
 
 }

@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.entity.map;
+package com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap;
 
 
 

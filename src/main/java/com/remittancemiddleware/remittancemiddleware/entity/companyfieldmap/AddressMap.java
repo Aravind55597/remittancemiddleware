@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.entity.map;
+package com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap;
 
 
 
@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-
-
 
 
 @Entity

@@ -1,11 +1,9 @@
-package com.remittancemiddleware.remittancemiddleware.controller;
+package com.remittancemiddleware.remittancemiddleware.restcontroller;
 
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-import java.util.Map;
 
 public interface CompanyController {
     List<Company> findAll();

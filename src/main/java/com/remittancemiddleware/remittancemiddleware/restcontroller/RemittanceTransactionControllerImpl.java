@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.controller;
+package com.remittancemiddleware.remittancemiddleware.restcontroller;
 
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.TransactionStatus;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;

@@ -1,17 +1,14 @@
-package com.remittancemiddleware.remittancemiddleware.controller;
+package com.remittancemiddleware.remittancemiddleware.restcontroller;
 
 import com.remittancemiddleware.remittancemiddleware.entity.User;
-import com.remittancemiddleware.remittancemiddleware.service.UserService;
 import com.remittancemiddleware.remittancemiddleware.service.UserServiceImpl;
 import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-import static com.fasterxml.jackson.databind.type.LogicalType.Map;
 @Slf4j
 @RestController
 @RequestMapping("/api")
