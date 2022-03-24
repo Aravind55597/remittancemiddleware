@@ -2,8 +2,23 @@ package com.remittancemiddleware.remittancemiddleware;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.remittancemiddleware.remittancemiddleware.dao.RemittanceTransactionDAO;
+import com.remittancemiddleware.remittancemiddleware.dao.RemittanceCompanyDAO;
+import com.remittancemiddleware.remittancemiddleware.dao.RemittanceMapDAO;
+import com.remittancemiddleware.remittancemiddleware.dao.RemittanceMapApiDAO;
+import com.remittancemiddleware.remittancemiddleware.dao.UserDAO;
+import com.remittancemiddleware.remittancemiddleware.dao.CompanyDAO;
+import com.remittancemiddleware.remittancemiddleware.dao.SupportedCountryDAO;
+
+
 import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.FinanceNowData;
-import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
+import com.remittancemiddleware.remittancemiddleware.entity.Company;
+import com.remittancemiddleware.remittancemiddleware.entity.RemittanceCompany;
+import com.remittancemiddleware.remittancemiddleware.entity.SupportedCountry;
+import com.remittancemiddleware.remittancemiddleware.entity.User;
+import com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap.*;
+import com.remittancemiddleware.remittancemiddleware.entity.enumdata.*;
+import com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap.*;
+import com.remittancemiddleware.remittancemiddleware.entity.transaction.*;
 import com.remittancemiddleware.remittancemiddleware.service.SandboxAPIService;
 import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToFinanceNowMapper;
 import okhttp3.OkHttpClient;
@@ -15,6 +30,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 
 //https://www.javaguides.net/2018/11/spring-data-jpa-query-creation-from-method-names.html
@@ -65,9 +82,9 @@ public class RemittancemiddlewareApplication {
 
 
 
-/*
+//Drop remittance schema and add remittance schema. Before you run the app if you want to add new test data - SupportedCountry can't have duplicate phillipines.
 	@Bean
-	public CommandLineRunner demoData(CompanyDAO companyDAO , RemittanceMapDAO remittanceMapDAO, UserDAO userDAO, RemittanceTransactionDAO remittanceTransactionDAO) {
+	public CommandLineRunner demoData(RemittanceCompanyDAO remittanceCompanyDAO, RemittanceMapApiDAO remittanceMapApiDAO, SupportedCountryDAO supportedCountryDAO, CompanyDAO companyDAO , RemittanceMapDAO remittanceMapDAO, UserDAO userDAO, RemittanceTransactionDAO remittanceTransactionDAO) {
 		return args -> {
 
 			Company company = new Company();
@@ -107,6 +124,235 @@ public class RemittancemiddlewareApplication {
 			RemittanceTransaction remittanceTransactionF1 = new RemittanceTransaction();
 			RemittanceTransaction remittanceTransactionF2 = new RemittanceTransaction();
 			RemittanceTransaction remittanceTransactionF3 = new RemittanceTransaction();
+
+			//start of additional test data - right schema
+
+			RemittanceCompany remittanceCompanyER = new RemittanceCompany();
+			RemittanceCompany remittanceCompanyFN = new RemittanceCompany();
+			RemittanceCompany remittanceCompanyPG = new RemittanceCompany();
+
+			SupportedCountry supportedCountryPHL = new SupportedCountry();
+
+			RemittanceMapApi remittanceMapApiER = new RemittanceMapApi();
+			RemittanceMapApi remittanceMapApiFN = new RemittanceMapApi();
+			RemittanceMapApi remittanceMapApiPG = new RemittanceMapApi();
+
+			SenderMapApi senderMapApiER = new SenderMapApi();
+			ReceiverMapApi receiverMapApiER = new ReceiverMapApi();
+			SenderMapApi senderMapApiFN = new SenderMapApi();
+			ReceiverMapApi receiverMapApiFN = new ReceiverMapApi();
+
+			BankAccountMapApi bankAccountMapApiSenderER = new BankAccountMapApi();
+			BankAccountMapApi bankAccountMapApiReceiverER = new BankAccountMapApi();
+			BankAccountMapApi bankAccountMapApiSenderFN = new BankAccountMapApi();
+			BankAccountMapApi bankAccountMapApiReceiverFN = new BankAccountMapApi();
+
+			IdentificationMapApi identificationMapApiSenderER = new IdentificationMapApi();
+			IdentificationMapApi identificationMapApiReceiverER = new IdentificationMapApi();
+			IdentificationMapApi identificationMapApiSenderFN = new IdentificationMapApi();
+			IdentificationMapApi identificationMapApiReceiverFN = new IdentificationMapApi();
+
+			AddressMapApi addressMapApiSenderER = new AddressMapApi();
+			AddressMapApi addressMapApiReceiverER = new AddressMapApi();
+			AddressMapApi addressMapApiSenderFN = new AddressMapApi();
+			AddressMapApi addressMapApiReceiverFN = new AddressMapApi();
+
+
+
+			remittanceCompanyER.setRemittanceMapApi(remittanceMapApiER);
+			remittanceCompanyFN.setRemittanceMapApi(remittanceMapApiFN);
+//			remittanceCompanyPG.setRemittanceMapApi(remittanceMapApiPG);
+
+
+			remittanceCompanyER.setRemittanceCompanyName(RemittanceCompanyName.EVERYWHERE_REMIT);
+			remittanceCompanyFN.setRemittanceCompanyName(RemittanceCompanyName.FINANCE_NOW);
+//			remittanceCompanyPG.setRemittanceCompanyName(RemittanceCompanyName.PAYMENT_GO);
+
+			remittanceCompanyER.addSupportedCountries(supportedCountryPHL);
+			remittanceCompanyFN.addSupportedCountries(supportedCountryPHL);
+
+			//paymentGo is not under phillipines
+//			remittanceCompanyPG.addSupportedCountries(supportedCountryPHL);
+
+			supportedCountryPHL.setIbanName("PHL");
+			supportedCountryPHL.addRemittanceCompanies(remittanceCompanyER);
+			supportedCountryPHL.addRemittanceCompanies(remittanceCompanyFN);
+//-------------------------------------------------------------------------------------------------------------
+			//Sender Test data - ER
+			senderMapApiER.setFirstName("First Name");
+			senderMapApiER.setLastName("Last Name");
+			senderMapApiER.setNationality("Nationality");
+			senderMapApiER.setCurrency("Receiver Currency");
+			senderMapApiER.setDateOfBirth("Birthday");
+			senderMapApiER.setMobileNumber("Phone Number");
+			senderMapApiER.setIdentificationMapApi(identificationMapApiSenderER);
+			senderMapApiER.setBankAccountMapApi(bankAccountMapApiSenderER);
+			senderMapApiER.setAddressMapApi(addressMapApiSenderER);
+			senderMapApiER.setSourceOfFunds("Source of Funds");
+			senderMapApiER.setSenderCurrency("Sender Currency");
+			senderMapApiER.setBeneficiaryRelationship("Relation");
+			senderMapApiER.setRemittanceMapApi(remittanceMapApiER);
+//
+//			//Receiver Test data - ER
+			receiverMapApiER.setFirstName("First Name");
+			receiverMapApiER.setLastName("Last Name");
+			receiverMapApiER.setNationality("Nationality");
+			receiverMapApiER.setCurrency("Receiver Currency");
+			receiverMapApiER.setDateOfBirth("Birthday");
+			receiverMapApiER.setMobileNumber("Phone Number");
+			receiverMapApiER.setIdentificationMapApi(identificationMapApiReceiverER);
+			receiverMapApiER.setBankAccountMapApi(bankAccountMapApiReceiverER);
+			receiverMapApiER.setAddressMapApi(addressMapApiReceiverER);
+			receiverMapApiER.setType("");
+			receiverMapApiER.setPayoutCurrency("Receive Currency");
+			receiverMapApiER.setRemittanceMapApi(remittanceMapApiER);
+
+			addressMapApiSenderER.setAddressLine("Address");
+			addressMapApiSenderER.setCity("City");
+			addressMapApiSenderER.setCountry("Country");
+			addressMapApiSenderER.setState("State");
+			addressMapApiSenderER.setZipCode("Postal Code");
+			addressMapApiSenderER.setPartyMapApi(senderMapApiER);
+
+			addressMapApiReceiverER.setAddressLine("Address");
+			addressMapApiReceiverER.setCity("City");
+			addressMapApiReceiverER.setCountry("Country");
+			addressMapApiReceiverER.setState("State");
+			addressMapApiReceiverER.setZipCode("Postal Code");
+			addressMapApiReceiverER.setPartyMapApi(receiverMapApiER);
+
+			bankAccountMapApiSenderER.setBankName("Bank");
+			bankAccountMapApiSenderER.setBranchName("Branch");
+			bankAccountMapApiSenderER.setAccountNumber("Account No");
+			bankAccountMapApiSenderER.setPartyMapApi(senderMapApiER);
+
+			bankAccountMapApiReceiverER.setBankName("Bank");
+			bankAccountMapApiReceiverER.setBranchName("Branch");
+			bankAccountMapApiReceiverER.setAccountNumber("Account No");
+			bankAccountMapApiReceiverER.setPartyMapApi(receiverMapApiER);
+
+			identificationMapApiSenderER.setIdType("Identity Type");
+			identificationMapApiSenderER.setIdNumber("Identity Number");
+			identificationMapApiSenderER.setIssuingCountry("Country of Issue");
+			identificationMapApiSenderER.setPartyMapApi(senderMapApiER);
+
+			identificationMapApiReceiverER.setIdType("Identity Type");
+			identificationMapApiReceiverER.setIdNumber("Identity Number");
+			identificationMapApiReceiverER.setIssuingCountry("Country of Issue");
+			identificationMapApiReceiverER.setPartyMapApi(receiverMapApiER);
+
+			remittanceMapApiER.setPurpose("Remittance Purpose");
+			remittanceMapApiER.setAmount("999");
+			remittanceMapApiER.setPaymentMode("Mode of Payment");
+			remittanceMapApiER.setRemittanceCompany(remittanceCompanyER);
+			remittanceMapApiER.setSourceType("Source of Funds");
+			remittanceMapApiER.setSegment("");
+			remittanceMapApiER.setSenderMapApi(senderMapApiER);
+			remittanceMapApiER.setReceiverMapApi(receiverMapApiER);
+			remittanceMapApiER.setRemittanceCompany(remittanceCompanyER);
+
+// ---------------------------------------------------------------------------------------------------------------
+//			Sender Test data - FN
+			senderMapApiFN.setFirstName("First Name");
+			senderMapApiFN.setLastName("Last Name");
+			senderMapApiFN.setNationality("Nationality");
+			senderMapApiFN.setCurrency("Receiver Currency");
+			senderMapApiFN.setDateOfBirth("Birthday");
+			senderMapApiFN.setMobileNumber("Phone Number");
+			senderMapApiFN.setIdentificationMapApi(identificationMapApiSenderFN);
+			senderMapApiFN.setBankAccountMapApi(bankAccountMapApiSenderFN);
+			senderMapApiFN.setAddressMapApi(addressMapApiSenderFN);
+			senderMapApiFN.setSourceOfFunds("Source of Funds");
+			senderMapApiFN.setSenderCurrency("Sender Currency");
+			senderMapApiFN.setBeneficiaryRelationship("Relation");
+			senderMapApiFN.setRemittanceMapApi(remittanceMapApiFN);
+//
+//			//Receiver Test data - FN
+			receiverMapApiFN.setFirstName("First Name");
+			receiverMapApiFN.setLastName("Last Name");
+			receiverMapApiFN.setNationality("Nationality");
+			receiverMapApiFN.setCurrency("Receiver Currency");
+			receiverMapApiFN.setDateOfBirth("Birthday");
+			receiverMapApiFN.setMobileNumber("Phone Number");
+			receiverMapApiFN.setIdentificationMapApi(identificationMapApiReceiverFN);
+			receiverMapApiFN.setBankAccountMapApi(bankAccountMapApiReceiverFN);
+			receiverMapApiFN.setAddressMapApi(addressMapApiReceiverFN);
+			receiverMapApiFN.setType("");
+			receiverMapApiFN.setPayoutCurrency("Receive Currency");
+			receiverMapApiFN.setRemittanceMapApi(remittanceMapApiFN);
+
+			addressMapApiSenderFN.setAddressLine("Address");
+			addressMapApiSenderFN.setCity("City");
+			addressMapApiSenderFN.setCountry("Country");
+			addressMapApiSenderFN.setState("State");
+			addressMapApiSenderFN.setZipCode("Postal Code");
+			addressMapApiSenderFN.setPartyMapApi(senderMapApiFN);
+
+			addressMapApiReceiverFN.setAddressLine("Address");
+			addressMapApiReceiverFN.setCity("City");
+			addressMapApiReceiverFN.setCountry("Country");
+			addressMapApiReceiverFN.setState("State");
+			addressMapApiReceiverFN.setZipCode("Postal Code");
+			addressMapApiReceiverFN.setPartyMapApi(receiverMapApiFN);
+
+			bankAccountMapApiSenderFN.setBankName("Bank");
+			bankAccountMapApiSenderFN.setBranchName("Branch");
+			bankAccountMapApiSenderFN.setAccountNumber("Account No");
+			bankAccountMapApiSenderFN.setPartyMapApi(senderMapApiFN);
+
+			bankAccountMapApiReceiverFN.setBankName("Bank");
+			bankAccountMapApiReceiverFN.setBranchName("Branch");
+			bankAccountMapApiReceiverFN.setAccountNumber("Account No");
+			bankAccountMapApiReceiverFN.setPartyMapApi(receiverMapApiFN);
+
+			identificationMapApiSenderFN.setIdType("Identity Type");
+			identificationMapApiSenderFN.setIdNumber("Identity Number");
+			identificationMapApiSenderFN.setIssuingCountry("Country of Issue");
+			identificationMapApiSenderFN.setPartyMapApi(senderMapApiFN);
+
+			identificationMapApiReceiverFN.setIdType("Identity Type");
+			identificationMapApiReceiverFN.setIdNumber("Identity Number");
+			identificationMapApiReceiverFN.setIssuingCountry("Country of Issue");
+			identificationMapApiReceiverFN.setPartyMapApi(receiverMapApiFN);
+
+			remittanceMapApiFN.setPurpose("Remittance Purpose");
+			remittanceMapApiFN.setAmount("999");
+			remittanceMapApiFN.setPaymentMode("Mode of Payment");
+			remittanceMapApiFN.setRemittanceCompany(remittanceCompanyFN);
+			remittanceMapApiFN.setSourceType("Source of Funds");
+			remittanceMapApiFN.setSegment("");
+			remittanceMapApiFN.setSenderMapApi(senderMapApiFN);
+			remittanceMapApiFN.setReceiverMapApi(receiverMapApiFN);
+			remittanceMapApiFN.setRemittanceCompany(remittanceCompanyFN);
+//
+//			remittanceMapApiPG.setPurpose("Remittance Purpose");
+//			remittanceMapApiPG.setAmount("999");
+//			remittanceMapApiPG.setPaymentMode("Mode of Payment");
+//			remittanceMapApiPG.setRemittanceCompany(remittanceCompanyPG);
+//			remittanceMapApiPG.setSourceType("Source of Funds");
+//			remittanceMapApiPG.setSegment("");
+//			remittanceMapApiPG.setSenderMapApi(senderMapApi);
+//			remittanceMapApiPG.setReceiverMapApi(receiverMapApi);
+//			remittanceMapApiPG.setRemittanceCompany(remittanceCompanyPG);
+
+//
+
+
+
+			supportedCountryDAO.save(supportedCountryPHL);
+
+			remittanceCompanyDAO.save(remittanceCompanyER);
+			remittanceCompanyDAO.save(remittanceCompanyFN);
+//			remittanceCompanyDAO.save(remittanceCompanyPG);
+
+
+			remittanceMapApiDAO.save(remittanceMapApiER);
+			remittanceMapApiDAO.save(remittanceMapApiFN);
+//			remittanceMapApiDAO.save(remittanceMapApiPG);
+
+
+
+			//end of additional Test Data - right schema
 
 
 //			user1.setEmail("user1@gmail.com");
@@ -247,7 +493,7 @@ public class RemittancemiddlewareApplication {
 			identificationMapS.setPartyMap(senderMap);
 
 			remittanceMap.setPurpose("Remittance Purpose");
-			remittanceMap.setAmount("Remittance Amount");
+			remittanceMap.setAmount(999L);
 			remittanceMap.setPaymentMode("Mode of Payment");
 			remittanceMap.setRemittanceCompany("Remit Company");
 			remittanceMap.setSourceType("Source of Funds");
@@ -258,8 +504,8 @@ public class RemittancemiddlewareApplication {
 
 
 			remittanceTransaction1.setPurpose(RemittancePurpose.EDUCATION);
-			remittanceTransaction1.setAmount(8250);
-			remittanceTransaction1.setRemittanceCompany(RemittanceCompany.PAYMENT_GO);
+			remittanceTransaction1.setAmount(8250L);
+			remittanceTransaction1.setRemittanceCompany(RemittanceCompanyName.PAYMENT_GO);
 			remittanceTransaction1.setSourceType("Loan");
 			remittanceTransaction1.setSegment("");
 			remittanceTransaction1.setPaymentMode("Cheque");
@@ -269,8 +515,8 @@ public class RemittancemiddlewareApplication {
 			remittanceTransaction1.setCompany(company);
 
 			remittanceTransaction2.setPurpose(RemittancePurpose.FAMILY_EXPENSES);
-			remittanceTransaction2.setAmount(6500);
-			remittanceTransaction2.setRemittanceCompany(RemittanceCompany.PAYMENT_GO);
+			remittanceTransaction2.setAmount(6500L);
+			remittanceTransaction2.setRemittanceCompany(RemittanceCompanyName.PAYMENT_GO);
 			remittanceTransaction2.setSourceType("Allowance");
 			remittanceTransaction2.setSegment("");
 			remittanceTransaction2.setPaymentMode("Cash");
@@ -280,8 +526,8 @@ public class RemittancemiddlewareApplication {
 			remittanceTransaction2.setCompany(company);
 
 			remittanceTransaction3.setPurpose(RemittancePurpose.TRAVEL_EXPENSES);
-			remittanceTransaction3.setAmount(6200);
-			remittanceTransaction3.setRemittanceCompany(RemittanceCompany.PAYMENT_GO);
+			remittanceTransaction3.setAmount(6200L);
+			remittanceTransaction3.setRemittanceCompany(RemittanceCompanyName.PAYMENT_GO);
 			remittanceTransaction3.setSourceType("Savings");
 			remittanceTransaction3.setSegment("");
 			remittanceTransaction3.setPaymentMode("Bank Transfer");
@@ -291,8 +537,8 @@ public class RemittancemiddlewareApplication {
 			remittanceTransaction3.setCompany(company);
 
 			remittanceTransactionE1.setPurpose(RemittancePurpose.INVESTMENT);
-			remittanceTransactionE1.setAmount(3870);
-			remittanceTransactionE1.setRemittanceCompany(RemittanceCompany.EVERYWHERE_REMIT);
+			remittanceTransactionE1.setAmount(3870L);
+			remittanceTransactionE1.setRemittanceCompany(RemittanceCompanyName.EVERYWHERE_REMIT);
 			remittanceTransactionE1.setSourceType("Savings");
 			remittanceTransactionE1.setSegment("");
 			remittanceTransactionE1.setPaymentMode("Bank Transfer");
@@ -302,8 +548,8 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionE1.setCompany(company);
 
 			remittanceTransactionE2.setPurpose(RemittancePurpose.PERSONAL_ASSET_ALLOCATION);
-			remittanceTransactionE2.setAmount(5545);
-			remittanceTransactionE2.setRemittanceCompany(RemittanceCompany.EVERYWHERE_REMIT);
+			remittanceTransactionE2.setAmount(5545L);
+			remittanceTransactionE2.setRemittanceCompany(RemittanceCompanyName.EVERYWHERE_REMIT);
 			remittanceTransactionE2.setSourceType("Salary");
 			remittanceTransactionE2.setSegment("");
 			remittanceTransactionE2.setPaymentMode("Bank Transfer");
@@ -313,8 +559,8 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionE2.setCompany(company);
 
 			remittanceTransactionE3.setPurpose(RemittancePurpose.FAMILY_EXPENSES);
-			remittanceTransactionE3.setAmount(3750);
-			remittanceTransactionE3.setRemittanceCompany(RemittanceCompany.EVERYWHERE_REMIT);
+			remittanceTransactionE3.setAmount(3750L);
+			remittanceTransactionE3.setRemittanceCompany(RemittanceCompanyName.EVERYWHERE_REMIT);
 			remittanceTransactionE3.setSourceType("Salary");
 			remittanceTransactionE3.setSegment("");
 			remittanceTransactionE3.setPaymentMode("Cash");
@@ -324,8 +570,8 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionE3.setCompany(company);
 
 			remittanceTransactionF1.setPurpose(RemittancePurpose.CHARITY_DONATION);
-			remittanceTransactionF1.setAmount(250);
-			remittanceTransactionF1.setRemittanceCompany(RemittanceCompany.FINANCE_NOW);
+			remittanceTransactionF1.setAmount(250L);
+			remittanceTransactionF1.setRemittanceCompany(RemittanceCompanyName.FINANCE_NOW);
 			remittanceTransactionF1.setSourceType("Savings");
 			remittanceTransactionF1.setSegment("");
 			remittanceTransactionF1.setPaymentMode("Cash");
@@ -335,8 +581,8 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionF1.setCompany(company);
 
 			remittanceTransactionF2.setPurpose(RemittancePurpose.PAYMENT_FOR_GOODS);
-			remittanceTransactionF2.setAmount(999);
-			remittanceTransactionF2.setRemittanceCompany(RemittanceCompany.FINANCE_NOW);
+			remittanceTransactionF2.setAmount(999L);
+			remittanceTransactionF2.setRemittanceCompany(RemittanceCompanyName.FINANCE_NOW);
 			remittanceTransactionF2.setSourceType("Salary");
 			remittanceTransactionF2.setSegment("");
 			remittanceTransactionF2.setPaymentMode("Bank Transfer");
@@ -346,8 +592,8 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionF2.setCompany(company);
 
 			remittanceTransactionF3.setPurpose(RemittancePurpose.PAYMENT_FOR_SERVICES);
-			remittanceTransactionF3.setAmount(3500);
-			remittanceTransactionF3.setRemittanceCompany(RemittanceCompany.FINANCE_NOW);
+			remittanceTransactionF3.setAmount(3500L);
+			remittanceTransactionF3.setRemittanceCompany(RemittanceCompanyName.FINANCE_NOW);
 			remittanceTransactionF3.setSourceType("Salary");
 			remittanceTransactionF3.setSegment("");
 			remittanceTransactionF3.setPaymentMode("Bank Transfer");
@@ -368,7 +614,10 @@ public class RemittancemiddlewareApplication {
 			company.addRemittanceTransaction(remittanceTransactionF2);
 			company.addRemittanceTransaction(remittanceTransactionF3);
 
-			company.setRemittanceMap(remittanceMap);
+//			company.setRemittanceMap(remittanceMap);
+			company.addRemittanceMaps(remittanceMap);
+
+
 			companyDAO.save(company);
 
 			userDAO.save(user1);
@@ -388,10 +637,19 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionDAO.save(remittanceTransactionF2);
 			remittanceTransactionDAO.save(remittanceTransactionF3);
 
+//			supportedCountryDAO.save(supportedCountryPHL);
+//
+//			remittanceCompanyDAO.save(remittanceCompanyER);
+//			remittanceCompanyDAO.save(remittanceCompanyFN);
+//			remittanceCompanyDAO.save(remittanceCompanyPG);
+//
+//			remittanceMapApiDAO.save(remittanceMapApiER);
+//			remittanceMapApiDAO.save(remittanceMapApiFN);
+//			remittanceMapApiDAO.save(remittanceMapApiPG);
 		};
 	}
 
- */
+
 
 	//	@Bean
 	//	public mapperService mapperService(){

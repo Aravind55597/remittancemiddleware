@@ -68,5 +68,12 @@ public class Company implements Serializable {
         this.remittanceTransactions.add(remittanceTransactions);
     }
 
+    public void addRemittanceMaps(RemittanceMap theRemittanceMap){
+        if(this.remittanceMaps==null){
+            this.remittanceMaps=new ArrayList<RemittanceMap>();
+        }
+        this.remittanceMaps.add(theRemittanceMap);
+    }
+
 
 }
