@@ -15,7 +15,7 @@ public class CompanyControllerImpl implements CompanyController {
     private final CompanyServiceImpl companyServiceImpl;
 
     @Autowired
-    private CompanyControllerImpl(CompanyServiceImpl theCompanyServiceImpl) {
+    public CompanyControllerImpl(CompanyServiceImpl theCompanyServiceImpl) {
         this.companyServiceImpl = theCompanyServiceImpl;
     }
     @GetMapping("/company")
