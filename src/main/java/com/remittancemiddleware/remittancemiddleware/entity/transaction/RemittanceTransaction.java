@@ -47,19 +47,12 @@ public class RemittanceTransaction  implements Serializable{
     @JoinColumn(name = "sender_id")
     private Sender sender;
 
-    @JsonBackReference
-    public Sender getSender(){
-        return sender;
-    }
+
 
     @OneToOne(cascade = {CascadeType.ALL},orphanRemoval=true)
     @JoinColumn(name = "receiver_id")
     private Receiver receiver;
 
-    @JsonBackReference
-    public Receiver getReceiver(){
-        return receiver;
-    }
 
     @ManyToOne
     @JoinColumn(name="company_id")

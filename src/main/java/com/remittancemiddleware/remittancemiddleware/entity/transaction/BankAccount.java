@@ -23,8 +23,8 @@ public class BankAccount  implements Serializable {
     private String accountNumber;
 
 
-    @OneToOne(mappedBy = "bankAccount")
-    private Party party;
+//    @OneToOne(mappedBy = "bankAccount")
+//    private Party party;
 
     public BankAccount(String bankName,String branchName, String accountNumber) {
         this.bankName = bankName;

@@ -27,9 +27,9 @@ public class Address  implements Serializable {
     private int zipCode;
 
 
-    @OneToOne
-    @JoinColumn(name = "party_id")
-    private Party party;
+//    @OneToOne
+//    @JoinColumn(name = "party_id")
+//    private Party party;
 
     public Address(String addressLine, String city, String country, String state, int zipCode) {
         this.addressLine = addressLine;

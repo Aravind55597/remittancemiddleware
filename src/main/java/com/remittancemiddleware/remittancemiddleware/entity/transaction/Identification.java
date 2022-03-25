@@ -19,8 +19,8 @@ public class Identification  implements Serializable {
 
     private String idNumber;
 
-    @OneToOne(mappedBy = "identification")
-    private Party party;
+//    @OneToOne(mappedBy = "identification")
+//    private Party party;
 
     @Enumerated(EnumType.STRING)
     private IdType idType; //enum idType // done
