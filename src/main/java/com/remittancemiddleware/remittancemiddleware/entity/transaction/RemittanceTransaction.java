@@ -4,7 +4,7 @@ package com.remittancemiddleware.remittancemiddleware.entity.transaction;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
-import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittanceCompany;
+import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittanceCompanyName;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittancePurpose;
 
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.TransactionStatus;
@@ -30,8 +30,9 @@ public class RemittanceTransaction  implements Serializable{
 
     private Long amount; //remittanceAmount enum // nope, remittance amount is just amount //
 
+    //TODO CHANGE THIS TO REMITTANCE COMPANY NAME
     @Enumerated(EnumType.STRING)
-    private RemittanceCompany remittanceCompany;
+    private RemittanceCompanyName remittanceCompany;
 
     private String sourceType; //sourceType enum // hard code value as it was hard coded from a hidden field
 
@@ -43,7 +44,7 @@ public class RemittanceTransaction  implements Serializable{
     private TransactionStatus transactionStatus;
 
     @OneToOne(cascade = {CascadeType.ALL},orphanRemoval=true)
-    @JoinColumn(name = "sender_ID")
+    @JoinColumn(name = "sender_id")
     private Sender sender;
 
     @JsonBackReference
@@ -52,7 +53,7 @@ public class RemittanceTransaction  implements Serializable{
     }
 
     @OneToOne(cascade = {CascadeType.ALL},orphanRemoval=true)
-    @JoinColumn(name = "receiver_ID")
+    @JoinColumn(name = "receiver_id")
     private Receiver receiver;
 
     @JsonBackReference
@@ -61,7 +62,7 @@ public class RemittanceTransaction  implements Serializable{
     }
 
     @ManyToOne
-    @JoinColumn(name="company_ID")
+    @JoinColumn(name="company_id")
     private Company company;
 
     @JsonBackReference

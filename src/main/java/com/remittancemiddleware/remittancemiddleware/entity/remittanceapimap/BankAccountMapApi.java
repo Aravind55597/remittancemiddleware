@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.entity.map;
+package com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap;
 
 
 import lombok.Getter;
@@ -6,12 +6,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class BankAccountMap {
+public class BankAccountMapApi implements Serializable {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +27,6 @@ public class BankAccountMap {
     private String accountNumber;
 
 
-    @OneToOne(mappedBy = "bankAccountMap")
-    private PartyMap partyMap;
-
-
-
+//    @OneToOne(mappedBy = "bankAccountMapApi")
+//    private PartyMapApi partyMapApi;
 }

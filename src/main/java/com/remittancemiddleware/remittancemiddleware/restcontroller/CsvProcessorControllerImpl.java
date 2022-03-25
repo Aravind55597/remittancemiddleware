@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.controller;
+package com.remittancemiddleware.remittancemiddleware.restcontroller;
 
 
 import com.remittancemiddleware.remittancemiddleware.service.CsvProcessorServiceImpl;

@@ -1,4 +1,4 @@
-package com.remittancemiddleware.remittancemiddleware.controller;
+package com.remittancemiddleware.remittancemiddleware.restcontroller;
 
 import org.springframework.web.multipart.MultipartFile;
 

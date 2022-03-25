@@ -1,9 +1,8 @@
-package com.remittancemiddleware.remittancemiddleware.controller;
+package com.remittancemiddleware.remittancemiddleware.restcontroller;
 
 import com.remittancemiddleware.remittancemiddleware.entity.User;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Map;
 

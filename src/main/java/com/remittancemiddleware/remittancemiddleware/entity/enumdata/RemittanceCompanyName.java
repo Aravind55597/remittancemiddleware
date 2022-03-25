@@ -1,5 +1,5 @@
 package com.remittancemiddleware.remittancemiddleware.entity.enumdata;
 
-public enum RemittanceCompany {
+public enum RemittanceCompanyName {
     EVERYWHERE_REMIT, FINANCE_NOW, PAYMENT_GO
 }

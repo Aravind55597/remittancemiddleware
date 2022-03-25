@@ -1,4 +1,5 @@
-package com.remittancemiddleware.remittancemiddleware.entity.map;
+package com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap;
+
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,26 +7,26 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-
-
-
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class IdentificationMap {
+public class BankAccountMap {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String idType;
+    private String bankName;
 
-    private String idNumber;
+    private String branchName;
 
-    private String issuingCountry;
+    private String accountNumber;
 
-    @OneToOne(mappedBy = "identificationMap")
+
+    @OneToOne(mappedBy = "bankAccountMap")
     private PartyMap partyMap;
+
+
 
 }

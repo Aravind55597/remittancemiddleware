@@ -2,7 +2,7 @@ package com.remittancemiddleware.remittancemiddleware.entity;
 
 
 import com.fasterxml.jackson.annotation.*;
-import com.remittancemiddleware.remittancemiddleware.entity.map.RemittanceMap;
+import com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap.RemittanceMap;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,8 +17,10 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonIgnoreProperties({"users", "remittanceMap", "remittanceTransactions"})
+@JsonIgnoreProperties({"users", "remittanceMaps", "remittanceTransactions"})
 public class Company implements Serializable {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -33,9 +35,13 @@ public class Company implements Serializable {
         return users;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "remittance_map_id")
-    private RemittanceMap remittanceMap;
+    //__________________________________________________________________________________
+    //TODO JSON MANAGED REFERENCE
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "company", fetch = FetchType.LAZY)
+    private List<RemittanceMap> remittanceMaps;
+   //__________________________________________________________________________________
+
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "company", fetch = FetchType.LAZY)
     private List<RemittanceTransaction> remittanceTransactions;
@@ -44,7 +50,6 @@ public class Company implements Serializable {
         this.companyName = companyName;
     }
 
-    @JsonManagedReference
     public List<RemittanceTransaction> getRemittanceTransactions(){
         return remittanceTransactions;
     }
@@ -61,6 +66,13 @@ public class Company implements Serializable {
             this.remittanceTransactions=new ArrayList<RemittanceTransaction>();
         }
         this.remittanceTransactions.add(remittanceTransactions);
+    }
+
+    public void addRemittanceMaps(RemittanceMap theRemittanceMap){
+        if(this.remittanceMaps==null){
+            this.remittanceMaps=new ArrayList<RemittanceMap>();
+        }
+        this.remittanceMaps.add(theRemittanceMap);
     }
 
 
