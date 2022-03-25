@@ -180,44 +180,44 @@ public class RemittancemiddlewareApplication {
 			supportedCountryPHL.addRemittanceCompanies(remittanceCompanyFN);
 //-------------------------------------------------------------------------------------------------------------
 			//Sender Test data - ER
-			senderMapApiER.setFirstName("Sender_legal_name_first");
-			senderMapApiER.setLastName("Sender_legal_name_last");
-			senderMapApiER.setNationality("Sender_nationality");
-			senderMapApiER.setCurrency("Recipient_currency");
-			senderMapApiER.setDateOfBirth("Sender_date_of_birth");
-			senderMapApiER.setMobileNumber("");
+			senderMapApiER.setFirstName("sender_legal_name_first");
+			senderMapApiER.setLastName("sender_legal_name_last");
+			senderMapApiER.setNationality("sender_nationality");
+			senderMapApiER.setCurrency("sender_currency");
+			senderMapApiER.setDateOfBirth("sender_date_of_birth");
+			senderMapApiER.setMobileNumber(null);
 			senderMapApiER.setIdentificationMapApi(identificationMapApiSenderER);
 			senderMapApiER.setBankAccountMapApi(bankAccountMapApiSenderER);
 			senderMapApiER.setAddressMapApi(addressMapApiSenderER);
-			senderMapApiER.setSourceOfFunds("Source_of_funds");
-			senderMapApiER.setSenderCurrency("Sender_currency");
-			senderMapApiER.setBeneficiaryRelationship("");
+			senderMapApiER.setSourceOfFunds("source_of_funds");
+			senderMapApiER.setSenderCurrency("sender_currency");
+			senderMapApiER.setBeneficiaryRelationship(null);
 //			senderMapApiER.setRemittanceMapApi(remittanceMapApiER);
 //
 //			//Receiver Test data - ER
-			receiverMapApiER.setFirstName("Recipient_legal_name_first");
-			receiverMapApiER.setLastName("Recipient_legal_name_last");
+			receiverMapApiER.setFirstName("recipient_legal_name_first");
+			receiverMapApiER.setLastName("recipient_legal_name_last");
 			receiverMapApiER.setNationality(null);
-			receiverMapApiER.setCurrency("Recipient_currency");
-			receiverMapApiER.setDateOfBirth("Birthday");
-			receiverMapApiER.setMobileNumber("Phone Number");
+			receiverMapApiER.setCurrency("recipient_currency");
+			receiverMapApiER.setDateOfBirth(null);
+			receiverMapApiER.setMobileNumber("recipient_mobile_number");
 			receiverMapApiER.setIdentificationMapApi(identificationMapApiReceiverER);
 			receiverMapApiER.setBankAccountMapApi(bankAccountMapApiReceiverER);
 			receiverMapApiER.setAddressMapApi(addressMapApiReceiverER);
-			receiverMapApiER.setType("Recipient_type");
-			receiverMapApiER.setPayoutCurrency("Recipient_currency");
+			receiverMapApiER.setType("recipient_type");
+			receiverMapApiER.setPayoutCurrency("recipient_currency");
 //			receiverMapApiER.setRemittanceMapApi(remittanceMapApiER);
 
-			addressMapApiSenderER.setAddressLine("Sender_address_line");
-			addressMapApiSenderER.setCity("Sender_address_city");
-			addressMapApiSenderER.setCountry("Sender_address_country");
+			addressMapApiSenderER.setAddressLine("sender_address_line");
+			addressMapApiSenderER.setCity("sender_address_city");
+			addressMapApiSenderER.setCountry("sender_address_country");
 			addressMapApiSenderER.setState(null);
 			addressMapApiSenderER.setZipCode(null);
 //			addressMapApiSenderER.setPartyMapApi(senderMapApiER);
 
 			addressMapApiReceiverER.setAddressLine(null);
 			addressMapApiReceiverER.setCity(null);
-			addressMapApiReceiverER.setCountry(null);
+			addressMapApiReceiverER.setCountry("recipient_country");
 			addressMapApiReceiverER.setState(null);
 			addressMapApiReceiverER.setZipCode(null);
 //			addressMapApiReceiverER.setPartyMapApi(receiverMapApiER);
@@ -229,12 +229,12 @@ public class RemittancemiddlewareApplication {
 
 			bankAccountMapApiReceiverER.setBankName(null);
 			bankAccountMapApiReceiverER.setBranchName(null);
-			bankAccountMapApiReceiverER.setAccountNumber(null);
+			bankAccountMapApiReceiverER.setAccountNumber("recipient_account_number");
 //			bankAccountMapApiReceiverER.setPartyMapApi(receiverMapApiER);
 
-			identificationMapApiSenderER.setIdType("Sender_id_type");
-			identificationMapApiSenderER.setIdNumber("Sender_id_number");
-			identificationMapApiSenderER.setIssuingCountry("Sender_id_country");
+			identificationMapApiSenderER.setIdType("sender_id_type");
+			identificationMapApiSenderER.setIdNumber("sender_id_number");
+			identificationMapApiSenderER.setIssuingCountry("sender_id_country");
 //			identificationMapApiSenderER.setPartyMapApi(senderMapApiER);
 
 			identificationMapApiReceiverER.setIdType(null);
@@ -242,12 +242,12 @@ public class RemittancemiddlewareApplication {
 			identificationMapApiReceiverER.setIssuingCountry(null);
 //			identificationMapApiReceiverER.setPartyMapApi(receiverMapApiER);
 
-			remittanceMapApiER.setPurpose("Remiitance_purpose");
-			remittanceMapApiER.setAmount(null);
+			remittanceMapApiER.setPurpose("remittance_purpose");
+			remittanceMapApiER.setAmount("units");
 			remittanceMapApiER.setPaymentMode(null);
 //			remittanceMapApiER.setRemittanceCompany(remittanceCompanyER);
-			remittanceMapApiER.setSourceType("Source_of_funds");
-			remittanceMapApiER.setSegment(null);
+			remittanceMapApiER.setSourceType("source_type");
+			remittanceMapApiER.setSegment("segment");
 			remittanceMapApiER.setSenderMapApi(senderMapApiER);
 			remittanceMapApiER.setReceiverMapApi(receiverMapApiER);
 //			remittanceMapApiER.setRemittanceCompany(remittanceCompanyER);
