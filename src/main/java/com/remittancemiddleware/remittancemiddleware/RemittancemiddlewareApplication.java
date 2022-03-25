@@ -27,6 +27,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 
 import java.text.SimpleDateFormat;
@@ -56,6 +59,15 @@ public class RemittancemiddlewareApplication {
 		return new SimpleDateFormat("dd-MM-yyyy");
 	}
 
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new  WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**");
+			}
+		};
+	}
 
 	// Note: Take note of input parameters, before you test
 	// Change input mapper object types to the one being tested e.g. EverywhereRemit, and get correct Id of the corresponding transaction before you test
