@@ -1,5 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.entity.transaction;
 
+
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.BeneficiaryRelationship;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.SourceOfFunds;
 import lombok.Getter;

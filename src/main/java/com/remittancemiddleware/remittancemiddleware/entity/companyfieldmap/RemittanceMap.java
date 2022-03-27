@@ -1,7 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap;
 
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap.SenderMapApi;
@@ -24,11 +23,9 @@ public class RemittanceMap implements Serializable {
 
     private String purpose;
 
-    private Long amount;
+    private String amount;
 
     private String paymentMode;
-
-    private String remittanceCompany;
 
     private String sourceType;
 
@@ -47,6 +44,7 @@ public class RemittanceMap implements Serializable {
     @JoinColumn(name="company_id")
     private Company company;
 
+    private String remittanceCompany;
 
     private String destinationCountry;
 

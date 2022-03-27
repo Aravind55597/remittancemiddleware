@@ -1,7 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.entity.transaction;
 
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittanceCompanyName;
@@ -30,33 +29,31 @@ public class RemittanceTransaction  implements Serializable{
 
     private Long amount; //remittanceAmount enum // nope, remittance amount is just amount //
 
-    //TODO CHANGE THIS TO REMITTANCE COMPANY NAME
-    @Enumerated(EnumType.STRING)
-    private RemittanceCompanyName remittanceCompany;
+    private String paymentMode;
 
     private String sourceType; //sourceType enum // hard code value as it was hard coded from a hidden field
 
     private String segment; //segment // hard code value, same reason as above
-
-    private String paymentMode;
-
-    @Enumerated(EnumType.STRING)
-    private TransactionStatus transactionStatus;
 
     @OneToOne(cascade = {CascadeType.ALL},orphanRemoval=true)
     @JoinColumn(name = "sender_id")
     private Sender sender;
 
 
-
     @OneToOne(cascade = {CascadeType.ALL},orphanRemoval=true)
     @JoinColumn(name = "receiver_id")
     private Receiver receiver;
 
-
     @ManyToOne
     @JoinColumn(name="company_id")
     private Company company;
+
+    //TODO CHANGE THIS TO REMITTANCE COMPANY NAME
+    @Enumerated(EnumType.STRING)
+    private RemittanceCompanyName remittanceCompany;
+
+    @Enumerated(EnumType.STRING)
+    private TransactionStatus transactionStatus;
 
     @JsonBackReference
     public Company getCompany() {

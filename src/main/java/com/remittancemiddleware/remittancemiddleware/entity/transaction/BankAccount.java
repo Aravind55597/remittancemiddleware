@@ -1,5 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.entity.transaction;
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

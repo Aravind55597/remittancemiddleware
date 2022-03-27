@@ -19,12 +19,12 @@ import java.util.Date;
 public class Receiver  extends Party {
 
 
-    private String receiverType; // enum receiverType // nope for enum, hard code default field value "bank_account" from excel
-
-    private String receiverRemittanceCountry;
+    private String type; // enum receiverType // nope for enum, hard code default field value "bank_account" from excel
 
     //this should be removed ?
     private String payoutCurrency; //payoutCurrency enum // no enum, same as above
+
+    private String receiverRemittanceCountry;
 
 
     public Receiver(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, String mobileNumber, String receiverType) {
@@ -34,6 +34,6 @@ public class Receiver  extends Party {
         this.currency = currency;
         this.dateOfBirth = dateOfBirth;
         this.mobileNumber = mobileNumber;
-        this.receiverType = receiverType;
+        this.type = receiverType;
     }
 }

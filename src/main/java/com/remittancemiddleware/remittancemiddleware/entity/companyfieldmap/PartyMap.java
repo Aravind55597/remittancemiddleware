@@ -26,7 +26,6 @@ abstract public class PartyMap {
 
     private String currency;
 
-
     private String dateOfBirth;
 
     private String mobileNumber;

@@ -14,8 +14,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class BankAccountMapApi implements Serializable {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

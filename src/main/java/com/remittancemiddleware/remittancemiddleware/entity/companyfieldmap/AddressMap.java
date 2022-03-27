@@ -1,8 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap;
 
 
-
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,14 +17,11 @@ public class AddressMap {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-
     private String addressLine;
-
 
     private String city;
 
     private String country;
-
 
     private String state;
 

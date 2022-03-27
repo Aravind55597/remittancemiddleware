@@ -18,7 +18,6 @@ import java.io.Serializable;
 @Inheritance(strategy = InheritanceType.JOINED)
 abstract public class PartyMapApi implements Serializable {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -30,7 +29,6 @@ abstract public class PartyMapApi implements Serializable {
     private String nationality;
 
     private String currency;
-
 
     private String dateOfBirth;
 
