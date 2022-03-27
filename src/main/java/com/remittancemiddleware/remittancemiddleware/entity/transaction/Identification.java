@@ -1,5 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.entity.transaction;
 
+
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.IdType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,19 +18,19 @@ public class Identification  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String idNumber;
+    @Enumerated(EnumType.STRING)
+    private IdType idType; //enum idType // done
 
 //    @OneToOne(mappedBy = "identification")
 //    private Party party;
 
-    @Enumerated(EnumType.STRING)
-    private IdType idType; //enum idType // done
+    private String idNumber;
 
     private String issuingCountry; //enum issuing country? // nope, using standard country code
 
-    public Identification(String idNumber, IdType idType, String issuingCountry) {
-        this.idNumber = idNumber;
+    public Identification(IdType idType, String idNumber,  String issuingCountry) {
         this.idType = idType;
+        this.idNumber = idNumber;
         this.issuingCountry = issuingCountry;
     }
 }

@@ -1,7 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap;
 
 
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,7 +23,6 @@ public class SenderMap extends PartyMap{
     private String senderCurrency ;
 
     private String beneficiaryRelationship;
-
 
     @OneToOne(mappedBy = "senderMap")
     private RemittanceMap remittanceMap;

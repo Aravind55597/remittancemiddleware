@@ -15,7 +15,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class RemittanceMapApi implements Serializable {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

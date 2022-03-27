@@ -1,5 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap;
 
+
 import com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap.RemittanceMap;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @PrimaryKeyJoinColumn(name = "party_map_api_id")
 public class SenderMapApi extends PartyMapApi implements Serializable {
-
 
     private String sourceOfFunds;
 
