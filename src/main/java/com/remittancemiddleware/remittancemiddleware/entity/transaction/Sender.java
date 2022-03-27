@@ -28,7 +28,7 @@ public class Sender  extends Party{
     @Enumerated(EnumType.STRING)
     public BeneficiaryRelationship beneficiaryRelationship; //    enum senderBeneficiaryRelationship; // done
 
-    public Sender(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, String mobileNumber, SourceOfFunds sourceOfFunds, BeneficiaryRelationship  beneficiaryRelationship) {
+    public Sender(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, String mobileNumber, SourceOfFunds sourceOfFunds,String senderRemittanceCountry, String senderCurrency, BeneficiaryRelationship  beneficiaryRelationship) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationality = nationality;
@@ -36,6 +36,8 @@ public class Sender  extends Party{
         this.dateOfBirth = dateOfBirth;
         this.mobileNumber = mobileNumber;
         this.sourceOfFunds = sourceOfFunds;
+        this.senderRemittanceCountry = senderRemittanceCountry;
+        this.senderCurrency = senderCurrency;
         this.beneficiaryRelationship = beneficiaryRelationship;
     }
 }
