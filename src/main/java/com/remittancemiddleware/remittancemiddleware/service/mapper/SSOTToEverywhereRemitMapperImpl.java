@@ -90,7 +90,7 @@ public class SSOTToEverywhereRemitMapperImpl implements SSOTToEverywhereRemitMap
 
         result.setRecipientMobileNumber(ssot.getSender().getMobileNumber());
 
-        result.setRecipientType(ssot.getReceiver().getReceiverType());
+        result.setRecipientType(ssot.getReceiver().getType());
 
         result.setRecipientCountry(ssot.getReceiver().getReceiverRemittanceCountry());
 
