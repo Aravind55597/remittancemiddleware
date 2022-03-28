@@ -29,9 +29,9 @@ public class SandboxAPIServiceImpl implements SandboxAPIService {
 
     @Autowired
     public SandboxAPIServiceImpl(OkHttpClient okHttpClient , ObjectMapper objectMapper,
-                                 @Value("sandbox.password") String sandboxPassword,
-                                 @Value("sandbox.username") String sandboxUsername,
-                                 @Value("sandbox.base.url") String sandboxBaseUrl){
+                                 @Value("${sandbox.password}") String sandboxPassword,
+                                 @Value("${sandbox.username}") String sandboxUsername,
+                                 @Value("${sandbox.base.url}") String sandboxBaseUrl){
         this.okHttpClient=okHttpClient;
         this.objectMapper=objectMapper;
         this.sandboxPassword= sandboxPassword;
