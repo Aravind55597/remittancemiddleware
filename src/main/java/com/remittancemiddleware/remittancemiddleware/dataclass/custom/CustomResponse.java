@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
+import java.util.HashMap;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -43,6 +45,16 @@ public class CustomResponse<T> {
         this.data = null;
         this.httpCode = httpStatus.value();
     }
+
+
+    public CustomResponse(String errorMsg , HttpStatus httpStatus , T errors)
+    {
+        this.succeeded = false;
+        this.message = errorMsg;
+        this.data = errors;
+        this.httpCode = httpStatus.value();
+    }
+
 
 
 }

@@ -1,23 +1,27 @@
 package com.remittancemiddleware.remittancemiddleware.customexception;
 
-public class CustomBadRequestException extends RuntimeException {
 
-    public CustomBadRequestException() {
-    }
+import java.util.HashMap;
+
+public class CustomBadRequestException extends CustomException {
 
     public CustomBadRequestException(String message) {
         super(message);
     }
 
-    public CustomBadRequestException(String message, Throwable cause) {
-        super(message, cause);
+    public CustomBadRequestException(HashMap<String, String> errors) {
+        super(errors);
     }
 
-    public CustomBadRequestException(Throwable cause) {
-        super(cause);
+    public CustomBadRequestException(String message, HashMap<String, String> errors) {
+        super(message, errors);
     }
 
-//    public CustomBadRequestException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-//        super(message, cause, enableSuppression, writableStackTrace);
-//    }
+    public CustomBadRequestException(String message, Throwable cause, HashMap<String, String> errors) {
+        super(message, cause, errors);
+    }
+
+    public CustomBadRequestException(Throwable cause, HashMap<String, String> errors) {
+        super(cause, errors);
+    }
 }

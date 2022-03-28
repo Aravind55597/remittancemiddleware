@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.util.HashMap;
+
 //reference: https://www.baeldung.com/exception-handling-for-rest-with-spring
 @ControllerAdvice
 public class GlobalExceptionHandlerImpl implements GlobalExceptionHandler {
@@ -18,9 +20,10 @@ public class GlobalExceptionHandlerImpl implements GlobalExceptionHandler {
     public ResponseEntity<CustomResponse> handleException(CustomBadRequestException exc){
 
         //create CustomerErrorResponse
-        CustomResponse error = new CustomResponse(
+        CustomResponse<HashMap<String,String>> error = new CustomResponse(
                 exc.getMessage(),
-                HttpStatus.BAD_REQUEST
+                HttpStatus.BAD_REQUEST,
+                exc.getErrors()
         );
 
         //return ResponseEntity
@@ -33,9 +36,10 @@ public class GlobalExceptionHandlerImpl implements GlobalExceptionHandler {
     public ResponseEntity<CustomResponse> handleException(CustomNotFoundException exc){
 
         //create CustomerErrorResponse
-        CustomResponse error = new CustomResponse(
+        CustomResponse<HashMap<String,String>> error = new CustomResponse(
                 exc.getMessage(),
-                HttpStatus.NOT_FOUND
+                HttpStatus.NOT_FOUND,
+                exc.getErrors()
         );
 
         //return ResponseEntity

@@ -1,23 +1,26 @@
 package com.remittancemiddleware.remittancemiddleware.customexception;
 
-public class CustomNotFoundException extends RuntimeException{
+import java.util.HashMap;
 
-    public CustomNotFoundException() {
-    }
+public class CustomNotFoundException  extends CustomException{
 
     public CustomNotFoundException(String message) {
         super(message);
     }
 
-    public CustomNotFoundException(String message, Throwable cause) {
-        super(message, cause);
+    public CustomNotFoundException(HashMap<String, String> errors) {
+        super(errors);
     }
 
-    public CustomNotFoundException(Throwable cause) {
-        super(cause);
+    public CustomNotFoundException(String message, HashMap<String, String> errors) {
+        super(message, errors);
     }
 
-//    public CustomNotFoundException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-//        super(message, cause, enableSuppression, writableStackTrace);
-//    }
+    public CustomNotFoundException(String message, Throwable cause, HashMap<String, String> errors) {
+        super(message, cause, errors);
+    }
+
+    public CustomNotFoundException(Throwable cause, HashMap<String, String> errors) {
+        super(cause, errors);
+    }
 }

@@ -127,7 +127,7 @@ public class SSOTToFinanceNowMapperImpl implements SSOTToFinanceNowMapper {
 
         result.setPurposeOfRemittance(this.convertRemittancePurpose(ssot.getPurpose()));
 
-        result.setPaymentAmount(ssot.getAmount().toString());
+        result.setTransferAmount(ssot.getAmount().toString());
     }
 
     public String convertCountry(String countrySSOT) throws CustomMappingException {

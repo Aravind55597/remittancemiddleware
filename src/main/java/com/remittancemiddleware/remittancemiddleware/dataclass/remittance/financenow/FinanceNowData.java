@@ -13,7 +13,7 @@ public class FinanceNowData {
 
     private String bankAccountNumber;
 
-    private String paymentAmount;
+    private String transferAmount;
 
     private String paymentMode;
 
