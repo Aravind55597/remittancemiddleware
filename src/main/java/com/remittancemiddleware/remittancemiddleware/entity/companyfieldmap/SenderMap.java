@@ -24,7 +24,7 @@ public class SenderMap extends PartyMap{
 
     private String beneficiaryRelationship;
 
-    @OneToOne(mappedBy = "senderMap")
-    private RemittanceMap remittanceMap;
+//    @OneToOne(mappedBy = "senderMap")
+//    private RemittanceMap remittanceMap;
 
 }

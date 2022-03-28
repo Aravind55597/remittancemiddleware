@@ -24,8 +24,8 @@ public class BankAccountMap {
     private String accountNumber;
 
 
-    @OneToOne(mappedBy = "bankAccountMap")
-    private PartyMap partyMap;
+//    @OneToOne(mappedBy = "bankAccountMap")
+//    private PartyMap partyMap;
 
 
 

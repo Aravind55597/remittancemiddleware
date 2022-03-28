@@ -27,7 +27,7 @@ public class AddressMap {
 
     private String zipCode;
 
-    @OneToOne(mappedBy = "addressMap")
-    private PartyMap partyMap;
+//    @OneToOne(mappedBy = "addressMap")
+//    private PartyMap partyMap;
 
 }

@@ -24,7 +24,7 @@ public class IdentificationMap {
 
     private String issuingCountry;
 
-    @OneToOne(mappedBy = "identificationMap")
-    private PartyMap partyMap;
+//    @OneToOne(mappedBy = "identificationMap")
+//    private PartyMap partyMap;
 
 }
