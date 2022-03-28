@@ -1,6 +1,7 @@
 package com.remittancemiddleware.remittancemiddleware.restcontroller;
 
 
+import com.remittancemiddleware.remittancemiddleware.dataclass.custom.CustomResponse;
 import com.remittancemiddleware.remittancemiddleware.service.CsvProcessorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,10 +24,10 @@ public class CsvProcessorControllerImpl implements CsvProcessorController {
         }
 
         @PostMapping("/csvProcessor/processCsv")
-        public List<Map<String,String>> processCsv(@RequestParam("csvFile") MultipartFile csvFile) throws Exception {
+        public CustomResponse processCsv(@RequestParam("csvFile") MultipartFile csvFile) throws Exception {
 
             try {
-                return csvProcessorServiceImpl.processCsv(csvFile);
+                return new CustomResponse(csvProcessorServiceImpl.processCsv(csvFile));
             } catch (Exception e) {
                 throw e;
             }
@@ -34,10 +35,10 @@ public class CsvProcessorControllerImpl implements CsvProcessorController {
         };
 
     @PostMapping("/csvProcessor/processCsvHeaders")
-    public List<String> processCsvHeaders(@RequestParam("csvFile") MultipartFile csvFile) throws Exception {
+    public CustomResponse processCsvHeaders(@RequestParam("csvFile") MultipartFile csvFile) throws Exception {
 
         try {
-            return csvProcessorServiceImpl.processCsvHeaders(csvFile);
+            return new CustomResponse(csvProcessorServiceImpl.processCsvHeaders(csvFile));
         } catch (Exception e) {
             throw e;
         }

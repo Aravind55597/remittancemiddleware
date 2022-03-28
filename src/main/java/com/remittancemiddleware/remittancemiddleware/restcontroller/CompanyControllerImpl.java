@@ -1,5 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.restcontroller;
 
+import com.remittancemiddleware.remittancemiddleware.dataclass.custom.CustomResponse;
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
 
 import com.remittancemiddleware.remittancemiddleware.service.CompanyServiceImpl;
@@ -18,13 +19,14 @@ public class CompanyControllerImpl implements CompanyController {
         this.companyServiceImpl = theCompanyServiceImpl;
     }
     @GetMapping("/company")
-    public List<Company> findAll() {
-        return companyServiceImpl.findAll();
+    public CustomResponse findAll() {
+
+        return new CustomResponse(companyServiceImpl.findAll());
     };
 
     @GetMapping("/company/{companyId}")
-    public Company findById(@PathVariable int companyId) {
-        return companyServiceImpl.findById(companyId);
+    public CustomResponse findById(@PathVariable int companyId) {
+        return new CustomResponse(companyServiceImpl.findById(companyId));
     };
 
 }
