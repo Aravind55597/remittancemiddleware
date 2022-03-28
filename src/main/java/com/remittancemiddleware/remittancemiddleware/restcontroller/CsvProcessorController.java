@@ -1,11 +1,12 @@
 package com.remittancemiddleware.remittancemiddleware.restcontroller;
 
+import com.remittancemiddleware.remittancemiddleware.dataclass.custom.CustomResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
 
 public interface CsvProcessorController {
-    List<Map<String,String>> processCsv(MultipartFile csvFile) throws Exception;
-    List<String> processCsvHeaders(MultipartFile csvFile) throws Exception;
+    CustomResponse processCsv(MultipartFile csvFile) throws Exception;
+    CustomResponse processCsvHeaders(MultipartFile csvFile) throws Exception;
 }

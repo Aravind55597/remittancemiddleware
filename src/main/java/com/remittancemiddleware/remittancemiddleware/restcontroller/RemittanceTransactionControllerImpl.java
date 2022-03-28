@@ -1,5 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.restcontroller;
 
+import com.remittancemiddleware.remittancemiddleware.dataclass.custom.CustomResponse;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.TransactionStatus;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
 import com.remittancemiddleware.remittancemiddleware.service.RemittanceTransactionService;
@@ -20,16 +21,18 @@ public class RemittanceTransactionControllerImpl implements RemittanceTransactio
 
 
     @GetMapping("/getTransactionsByUser")
-    public List<RemittanceTransaction> getTransactionsByUser(@RequestParam int userId){
+    public CustomResponse getTransactionsByUser(@RequestParam int userId){
         List<RemittanceTransaction> remittanceTransaction = remittanceTransactionService.findByCompanyId(userId);
-        return remittanceTransaction;
+        CustomResponse result = new CustomResponse (remittanceTransaction);
+        return result;
     }
 
     @GetMapping("/getTransactionsByStatus")
-    public List<RemittanceTransaction> getTransactionsByStatus(@RequestParam String status, @RequestParam int userId){
+    public CustomResponse getTransactionsByStatus(@RequestParam String status, @RequestParam int userId){
         TransactionStatus transactionStatus = remittanceTransactionService.getTransactionStatus(status);
 
         List<RemittanceTransaction> remittanceTransaction = remittanceTransactionService.findByTransactionStatusAndCompanyId(transactionStatus, userId);
-        return remittanceTransaction;
+        CustomResponse result = new CustomResponse (remittanceTransaction);
+        return result;
     }
 }

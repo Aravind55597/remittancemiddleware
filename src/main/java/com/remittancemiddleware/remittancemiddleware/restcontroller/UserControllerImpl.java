@@ -1,5 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.restcontroller;
 
+import com.remittancemiddleware.remittancemiddleware.dataclass.custom.CustomResponse;
 import com.remittancemiddleware.remittancemiddleware.entity.User;
 import com.remittancemiddleware.remittancemiddleware.service.UserServiceImpl;
 import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFoundException;
@@ -22,24 +23,27 @@ public class UserControllerImpl implements UserController {
     }
 
     @GetMapping("/user/{userId}")
-    public User getUserById(@PathVariable(value="userId") int userId) {
+    public CustomResponse getUserById(@PathVariable(value="userId") int userId) {
 
         User theUser = userServiceImpl.findById(userId);
 
         if (theUser == null) {
             throw new CustomNotFoundException("Did not find user id - " + userId);
         }
-
-        return theUser;
+        CustomResponse result = new CustomResponse (theUser);
+        return result;
     }
 
     @PostMapping(value="/user")
-    public User createUser(@RequestBody Map<String,String> creationDetails ) {
-        return userServiceImpl.save(creationDetails);
+    public CustomResponse createUser(@RequestBody Map<String,String> creationDetails ) {
+        CustomResponse result = new CustomResponse (userServiceImpl.save(creationDetails));
+        return result;
     }
 
     @PostMapping(value="/user/login")
-    public User login(@RequestBody Map<String,String> loginDetails) {
-        return userServiceImpl.login(loginDetails);
+    public CustomResponse login(@RequestBody Map<String,String> loginDetails) {
+        CustomResponse result = new CustomResponse (userServiceImpl.login(loginDetails));
+
+        return result;
     }
 }
