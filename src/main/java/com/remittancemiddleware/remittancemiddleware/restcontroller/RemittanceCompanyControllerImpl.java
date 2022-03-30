@@ -5,6 +5,7 @@ import com.remittancemiddleware.remittancemiddleware.entity.RemittanceCompany;
 import com.remittancemiddleware.remittancemiddleware.service.RemittanceCompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -18,10 +19,11 @@ public class RemittanceCompanyControllerImpl implements RemittanceCompanyControl
         this.remittanceCompanyService = theRemittanceCompanyService;
     }
 
-    @GetMapping("/remittanceCompany")
-    public CustomResponse findAll() {
-        List<RemittanceCompany> remittanceCompany = remittanceCompanyService.findAll();
-        CustomResponse result = new CustomResponse (remittanceCompany);
+    @GetMapping("/remittanceCompany/cId")
+    public CustomResponse findRemittanceCompanyById(@RequestParam int cId) {
+        List<RemittanceCompany> rc = remittanceCompanyService.findRemittanceCompanyById(cId);
+        CustomResponse result = new CustomResponse (rc);
         return result;
     };
+
 }
