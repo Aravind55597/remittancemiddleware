@@ -341,7 +341,7 @@ public class RemittancemiddlewareApplication {
 
 //
 //			remittanceMapApiPG.setPurpose("Remittance Purpose");
-//			remittanceMapApiPG.setAmount("999");
+//			remittanceMapApiPG.setAmount("merTransAmount");
 //			remittanceMapApiPG.setPaymentMode("Mode of Payment");
 //			remittanceMapApiPG.setRemittanceCompany(remittanceCompanyPG);
 //			remittanceMapApiPG.setSourceType("Source of Funds");
@@ -508,14 +508,14 @@ public class RemittancemiddlewareApplication {
 //			identificationMapS.setPartyMap(senderMap);
 
 			remittanceMap.setPurpose("Remittance Purpose");
-			remittanceMap.setAmount("999");
+			remittanceMap.setAmount("Amount");
 			remittanceMap.setPaymentMode("Mode of Payment");
-			remittanceMap.setRemittanceCompany("Remit Company");
 			remittanceMap.setSourceType("Source of Funds");
-//			remittanceMap.setSegment("");
+			remittanceMap.setSegment("Segment");
 			remittanceMap.setSenderMap(senderMap);
 			remittanceMap.setReceiverMap(receiverMap);
 			remittanceMap.setCompany(company);
+			remittanceMap.setDestinationCountry("PHL");
 
 
 			remittanceTransaction1.setPurpose(RemittancePurpose.EDUCATION);
@@ -555,7 +555,7 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionE1.setAmount(3870L);
 			remittanceTransactionE1.setRemittanceCompany(RemittanceCompanyName.EVERYWHERE_REMIT);
 			remittanceTransactionE1.setSourceType("Savings");
-			remittanceTransactionE1.setSegment("");
+			remittanceTransactionE1.setSegment("Segment");
 			remittanceTransactionE1.setPaymentMode("Bank Transfer");
 			remittanceTransactionE1.setTransactionStatus(TransactionStatus.PENDING_COMPLIANCE_CHECKS);
 			remittanceTransactionE1.setSender(sender);
@@ -566,7 +566,7 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionE2.setAmount(5545L);
 			remittanceTransactionE2.setRemittanceCompany(RemittanceCompanyName.EVERYWHERE_REMIT);
 			remittanceTransactionE2.setSourceType("Salary");
-			remittanceTransactionE2.setSegment("");
+			remittanceTransactionE2.setSegment("Segment");
 			remittanceTransactionE2.setPaymentMode("Bank Transfer");
 			remittanceTransactionE2.setTransactionStatus(TransactionStatus.PENDING_AML);
 			remittanceTransactionE2.setSender(sender);
@@ -577,7 +577,7 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionE3.setAmount(3750L);
 			remittanceTransactionE3.setRemittanceCompany(RemittanceCompanyName.EVERYWHERE_REMIT);
 			remittanceTransactionE3.setSourceType("Salary");
-			remittanceTransactionE3.setSegment("");
+			remittanceTransactionE3.setSegment("Segment");
 			remittanceTransactionE3.setPaymentMode("Cash");
 			remittanceTransactionE3.setTransactionStatus(TransactionStatus.SUCCESSFUL);
 			remittanceTransactionE3.setSender(sender);
