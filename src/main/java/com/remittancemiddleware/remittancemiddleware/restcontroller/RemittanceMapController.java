@@ -8,6 +8,6 @@ import java.util.Map;
 
 
 public interface RemittanceMapController {
-    CustomResponse getMappingByCountry(@PathVariable int companyId, @PathVariable String destCountry);
+    CustomResponse getMappingByCountry(@PathVariable int userId, @PathVariable String destCountry);
 //    CustomResponse createRemittanceMap(@RequestBody Map<String, String> mappingDetails);
 }

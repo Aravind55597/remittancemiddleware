@@ -5,9 +5,11 @@ import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFo
 import com.remittancemiddleware.remittancemiddleware.dao.CompanyDAO;
 import com.remittancemiddleware.remittancemiddleware.dao.RemittanceMapDAO;
 import com.remittancemiddleware.remittancemiddleware.dao.SupportedCountryDAO;
+import com.remittancemiddleware.remittancemiddleware.dao.UserDAO;
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import com.remittancemiddleware.remittancemiddleware.entity.RemittanceCompany;
 import com.remittancemiddleware.remittancemiddleware.entity.SupportedCountry;
+import com.remittancemiddleware.remittancemiddleware.entity.User;
 import com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap.RemittanceMap;
 import com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap.RemittanceMapApi;
 import org.apache.commons.collections.map.CompositeMap;
@@ -26,16 +28,20 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
     private RemittanceMapDAO remittanceMapDAO;
     private SupportedCountryDAO supportedCountryDAO;
     private CompanyDAO companyDAO;
+    private UserDAO userDAO;
 
     @Autowired
-    public RemittanceMapServiceImpl(RemittanceMapDAO theRemittanceMapDAO, SupportedCountryDAO theSupportedCountryDAO, CompanyDAO theCompanyDAO) {
+    public RemittanceMapServiceImpl(RemittanceMapDAO theRemittanceMapDAO, SupportedCountryDAO theSupportedCountryDAO, CompanyDAO theCompanyDAO, UserDAO theUserDAO) {
         this.remittanceMapDAO = theRemittanceMapDAO;
         this.supportedCountryDAO = theSupportedCountryDAO;
         this.companyDAO = theCompanyDAO;
+        this.userDAO = theUserDAO;
     }
 
     @Override
-    public RemittanceMap findMapByCountry(int companyId, String destCountry) {
+    public RemittanceMap findMapByCountry(int userId, String destCountry) {
+        User theUser = userDAO.getById(userId);
+        int companyId = theUser.getCompanyId();
         Company theCompany = companyDAO.getById(companyId);
         Optional<RemittanceMap> result = Optional.ofNullable(remittanceMapDAO.findByCompanyAndDestinationCountry(theCompany, destCountry));
 
@@ -47,32 +53,35 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
         return theRemittanceMap;
     }
 
-//    @Override
-//    @Transactional
-//    public Map<String,Boolean> getRequiredFields(String destCountry) {
-//        SupportedCountry theCountry = supportedCountryDAO.findIdByibanName(destCountry);
-//        List<RemittanceCompany> remittanceCompanyList = theCountry.getRemittanceCompanies();
-//        Map<String, Boolean> result = new HashMap<>();
-//        for (RemittanceCompany aCompany:remittanceCompanyList) {
-//            RemittanceMapApi remittanceMapApi = aCompany.getRemittanceMapApi();
-//            ObjectMapper oMapper = new ObjectMapper();
-////            if (result.containsKey("Amount")) {
-////                if (result.get("Amount") == false) {
-////                    if (remittanceMapApi.getAmount() != null) {
-////                        result.put("Amount", true);
-////                    }
-////                }
-////            }
-////            else {
-////                if (remittanceMapApi.getAmount() == null) {
-////                    result.put("Amount", false);
-////                } else {
-////                    result.put("Amount", true);
-////                }
-////            }
-//        }
-//        return result;
-//    }
+    @Override
+    @Transactional
+    public Map<String,Boolean> getRequiredFields(String destCountry) {
+        SupportedCountry theCountry = supportedCountryDAO.findIdByibanName(destCountry);
+        List<RemittanceCompany> remittanceCompanyList = theCountry.getRemittanceCompanies();
+        Map<String, Boolean> result = new HashMap<>();
+        for (RemittanceCompany aCompany:remittanceCompanyList) {
+            RemittanceMapApi remittanceMapApi = aCompany.getRemittanceMapApi();
+            ObjectMapper oMapper = new ObjectMapper();
+            Map<String,String> remittanceMap = oMapper.convertValue(remittanceMapApi, Map.class);
+            for (Map.Entry<String,String> set : remittanceMap.entrySet()) {
+                if (result.containsKey(set.getKey())) {
+                    if (result.get(set.getKey()) == false) {
+                        if (set.getValue() != null) {
+                            result.put(set.getKey(), true);
+                        }
+                    }
+                }
+                else {
+                    if (set.getValue() == null) {
+                        result.put(set.getKey(), false);
+                    } else {
+                        result.put(set.getKey(), true);
+                    }
+                }
+            }
+        }
+        return result;
+    }
 
 //    @Override
 //    @Transactional

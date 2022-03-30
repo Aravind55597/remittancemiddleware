@@ -387,135 +387,135 @@ public class RemittancemiddlewareApplication {
 			company.addUser(user2);
 			// remittance trans
 
-			identificationS.setIdNumber("9578660");
-//			identificationS.setParty(sender);
-			identificationS.setIdType(IdType.NATIONAL_ID);
-			identificationS.setIssuingCountry("Singapore");
+//			identificationS.setIdNumber("9578660");
+////			identificationS.setParty(sender);
+//			identificationS.setIdType(IdType.NATIONAL_ID);
+//			identificationS.setIssuingCountry("Singapore");
+//
+//			bankAccountS.setBankName("OCBC");
+//			bankAccountS.setBranchName("Bedok North");
+//			bankAccountS.setAccountNumber("627819930");
+////			bankAccountS.setParty(sender);
+//
+//			addressS.setAddressLine("Block 80 Bedok North");
+//			addressS.setCity("Singapore");
+//			addressS.setCountry("SGP");
+//			addressS.setState("Singapore");
+//			addressS.setZipCode(460080);
+////			addressS.setParty(sender);
+//
+//			sender.setFirstName("Tammy");
+//			sender.setLastName("Low");
+//			sender.setNationality("SGP");
+//			sender.setCurrency("SGD");
+//			sender.setDateOfBirth(new GregorianCalendar(1995, Calendar.DECEMBER, 30).getTime());
+//			sender.setMobileNumber("81234567");
+//			sender.setIdentification(identificationS);
+//			sender.setBankAccount(bankAccountS);
+//			sender.setAddress(addressS);
+//			sender.setSourceOfFunds(SourceOfFunds.SALARY);
+//			sender.setSenderCurrency("SGD");
+//			sender.setBeneficiaryRelationship(BeneficiaryRelationship.FAMILY);
+//
+//			identificationR.setIdNumber("45890082");
+////			identificationR.setParty(receiver);
+//			identificationR.setIdType(IdType.NATIONAL_ID);
+//			identificationR.setIssuingCountry("Philippines");
+//
+//			bankAccountR.setBankName("Bank of the Philippine Islands");
+//			bankAccountR.setBranchName("Manila");
+//			bankAccountR.setAccountNumber("78294291");
+////			bankAccountR.setParty(receiver);
+//
+//			addressR.setAddressLine("No. 224 Pairaso St");
+//			addressR.setCity("Makati");
+//			addressR.setCountry("PHL");
+//			addressR.setState("Manila");
+//			addressR.setZipCode(1103);
+////			addressR.setParty(receiver);
+//
+//			receiver.setFirstName("Mikayla");
+//			receiver.setLastName("Lim");
+//			receiver.setNationality("PHL");
+//			receiver.setCurrency("PHP");
+//			receiver.setDateOfBirth(new GregorianCalendar(1955, Calendar.JANUARY, 24).getTime());
+//			receiver.setMobileNumber("822489290");
+//			receiver.setIdentification(identificationR);
+//			receiver.setBankAccount(bankAccountR);
+//			receiver.setAddress(addressR);
+//			receiver.setType("bank_account");
+//			receiver.setPayoutCurrency("PHP");
+//
+//			senderMap.setFirstName("First Name");
+//			senderMap.setLastName("Last Name");
+//			senderMap.setNationality("Nationality");
+//			senderMap.setCurrency("Receiver Currency");
+//			senderMap.setDateOfBirth("Birthday");
+//			senderMap.setMobileNumber("Phone Number");
+//			senderMap.setIdentificationMap(identificationMapS);
+//			senderMap.setBankAccountMap(bankAccountMapS);
+//			senderMap.setAddressMap(addressMapS);
+//			senderMap.setSourceOfFunds("Source of Funds");
+//			senderMap.setSenderCurrency("Sender Currency");
+//			senderMap.setBeneficiaryRelationship("Relation");
+////			senderMap.setRemittanceMap(remittanceMap);
+//
+//			receiverMap.setFirstName("First Name");
+//			receiverMap.setLastName("Last Name");
+//			receiverMap.setNationality("Nationality");
+//			receiverMap.setCurrency("Receiver Currency");
+//			receiverMap.setDateOfBirth("Birthday");
+//			receiverMap.setMobileNumber("Phone Number");
+//			receiverMap.setIdentificationMap(identificationMapR);
+//			receiverMap.setBankAccountMap(bankAccountMapR);
+//			receiverMap.setAddressMap(addressMapR);
+////			receiverMap.setType("");
+//			receiverMap.setPayoutCurrency("Receive Currency");
+////			receiverMap.setRemittanceMap(remittanceMap);
+//
+//			addressMapR.setAddressLine("Address");
+////			addressMapR.setCity("City");
+//			addressMapR.setCountry("Country");
+////			addressMapR.setState("State");
+//			addressMapR.setZipCode("Postal Code");
+////			addressMapR.setPartyMap(receiverMap);
+//
+//			addressMapS.setAddressLine("Address");
+//			addressMapS.setCity("City");
+//			addressMapS.setCountry("Country");
+//			addressMapS.setState("State");
+//			addressMapS.setZipCode("Postal Code");
+////			addressMapS.setPartyMap(senderMap);
+//
+//			bankAccountMapR.setBankName("Bank");
+//			bankAccountMapR.setBranchName("Branch");
+//			bankAccountMapR.setAccountNumber("Account No");
+////			bankAccountMapR.setPartyMap(receiverMap);
+//
+//			bankAccountMapS.setBankName("Bank");
+//			bankAccountMapS.setBranchName("Branch");
+//			bankAccountMapS.setAccountNumber("Account No");
+////			bankAccountMapS.setPartyMap(senderMap);
+//
+//			identificationMapR.setIdType("Identity Type");
+//			identificationMapR.setIdNumber("Identity Number");
+//			identificationMapR.setIssuingCountry("Country of Issue");
+////			identificationMapR.setPartyMap(receiverMap);
+//
+//			identificationMapS.setIdType("Identity Type");
+//			identificationMapS.setIdNumber("Identity Number");
+//			identificationMapS.setIssuingCountry("Country of Issue");
+////			identificationMapS.setPartyMap(senderMap);
 
-			bankAccountS.setBankName("OCBC");
-			bankAccountS.setBranchName("Bedok North");
-			bankAccountS.setAccountNumber("627819930");
-//			bankAccountS.setParty(sender);
-
-			addressS.setAddressLine("Block 80 Bedok North");
-			addressS.setCity("Singapore");
-			addressS.setCountry("SGP");
-			addressS.setState("Singapore");
-			addressS.setZipCode(460080);
-//			addressS.setParty(sender);
-
-			sender.setFirstName("Tammy");
-			sender.setLastName("Low");
-			sender.setNationality("SGP");
-			sender.setCurrency("SGD");
-			sender.setDateOfBirth(new GregorianCalendar(1995, Calendar.DECEMBER, 30).getTime());
-			sender.setMobileNumber("81234567");
-			sender.setIdentification(identificationS);
-			sender.setBankAccount(bankAccountS);
-			sender.setAddress(addressS);
-			sender.setSourceOfFunds(SourceOfFunds.SALARY);
-			sender.setSenderCurrency("SGD");
-			sender.setBeneficiaryRelationship(BeneficiaryRelationship.FAMILY);
-
-			identificationR.setIdNumber("45890082");
-//			identificationR.setParty(receiver);
-			identificationR.setIdType(IdType.NATIONAL_ID);
-			identificationR.setIssuingCountry("Philippines");
-
-			bankAccountR.setBankName("Bank of the Philippine Islands");
-			bankAccountR.setBranchName("Manila");
-			bankAccountR.setAccountNumber("78294291");
-//			bankAccountR.setParty(receiver);
-
-			addressR.setAddressLine("No. 224 Pairaso St");
-			addressR.setCity("Makati");
-			addressR.setCountry("PHL");
-			addressR.setState("Manila");
-			addressR.setZipCode(1103);
-//			addressR.setParty(receiver);
-
-			receiver.setFirstName("Mikayla");
-			receiver.setLastName("Lim");
-			receiver.setNationality("PHL");
-			receiver.setCurrency("PHP");
-			receiver.setDateOfBirth(new GregorianCalendar(1955, Calendar.JANUARY, 24).getTime());
-			receiver.setMobileNumber("822489290");
-			receiver.setIdentification(identificationR);
-			receiver.setBankAccount(bankAccountR);
-			receiver.setAddress(addressR);
-			receiver.setType("bank_account");
-			receiver.setPayoutCurrency("PHP");
-
-			senderMap.setFirstName("First Name");
-			senderMap.setLastName("Last Name");
-			senderMap.setNationality("Nationality");
-			senderMap.setCurrency("Receiver Currency");
-			senderMap.setDateOfBirth("Birthday");
-			senderMap.setMobileNumber("Phone Number");
-			senderMap.setIdentificationMap(identificationMapS);
-			senderMap.setBankAccountMap(bankAccountMapS);
-			senderMap.setAddressMap(addressMapS);
-			senderMap.setSourceOfFunds("Source of Funds");
-			senderMap.setSenderCurrency("Sender Currency");
-			senderMap.setBeneficiaryRelationship("Relation");
-//			senderMap.setRemittanceMap(remittanceMap);
-
-			receiverMap.setFirstName("First Name");
-			receiverMap.setLastName("Last Name");
-			receiverMap.setNationality("Nationality");
-			receiverMap.setCurrency("Receiver Currency");
-			receiverMap.setDateOfBirth("Birthday");
-			receiverMap.setMobileNumber("Phone Number");
-			receiverMap.setIdentificationMap(identificationMapR);
-			receiverMap.setBankAccountMap(bankAccountMapR);
-			receiverMap.setAddressMap(addressMapR);
-//			receiverMap.setType("");
-			receiverMap.setPayoutCurrency("Receive Currency");
-//			receiverMap.setRemittanceMap(remittanceMap);
-
-			addressMapR.setAddressLine("Address");
-//			addressMapR.setCity("City");
-			addressMapR.setCountry("Country");
-//			addressMapR.setState("State");
-			addressMapR.setZipCode("Postal Code");
-//			addressMapR.setPartyMap(receiverMap);
-
-			addressMapS.setAddressLine("Address");
-			addressMapS.setCity("City");
-			addressMapS.setCountry("Country");
-			addressMapS.setState("State");
-			addressMapS.setZipCode("Postal Code");
-//			addressMapS.setPartyMap(senderMap);
-
-			bankAccountMapR.setBankName("Bank");
-			bankAccountMapR.setBranchName("Branch");
-			bankAccountMapR.setAccountNumber("Account No");
-//			bankAccountMapR.setPartyMap(receiverMap);
-
-			bankAccountMapS.setBankName("Bank");
-			bankAccountMapS.setBranchName("Branch");
-			bankAccountMapS.setAccountNumber("Account No");
-//			bankAccountMapS.setPartyMap(senderMap);
-
-			identificationMapR.setIdType("Identity Type");
-			identificationMapR.setIdNumber("Identity Number");
-			identificationMapR.setIssuingCountry("Country of Issue");
-//			identificationMapR.setPartyMap(receiverMap);
-
-			identificationMapS.setIdType("Identity Type");
-			identificationMapS.setIdNumber("Identity Number");
-			identificationMapS.setIssuingCountry("Country of Issue");
-//			identificationMapS.setPartyMap(senderMap);
-
-			remittanceMap.setPurpose("Remittance Purpose");
-			remittanceMap.setAmount("Amount");
-			remittanceMap.setPaymentMode("Mode of Payment");
-			remittanceMap.setSourceType("Source of Funds");
-			remittanceMap.setSegment("Segment");
-			remittanceMap.setSenderMap(senderMap);
-			remittanceMap.setReceiverMap(receiverMap);
-			remittanceMap.setCompany(company);
-			remittanceMap.setDestinationCountry("PHL");
+//			remittanceMap.setPurpose("Remittance Purpose");
+//			remittanceMap.setAmount("Amount");
+//			remittanceMap.setPaymentMode("Mode of Payment");
+//			remittanceMap.setSourceType("Source of Funds");
+//			remittanceMap.setSegment("Segment");
+//			remittanceMap.setSenderMap(senderMap);
+//			remittanceMap.setReceiverMap(receiverMap);
+//			remittanceMap.setCompany(company);
+//			remittanceMap.setDestinationCountry("PHL");
 
 
 			remittanceTransaction1.setPurpose(RemittancePurpose.EDUCATION);
@@ -629,8 +629,8 @@ public class RemittancemiddlewareApplication {
 			company.addRemittanceTransaction(remittanceTransactionF2);
 			company.addRemittanceTransaction(remittanceTransactionF3);
 
-//			company.setRemittanceMap(remittanceMap);
-			company.addRemittanceMaps(remittanceMap);
+////			company.setRemittanceMap(remittanceMap);
+//			company.addRemittanceMaps(remittanceMap);
 
 
 			companyDAO.save(company);
@@ -638,7 +638,7 @@ public class RemittancemiddlewareApplication {
 			userDAO.save(user1);
 			userDAO.save(user2);
 
-			remittanceMapDAO.save(remittanceMap);
+//			remittanceMapDAO.save(remittanceMap);
 
 			remittanceTransactionDAO.save(remittanceTransaction1);
 			remittanceTransactionDAO.save(remittanceTransaction2);

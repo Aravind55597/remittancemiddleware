@@ -21,13 +21,13 @@ public class RemittanceMapControllerImpl implements RemittanceMapController {
         this.remittanceMapServiceImpl = theRemittanceMapServiceImpl;
     }
 
-    @GetMapping("/remittancemap/{companyId}/{destCountry}")
-    public CustomResponse getMappingByCountry(@PathVariable(value="companyId") int companyId, @PathVariable(value="destCountry") String destCountry) {
-        RemittanceMap theRemittanceMap = remittanceMapServiceImpl.findMapByCountry(companyId, destCountry);
+    @GetMapping("/remittancemap/{userId}/{destCountry}")
+    public CustomResponse getMappingByCountry(@PathVariable(value="userId") int userId, @PathVariable(value="destCountry") String destCountry) {
+        RemittanceMap theRemittanceMap = remittanceMapServiceImpl.findMapByCountry(userId, destCountry);
         CustomResponse result = new CustomResponse<>();
         if (theRemittanceMap == null) {
-//            Map<String, Boolean> map = remittanceMapServiceImpl.getRequiredFields(destCountry);
-            throw new CustomNotFoundException("There is no existing remittance map");
+            Map<String, Boolean> map = remittanceMapServiceImpl.getRequiredFields(destCountry);
+            result = new CustomResponse(map);
         }
         else {
             result = new CustomResponse(theRemittanceMap);
