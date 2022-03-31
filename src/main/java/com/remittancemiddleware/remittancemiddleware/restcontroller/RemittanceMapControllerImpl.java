@@ -7,6 +7,7 @@ import com.remittancemiddleware.remittancemiddleware.service.RemittanceMapServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -26,8 +27,8 @@ public class RemittanceMapControllerImpl implements RemittanceMapController {
         RemittanceMap theRemittanceMap = remittanceMapServiceImpl.findMapByCountry(userId, destCountry);
         CustomResponse result = new CustomResponse<>();
         if (theRemittanceMap == null) {
-            Map<String, Boolean> map = remittanceMapServiceImpl.getRequiredFields(destCountry);
-            result = new CustomResponse(map);
+            List<String> list = remittanceMapServiceImpl.getRequiredFields(destCountry);
+            result = new CustomResponse(list);
         }
         else {
             result = new CustomResponse(theRemittanceMap);
