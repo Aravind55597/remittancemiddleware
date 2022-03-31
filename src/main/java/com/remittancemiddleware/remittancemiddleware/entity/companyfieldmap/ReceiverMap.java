@@ -16,7 +16,7 @@ public class ReceiverMap extends PartyMap {
 
     //primary key will be id from party
 
-    private String type ;
+    private String type;
 
     private String payoutCurrency;
 
