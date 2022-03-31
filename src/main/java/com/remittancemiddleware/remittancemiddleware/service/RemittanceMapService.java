@@ -9,4 +9,5 @@ public interface RemittanceMapService {
     public RemittanceMap findMapByCountry(int theId, String destCountry);
     public Map getRequiredFields(String destCountry);
     public RemittanceMap save(int theId, String destCountry, Map<String,String> theRemittanceMap);
+
 }

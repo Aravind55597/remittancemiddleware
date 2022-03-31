@@ -445,7 +445,7 @@ public class RemittancemiddlewareApplication {
 			receiver.setAddress(addressR);
 			receiver.setType("bank_account");
 			receiver.setPayoutCurrency("PHP");
-//
+
 //			senderMap.setFirstName("First Name");
 //			senderMap.setLastName("Last Name");
 //			senderMap.setNationality("Nationality");

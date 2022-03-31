@@ -11,6 +11,7 @@ import com.remittancemiddleware.remittancemiddleware.entity.SupportedCountry;
 import com.remittancemiddleware.remittancemiddleware.entity.User;
 import com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap.*;
 import com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -305,4 +306,5 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
             }
         }
     }
+
 }
