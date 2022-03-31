@@ -35,11 +35,11 @@ public class RemittanceMapControllerImpl implements RemittanceMapController {
         return result;
     }
 
-//    @PostMapping(value="/remittancemap")
-//    public CustomResponse createRemittanceMap(@RequestBody Map<String,String> mappingDetails) {
-//        CustomResponse result = new CustomResponse(remittanceMapServiceImpl.save(mappingDetails));
-//
-//        return result;
-//    }
+    @PostMapping(value="/remittancemap/{userId}/{destCountry}")
+    public CustomResponse createRemittanceMap(@PathVariable(value="userId") int userId, @PathVariable(value="destCountry") String destCountry, @RequestBody Map<String,String> mappingDetails) {
+        CustomResponse result = new CustomResponse(remittanceMapServiceImpl.save(userId, destCountry, mappingDetails));
+
+        return result;
+    }
 
 }

@@ -8,5 +8,6 @@ import java.util.Map;
 public interface RemittanceMapService {
     public RemittanceMap findMapByCountry(int theId, String destCountry);
     public Map getRequiredFields(String destCountry);
-//    public RemittanceMap save(Map<String,String> theRemittanceMap);
+    public RemittanceMap save(int theId, String destCountry, Map<String,String> theRemittanceMap);
+
 }

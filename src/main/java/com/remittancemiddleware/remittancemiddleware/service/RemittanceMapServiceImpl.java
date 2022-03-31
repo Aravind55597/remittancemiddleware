@@ -1,7 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFoundException;
 import com.remittancemiddleware.remittancemiddleware.dao.CompanyDAO;
 import com.remittancemiddleware.remittancemiddleware.dao.RemittanceMapDAO;
 import com.remittancemiddleware.remittancemiddleware.dao.SupportedCountryDAO;
@@ -10,18 +9,14 @@ import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import com.remittancemiddleware.remittancemiddleware.entity.RemittanceCompany;
 import com.remittancemiddleware.remittancemiddleware.entity.SupportedCountry;
 import com.remittancemiddleware.remittancemiddleware.entity.User;
-import com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap.RemittanceMap;
+import com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap.*;
 import com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap.*;
-import com.remittancemiddleware.remittancemiddleware.entity.transaction.Identification;
-import org.apache.commons.collections.map.CompositeMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 
 @Service
@@ -209,9 +204,107 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
         return result;
     }
 
-//    @Override
-//    @Transactional
-//    public RemittanceMap save(Map<String,String> mappingDetails) {
-//
-//    }
+    @Override
+    @Transactional
+    public RemittanceMap save(int userId, String destCountry, Map<String,String> mappingDetails) {
+        User theUser = userDAO.getById(userId);
+        int companyId = theUser.getCompanyId();
+        Company theCompany = companyDAO.getById(companyId);
+        ObjectMapper oMapper = new ObjectMapper();
+
+        RemittanceMap theRemittanceMap = new RemittanceMap();
+        ReceiverMap theReceiverMap = new ReceiverMap();
+        SenderMap theSenderMap = new SenderMap();
+        AddressMap theAddressMapR = new AddressMap();
+        AddressMap theAddressMapS = new AddressMap();
+        BankAccountMap theBankAccountMapR = new BankAccountMap();
+        BankAccountMap theBankAccountMapS = new BankAccountMap();
+        IdentificationMap theIdentificationMapR = new IdentificationMap();
+        IdentificationMap theIdentificationMapS = new IdentificationMap();
+
+        Map<String,String> remittanceMap = oMapper.convertValue(theRemittanceMap, Map.class);
+        Map<String,String> receiverMap = oMapper.convertValue(theReceiverMap, Map.class);
+        Map<String,String> senderMap = oMapper.convertValue(theSenderMap, Map.class);
+        Map<String,String> addressMapR = oMapper.convertValue(theAddressMapR, Map.class);
+        Map<String,String> addressMapS = oMapper.convertValue(theAddressMapS, Map.class);
+        Map<String,String> bankAccountMapR = oMapper.convertValue(theBankAccountMapR, Map.class);
+        Map<String,String> bankAccountMapS = oMapper.convertValue(theBankAccountMapS, Map.class);
+        Map<String,String> identificationMapR = oMapper.convertValue(theIdentificationMapR, Map.class);
+        Map<String,String> identificationMapS = oMapper.convertValue(theIdentificationMapS, Map.class);
+
+        remittanceMap.remove("id");
+        receiverMap.remove("id");
+        senderMap.remove("id");
+        addressMapR.remove("id");
+        addressMapS.remove("id");
+        bankAccountMapR.remove("id");
+        bankAccountMapS.remove("id");
+        identificationMapR.remove("id");
+        identificationMapS.remove("id");
+
+        Set<String> keysRemittanceMap = remittanceMap.keySet();
+        Set<String> keysReceiverMap = receiverMap.keySet();
+        Set<String> keysSenderMap = senderMap.keySet();
+        Set<String> keysAddressMapR = addressMapR.keySet();
+        Set<String> keysBankAccMapR = bankAccountMapR.keySet();
+        Set<String> keysIdentificationMapR = identificationMapR.keySet();
+        Set<String> keysAddressMapS = addressMapS.keySet();
+        Set<String> keysBankAccMapS = bankAccountMapS.keySet();
+        Set<String> keysIdentificationMapS = identificationMapS.keySet();
+
+        Set<String> keys = mappingDetails.keySet();
+        for (String s:keys) {
+            if (s.contains("receiver")) {
+                addValuesToMap(mappingDetails, receiverMap, keysReceiverMap, s);
+                addValuesToMap(mappingDetails, addressMapR, keysAddressMapR, s);
+                addValuesToMap(mappingDetails, bankAccountMapR, keysBankAccMapR, s);
+                addValuesToMap(mappingDetails, identificationMapR, keysIdentificationMapR, s);
+            }
+            else if (s.contains("sender")) {
+                addValuesToMap(mappingDetails, senderMap, keysSenderMap, s);
+                addValuesToMap(mappingDetails, addressMapS, keysAddressMapS, s);
+                addValuesToMap(mappingDetails, bankAccountMapS, keysBankAccMapS, s);
+                addValuesToMap(mappingDetails, identificationMapS, keysIdentificationMapS, s);
+            }
+            else {
+                addValuesToMap(mappingDetails, remittanceMap, keysRemittanceMap, s);
+            }
+        }
+
+        theRemittanceMap = oMapper.convertValue(remittanceMap, RemittanceMap.class);
+        theReceiverMap = oMapper.convertValue(receiverMap, ReceiverMap.class);
+        theSenderMap = oMapper.convertValue(senderMap, SenderMap.class);
+        theAddressMapR = oMapper.convertValue(addressMapR, AddressMap.class);
+        theAddressMapS = oMapper.convertValue(addressMapS, AddressMap.class);
+        theBankAccountMapR = oMapper.convertValue(bankAccountMapR, BankAccountMap.class);
+        theBankAccountMapS = oMapper.convertValue(bankAccountMapS, BankAccountMap.class);
+        theIdentificationMapR = oMapper.convertValue(identificationMapR, IdentificationMap.class);
+        theIdentificationMapS = oMapper.convertValue(identificationMapS, IdentificationMap.class);
+
+        theReceiverMap.setAddressMap(theAddressMapR);
+        theReceiverMap.setBankAccountMap(theBankAccountMapR);
+        theReceiverMap.setIdentificationMap(theIdentificationMapR);
+
+        theSenderMap.setAddressMap(theAddressMapS);
+        theSenderMap.setBankAccountMap(theBankAccountMapS);
+        theSenderMap.setIdentificationMap(theIdentificationMapS);
+
+        theRemittanceMap.setReceiverMap(theReceiverMap);
+        theRemittanceMap.setSenderMap(theSenderMap);
+
+        theRemittanceMap.setCompany(theCompany);
+        theRemittanceMap.setDestinationCountry(destCountry);
+        remittanceMapDAO.save(theRemittanceMap);
+
+        return theRemittanceMap;
+    }
+
+    private static void addValuesToMap(Map<String, String> mappingDetails, Map<String, String> SSOTMap, Set<String> keysSSOTMap, String s) {
+        for (String s1: keysSSOTMap) {
+            if (s.contains(s1)) {
+                SSOTMap.put(s1, mappingDetails.get(s));
+            }
+        }
+    }
+
 }

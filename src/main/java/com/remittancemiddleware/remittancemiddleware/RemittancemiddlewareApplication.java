@@ -387,65 +387,65 @@ public class RemittancemiddlewareApplication {
 			company.addUser(user2);
 			// remittance trans
 
-//			identificationS.setIdNumber("9578660");
-////			identificationS.setParty(sender);
-//			identificationS.setIdType(IdType.NATIONAL_ID);
-//			identificationS.setIssuingCountry("Singapore");
-//
-//			bankAccountS.setBankName("OCBC");
-//			bankAccountS.setBranchName("Bedok North");
-//			bankAccountS.setAccountNumber("627819930");
-////			bankAccountS.setParty(sender);
-//
-//			addressS.setAddressLine("Block 80 Bedok North");
-//			addressS.setCity("Singapore");
-//			addressS.setCountry("SGP");
-//			addressS.setState("Singapore");
-//			addressS.setZipCode(460080);
-////			addressS.setParty(sender);
-//
-//			sender.setFirstName("Tammy");
-//			sender.setLastName("Low");
-//			sender.setNationality("SGP");
-//			sender.setCurrency("SGD");
-//			sender.setDateOfBirth(new GregorianCalendar(1995, Calendar.DECEMBER, 30).getTime());
-//			sender.setMobileNumber("81234567");
-//			sender.setIdentification(identificationS);
-//			sender.setBankAccount(bankAccountS);
-//			sender.setAddress(addressS);
-//			sender.setSourceOfFunds(SourceOfFunds.SALARY);
-//			sender.setSenderCurrency("SGD");
-//			sender.setBeneficiaryRelationship(BeneficiaryRelationship.FAMILY);
-//
-//			identificationR.setIdNumber("45890082");
-////			identificationR.setParty(receiver);
-//			identificationR.setIdType(IdType.NATIONAL_ID);
-//			identificationR.setIssuingCountry("Philippines");
-//
-//			bankAccountR.setBankName("Bank of the Philippine Islands");
-//			bankAccountR.setBranchName("Manila");
-//			bankAccountR.setAccountNumber("78294291");
-////			bankAccountR.setParty(receiver);
-//
-//			addressR.setAddressLine("No. 224 Pairaso St");
-//			addressR.setCity("Makati");
-//			addressR.setCountry("PHL");
-//			addressR.setState("Manila");
-//			addressR.setZipCode(1103);
-////			addressR.setParty(receiver);
-//
-//			receiver.setFirstName("Mikayla");
-//			receiver.setLastName("Lim");
-//			receiver.setNationality("PHL");
-//			receiver.setCurrency("PHP");
-//			receiver.setDateOfBirth(new GregorianCalendar(1955, Calendar.JANUARY, 24).getTime());
-//			receiver.setMobileNumber("822489290");
-//			receiver.setIdentification(identificationR);
-//			receiver.setBankAccount(bankAccountR);
-//			receiver.setAddress(addressR);
-//			receiver.setType("bank_account");
-//			receiver.setPayoutCurrency("PHP");
-//
+			identificationS.setIdNumber("9578660");
+//			identificationS.setParty(sender);
+			identificationS.setIdType(IdType.NATIONAL_ID);
+			identificationS.setIssuingCountry("Singapore");
+
+			bankAccountS.setBankName("OCBC");
+			bankAccountS.setBranchName("Bedok North");
+			bankAccountS.setAccountNumber("627819930");
+//			bankAccountS.setParty(sender);
+
+			addressS.setAddressLine("Block 80 Bedok North");
+			addressS.setCity("Singapore");
+			addressS.setCountry("SGP");
+			addressS.setState("Singapore");
+			addressS.setZipCode(460080);
+//			addressS.setParty(sender);
+
+			sender.setFirstName("Tammy");
+			sender.setLastName("Low");
+			sender.setNationality("SGP");
+			sender.setCurrency("SGD");
+			sender.setDateOfBirth(new GregorianCalendar(1995, Calendar.DECEMBER, 30).getTime());
+			sender.setMobileNumber("81234567");
+			sender.setIdentification(identificationS);
+			sender.setBankAccount(bankAccountS);
+			sender.setAddress(addressS);
+			sender.setSourceOfFunds(SourceOfFunds.SALARY);
+			sender.setSenderCurrency("SGD");
+			sender.setBeneficiaryRelationship(BeneficiaryRelationship.FAMILY);
+
+			identificationR.setIdNumber("45890082");
+//			identificationR.setParty(receiver);
+			identificationR.setIdType(IdType.NATIONAL_ID);
+			identificationR.setIssuingCountry("Philippines");
+
+			bankAccountR.setBankName("Bank of the Philippine Islands");
+			bankAccountR.setBranchName("Manila");
+			bankAccountR.setAccountNumber("78294291");
+//			bankAccountR.setParty(receiver);
+
+			addressR.setAddressLine("No. 224 Pairaso St");
+			addressR.setCity("Makati");
+			addressR.setCountry("PHL");
+			addressR.setState("Manila");
+			addressR.setZipCode(1103);
+//			addressR.setParty(receiver);
+
+			receiver.setFirstName("Mikayla");
+			receiver.setLastName("Lim");
+			receiver.setNationality("PHL");
+			receiver.setCurrency("PHP");
+			receiver.setDateOfBirth(new GregorianCalendar(1955, Calendar.JANUARY, 24).getTime());
+			receiver.setMobileNumber("822489290");
+			receiver.setIdentification(identificationR);
+			receiver.setBankAccount(bankAccountR);
+			receiver.setAddress(addressR);
+			receiver.setType("bank_account");
+			receiver.setPayoutCurrency("PHP");
+
 //			senderMap.setFirstName("First Name");
 //			senderMap.setLastName("Last Name");
 //			senderMap.setNationality("Nationality");
