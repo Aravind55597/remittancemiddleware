@@ -51,10 +51,11 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
 
     @Override
     @Transactional
-    public Map<String,Boolean> getRequiredFields(String destCountry) {
+    public List<String> getRequiredFields(String destCountry) {
         SupportedCountry theCountry = supportedCountryDAO.findIdByibanName(destCountry);
         List<RemittanceCompany> remittanceCompanyList = theCountry.getRemittanceCompanies();
-        Map<String, Boolean> result = new HashMap<>();
+        Map<String, Boolean> map = new HashMap<>();
+        List<String> result = new ArrayList<>();
         for (RemittanceCompany aCompany:remittanceCompanyList) {
             RemittanceMapApi remittanceMapApi = aCompany.getRemittanceMapApi();
             ObjectMapper oMapper = new ObjectMapper();
@@ -71,7 +72,7 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                                     Map<String,String> addressMap = oMapper.convertValue(addressMapApi, Map.class);
                                     for (Map.Entry<String,String> setAR : addressMap.entrySet()) {
                                         if (!(setAR.getKey().equals("id"))) {
-                                            result = addToRequiredFieldsR(result, setAR);
+                                            map = addToRequiredFieldsR(map, setAR);
                                         }
                                     }
                                 }
@@ -80,7 +81,7 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                                     Map<String,String> bankAccountMap = oMapper.convertValue(bankAccountMapApi, Map.class);
                                     for (Map.Entry<String,String> setBR : bankAccountMap.entrySet()) {
                                         if (!(setBR.getKey().equals("id"))) {
-                                            result = addToRequiredFieldsR(result, setBR);
+                                            map = addToRequiredFieldsR(map, setBR);
                                         }
                                     }
                                 }
@@ -89,12 +90,12 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                                     Map<String,String> identificationMap = oMapper.convertValue(identificationMapApi, Map.class);
                                     for (Map.Entry<String,String> setIR : identificationMap.entrySet()) {
                                         if (!(setIR.getKey().equals("id"))) {
-                                            result = addToRequiredFieldsR(result, setIR);
+                                            map = addToRequiredFieldsR(map, setIR);
                                         }
                                     }
                                 }
                                 else {
-                                    result = addToRequiredFieldsR(result, setR);
+                                    map = addToRequiredFieldsR(map, setR);
                                 }
                             }
                         }
@@ -110,7 +111,7 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                                     Map<String,String> addressMap = oMapper.convertValue(addressMapApi, Map.class);
                                     for (Map.Entry<String,String> setAS : addressMap.entrySet()) {
                                         if (!(setAS.getKey().equals("id"))) {
-                                            result = addToRequiredFieldsS(result, setAS);
+                                            map = addToRequiredFieldsS(map, setAS);
                                         }
                                     }
                                 }
@@ -119,7 +120,7 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                                     Map<String,String> bankAccountMap = oMapper.convertValue(bankAccountMapApi, Map.class);
                                     for (Map.Entry<String,String> setBS : bankAccountMap.entrySet()) {
                                         if (!(setBS.getKey().equals("id"))) {
-                                            result = addToRequiredFieldsS(result, setBS);
+                                            map = addToRequiredFieldsS(map, setBS);
                                         }
                                     }
                                 }
@@ -128,20 +129,25 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                                     Map<String,String> identificationMap = oMapper.convertValue(identificationMapApi, Map.class);
                                     for (Map.Entry<String,String> setIS : identificationMap.entrySet()) {
                                         if (!(setIS.getKey().equals("id"))) {
-                                            result = addToRequiredFieldsS(result, setIS);
+                                            map = addToRequiredFieldsS(map, setIS);
                                         }
                                     }
                                 }
                                 else {
-                                    result = addToRequiredFieldsS(result, setS);
+                                    map = addToRequiredFieldsS(map, setS);
                                 }
                             }
                         }
                     }
                     else {
-                        result = addToRequiredFieldsGen(result, set);
+                        map = addToRequiredFieldsGen(map, set);
                     }
                 }
+            }
+        }
+        for (Map.Entry<String,Boolean> setMap: map.entrySet()) {
+            if (setMap.getValue()) {
+                result.add(setMap.getKey());
             }
         }
         return result;
