@@ -10,4 +10,5 @@ import java.util.Map;
 public interface RemittanceMapController {
     CustomResponse getMappingByCountry(@PathVariable int userId, @PathVariable String destCountry);
     CustomResponse createRemittanceMap(@PathVariable int userId, @PathVariable String destCountry, @RequestBody Map<String, String> mappingDetails);
+    CustomResponse updateRemittanceMap(@PathVariable int userId, @PathVariable String destCountry, @RequestBody Map<String, String> mappingDetails);
 }

@@ -1,9 +1,7 @@
 package com.remittancemiddleware.remittancemiddleware.restcontroller;
 
-import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFoundException;
 import com.remittancemiddleware.remittancemiddleware.dataclass.custom.CustomResponse;
-import com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap.RemittanceMap;
-import com.remittancemiddleware.remittancemiddleware.service.RemittanceMapServiceImpl;
+import com.remittancemiddleware.remittancemiddleware.service.RemittanceMapService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,30 +13,37 @@ import java.util.Map;
 @RequestMapping("/api")
 public class RemittanceMapControllerImpl implements RemittanceMapController {
 
-    private final RemittanceMapServiceImpl remittanceMapServiceImpl;
+    private final RemittanceMapService remittanceMapService;
 
     @Autowired
-    public RemittanceMapControllerImpl(RemittanceMapServiceImpl theRemittanceMapServiceImpl) {
-        this.remittanceMapServiceImpl = theRemittanceMapServiceImpl;
+    public RemittanceMapControllerImpl(RemittanceMapService theRemittanceMapServiceImpl) {
+        this.remittanceMapService = theRemittanceMapServiceImpl;
     }
 
     @GetMapping("/remittancemap/{userId}/{destCountry}")
     public CustomResponse getMappingByCountry(@PathVariable(value="userId") int userId, @PathVariable(value="destCountry") String destCountry) {
-        RemittanceMap theRemittanceMap = remittanceMapServiceImpl.findMapByCountry(userId, destCountry);
+        Map<String,String> remittanceHashMap = remittanceMapService.findMapByCountry(userId, destCountry);
         CustomResponse result = new CustomResponse<>();
-        if (theRemittanceMap == null) {
-            List<String> list = remittanceMapServiceImpl.getRequiredFields(destCountry);
+        if (remittanceHashMap == null) {
+            List<String> list = remittanceMapService.getRequiredFields(destCountry);
             result = new CustomResponse(list);
         }
         else {
-            result = new CustomResponse(theRemittanceMap);
+            result = new CustomResponse(remittanceHashMap);
         }
         return result;
     }
 
-    @PostMapping(value="/remittancemap/{userId}/{destCountry}")
+    @PostMapping(value="/createremittancemap/{userId}/{destCountry}")
     public CustomResponse createRemittanceMap(@PathVariable(value="userId") int userId, @PathVariable(value="destCountry") String destCountry, @RequestBody Map<String,String> mappingDetails) {
-        CustomResponse result = new CustomResponse(remittanceMapServiceImpl.save(userId, destCountry, mappingDetails));
+        CustomResponse result = new CustomResponse(remittanceMapService.save(userId, destCountry, mappingDetails));
+
+        return result;
+    }
+
+    @PutMapping(value="/updateremittancemap/{userId}/{destCountry}")
+    public CustomResponse updateRemittanceMap(@PathVariable(value="userId") int userId, @PathVariable(value="destCountry") String destCountry, @RequestBody Map<String,String> mappingDetails) {
+        CustomResponse result = new CustomResponse(remittanceMapService.update(userId, destCountry, mappingDetails));
 
         return result;
     }
