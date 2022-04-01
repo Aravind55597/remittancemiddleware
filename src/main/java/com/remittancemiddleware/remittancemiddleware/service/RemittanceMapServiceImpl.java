@@ -44,6 +44,7 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
 
         RemittanceMap theRemittanceMap = null;
         Map<String, String> output = new HashMap<>();
+        Map<String,String> processedOutput = new HashMap<>();
 
         if (result.isPresent()) {
             theRemittanceMap = result.get();
@@ -133,9 +134,14 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                     output = showRequiredFieldsGen(output, set);
                 }
             }
+            for (Map.Entry<String,String> set0 : output.entrySet()) {
+                if (set0.getValue() != null) {
+                    processedOutput.put(set0.getKey(), set0.getValue());
+                }
+            }
         }
 
-        return output;
+        return processedOutput;
     }
 
     @Override
