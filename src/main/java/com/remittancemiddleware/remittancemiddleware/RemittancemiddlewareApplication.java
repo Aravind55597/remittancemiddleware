@@ -100,9 +100,13 @@ public class RemittancemiddlewareApplication {
 	public CommandLineRunner demoData(RemittanceCompanyDAO remittanceCompanyDAO, RemittanceMapApiDAO remittanceMapApiDAO, SupportedCountryDAO supportedCountryDAO, CompanyDAO companyDAO , RemittanceMapDAO remittanceMapDAO, UserDAO userDAO, RemittanceTransactionDAO remittanceTransactionDAO) {
 		return args -> {
 
-			Company company = new Company();
+			Company company1 = new Company();
 			User user1 = new User("user1@gmail.com", "abc12345", "Anne", "Tan");
 			User user2 = new User("user2@gmail.com","abc12345","Jimmy","Lee");
+
+			Company company2 = new Company();
+			User user3 = new User("user3@gmail.com","abc12345","Bob","Tan");
+			User user4 = new User("user4@gmail.com","abc12345","Amy","Lee");
 
 			RemittanceMap remittanceMap = new RemittanceMap();
 			ReceiverMap receiverMap = new ReceiverMap();
@@ -374,18 +378,25 @@ public class RemittancemiddlewareApplication {
 //			user1.setPassword("abc12345");
 //			user1.setFirstName("Anne");
 //			user1.setLastName("Tan");
-			user1.setCompany(company);
+			user1.setCompany(company1);
 
 //			user2.setEmail("user2@gmail.com");
 //			user2.setPassword("abc12345");
 //			user2.setFirstName("Jimmy");
 //			user2.setLastName("Lee");
-			user2.setCompany(company);
+			user2.setCompany(company1);
 
-			company.setCompanyName("Sunshine PTE LTD");
-			company.addUser(user1);
-			company.addUser(user2);
+			company1.setCompanyName("Sunshine PTE LTD");
+			company1.addUser(user1);
+			company1.addUser(user2);
 			// remittance trans
+
+			user3.setCompany(company2);
+			user4.setCompany(company2);
+
+			company2.setCompanyName("NFT PTE LTD");
+			company2.addUser(user3);
+			company2.addUser(user4);
 
 			identificationS.setIdNumber("9578660");
 //			identificationS.setParty(sender);
@@ -446,76 +457,76 @@ public class RemittancemiddlewareApplication {
 			receiver.setType("bank_account");
 			receiver.setPayoutCurrency("PHP");
 
-//			senderMap.setFirstName("First Name");
-//			senderMap.setLastName("Last Name");
-//			senderMap.setNationality("Nationality");
-//			senderMap.setCurrency("Receiver Currency");
-//			senderMap.setDateOfBirth("Birthday");
-//			senderMap.setMobileNumber("Phone Number");
-//			senderMap.setIdentificationMap(identificationMapS);
-//			senderMap.setBankAccountMap(bankAccountMapS);
-//			senderMap.setAddressMap(addressMapS);
-//			senderMap.setSourceOfFunds("Source of Funds");
-//			senderMap.setSenderCurrency("Sender Currency");
-//			senderMap.setBeneficiaryRelationship("Relation");
-////			senderMap.setRemittanceMap(remittanceMap);
-//
-//			receiverMap.setFirstName("First Name");
-//			receiverMap.setLastName("Last Name");
-//			receiverMap.setNationality("Nationality");
-//			receiverMap.setCurrency("Receiver Currency");
-//			receiverMap.setDateOfBirth("Birthday");
-//			receiverMap.setMobileNumber("Phone Number");
-//			receiverMap.setIdentificationMap(identificationMapR);
-//			receiverMap.setBankAccountMap(bankAccountMapR);
-//			receiverMap.setAddressMap(addressMapR);
-////			receiverMap.setType("");
-//			receiverMap.setPayoutCurrency("Receive Currency");
-////			receiverMap.setRemittanceMap(remittanceMap);
-//
-//			addressMapR.setAddressLine("Address");
-////			addressMapR.setCity("City");
-//			addressMapR.setCountry("Country");
-////			addressMapR.setState("State");
-//			addressMapR.setZipCode("Postal Code");
-////			addressMapR.setPartyMap(receiverMap);
-//
-//			addressMapS.setAddressLine("Address");
-//			addressMapS.setCity("City");
-//			addressMapS.setCountry("Country");
-//			addressMapS.setState("State");
-//			addressMapS.setZipCode("Postal Code");
-////			addressMapS.setPartyMap(senderMap);
-//
-//			bankAccountMapR.setBankName("Bank");
-//			bankAccountMapR.setBranchName("Branch");
-//			bankAccountMapR.setAccountNumber("Account No");
-////			bankAccountMapR.setPartyMap(receiverMap);
-//
-//			bankAccountMapS.setBankName("Bank");
-//			bankAccountMapS.setBranchName("Branch");
-//			bankAccountMapS.setAccountNumber("Account No");
-////			bankAccountMapS.setPartyMap(senderMap);
-//
-//			identificationMapR.setIdType("Identity Type");
-//			identificationMapR.setIdNumber("Identity Number");
-//			identificationMapR.setIssuingCountry("Country of Issue");
-////			identificationMapR.setPartyMap(receiverMap);
-//
-//			identificationMapS.setIdType("Identity Type");
-//			identificationMapS.setIdNumber("Identity Number");
-//			identificationMapS.setIssuingCountry("Country of Issue");
-////			identificationMapS.setPartyMap(senderMap);
+			senderMap.setFirstName("First Name");
+			senderMap.setLastName("Last Name");
+			senderMap.setNationality("Nationality");
+			senderMap.setCurrency("Receiver Currency");
+			senderMap.setDateOfBirth("Birthday");
+			senderMap.setMobileNumber("Phone Number");
+			senderMap.setIdentificationMap(identificationMapS);
+			senderMap.setBankAccountMap(bankAccountMapS);
+			senderMap.setAddressMap(addressMapS);
+			senderMap.setSourceOfFunds("Source of Funds");
+			senderMap.setSenderCurrency("Sender Currency");
+			senderMap.setBeneficiaryRelationship("Relation");
+//			senderMap.setRemittanceMap(remittanceMap);
 
-//			remittanceMap.setPurpose("Remittance Purpose");
-//			remittanceMap.setAmount("Amount");
-//			remittanceMap.setPaymentMode("Mode of Payment");
-//			remittanceMap.setSourceType("Source of Funds");
-//			remittanceMap.setSegment("Segment");
-//			remittanceMap.setSenderMap(senderMap);
-//			remittanceMap.setReceiverMap(receiverMap);
-//			remittanceMap.setCompany(company);
-//			remittanceMap.setDestinationCountry("PHL");
+			receiverMap.setFirstName("First Name");
+			receiverMap.setLastName("Last Name");
+			receiverMap.setNationality("Nationality");
+			receiverMap.setCurrency("Receiver Currency");
+			receiverMap.setDateOfBirth("Birthday");
+			receiverMap.setMobileNumber("Phone Number");
+			receiverMap.setIdentificationMap(identificationMapR);
+			receiverMap.setBankAccountMap(bankAccountMapR);
+			receiverMap.setAddressMap(addressMapR);
+//			receiverMap.setType("");
+			receiverMap.setPayoutCurrency("Receive Currency");
+//			receiverMap.setRemittanceMap(remittanceMap);
+
+			addressMapR.setAddressLine("Address");
+//			addressMapR.setCity("City");
+			addressMapR.setCountry("Country");
+//			addressMapR.setState("State");
+			addressMapR.setZipCode("Postal Code");
+//			addressMapR.setPartyMap(receiverMap);
+
+			addressMapS.setAddressLine("Address");
+			addressMapS.setCity("City");
+			addressMapS.setCountry("Country");
+			addressMapS.setState("State");
+			addressMapS.setZipCode("Postal Code");
+//			addressMapS.setPartyMap(senderMap);
+
+			bankAccountMapR.setBankName("Bank");
+			bankAccountMapR.setBranchName("Branch");
+			bankAccountMapR.setAccountNumber("Account No");
+//			bankAccountMapR.setPartyMap(receiverMap);
+
+			bankAccountMapS.setBankName("Bank");
+			bankAccountMapS.setBranchName("Branch");
+			bankAccountMapS.setAccountNumber("Account No");
+//			bankAccountMapS.setPartyMap(senderMap);
+
+			identificationMapR.setIdType("Identity Type");
+			identificationMapR.setIdNumber("Identity Number");
+			identificationMapR.setIssuingCountry("Country of Issue");
+//			identificationMapR.setPartyMap(receiverMap);
+
+			identificationMapS.setIdType("Identity Type");
+			identificationMapS.setIdNumber("Identity Number");
+			identificationMapS.setIssuingCountry("Country of Issue");
+//			identificationMapS.setPartyMap(senderMap);
+
+			remittanceMap.setPurpose("Remittance Purpose");
+			remittanceMap.setAmount("Amount");
+			remittanceMap.setPaymentMode("Mode of Payment");
+			remittanceMap.setSourceType("Source of Funds");
+			remittanceMap.setSegment("Segment");
+			remittanceMap.setSenderMap(senderMap);
+			remittanceMap.setReceiverMap(receiverMap);
+			remittanceMap.setCompany(company1);
+			remittanceMap.setDestinationCountry("PHL");
 
 
 			remittanceTransaction1.setPurpose(RemittancePurpose.EDUCATION);
@@ -527,7 +538,7 @@ public class RemittancemiddlewareApplication {
 			remittanceTransaction1.setTransactionStatus(TransactionStatus.PENDING_AML);
 			remittanceTransaction1.setSender(sender);
 			remittanceTransaction1.setReceiver(receiver);
-			remittanceTransaction1.setCompany(company);
+			remittanceTransaction1.setCompany(company1);
 
 			remittanceTransaction2.setPurpose(RemittancePurpose.FAMILY_EXPENSES);
 			remittanceTransaction2.setAmount(6500L);
@@ -538,7 +549,7 @@ public class RemittancemiddlewareApplication {
 			remittanceTransaction2.setTransactionStatus(TransactionStatus.SUCCESSFUL);
 			remittanceTransaction2.setSender(sender);
 			remittanceTransaction2.setReceiver(receiver);
-			remittanceTransaction2.setCompany(company);
+			remittanceTransaction2.setCompany(company1);
 
 			remittanceTransaction3.setPurpose(RemittancePurpose.TRAVEL_EXPENSES);
 			remittanceTransaction3.setAmount(6200L);
@@ -549,7 +560,7 @@ public class RemittancemiddlewareApplication {
 			remittanceTransaction3.setTransactionStatus(TransactionStatus.PENDING_COMPLIANCE_CHECKS);
 			remittanceTransaction3.setSender(sender);
 			remittanceTransaction3.setReceiver(receiver);
-			remittanceTransaction3.setCompany(company);
+			remittanceTransaction3.setCompany(company1);
 
 			remittanceTransactionE1.setPurpose(RemittancePurpose.INVESTMENT);
 			remittanceTransactionE1.setAmount(3870L);
@@ -560,7 +571,7 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionE1.setTransactionStatus(TransactionStatus.PENDING_COMPLIANCE_CHECKS);
 			remittanceTransactionE1.setSender(sender);
 			remittanceTransactionE1.setReceiver(receiver);
-			remittanceTransactionE1.setCompany(company);
+			remittanceTransactionE1.setCompany(company1);
 
 			remittanceTransactionE2.setPurpose(RemittancePurpose.PERSONAL_ASSET_ALLOCATION);
 			remittanceTransactionE2.setAmount(5545L);
@@ -571,7 +582,7 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionE2.setTransactionStatus(TransactionStatus.PENDING_AML);
 			remittanceTransactionE2.setSender(sender);
 			remittanceTransactionE2.setReceiver(receiver);
-			remittanceTransactionE2.setCompany(company);
+			remittanceTransactionE2.setCompany(company1);
 
 			remittanceTransactionE3.setPurpose(RemittancePurpose.FAMILY_EXPENSES);
 			remittanceTransactionE3.setAmount(3750L);
@@ -582,7 +593,7 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionE3.setTransactionStatus(TransactionStatus.SUCCESSFUL);
 			remittanceTransactionE3.setSender(sender);
 			remittanceTransactionE3.setReceiver(receiver);
-			remittanceTransactionE3.setCompany(company);
+			remittanceTransactionE3.setCompany(company1);
 
 			remittanceTransactionF1.setPurpose(RemittancePurpose.CHARITY_DONATION);
 			remittanceTransactionF1.setAmount(250L);
@@ -593,7 +604,7 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionF1.setTransactionStatus(TransactionStatus.SUCCESSFUL);
 			remittanceTransactionF1.setSender(sender);
 			remittanceTransactionF1.setReceiver(receiver);
-			remittanceTransactionF1.setCompany(company);
+			remittanceTransactionF1.setCompany(company1);
 
 			remittanceTransactionF2.setPurpose(RemittancePurpose.PAYMENT_FOR_GOODS);
 			remittanceTransactionF2.setAmount(999L);
@@ -604,7 +615,7 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionF2.setTransactionStatus(TransactionStatus.PENDING_COMPLIANCE_CHECKS);
 			remittanceTransactionF2.setSender(sender);
 			remittanceTransactionF2.setReceiver(receiver);
-			remittanceTransactionF2.setCompany(company);
+			remittanceTransactionF2.setCompany(company1);
 
 			remittanceTransactionF3.setPurpose(RemittancePurpose.PAYMENT_FOR_SERVICES);
 			remittanceTransactionF3.setAmount(3500L);
@@ -615,28 +626,31 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionF3.setTransactionStatus(TransactionStatus.REJECTED);
 			remittanceTransactionF3.setSender(sender);
 			remittanceTransactionF3.setReceiver(receiver);
-			remittanceTransactionF3.setCompany(company);
+			remittanceTransactionF3.setCompany(company1);
 
-			company.addRemittanceTransaction(remittanceTransaction1);
-			company.addRemittanceTransaction(remittanceTransaction2);
-			company.addRemittanceTransaction(remittanceTransaction3);
+			company1.addRemittanceTransaction(remittanceTransaction1);
+			company1.addRemittanceTransaction(remittanceTransaction2);
+			company1.addRemittanceTransaction(remittanceTransaction3);
 
-			company.addRemittanceTransaction(remittanceTransactionE1);
-			company.addRemittanceTransaction(remittanceTransactionE2);
-			company.addRemittanceTransaction(remittanceTransactionE3);
+			company1.addRemittanceTransaction(remittanceTransactionE1);
+			company1.addRemittanceTransaction(remittanceTransactionE2);
+			company1.addRemittanceTransaction(remittanceTransactionE3);
 
-			company.addRemittanceTransaction(remittanceTransactionF1);
-			company.addRemittanceTransaction(remittanceTransactionF2);
-			company.addRemittanceTransaction(remittanceTransactionF3);
+			company1.addRemittanceTransaction(remittanceTransactionF1);
+			company1.addRemittanceTransaction(remittanceTransactionF2);
+			company1.addRemittanceTransaction(remittanceTransactionF3);
 
-////			company.setRemittanceMap(remittanceMap);
-//			company.addRemittanceMaps(remittanceMap);
+////			company1.setRemittanceMap(remittanceMap);
+			company1.addRemittanceMaps(remittanceMap);
 
 
-			companyDAO.save(company);
+			companyDAO.save(company1);
+			companyDAO.save(company2);
 
 			userDAO.save(user1);
 			userDAO.save(user2);
+			userDAO.save(user3);
+			userDAO.save(user4);
 
 //			remittanceMapDAO.save(remittanceMap);
 

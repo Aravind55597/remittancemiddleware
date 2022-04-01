@@ -24,9 +24,9 @@ public class RemittanceMapControllerImpl implements RemittanceMapController {
     public CustomResponse getMappingByCountry(@PathVariable(value="userId") int userId, @PathVariable(value="destCountry") String destCountry) {
         Map<String,String> remittanceHashMap = remittanceMapService.findMapByCountry(userId, destCountry);
         CustomResponse result = new CustomResponse<>();
-        if (remittanceHashMap == null) {
-            List<String> list = remittanceMapService.getRequiredFields(destCountry);
-            result = new CustomResponse(list);
+        if (remittanceHashMap.isEmpty()) {
+            List<String> requiredFields = remittanceMapService.getRequiredFields(destCountry);
+            result = new CustomResponse(requiredFields);
         }
         else {
             result = new CustomResponse(remittanceHashMap);
