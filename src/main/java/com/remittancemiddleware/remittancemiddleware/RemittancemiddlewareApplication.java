@@ -64,7 +64,7 @@ public class RemittancemiddlewareApplication {
 		return new  WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedMethods("*").allowedOrigins("*");;
+				registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "PUT", "POST", "PATCH", "DELETE", "OPTIONS");;
 			}
 		};
 	}
