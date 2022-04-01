@@ -333,7 +333,6 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
         int companyId = theUser.getCompanyId();
         Company theCompany = companyDAO.getById(companyId);
 
-
         ObjectMapper oMapper = new ObjectMapper();
 
         RemittanceMap theRemittanceMap = new RemittanceMap();
@@ -420,6 +419,8 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
         theRemittanceMap.setDestinationCountry(destCountry);
         remittanceMapDAO.save(theRemittanceMap);
 
+
+
         return theRemittanceMap;
     }
 
@@ -439,14 +440,30 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
         if (result.isPresent()) {
             theRemittanceMap = result.get();
             int id = theRemittanceMap.getId();
-            ReceiverMap theReceiverMap = new ReceiverMap();
-            SenderMap theSenderMap = new SenderMap();
-            AddressMap theAddressMapR = new AddressMap();
-            AddressMap theAddressMapS = new AddressMap();
-            BankAccountMap theBankAccountMapR = new BankAccountMap();
-            BankAccountMap theBankAccountMapS = new BankAccountMap();
-            IdentificationMap theIdentificationMapR = new IdentificationMap();
-            IdentificationMap theIdentificationMapS = new IdentificationMap();
+
+            ReceiverMap theReceiverMap = theRemittanceMap.getReceiverMap();
+            int rId = theReceiverMap.getId();
+
+            SenderMap theSenderMap = theRemittanceMap.getSenderMap();
+            int sId = theSenderMap.getId();
+
+            AddressMap theAddressMapR = theReceiverMap.getAddressMap();
+            int arId = theAddressMapR.getId();
+
+            AddressMap theAddressMapS = theSenderMap.getAddressMap();
+            int asId = theAddressMapS.getId();
+
+            BankAccountMap theBankAccountMapR = theReceiverMap.getBankAccountMap();
+            int brId = theBankAccountMapR.getId();
+
+            BankAccountMap theBankAccountMapS = theSenderMap.getBankAccountMap();
+            int bsId = theBankAccountMapS.getId();
+
+            IdentificationMap theIdentificationMapR = theReceiverMap.getIdentificationMap();
+            int irId = theIdentificationMapR.getId();
+
+            IdentificationMap theIdentificationMapS = theSenderMap.getIdentificationMap();
+            int isId = theIdentificationMapS.getId();
 
             Map<String,String> remittanceMap = oMapper.convertValue(theRemittanceMap, Map.class);
             Map<String,String> receiverMap = oMapper.convertValue(theReceiverMap, Map.class);
@@ -507,13 +524,24 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
             theIdentificationMapR = oMapper.convertValue(identificationMapR, IdentificationMap.class);
             theIdentificationMapS = oMapper.convertValue(identificationMapS, IdentificationMap.class);
 
+            theAddressMapR.setId(arId);
+            theBankAccountMapR.setId(brId);
+            theIdentificationMapR.setId(irId);
+
             theReceiverMap.setAddressMap(theAddressMapR);
             theReceiverMap.setBankAccountMap(theBankAccountMapR);
             theReceiverMap.setIdentificationMap(theIdentificationMapR);
 
+            theAddressMapS.setId(asId);
+            theBankAccountMapS.setId(bsId);
+            theIdentificationMapS.setId(isId);
+            
             theSenderMap.setAddressMap(theAddressMapS);
             theSenderMap.setBankAccountMap(theBankAccountMapS);
             theSenderMap.setIdentificationMap(theIdentificationMapS);
+
+            theReceiverMap.setId(rId);
+            theSenderMap.setId(sId);
 
             theRemittanceMap.setReceiverMap(theReceiverMap);
             theRemittanceMap.setSenderMap(theSenderMap);
