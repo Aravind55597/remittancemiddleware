@@ -457,50 +457,50 @@ public class RemittancemiddlewareApplication {
 			receiver.setType("bank_account");
 			receiver.setPayoutCurrency("PHP");
 
-			senderMap.setFirstName("First Name");
-			senderMap.setLastName("Last Name");
-			senderMap.setNationality("Nationality");
+			senderMap.setFirstName("SenderFirstName");
+			senderMap.setLastName("SenderLastName");
+			senderMap.setNationality("SenderNationality");
 			senderMap.setCurrency("Receiver Currency");
-			senderMap.setDateOfBirth("Birthday");
-			senderMap.setMobileNumber("Phone Number");
+			senderMap.setDateOfBirth("SenderDateofBirth");
+//			senderMap.setMobileNumber("Phone Number");
 			senderMap.setIdentificationMap(identificationMapS);
 			senderMap.setBankAccountMap(bankAccountMapS);
 			senderMap.setAddressMap(addressMapS);
-			senderMap.setSourceOfFunds("Source of Funds");
+			senderMap.setSourceOfFunds("SenderSourceofFund");
 			senderMap.setSenderCurrency("Sender Currency");
-			senderMap.setBeneficiaryRelationship("Relation");
+			senderMap.setBeneficiaryRelationship("SenderRelationship");
 //			senderMap.setRemittanceMap(remittanceMap);
 
-			receiverMap.setFirstName("First Name");
-			receiverMap.setLastName("Last Name");
-			receiverMap.setNationality("Nationality");
+			receiverMap.setFirstName("ReceiverFirstName");
+			receiverMap.setLastName("ReceiverLastName");
+			receiverMap.setNationality("ReceiverNationality");
 			receiverMap.setCurrency("Receiver Currency");
-			receiverMap.setDateOfBirth("Birthday");
-			receiverMap.setMobileNumber("Phone Number");
+			receiverMap.setDateOfBirth("ReceiverDateofBirth");
+//			receiverMap.setMobileNumber("Phone Number");
 			receiverMap.setIdentificationMap(identificationMapR);
 			receiverMap.setBankAccountMap(bankAccountMapR);
 			receiverMap.setAddressMap(addressMapR);
 //			receiverMap.setType("");
-			receiverMap.setPayoutCurrency("Receive Currency");
+			receiverMap.setPayoutCurrency("ReceiverPayoutCurrency");
 //			receiverMap.setRemittanceMap(remittanceMap);
 
-			addressMapR.setAddressLine("Address");
-//			addressMapR.setCity("City");
-			addressMapR.setCountry("Country");
+			addressMapR.setAddressLine("ReceiverAddress");
+			addressMapR.setCity("ReceiverCity");
+			addressMapR.setCountry("ReceiverCountry");
 //			addressMapR.setState("State");
-			addressMapR.setZipCode("Postal Code");
+//			addressMapR.setZipCode("Postal Code");
 //			addressMapR.setPartyMap(receiverMap);
 
-			addressMapS.setAddressLine("Address");
-			addressMapS.setCity("City");
-			addressMapS.setCountry("Country");
-			addressMapS.setState("State");
-			addressMapS.setZipCode("Postal Code");
+			addressMapS.setAddressLine("SenderAddress");
+			addressMapS.setCity("SenderCity");
+			addressMapS.setCountry("SenderCountry");
+			addressMapS.setState("SenderState");
+//			addressMapS.setZipCode("Postal Code");
 //			addressMapS.setPartyMap(senderMap);
 
-			bankAccountMapR.setBankName("Bank");
-			bankAccountMapR.setBranchName("Branch");
-			bankAccountMapR.setAccountNumber("Account No");
+//			bankAccountMapR.setBankName("Bank");
+//			bankAccountMapR.setBranchName("Branch");
+			bankAccountMapR.setAccountNumber("ReceiverAccountNumber");
 //			bankAccountMapR.setPartyMap(receiverMap);
 
 			bankAccountMapS.setBankName("Bank");
@@ -508,20 +508,20 @@ public class RemittancemiddlewareApplication {
 			bankAccountMapS.setAccountNumber("Account No");
 //			bankAccountMapS.setPartyMap(senderMap);
 
-			identificationMapR.setIdType("Identity Type");
-			identificationMapR.setIdNumber("Identity Number");
-			identificationMapR.setIssuingCountry("Country of Issue");
+			identificationMapR.setIdType("ReceiverIDType");
+			identificationMapR.setIdNumber("ReceiverIDNumber");
+//			identificationMapR.setIssuingCountry("Country of Issue");
 //			identificationMapR.setPartyMap(receiverMap);
 
-			identificationMapS.setIdType("Identity Type");
-			identificationMapS.setIdNumber("Identity Number");
-			identificationMapS.setIssuingCountry("Country of Issue");
+			identificationMapS.setIdType("SenderIDType");
+			identificationMapS.setIdNumber("SenderIDNumber");
+			identificationMapS.setIssuingCountry("SenderIDIssuingCountry");
 //			identificationMapS.setPartyMap(senderMap);
 
-			remittanceMap.setPurpose("Remittance Purpose");
-			remittanceMap.setAmount("Amount");
-			remittanceMap.setPaymentMode("Mode of Payment");
-			remittanceMap.setSourceType("Source of Funds");
+			remittanceMap.setPurpose("PurposeofRemittance");
+			remittanceMap.setAmount("ReceivingAmount");
+			remittanceMap.setPaymentMode("PaymentMode");
+			remittanceMap.setSourceType("SourceType");
 			remittanceMap.setSegment("Segment");
 			remittanceMap.setSenderMap(senderMap);
 			remittanceMap.setReceiverMap(receiverMap);
