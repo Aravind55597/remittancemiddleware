@@ -72,7 +72,7 @@ public class SSOTToEverywhereRemitMapperImpl implements SSOTToEverywhereRemitMap
 
         result.setSenderIdCountry(ssot.getSender().getIdentification().getIssuingCountry());
 
-        result.setSenderCurrency(ssot.getSender().getSenderCurrency());
+        result.setSenderCurrency(ssot.getSender().getCurrency());
 
         result.setSenderCountry(ssot.getSender().getSenderRemittanceCountry());
     }
@@ -80,7 +80,7 @@ public class SSOTToEverywhereRemitMapperImpl implements SSOTToEverywhereRemitMap
     void setReceiverValues(RemittanceTransaction ssot, EverywhereRemitData result) throws NullPointerException , CustomMappingException{
         result.setRecipientAccountNumber(ssot.getReceiver().getBankAccount().getAccountNumber());
         
-        result.setRecipientCurrency(ssot.getReceiver().getPayoutCurrency());
+        result.setRecipientCurrency(ssot.getReceiver().getCurrency());
 
         result.setRecipientCountry(ssot.getReceiver().getReceiverRemittanceCountry());
 

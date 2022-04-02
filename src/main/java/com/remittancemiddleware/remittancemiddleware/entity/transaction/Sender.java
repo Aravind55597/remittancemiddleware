@@ -23,12 +23,12 @@ public class Sender  extends Party{
 
     private String senderRemittanceCountry;
 
-    private String senderCurrency; //senderCurency enum // nope should be using standard currency notation i.e. 3 letter string
+//    private String senderCurrency; //senderCurency enum // nope should be using standard currency notation i.e. 3 letter string
 
     @Enumerated(EnumType.STRING)
     public BeneficiaryRelationship beneficiaryRelationship; //    enum senderBeneficiaryRelationship; // done
 
-    public Sender(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, String mobileNumber, SourceOfFunds sourceOfFunds,String senderRemittanceCountry, String senderCurrency, BeneficiaryRelationship  beneficiaryRelationship) {
+    public Sender(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, String mobileNumber, SourceOfFunds sourceOfFunds,String senderRemittanceCountry, BeneficiaryRelationship  beneficiaryRelationship) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationality = nationality;
@@ -37,7 +37,6 @@ public class Sender  extends Party{
         this.mobileNumber = mobileNumber;
         this.sourceOfFunds = sourceOfFunds;
         this.senderRemittanceCountry = senderRemittanceCountry;
-        this.senderCurrency = senderCurrency;
         this.beneficiaryRelationship = beneficiaryRelationship;
     }
 }

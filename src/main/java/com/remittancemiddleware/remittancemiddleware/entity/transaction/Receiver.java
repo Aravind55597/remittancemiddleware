@@ -22,12 +22,12 @@ public class Receiver  extends Party {
     private String type; // enum receiverType // nope for enum, hard code default field value "bank_account" from excel
 
     //this should be removed ?
-    private String payoutCurrency; //payoutCurrency enum // no enum, same as above
+//    private String payoutCurrency; //payoutCurrency enum // no enum, same as above
 
     private String receiverRemittanceCountry;
 
 
-    public Receiver(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, String mobileNumber, String receiverType, String payoutCurrency, String receiverRemittanceCountry) {
+    public Receiver(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, String mobileNumber, String receiverType,  String receiverRemittanceCountry) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationality = nationality;
@@ -35,7 +35,6 @@ public class Receiver  extends Party {
         this.dateOfBirth = dateOfBirth;
         this.mobileNumber = mobileNumber;
         this.type = receiverType;
-        this.payoutCurrency = payoutCurrency;
         this.receiverRemittanceCountry = receiverRemittanceCountry;
     }
 }

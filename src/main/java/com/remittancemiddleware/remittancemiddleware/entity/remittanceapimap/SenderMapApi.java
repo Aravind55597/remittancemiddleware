@@ -20,7 +20,7 @@ public class SenderMapApi extends PartyMapApi implements Serializable {
 
     private String senderRemittanceCountry; // added for sender_address_country("SGP") hidden field for EverywhereRemit
 
-    private String senderCurrency ;
+//    private String senderCurrency ;
 
     private String beneficiaryRelationship;
 

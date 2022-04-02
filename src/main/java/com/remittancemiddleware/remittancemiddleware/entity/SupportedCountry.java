@@ -29,11 +29,13 @@ public class SupportedCountry implements Serializable {
     @Column(unique=true)
     private String ibanName;
 
+    private String name;
     @ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
     @JoinTable(
             name="supported_country_remittance_company",
             joinColumns=@JoinColumn(name="supported_country_id"),
-            inverseJoinColumns=@JoinColumn(name="remittance_company_id")
+            inverseJoinColumns=@JoinColumn(name="remittance_company_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames={"supported_country_id","remittance_company_id"})
     )
     private List<RemittanceCompany> remittanceCompanies;
 

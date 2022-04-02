@@ -31,12 +31,12 @@ public class RemittanceCompany implements Serializable {
     private RemittanceCompanyName remittanceCompanyName;
 
 
-    @ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
-    @JoinTable(
-            name="supported_country_remittance_company",
-            joinColumns=@JoinColumn(name="remittance_company_id"),
-            inverseJoinColumns=@JoinColumn(name="supported_country_id")
-    )
+    @ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH}, mappedBy = "remittanceCompanies")
+//    @JoinTable(
+//            name="supported_country_remittance_company",
+//            joinColumns=@JoinColumn(name="remittance_company_id"),
+//            inverseJoinColumns=@JoinColumn(name="supported_country_id")
+//    )
     private List<SupportedCountry> supportedCountries;
 
     @OneToOne(cascade=CascadeType.ALL)

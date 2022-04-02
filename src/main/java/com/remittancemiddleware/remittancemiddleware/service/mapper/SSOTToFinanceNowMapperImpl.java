@@ -94,7 +94,7 @@ public class SSOTToFinanceNowMapperImpl implements SSOTToFinanceNowMapper {
 
         result.setSenderSourceOfFund(this.convertSourceOfFunds(ssot.getSender().getSourceOfFunds()));
 
-        result.setPayoutCurrency(ssot.getReceiver().getPayoutCurrency());
+        result.setPayoutCurrency(ssot.getReceiver().getCurrency());
 
     }
 

@@ -18,7 +18,7 @@ public class ReceiverMapApi extends PartyMapApi implements Serializable {
 
     private String type ;
 
-    private String payoutCurrency;
+//    private String payoutCurrency;
 
     private String receiverRemittanceCountry; // added from misplaced receiverCountry previously
 
