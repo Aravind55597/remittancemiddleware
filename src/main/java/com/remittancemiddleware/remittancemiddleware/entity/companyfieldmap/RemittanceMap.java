@@ -44,8 +44,6 @@ public class RemittanceMap implements Serializable {
     @JoinColumn(name="company_id")
     private Company company;
 
-    @Column(unique=true)
     private String destinationCountry;
-
 
 }
