@@ -256,39 +256,21 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                         SSOTToEverywhereRemitMapperImpl ssotToEverywhereRemitMapperImpl = new SSOTToEverywhereRemitMapperImpl(new SimpleDateFormat());
                         EverywhereRemitData everywhereRemitTransaction = ssotToEverywhereRemitMapperImpl.MapSSOT(theRemittanceTransaction);
                         response = sandboxAPIServiceImpl.sendTransactionToSandbox(everywhereRemitTransaction, "everywhereremit");
-                        if (response.getCode() == 1) {
-                            if (response.getMessage().contains("Rejected")) {
-                                theRemittanceTransaction.setTransactionStatus(TransactionStatus.REJECTED);
-                            }
-                            else if (response.getMessage().contains("Pending AML")) {
-                                theRemittanceTransaction.setTransactionStatus(TransactionStatus.PENDING_AML);
-                            }
-                            else if (response.getMessage().contains("Pending Compliance Checks")) {
-                                theRemittanceTransaction.setTransactionStatus(TransactionStatus.PENDING_COMPLIANCE_CHECKS);
-                            }
-                            else{
-                                theRemittanceTransaction.setTransactionStatus(TransactionStatus.SUCCESSFUL);
-                            }
-                            remittanceTransactionDAO.save(theRemittanceTransaction);
-                        }
-
-                        else {
-                            output.add("Transaction " + Integer.toString(counter) + ": error due to " + response.getError());
-                        }
-
-
+                        updateStatus(output, counter, theRemittanceTransaction, response);
                         break;
 
                     case "FINANCE_NOW":
                         SSOTToFinanceNowMapperImpl ssotToFinanceNowMapperImpl = new SSOTToFinanceNowMapperImpl(new SimpleDateFormat());
                         FinanceNowData financeNowTransaction = ssotToFinanceNowMapperImpl.MapSSOT(theRemittanceTransaction);
                         response = sandboxAPIServiceImpl.sendTransactionToSandbox(financeNowTransaction, "financenow");
+                        updateStatus(output, counter, theRemittanceTransaction, response);
                         break;
 
                     case "PAYMENT_GO":
                         SSOTToPaymentGoMapperImpl ssotToPaymentGoMapperImpl = new SSOTToPaymentGoMapperImpl(new SimpleDateFormat());
                         PaymentGoData paymentGoTransaction = ssotToPaymentGoMapperImpl.MapSSOT(theRemittanceTransaction);
                         response = sandboxAPIServiceImpl.sendTransactionToSandbox(paymentGoTransaction, "paymentgo");
+                        updateStatus(output, counter, theRemittanceTransaction, response);
                         break;
 
                 }
@@ -303,6 +285,28 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
         return output;
 
+    }
+
+    private void updateStatus(List<String> output, int counter, RemittanceTransaction theRemittanceTransaction, SandboxResponse response) {
+        if (response.getCode() == 1) {
+            if (response.getMessage().contains("Rejected")) {
+                theRemittanceTransaction.setTransactionStatus(TransactionStatus.REJECTED);
+            }
+            else if (response.getMessage().contains("Pending AML")) {
+                theRemittanceTransaction.setTransactionStatus(TransactionStatus.PENDING_AML);
+            }
+            else if (response.getMessage().contains("Pending Compliance Checks")) {
+                theRemittanceTransaction.setTransactionStatus(TransactionStatus.PENDING_COMPLIANCE_CHECKS);
+            }
+            else{
+                theRemittanceTransaction.setTransactionStatus(TransactionStatus.SUCCESSFUL);
+            }
+            remittanceTransactionDAO.save(theRemittanceTransaction);
+        }
+
+        else {
+            output.add("Transaction " + Integer.toString(counter) + ": error due to " + response.getError());
+        }
     }
 
     private static void addFields(Map<String, String> transactionData, Map.Entry<String, String> setSSOT, Map.Entry<String, String> setCSVTransaction) {
