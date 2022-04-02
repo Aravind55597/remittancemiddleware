@@ -192,6 +192,7 @@ public class RemittancemiddlewareApplication {
 //			remittanceCompanyPG.addSupportedCountries(supportedCountryPHL);
 
 			supportedCountryPHL.setIbanName("PHL");
+			supportedCountryPHL.setName("Philippines");
 			supportedCountryPHL.addRemittanceCompanies(remittanceCompanyER);
 			supportedCountryPHL.addRemittanceCompanies(remittanceCompanyFN);
 //-------------------------------------------------------------------------------------------------------------
@@ -206,7 +207,6 @@ public class RemittancemiddlewareApplication {
 			senderMapApiER.setBankAccountMapApi(bankAccountMapApiSenderER);
 			senderMapApiER.setAddressMapApi(addressMapApiSenderER);
 			senderMapApiER.setSourceOfFunds("source_of_funds");
-			senderMapApiER.setSenderCurrency("sender_currency");
 			senderMapApiER.setBeneficiaryRelationship(null);
 //			senderMapApiER.setRemittanceMapApi(remittanceMapApiER);
 //
@@ -221,7 +221,6 @@ public class RemittancemiddlewareApplication {
 			receiverMapApiER.setBankAccountMapApi(bankAccountMapApiReceiverER);
 			receiverMapApiER.setAddressMapApi(addressMapApiReceiverER);
 			receiverMapApiER.setType("recipient_type");
-			receiverMapApiER.setPayoutCurrency("recipient_currency");
 //			receiverMapApiER.setRemittanceMapApi(remittanceMapApiER);
 
 			addressMapApiSenderER.setAddressLine("sender_address_line");
@@ -280,7 +279,6 @@ public class RemittancemiddlewareApplication {
 			senderMapApiFN.setBankAccountMapApi(bankAccountMapApiSenderFN);
 			senderMapApiFN.setAddressMapApi(addressMapApiSenderFN);
 			senderMapApiFN.setSourceOfFunds("SenderSourceOfFund");
-			senderMapApiFN.setSenderCurrency(null);
 			senderMapApiFN.setBeneficiaryRelationship("SenderBeneficiaryRelationship");
 //			senderMapApiFN.setRemittanceMapApi(remittanceMapApiFN);
 //
@@ -295,7 +293,6 @@ public class RemittancemiddlewareApplication {
 			receiverMapApiFN.setBankAccountMapApi(bankAccountMapApiReceiverFN);
 			receiverMapApiFN.setAddressMapApi(addressMapApiReceiverFN);
 			receiverMapApiFN.setType(null);
-			receiverMapApiFN.setPayoutCurrency("PayoutCurrency");
 //			receiverMapApiFN.setRemittanceMapApi(remittanceMapApiFN);
 
 			addressMapApiSenderFN.setAddressLine("SenderAddress");
@@ -425,7 +422,6 @@ public class RemittancemiddlewareApplication {
 			sender.setBankAccount(bankAccountS);
 			sender.setAddress(addressS);
 			sender.setSourceOfFunds(SourceOfFunds.SALARY);
-			sender.setSenderCurrency("SGD");
 			sender.setBeneficiaryRelationship(BeneficiaryRelationship.FAMILY);
 
 			identificationR.setIdNumber("45890082");
@@ -455,7 +451,6 @@ public class RemittancemiddlewareApplication {
 			receiver.setBankAccount(bankAccountR);
 			receiver.setAddress(addressR);
 			receiver.setType("bank_account");
-			receiver.setPayoutCurrency("PHP");
 
 			senderMap.setFirstName("SenderFirstName");
 			senderMap.setLastName("SenderLastName");
@@ -467,7 +462,6 @@ public class RemittancemiddlewareApplication {
 			senderMap.setBankAccountMap(bankAccountMapS);
 			senderMap.setAddressMap(addressMapS);
 			senderMap.setSourceOfFunds("SenderSourceofFund");
-			senderMap.setSenderCurrency("Sender Currency");
 			senderMap.setBeneficiaryRelationship("SenderRelationship");
 //			senderMap.setRemittanceMap(remittanceMap);
 
@@ -481,7 +475,6 @@ public class RemittancemiddlewareApplication {
 			receiverMap.setBankAccountMap(bankAccountMapR);
 			receiverMap.setAddressMap(addressMapR);
 //			receiverMap.setType("");
-			receiverMap.setPayoutCurrency("ReceiverPayoutCurrency");
 //			receiverMap.setRemittanceMap(remittanceMap);
 
 			addressMapR.setAddressLine("ReceiverAddress");
@@ -666,19 +659,10 @@ public class RemittancemiddlewareApplication {
 			remittanceTransactionDAO.save(remittanceTransactionF2);
 			remittanceTransactionDAO.save(remittanceTransactionF3);
 
-//			supportedCountryDAO.save(supportedCountryPHL);
-//
-//			remittanceCompanyDAO.save(remittanceCompanyER);
-//			remittanceCompanyDAO.save(remittanceCompanyFN);
-//			remittanceCompanyDAO.save(remittanceCompanyPG);
-//
-//			remittanceMapApiDAO.save(remittanceMapApiER);
-//			remittanceMapApiDAO.save(remittanceMapApiFN);
-//			remittanceMapApiDAO.save(remittanceMapApiPG);
 		};
 	}
-*/
 
+*/
 
 	//	@Bean
 	//	public mapperService mapperService(){
