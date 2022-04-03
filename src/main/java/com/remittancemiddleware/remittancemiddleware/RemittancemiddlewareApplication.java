@@ -693,6 +693,7 @@ public class RemittancemiddlewareApplication {
 //					String firstName = resultSet.getString("first_name");
 //					System.out.println(firstName);
 //				}
+				
 			} catch(Exception e){
 				System.out.println(e.getMessage());
 				// database "remittance" doesn't exist
