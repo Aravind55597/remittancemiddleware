@@ -112,7 +112,7 @@ public class RemittancemiddlewareApplication {
 			connectionProps.put("password", this.password);
 
 			connection = DriverManager.getConnection(url, connectionProps);
-			DatabaseMetaData meta = connection.getMetaData();
+//			DatabaseMetaData meta = connection.getMetaData();
 
 			try{
 				//test if database "remittance" exist
@@ -121,7 +121,7 @@ public class RemittancemiddlewareApplication {
 				//check if there is data in the user table
 				// if there is no data in remittance database, seed test data into database
 				if (!resultSet.next()){
-					System.out.println("no data in remittance database -- running seed data now. Please wait for it to seed finish");
+					System.out.println("There is not data in remittance database -- seeding data now. Please wait for \"Completed initialisation\" message" );
 
 					Company company1 = new Company();
 					User user1 = new User("user1@gmail.com", "abc12345", "Anne", "Tan");
