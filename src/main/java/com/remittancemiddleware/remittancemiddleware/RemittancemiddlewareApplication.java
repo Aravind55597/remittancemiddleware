@@ -121,7 +121,7 @@ public class RemittancemiddlewareApplication {
 				//check if there is data in the user table
 				// if there is no data in remittance database, seed test data into database
 				if (!resultSet.next()){
-					System.out.println("There is not data in remittance database -- seeding data now. Please wait for \"Completed initialisation\" message" );
+					System.out.println("There is no data in remittance database -- seeding data now. Please wait for \"Completed initialisation\" message" );
 
 					Company company1 = new Company();
 					User user1 = new User("user1@gmail.com", "abc12345", "Anne", "Tan");
