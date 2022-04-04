@@ -138,7 +138,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
             List<Map<String, String>> transactions = csvProcessorService.processCsv(csvFile);
 //            ObjectMapper oMapper = new ObjectMapper();
             Map<String, String> remittanceMap = oMapper.convertValue(theRemittanceMap, Map.class);
-
+            int transactionNumber = 1;
             for (Map<String, String> t : transactions) {
                 Map<String, String> transaction = new HashMap<>();
                 Map<String, String> receiver = new HashMap<>();
@@ -149,16 +149,16 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 Map<String, String> bankAccountS = new HashMap<>();
                 Map<String, String> identificationR = new HashMap<>();
                 Map<String, String> identificationS = new HashMap<>();
-                int counter = 1;
+
 
                 for (Map.Entry<String, String> transactionSet : t.entrySet()) {
                     for (Map.Entry<String, String> setRM : remittanceMap.entrySet()) {
                         if (!(setRM.getKey().equals("id"))) {
                             if (setRM.getKey().equals("receiverMap")) {
 
-                                mapReceiver(theRemittanceMap, oMapper, receiver, addressR, bankAccountR, identificationR, transactionSet, counter, output);
+                                mapReceiver(theRemittanceMap, oMapper, receiver, addressR, bankAccountR, identificationR, transactionSet, transactionNumber, output);
                             } else if (setRM.getKey().equals("senderMap")) {
-                                mapSender(theRemittanceMap, oMapper, sender, addressS, bankAccountS, identificationS, transactionSet, counter, output);
+                                mapSender(theRemittanceMap, oMapper, sender, addressS, bankAccountS, identificationS, transactionSet, transactionNumber, output);
 
                                 // transactionSet -> csv hashmap (key is column name , value is value)
                                 // setRM -> remittance map hashmap (key is ssot field name , value is column name)
@@ -174,7 +174,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                                     }
                                 }
                                 catch(NumberFormatException ex){
-                                    output.add("Transaction " + counter + ": error due to " + setRM.getValue() + " is not a formatted number");
+                                    output.add("Transaction " + transactionNumber + ": error due to " + setRM.getValue() + " is not a formatted number");
                                 }
 
                                 transaction.put(setRM.getKey(), transactionSet.getValue());
@@ -182,12 +182,9 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                         }
 
                     }
+
                 }
-                //TODO
-                //check if output list is empty . If it is not , must be a bad request
-                if(output.size()!=0){
-                    throw new CustomBadRequestException("Formatting errors",output);
-                }
+
 
                 RemittanceTransaction theRemittanceTransaction = oMapper.convertValue(transaction, RemittanceTransaction.class);
                 Receiver theReceiver = oMapper.convertValue(receiver, Receiver.class);
@@ -213,11 +210,22 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 theRemittanceTransaction.setRemittanceCompany(RemittanceCompanyName.valueOf(remittanceCompany));
                 SandboxResponse response = null;
 
-                sendToSandbox(remittanceCompany, output, counter, theRemittanceTransaction);
+                //TODO
+                //check if output list is empty . If it is not , must be a bad request
+                if(output.size()!=0){
+                    throw new CustomBadRequestException("Formatting errors",output);
+                }
 
-                counter++;
+
+
+                sendToSandbox(remittanceCompany, output, transactionNumber, theRemittanceTransaction);
+
+                transactionNumber++;
+
             }
-        } else {
+        }
+
+        else {
             throw new CustomNotFoundException("Did not find remittance map for - " + destCountry);
         }
 
