@@ -2,6 +2,7 @@ package com.remittancemiddleware.remittancemiddleware.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pemistahl.lingua.api.LanguageDetector;
+import com.remittancemiddleware.remittancemiddleware.customexception.CustomBadRequestException;
 import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFoundException;
 import com.remittancemiddleware.remittancemiddleware.dao.CompanyDAO;
 import com.remittancemiddleware.remittancemiddleware.dao.RemittanceMapDAO;
@@ -121,7 +122,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
         User theUser = userDAO.getById(userId);
         int companyId = theUser.getCompanyId();
         Company theCompany = companyDAO.getById(companyId);
-        List<String> output = new ArrayList<>();
+        ArrayList<String> output = new ArrayList<>();
 
         Optional<RemittanceMap> result = Optional.ofNullable(remittanceMapDAO.findByCompanyAndDestinationCountry(theCompany, destCountry));
 
@@ -170,14 +171,9 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 }
                 //TODO
                 //check if output list is empty . If it is not , must be a bad request
-
-
-
-
-
-
-
-
+                if(output.size()!=0){
+                    throw new CustomBadRequestException("Formatting errors",output);
+                }
 
                 RemittanceTransaction theRemittanceTransaction = oMapper.convertValue(transaction, RemittanceTransaction.class);
                 Receiver theReceiver = oMapper.convertValue(receiver, Receiver.class);
@@ -202,10 +198,6 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 theRemittanceTransaction.setCompany(theCompany);
                 theRemittanceTransaction.setRemittanceCompany(RemittanceCompanyName.valueOf(remittanceCompany));
                 SandboxResponse response = null;
-
-
-
-
 
                 sendToSandbox(remittanceCompany, output, counter, theRemittanceTransaction);
 
