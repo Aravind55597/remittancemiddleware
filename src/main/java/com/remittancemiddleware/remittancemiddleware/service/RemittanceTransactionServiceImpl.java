@@ -21,7 +21,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -143,76 +142,18 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                     for (Map.Entry<String, String> setRM : remittanceMap.entrySet()) {
                         if (!(setRM.getKey().equals("id"))) {
                             if (setRM.getKey().equals("receiverMap")) {
-                                ReceiverMap theReceiverMap = theRemittanceMap.getReceiverMap();
-                                Map<String, String> receiverMap = oMapper.convertValue(theReceiverMap, Map.class);
-                                for (Map.Entry<String, String> setR : receiverMap.entrySet()) {
-                                    if (!(setR.getKey().equals("id"))) {
-                                        if (setR.getKey().equals("addressMap")) {
-                                            AddressMap theAddressMap = theReceiverMap.getAddressMap();
-                                            Map<String, String> addressMap = oMapper.convertValue(theAddressMap, Map.class);
-                                            for (Map.Entry<String, String> setAR : addressMap.entrySet()) {
-                                                if (!(setAR.getKey().equals("id"))) {
-                                                    addFields(addressR, setAR, set);
-                                                }
 
-                                            }
-                                        } else if (setR.getKey().equals("bankAccountMap")) {
-                                            BankAccountMap theBankAccountMap = theReceiverMap.getBankAccountMap();
-                                            Map<String, String> bankAccountMap = oMapper.convertValue(theBankAccountMap, Map.class);
-                                            for (Map.Entry<String, String> setBR : bankAccountMap.entrySet()) {
-                                                if (!(setBR.getKey().equals("id"))) {
-                                                    addFields(bankAccountR, setBR, set);
-                                                }
-                                            }
-                                        } else if (setR.getKey().equals("identificationMap")) {
-                                            IdentificationMap theIdentificationMap = theReceiverMap.getIdentificationMap();
-                                            Map<String, String> identificationMap = oMapper.convertValue(theIdentificationMap, Map.class);
-                                            for (Map.Entry<String, String> setIR : identificationMap.entrySet()) {
-                                                if (!(setIR.getKey().equals("id"))) {
-                                                    addFields(identificationR, setIR, set);
-                                                }
-                                            }
-                                        } else {
-                                            addFields(receiver, setR, set);
-                                        }
-                                    }
-                                }
+                                mapReceiver(theRemittanceMap, oMapper, receiver, addressR, bankAccountR, identificationR, set);
                             } else if (setRM.getKey().equals("senderMap")) {
-                                SenderMap theSenderMap = theRemittanceMap.getSenderMap();
-                                Map<String, String> senderMap = oMapper.convertValue(theSenderMap, Map.class);
-                                for (Map.Entry<String, String> setS : senderMap.entrySet()) {
-                                    if (!(setS.getKey().equals("id"))) {
-                                        if (setS.getKey().equals("addressMap")) {
-                                            AddressMap theAddressMap = theSenderMap.getAddressMap();
-                                            Map<String, String> addressMap = oMapper.convertValue(theAddressMap, Map.class);
-                                            for (Map.Entry<String, String> setAS : addressMap.entrySet()) {
-                                                if (!(setAS.getKey().equals("id"))) {
-                                                    addFields(addressS, setAS, set);
-                                                }
-                                            }
-                                        } else if (setS.getKey().equals("bankAccountMap")) {
-                                            BankAccountMap theBankAccountMap = theSenderMap.getBankAccountMap();
-                                            Map<String, String> bankAccountMap = oMapper.convertValue(theBankAccountMap, Map.class);
-                                            for (Map.Entry<String, String> setBS : bankAccountMap.entrySet()) {
-                                                if (!(setBS.getKey().equals("id"))) {
-                                                    addFields(bankAccountS, setBS, set);
-                                                }
-                                            }
-                                        } else if (setS.getKey().equals("identificationMap")) {
-                                            IdentificationMap theIdentificationMap = theSenderMap.getIdentificationMap();
-                                            Map<String, String> identificationMap = oMapper.convertValue(theIdentificationMap, Map.class);
-                                            for (Map.Entry<String, String> setIS : identificationMap.entrySet()) {
-                                                if (!(setIS.getKey().equals("id"))) {
-                                                    addFields(identificationS, setIS, set);
-                                                }
-                                            }
-                                        } else {
-                                            addFields(sender, setS, set);
-                                        }
-                                    }
-                                }
+                                mapSender(theRemittanceMap, oMapper, sender, addressS, bankAccountS, identificationS, set);
 
+                                // set -> csv hashmap (key is column name , value is value)
+                                // setRM -> remittance map hashmap (key is ssot field name , value is column name)
                             } else if (set.getKey().equals(setRM.getValue())) {
+
+                                //TODO
+                                //if setRM.getKey() is amount
+                                // check if double string or integer string
                                 transaction.put(setRM.getKey(), set.getValue());
                             }
                         }
@@ -246,22 +187,19 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
                 switch (remittanceCompany) {
                     case "EVERYWHERE_REMIT":
-                        SSOTToEverywhereRemitMapperImpl ssotToEverywhereRemitMapperImpl = new SSOTToEverywhereRemitMapperImpl(new SimpleDateFormat());
-                        EverywhereRemitData everywhereRemitTransaction = ssotToEverywhereRemitMapperImpl.MapSSOT(theRemittanceTransaction);
+                        EverywhereRemitData everywhereRemitTransaction = ssotToEverywhereRemitMapper.MapSSOT(theRemittanceTransaction);
                         response = sandboxAPIService.sendTransactionToSandbox(everywhereRemitTransaction, "everywhereremit");
                         updateStatus(output, counter, theRemittanceTransaction, response);
                         break;
 
                     case "FINANCE_NOW":
-                        SSOTToFinanceNowMapperImpl ssotToFinanceNowMapperImpl = new SSOTToFinanceNowMapperImpl(new SimpleDateFormat());
-                        FinanceNowData financeNowTransaction = ssotToFinanceNowMapperImpl.MapSSOT(theRemittanceTransaction);
+                        FinanceNowData financeNowTransaction = ssotToFinanceNowMapper.MapSSOT(theRemittanceTransaction);
                         response = sandboxAPIService.sendTransactionToSandbox(financeNowTransaction, "financenow");
                         updateStatus(output, counter, theRemittanceTransaction, response);
                         break;
 
                     case "PAYMENT_GO":
-                        SSOTToPaymentGoMapperImpl ssotToPaymentGoMapperImpl = new SSOTToPaymentGoMapperImpl(new SimpleDateFormat());
-                        PaymentGoData paymentGoTransaction = ssotToPaymentGoMapperImpl.MapSSOT(theRemittanceTransaction);
+                        PaymentGoData paymentGoTransaction = ssotToPaymentGoMapper.MapSSOT(theRemittanceTransaction);
                         response = sandboxAPIService.sendTransactionToSandbox(paymentGoTransaction, "paymentgo");
                         updateStatus(output, counter, theRemittanceTransaction, response);
                         break;
@@ -276,6 +214,79 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
         return output;
 
+    }
+
+    private void mapSender(RemittanceMap theRemittanceMap, ObjectMapper oMapper, Map<String, String> sender, Map<String, String> addressS, Map<String, String> bankAccountS, Map<String, String> identificationS, Map.Entry<String, String> set) {
+        SenderMap theSenderMap = theRemittanceMap.getSenderMap();
+        Map<String, String> senderMap = oMapper.convertValue(theSenderMap, Map.class);
+        for (Map.Entry<String, String> setS : senderMap.entrySet()) {
+            if (!(setS.getKey().equals("id"))) {
+                if (setS.getKey().equals("addressMap")) {
+                    AddressMap theAddressMap = theSenderMap.getAddressMap();
+                    Map<String, String> addressMap = oMapper.convertValue(theAddressMap, Map.class);
+                    for (Map.Entry<String, String> setAS : addressMap.entrySet()) {
+                        if (!(setAS.getKey().equals("id"))) {
+                            addFields(addressS, setAS, set);
+                        }
+                    }
+                } else if (setS.getKey().equals("bankAccountMap")) {
+                    BankAccountMap theBankAccountMap = theSenderMap.getBankAccountMap();
+                    Map<String, String> bankAccountMap = oMapper.convertValue(theBankAccountMap, Map.class);
+                    for (Map.Entry<String, String> setBS : bankAccountMap.entrySet()) {
+                        if (!(setBS.getKey().equals("id"))) {
+                            addFields(bankAccountS, setBS, set);
+                        }
+                    }
+                } else if (setS.getKey().equals("identificationMap")) {
+                    IdentificationMap theIdentificationMap = theSenderMap.getIdentificationMap();
+                    Map<String, String> identificationMap = oMapper.convertValue(theIdentificationMap, Map.class);
+                    for (Map.Entry<String, String> setIS : identificationMap.entrySet()) {
+                        if (!(setIS.getKey().equals("id"))) {
+                            addFields(identificationS, setIS, set);
+                        }
+                    }
+                } else {
+                    addFields(sender, setS, set);
+                }
+            }
+        }
+    }
+
+    private void mapReceiver(RemittanceMap theRemittanceMap, ObjectMapper oMapper, Map<String, String> receiver, Map<String, String> addressR, Map<String, String> bankAccountR, Map<String, String> identificationR, Map.Entry<String, String> set) {
+        ReceiverMap theReceiverMap = theRemittanceMap.getReceiverMap();
+        Map<String, String> receiverMap = oMapper.convertValue(theReceiverMap, Map.class);
+        for (Map.Entry<String, String> setR : receiverMap.entrySet()) {
+            if (!(setR.getKey().equals("id"))) {
+                if (setR.getKey().equals("addressMap")) {
+                    AddressMap theAddressMap = theReceiverMap.getAddressMap();
+                    Map<String, String> addressMap = oMapper.convertValue(theAddressMap, Map.class);
+                    for (Map.Entry<String, String> setAR : addressMap.entrySet()) {
+                        if (!(setAR.getKey().equals("id"))) {
+                            addFields(addressR, setAR, set);
+                        }
+
+                    }
+                } else if (setR.getKey().equals("bankAccountMap")) {
+                    BankAccountMap theBankAccountMap = theReceiverMap.getBankAccountMap();
+                    Map<String, String> bankAccountMap = oMapper.convertValue(theBankAccountMap, Map.class);
+                    for (Map.Entry<String, String> setBR : bankAccountMap.entrySet()) {
+                        if (!(setBR.getKey().equals("id"))) {
+                            addFields(bankAccountR, setBR, set);
+                        }
+                    }
+                } else if (setR.getKey().equals("identificationMap")) {
+                    IdentificationMap theIdentificationMap = theReceiverMap.getIdentificationMap();
+                    Map<String, String> identificationMap = oMapper.convertValue(theIdentificationMap, Map.class);
+                    for (Map.Entry<String, String> setIR : identificationMap.entrySet()) {
+                        if (!(setIR.getKey().equals("id"))) {
+                            addFields(identificationR, setIR, set);
+                        }
+                    }
+                } else {
+                    addFields(receiver, setR, set);
+                }
+            }
+        }
     }
 
     private void updateStatus(List<String> output, int counter, RemittanceTransaction theRemittanceTransaction, SandboxResponse response) {
