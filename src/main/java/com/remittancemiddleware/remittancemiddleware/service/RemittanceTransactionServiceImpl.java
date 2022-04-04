@@ -249,6 +249,11 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                         //TODO
                         //if setRM.getKey() is accountNumber
                         // check if alphanumeric string
+                        if (setBS.getKey().equals("accountNumber")){
+                            if(!isAlphaNumeric(setBS.getValue())){
+                                output.add("Transaction " + counter + ": error due to " + "accountNumber is not AlphaNumeric");
+                            }
+                        }
                         addFields(bankAccountS, setBS, transactionSet);
                     }
                 }
