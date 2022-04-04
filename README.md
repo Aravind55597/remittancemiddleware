@@ -44,4 +44,47 @@ This a Remittance Middleware Programme by G1 Group 6
    Amount must be double or integer string | Upload invalid data using "SMU DUMMY DATA (Amount VALIDATION - only DOUBLE or INTEGER).csv" to the DRP | Invalid Input
    First name and last name must be in english | Upload invalid data using "SMU DUMMY DATA (FirstName LastName VALIDATION - only ENGLISH).csv" to the DRP | Invalid Input
 
+7. Overview of Classes in UML Diagram
+
+Company Class
+- Represents a SME Company Entity that uses the DRP
+- Is composed of its own Remittance Transactions submitted and Remittance Mappings in the RemittanceMap Class
+
+User Class
+- Represents the details relating to a DRP User that is related to a SME Company Entity
+- User is able to access information (e.g. transactions, mapping) if user is associated with a SME Company Entity in the database system
+
+Remittance Map Class
+- Represents the SME company's mapping based on SSOT
+- Remittance Map Class is composed of its associated Map related classes such as ReceiverMap, SenderMap, etc. as displayed in the UML.
+- Each attribute of the Map related class is mapped to its corresponding SSOT attribute, where the name of the attribute represents the SSOT attribute name, and the corresponding value represents the SME Company's attribute name, which was mapped previously during the Company's onboarding process.
+
+Remittance Transaction Class
+- Represents the SME company's transactions associated
+- Contains transaction information in addition to the details relating to the associated Sender and Receiver.
+- Contains transaction status to display validity of transactions being sent
+
+Sender/Receiver Class
+- represents sender/receiver in a remittance transaction
+- Inherits a common abstract class called "Party", which would have BankAccount, Identification and Address, as both Sender and Receiver have the same common attributes
+
+SupportedCountry Class
+- help represent a Supported Remittance Country e.g. PHL, CHN
+- helps fulfill functionality of getting a common SSOT Remittance Map based on the country being specified (e.g. PHL Map --> Mathematical Union all company mappings in PHL - Company A ∪ Company B U ...)
+- Is associated with multiple remittance company entities
+
+RemittanceCompany Class
+- represents a Remittance Company rendering remittance services through their API
+- is associated with supported countries
+- has Mapping stored in RemittanceMapApi (not RemittanceMap)
+
+RemittanceMapApi Class
+- stores Mapping for each RemmittanceCompany
+- performs same function as RemittanceMap, but only stores mapping associated for each RemittanceCompany
+- prevent possible errors from having remittance mappings being mixed and grouped together
+- Has nested classes similar to RemittanceMap in the form of SenderMapApi, ReceiverMapApi, etc.
+
+
+
+
 	
