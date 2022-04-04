@@ -304,8 +304,8 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                         // check if alphanumeric  string
 
                         if (transactionSet.getValue() != null && setIS.getKey().equals("idNumber")){
-                            System.out.println("transactionSet.getValue() =" + transactionSet.getValue());
-                            System.out.println("setIS.getKey() = " + setIS.getKey());
+//                            System.out.println("transactionSet.getValue() =" + transactionSet.getValue());
+//                            System.out.println("setIS.getKey() = " + setIS.getKey());
                             if(!isAlphaNumeric(setIS.getValue())){
                                 output.add("Transaction " + counter + ": error due to " + "idNumber is not AlphaNumeric");
                             }
@@ -322,10 +322,10 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
                 if((partySet.getValue() != null && partySet.getKey().equals("firstName"))
                         || (partySet.getValue() != null && partySet.getKey().equals("lastName")) ){
-                    System.out.println("partySet.getValue() = " + partySet.getValue());
-                    System.out.println("partySet.getKey() = " + partySet.getKey());
+//                    System.out.println("partySet.getValue() = " + partySet.getValue());
+//                    System.out.println("partySet.getKey() = " + partySet.getKey());
 
-                    System.out.println("languageDetector.detectLanguageOf(transactionSet.getValue())) = " +languageDetector.detectLanguageOf(transactionSet.getValue()));
+//                    System.out.println("languageDetector.detectLanguageOf(transactionSet.getValue())) = " +languageDetector.detectLanguageOf(transactionSet.getValue()));
 
                     String var = Language.ENGLISH.toString();
                     if(!languageDetector.detectLanguageOf(transactionSet.getValue()).equals(Language.ENGLISH.toString())){
