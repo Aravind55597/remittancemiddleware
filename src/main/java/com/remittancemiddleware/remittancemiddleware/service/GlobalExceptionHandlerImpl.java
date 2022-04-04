@@ -20,7 +20,7 @@ public class        GlobalExceptionHandlerImpl implements GlobalExceptionHandler
     //BAD REQUEST 400
     public ResponseEntity<CustomResponse> handleException(CustomBadRequestException exc){
         //create CustomerErrorResponse
-        if (exc.getErrors() == null) {
+        if (exc.getErrors() != null) {
             CustomResponse<HashMap<String,String>> error = new CustomResponse(
                     exc.getMessage(),
                     HttpStatus.BAD_REQUEST,
