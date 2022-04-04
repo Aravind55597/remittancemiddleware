@@ -261,6 +261,26 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                         //TODO
                         //if setRM.getKey() is issuingCountry
                         // check if 3 letter ALL caps  string
+                        boolean checkUppercase = true;
+                        if(setIS.getKey().equals("issuingCountry")){
+
+                            String issuingCountry = setIS.getValue();
+                            if (!(issuingCountry.length() == 3)){
+                                output.add("Transaction " + counter + ": error due to " + "issuingCountry is not a 3 letter code");
+                            }
+
+                            for (int i = 0; i < issuingCountry.length(); i++) {
+                                char ch = issuingCountry.charAt(i);
+                                if (!Character.isUpperCase(ch)){
+                                    checkUppercase = false;
+                                    break;
+                                }
+                            }
+
+                            if (!checkUppercase){
+                                output.add("Transaction " + counter + ": error due to " + "issuingCountry is invalid");
+                            }
+                        }
 
                         //TODO
                         //if setRM.getKey() is idNumber
