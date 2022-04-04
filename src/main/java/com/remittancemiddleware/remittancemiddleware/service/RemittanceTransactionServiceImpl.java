@@ -268,32 +268,34 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
             } else if (partySet.getKey().equals("identificationMap")) {
                 IdentificationMap theIdentificationMap = partyMap.getIdentificationMap();
                 Map<String, String> identificationMap = oMapper.convertValue(theIdentificationMap, Map.class);
-                for (Map.Entry<String, String> setIS : identificationMap.entrySet()) {
-                    if (!(setIS.getKey().equals("id"))) {
+                for (Map.Entry<String, String> setIdentification : identificationMap.entrySet()) {
+                    if (!(setIdentification.getKey().equals("id"))) {
 
                         //TODO
+                        
                         //if setRM.getKey() is issuingCountry
                         // check if 3 letter ALL caps  string
                         boolean invalidUppercase = false;
 
-                        if(setIS.getValue() != null && setIS.getKey().equals("issuingCountry")){
-                            System.out.println("setIS.getValue() = " + setIS.getValue());
-                            System.out.println("setIS.getKey() =" + setIS.getKey());
+                        if(setIdentification.getValue() != null && setIdentification.getKey().equals("issuingCountry") && transactionSet.getKey().equals(setIdentification.getValue()) ){
+                            System.out.println("setIdentification.getValue() = " + setIdentification.getValue());
+                            System.out.println("setIdentification.getKey() =" + setIdentification.getKey());
                             for (int i = 0; i < transactionSet.getValue().length(); i++) {
-                                char ch = setIS.getValue().charAt(i);
+                                char ch = setIdentification.getValue().charAt(i);
                                 if (!Character.isUpperCase(ch)){
                                     invalidUppercase = true;
                                     break;
                                 }
                             }
                             System.out.println("-------------------------------");
+                            System.out.println("transactionSet.getKey() =" + transactionSet.getKey());
                             System.out.println("transactionSet.getValue()" +  transactionSet.getValue());
                             System.out.println(invalidUppercase);
                             System.out.println(transactionSet.getValue().trim().length() != 3);
                             System.out.println("-------------------------------");
 
                             if (transactionSet.getValue().trim().length() != 3 || invalidUppercase){
-                                output.add("Transaction " + counter + ": error due to " + setIS.getValue() + " is not a 3 letter code");
+                                output.add("Transaction " + counter + ": error due to " + setIdentification.getValue() + " is not a 3 letter code");
                             }
 
 
@@ -303,15 +305,15 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                         //if setRM.getKey() is idNumber
                         // check if alphanumeric  string
 
-                        if (transactionSet.getValue() != null && setIS.getKey().equals("idNumber")){
+                        if (transactionSet.getValue() != null && setIdentification.getKey().equals("idNumber")){
 //                            System.out.println("transactionSet.getValue() =" + transactionSet.getValue());
-//                            System.out.println("setIS.getKey() = " + setIS.getKey());
-                            if(!isAlphaNumeric(setIS.getValue())){
+//                            System.out.println("setIdentification.getKey() = " + setIdentification.getKey());
+                            if(!isAlphaNumeric(setIdentification.getValue())){
                                 output.add("Transaction " + counter + ": error due to " + "idNumber is not AlphaNumeric");
                             }
                         }
 
-                        addFields(identificationS, setIS, transactionSet);
+                        addFields(identificationS, setIdentification, transactionSet);
                     }
                 }
             } else {
