@@ -164,7 +164,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                                 // setRM -> remittance map hashmap (key is ssot field name , value is column name)
                             } else if (transactionSet.getValue() != null && transactionSet.getKey().equals("amount")
                                     && transactionSet.getKey().equals(setRM.getValue())) {
-
+                                System.out.println("testest");
                                 //TODO
                                 //if setRM.getKey() is amount
                                 // check if double string or integer string
