@@ -341,7 +341,7 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
         RemittanceMap theRemittanceMap = null;
 
         if (!result.isEmpty()) {
-            throw new CustomBadRequestException("Remittance Map creation failed - there is an existing remittance map");
+            throw new CustomBadRequestException("Mapping creation failed. There is an existing mapping for " + destCountry + ".");
         }
 
         else {
@@ -356,7 +356,7 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                 }
 
                 if (!check) {
-                    throw new CustomBadRequestException("Remittance Map creation failed - all the required fields have not been passed in", missingFields);
+                    throw new CustomBadRequestException("Mapping creation failed. Please fill in all fields.", missingFields);
                 }
 
                 else {
@@ -444,12 +444,12 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                     theRemittanceMap.setCompany(theCompany);
                     theRemittanceMap.setDestinationCountry(destCountry);
                     remittanceMapDAO.save(theRemittanceMap);
-                    outcome = "Remittance map creation is successful";
+                    outcome = "Mapping creation is successful.";
                 }
             }
 
             else {
-                throw new CustomBadRequestException("Remittance Map creation failed - no data has been passed in");
+                throw new CustomBadRequestException("Mapping creation failed. Please fill in all fields.");
             }
         }
 
@@ -588,16 +588,16 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                 theRemittanceMap.setId(id);
 
                 remittanceMapDAO.save(theRemittanceMap);
-                outcome = "Remittance Map update is successful";
+                outcome = "Mapping update is successful.";
             }
             else {
-                throw new CustomBadRequestException("Remittance Map update failed - no data has been passed in");
+                throw new CustomBadRequestException("Mapping update failed. Please pass in the fields to be updated.");
             }
 
         }
 
         else {
-            throw new CustomNotFoundException("There is no existing remittance map for " + destCountry);
+            throw new CustomNotFoundException("Mapping update failed. There is no existing remittance map for " + destCountry + " to be updated.");
         }
 
         outcomeList.add(outcome);
