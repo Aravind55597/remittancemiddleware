@@ -31,7 +31,7 @@ This a Remittance Middleware Programme by G1 Group 6
 			 
 3. Run the backend by running the RemittancemiddlewareApplication which is located at "G2_T6_OOP_Project/backend/remittancemiddleware/src/main/java/RemittancemiddlewareApplication.java". <br />
 
-4. Run the frontend by running the command "npm serve" in the "G2_T6_OOP_Project/frontend" <br /><br />
+4. Run the frontend by running the command "npm serve" in the "G2_T6_OOP_Project/frontend" <br />
 
 5. The setup is now complete and you can now access the application. <br />
 
