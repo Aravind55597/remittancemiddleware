@@ -248,7 +248,9 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                     }
                 }
             } else {
-
+                //TODO
+                //if setRM.getKey() is firstName & lastname
+                // check if in english
                 addFields(party, partySet, transactionSet);
             }
         }
