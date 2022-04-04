@@ -1,6 +1,7 @@
 package com.remittancemiddleware.remittancemiddleware.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pemistahl.lingua.api.Language;
 import com.github.pemistahl.lingua.api.LanguageDetector;
 import com.remittancemiddleware.remittancemiddleware.customexception.CustomBadRequestException;
 import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFoundException;
@@ -40,6 +41,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
     private final SSOTToPaymentGoMapper ssotToPaymentGoMapper;
     private final SandboxAPIService sandboxAPIService;
     private final LanguageDetector languageDetector;
+    private final ObjectMapper oMapper;
 
     public RemittanceTransactionServiceImpl(RemittanceTransactionDAO theRemittanceTransactionDAO, UserDAO theUserDAO,
                                             CompanyDAO theCompanyDAO, RemittanceMapDAO theRemittanceMapDAO,
@@ -48,7 +50,8 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                                             SSOTToFinanceNowMapper ssotToFinanceNowMapper,
                                             SSOTToPaymentGoMapper ssotToPaymentGoMapper,
                                             SandboxAPIService sandboxAPIService,
-                                            LanguageDetector languageDetector) {
+                                            LanguageDetector languageDetector,
+                                            ObjectMapper oMapper) {
         this.remittanceTransactionDAO = theRemittanceTransactionDAO;
         this.userDAO = theUserDAO;
         this.companyDAO = theCompanyDAO;
@@ -59,6 +62,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
         this.ssotToPaymentGoMapper = ssotToPaymentGoMapper;
         this.sandboxAPIService = sandboxAPIService;
         this.languageDetector=languageDetector;
+        this.oMapper=oMapper;
     }
 
     @Override
@@ -132,7 +136,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
         if (result.isPresent()) {
             theRemittanceMap = result.get();
             List<Map<String, String>> transactions = csvProcessorService.processCsv(csvFile);
-            ObjectMapper oMapper = new ObjectMapper();
+//            ObjectMapper oMapper = new ObjectMapper();
             Map<String, String> remittanceMap = oMapper.convertValue(theRemittanceMap, Map.class);
 
             for (Map<String, String> t : transactions) {
@@ -268,6 +272,12 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 //TODO
                 //if setRM.getKey() is firstName & lastname
                 // check if in english
+                if(partySet.getKey()=="firstName" ||partySet.getKey()=="lastName" ){
+                    if(languageDetector.detectLanguageOf(transactionSet.getValue())!= Language.ENGLISH){
+                        output.add("Transaction " + counter + ": error due to " + "names must be in English" );
+                    }
+                }
+
                 addFields(party, partySet, transactionSet);
             }
         }
