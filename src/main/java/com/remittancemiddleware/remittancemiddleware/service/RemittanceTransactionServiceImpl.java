@@ -16,11 +16,14 @@ import com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap.*;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittanceCompanyName;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.TransactionStatus;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.*;
-import com.remittancemiddleware.remittancemiddleware.service.mapper.*;
+import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToEverywhereRemitMapper;
+import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToFinanceNowMapper;
+import com.remittancemiddleware.remittancemiddleware.service.mapper.SSOTToPaymentGoMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -109,7 +112,8 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
     }
 
     @Override
-    public List<String> processTransactions(@PathVariable int userId, @PathVariable String destCountry, @PathVariable String remittanceCompany, MultipartFile csvFile) throws Exception {
+    public List<String> processTransactions(@PathVariable int userId, @PathVariable String destCountry,
+                                            @PathVariable String remittanceCompany, MultipartFile csvFile) throws Exception {
         User theUser = userDAO.getById(userId);
         int companyId = theUser.getCompanyId();
         Company theCompany = companyDAO.getById(companyId);
@@ -185,26 +189,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 theRemittanceTransaction.setRemittanceCompany(RemittanceCompanyName.valueOf(remittanceCompany));
                 SandboxResponse response = null;
 
-                switch (remittanceCompany) {
-                    case "EVERYWHERE_REMIT":
-                        EverywhereRemitData everywhereRemitTransaction = ssotToEverywhereRemitMapper.MapSSOT(theRemittanceTransaction);
-                        response = sandboxAPIService.sendTransactionToSandbox(everywhereRemitTransaction, "everywhereremit");
-                        updateStatus(output, counter, theRemittanceTransaction, response);
-                        break;
-
-                    case "FINANCE_NOW":
-                        FinanceNowData financeNowTransaction = ssotToFinanceNowMapper.MapSSOT(theRemittanceTransaction);
-                        response = sandboxAPIService.sendTransactionToSandbox(financeNowTransaction, "financenow");
-                        updateStatus(output, counter, theRemittanceTransaction, response);
-                        break;
-
-                    case "PAYMENT_GO":
-                        PaymentGoData paymentGoTransaction = ssotToPaymentGoMapper.MapSSOT(theRemittanceTransaction);
-                        response = sandboxAPIService.sendTransactionToSandbox(paymentGoTransaction, "paymentgo");
-                        updateStatus(output, counter, theRemittanceTransaction, response);
-                        break;
-
-                }
+                sendToSandbox(remittanceCompany, output, counter, theRemittanceTransaction);
 
                 counter++;
             }
@@ -216,79 +201,94 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
     }
 
-    private void mapSender(RemittanceMap theRemittanceMap, ObjectMapper oMapper, Map<String, String> sender, Map<String, String> addressS, Map<String, String> bankAccountS, Map<String, String> identificationS, Map.Entry<String, String> set) {
+    private void sendToSandbox(String remittanceCompany, List<String> output, int counter, RemittanceTransaction theRemittanceTransaction) throws IOException {
+        SandboxResponse response;
+        switch (remittanceCompany) {
+            case "EVERYWHERE_REMIT":
+                EverywhereRemitData everywhereRemitTransaction = ssotToEverywhereRemitMapper.MapSSOT(theRemittanceTransaction);
+                response = sandboxAPIService.sendTransactionToSandbox(everywhereRemitTransaction, "everywhereremit");
+                updateStatus(output, counter, theRemittanceTransaction, response);
+                break;
+
+            case "FINANCE_NOW":
+                FinanceNowData financeNowTransaction = ssotToFinanceNowMapper.MapSSOT(theRemittanceTransaction);
+                response = sandboxAPIService.sendTransactionToSandbox(financeNowTransaction, "financenow");
+                updateStatus(output, counter, theRemittanceTransaction, response);
+                break;
+
+            case "PAYMENT_GO":
+                PaymentGoData paymentGoTransaction = ssotToPaymentGoMapper.MapSSOT(theRemittanceTransaction);
+                response = sandboxAPIService.sendTransactionToSandbox(paymentGoTransaction, "paymentgo");
+                updateStatus(output, counter, theRemittanceTransaction, response);
+                break;
+
+        }
+    }
+
+    private void mapParty(ObjectMapper oMapper, Map<String, String> party, Map<String, String> address,
+                          Map<String, String> bankAccountS, Map<String, String> identificationS,
+                          Map.Entry<String, String> transactionSet, PartyMap partyMap, Map.Entry<String, String> partySet) {
+
+        if (!(partySet.getKey().equals("id"))) {
+            if (partySet.getKey().equals("addressMap")) {
+                AddressMap theAddressMap = partyMap.getAddressMap();
+                Map<String, String> addressMap = oMapper.convertValue(theAddressMap, Map.class);
+                for (Map.Entry<String, String> setAS : addressMap.entrySet()) {
+                    if (!(setAS.getKey().equals("id"))) {
+                        addFields(address, setAS, transactionSet);
+                    }
+                }
+            } else if (partySet.getKey().equals("bankAccountMap")) {
+                BankAccountMap theBankAccountMap = partyMap.getBankAccountMap();
+                Map<String, String> bankAccountMap = oMapper.convertValue(theBankAccountMap, Map.class);
+                for (Map.Entry<String, String> setBS : bankAccountMap.entrySet()) {
+                    if (!(setBS.getKey().equals("id"))) {
+                        addFields(bankAccountS, setBS, transactionSet);
+                    }
+                }
+            } else if (partySet.getKey().equals("identificationMap")) {
+                IdentificationMap theIdentificationMap = partyMap.getIdentificationMap();
+                Map<String, String> identificationMap = oMapper.convertValue(theIdentificationMap, Map.class);
+                for (Map.Entry<String, String> setIS : identificationMap.entrySet()) {
+                    if (!(setIS.getKey().equals("id"))) {
+                        addFields(identificationS, setIS, transactionSet);
+                    }
+                }
+            } else {
+
+                addFields(party, partySet, transactionSet);
+            }
+        }
+    }
+    private void mapSender(RemittanceMap theRemittanceMap, ObjectMapper oMapper, Map<String, String> sender,
+                           Map<String, String> addressS, Map<String, String> bankAccountS,
+                           Map<String, String> identificationS, Map.Entry<String, String> set)
+    {
         SenderMap theSenderMap = theRemittanceMap.getSenderMap();
         Map<String, String> senderMap = oMapper.convertValue(theSenderMap, Map.class);
-        for (Map.Entry<String, String> setS : senderMap.entrySet()) {
-            if (!(setS.getKey().equals("id"))) {
-                if (setS.getKey().equals("addressMap")) {
-                    AddressMap theAddressMap = theSenderMap.getAddressMap();
-                    Map<String, String> addressMap = oMapper.convertValue(theAddressMap, Map.class);
-                    for (Map.Entry<String, String> setAS : addressMap.entrySet()) {
-                        if (!(setAS.getKey().equals("id"))) {
-                            addFields(addressS, setAS, set);
-                        }
-                    }
-                } else if (setS.getKey().equals("bankAccountMap")) {
-                    BankAccountMap theBankAccountMap = theSenderMap.getBankAccountMap();
-                    Map<String, String> bankAccountMap = oMapper.convertValue(theBankAccountMap, Map.class);
-                    for (Map.Entry<String, String> setBS : bankAccountMap.entrySet()) {
-                        if (!(setBS.getKey().equals("id"))) {
-                            addFields(bankAccountS, setBS, set);
-                        }
-                    }
-                } else if (setS.getKey().equals("identificationMap")) {
-                    IdentificationMap theIdentificationMap = theSenderMap.getIdentificationMap();
-                    Map<String, String> identificationMap = oMapper.convertValue(theIdentificationMap, Map.class);
-                    for (Map.Entry<String, String> setIS : identificationMap.entrySet()) {
-                        if (!(setIS.getKey().equals("id"))) {
-                            addFields(identificationS, setIS, set);
-                        }
-                    }
-                } else {
-                    addFields(sender, setS, set);
-                }
-            }
+        for (Map.Entry<String, String> senderSet : senderMap.entrySet()) {
+            mapParty(oMapper, sender, addressS, bankAccountS, identificationS, set, (PartyMap) theSenderMap, senderSet);
         }
     }
 
-    private void mapReceiver(RemittanceMap theRemittanceMap, ObjectMapper oMapper, Map<String, String> receiver, Map<String, String> addressR, Map<String, String> bankAccountR, Map<String, String> identificationR, Map.Entry<String, String> set) {
+    private void mapReceiver(RemittanceMap theRemittanceMap, ObjectMapper oMapper, Map<String, String> receiver,
+                             Map<String, String> addressR, Map<String, String> bankAccountR,
+                             Map<String, String> identificationR, Map.Entry<String, String> set)
+    {
         ReceiverMap theReceiverMap = theRemittanceMap.getReceiverMap();
         Map<String, String> receiverMap = oMapper.convertValue(theReceiverMap, Map.class);
-        for (Map.Entry<String, String> setR : receiverMap.entrySet()) {
-            if (!(setR.getKey().equals("id"))) {
-                if (setR.getKey().equals("addressMap")) {
-                    AddressMap theAddressMap = theReceiverMap.getAddressMap();
-                    Map<String, String> addressMap = oMapper.convertValue(theAddressMap, Map.class);
-                    for (Map.Entry<String, String> setAR : addressMap.entrySet()) {
-                        if (!(setAR.getKey().equals("id"))) {
-                            addFields(addressR, setAR, set);
-                        }
-
-                    }
-                } else if (setR.getKey().equals("bankAccountMap")) {
-                    BankAccountMap theBankAccountMap = theReceiverMap.getBankAccountMap();
-                    Map<String, String> bankAccountMap = oMapper.convertValue(theBankAccountMap, Map.class);
-                    for (Map.Entry<String, String> setBR : bankAccountMap.entrySet()) {
-                        if (!(setBR.getKey().equals("id"))) {
-                            addFields(bankAccountR, setBR, set);
-                        }
-                    }
-                } else if (setR.getKey().equals("identificationMap")) {
-                    IdentificationMap theIdentificationMap = theReceiverMap.getIdentificationMap();
-                    Map<String, String> identificationMap = oMapper.convertValue(theIdentificationMap, Map.class);
-                    for (Map.Entry<String, String> setIR : identificationMap.entrySet()) {
-                        if (!(setIR.getKey().equals("id"))) {
-                            addFields(identificationR, setIR, set);
-                        }
-                    }
-                } else {
-                    addFields(receiver, setR, set);
-                }
-            }
+        for (Map.Entry<String, String> receiverSet : receiverMap.entrySet()) {
+            mapParty(oMapper, receiver, addressR, bankAccountR, identificationR, set, (PartyMap) theReceiverMap, receiverSet);
         }
     }
 
+
+
+    private static void addFields(Map<String, String> transactionData, Map.Entry<String, String> setSSOT, Map.Entry<String, String> setCSVTransaction) {
+        if (setCSVTransaction.getKey().equals(setSSOT.getValue())) {
+            transactionData.put(setSSOT.getKey(), setCSVTransaction.getValue());
+        }
+    }
     private void updateStatus(List<String> output, int counter, RemittanceTransaction theRemittanceTransaction, SandboxResponse response) {
         if (response.getCode() == 1) {
             if (response.getMessage().contains("Rejected")) {
@@ -306,11 +306,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
         }
     }
 
-    private static void addFields(Map<String, String> transactionData, Map.Entry<String, String> setSSOT, Map.Entry<String, String> setCSVTransaction) {
-        if (setCSVTransaction.getKey().equals(setSSOT.getValue())) {
-            transactionData.put(setSSOT.getKey(), setCSVTransaction.getValue());
-        }
-    }
+
 
 
 }
