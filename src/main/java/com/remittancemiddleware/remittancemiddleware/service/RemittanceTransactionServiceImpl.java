@@ -1,6 +1,7 @@
 package com.remittancemiddleware.remittancemiddleware.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pemistahl.lingua.api.LanguageDetector;
 import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFoundException;
 import com.remittancemiddleware.remittancemiddleware.dao.CompanyDAO;
 import com.remittancemiddleware.remittancemiddleware.dao.RemittanceMapDAO;
@@ -37,6 +38,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
     private final SSOTToFinanceNowMapper ssotToFinanceNowMapper;
     private final SSOTToPaymentGoMapper ssotToPaymentGoMapper;
     private final SandboxAPIService sandboxAPIService;
+    private final LanguageDetector languageDetector;
 
     public RemittanceTransactionServiceImpl(RemittanceTransactionDAO theRemittanceTransactionDAO, UserDAO theUserDAO,
                                             CompanyDAO theCompanyDAO, RemittanceMapDAO theRemittanceMapDAO,
@@ -44,7 +46,8 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                                             SSOTToEverywhereRemitMapper ssotToEverywhereRemitMapper,
                                             SSOTToFinanceNowMapper ssotToFinanceNowMapper,
                                             SSOTToPaymentGoMapper ssotToPaymentGoMapper,
-                                            SandboxAPIService sandboxAPIService) {
+                                            SandboxAPIService sandboxAPIService,
+                                            LanguageDetector languageDetector) {
         this.remittanceTransactionDAO = theRemittanceTransactionDAO;
         this.userDAO = theUserDAO;
         this.companyDAO = theCompanyDAO;
@@ -54,6 +57,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
         this.ssotToFinanceNowMapper = ssotToFinanceNowMapper;
         this.ssotToPaymentGoMapper = ssotToPaymentGoMapper;
         this.sandboxAPIService = sandboxAPIService;
+        this.languageDetector=languageDetector;
     }
 
     @Override
@@ -201,33 +205,11 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
     }
 
-    private void sendToSandbox(String remittanceCompany, List<String> output, int counter, RemittanceTransaction theRemittanceTransaction) throws IOException {
-        SandboxResponse response;
-        switch (remittanceCompany) {
-            case "EVERYWHERE_REMIT":
-                EverywhereRemitData everywhereRemitTransaction = ssotToEverywhereRemitMapper.MapSSOT(theRemittanceTransaction);
-                response = sandboxAPIService.sendTransactionToSandbox(everywhereRemitTransaction, "everywhereremit");
-                updateStatus(output, counter, theRemittanceTransaction, response);
-                break;
-
-            case "FINANCE_NOW":
-                FinanceNowData financeNowTransaction = ssotToFinanceNowMapper.MapSSOT(theRemittanceTransaction);
-                response = sandboxAPIService.sendTransactionToSandbox(financeNowTransaction, "financenow");
-                updateStatus(output, counter, theRemittanceTransaction, response);
-                break;
-
-            case "PAYMENT_GO":
-                PaymentGoData paymentGoTransaction = ssotToPaymentGoMapper.MapSSOT(theRemittanceTransaction);
-                response = sandboxAPIService.sendTransactionToSandbox(paymentGoTransaction, "paymentgo");
-                updateStatus(output, counter, theRemittanceTransaction, response);
-                break;
-
-        }
-    }
 
     private void mapParty(ObjectMapper oMapper, Map<String, String> party, Map<String, String> address,
                           Map<String, String> bankAccountS, Map<String, String> identificationS,
-                          Map.Entry<String, String> transactionSet, PartyMap partyMap, Map.Entry<String, String> partySet) {
+                          Map.Entry<String, String> transactionSet, PartyMap partyMap, Map.Entry<String, String> partySet)
+    {
 
         if (!(partySet.getKey().equals("id"))) {
             if (partySet.getKey().equals("addressMap")) {
@@ -243,6 +225,9 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 Map<String, String> bankAccountMap = oMapper.convertValue(theBankAccountMap, Map.class);
                 for (Map.Entry<String, String> setBS : bankAccountMap.entrySet()) {
                     if (!(setBS.getKey().equals("id"))) {
+                        //TODO
+                        //if setRM.getKey() is accountNumber
+                        // check if alphanumeric string
                         addFields(bankAccountS, setBS, transactionSet);
                     }
                 }
@@ -251,6 +236,14 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 Map<String, String> identificationMap = oMapper.convertValue(theIdentificationMap, Map.class);
                 for (Map.Entry<String, String> setIS : identificationMap.entrySet()) {
                     if (!(setIS.getKey().equals("id"))) {
+
+                        //TODO
+                        //if setRM.getKey() is issuingCountry
+                        // check if 3 letter ALL caps  string
+
+                        //TODO
+                        //if setRM.getKey() is idNumber
+                        // check if alphanumeric  string
                         addFields(identificationS, setIS, transactionSet);
                     }
                 }
@@ -283,12 +276,35 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
     }
 
 
-
     private static void addFields(Map<String, String> transactionData, Map.Entry<String, String> setSSOT, Map.Entry<String, String> setCSVTransaction) {
         if (setCSVTransaction.getKey().equals(setSSOT.getValue())) {
             transactionData.put(setSSOT.getKey(), setCSVTransaction.getValue());
         }
     }
+    private void sendToSandbox(String remittanceCompany, List<String> output, int counter, RemittanceTransaction theRemittanceTransaction) throws IOException {
+        SandboxResponse response;
+        switch (remittanceCompany) {
+            case "EVERYWHERE_REMIT":
+                EverywhereRemitData everywhereRemitTransaction = ssotToEverywhereRemitMapper.MapSSOT(theRemittanceTransaction);
+                response = sandboxAPIService.sendTransactionToSandbox(everywhereRemitTransaction, "everywhereremit");
+                updateStatus(output, counter, theRemittanceTransaction, response);
+                break;
+
+            case "FINANCE_NOW":
+                FinanceNowData financeNowTransaction = ssotToFinanceNowMapper.MapSSOT(theRemittanceTransaction);
+                response = sandboxAPIService.sendTransactionToSandbox(financeNowTransaction, "financenow");
+                updateStatus(output, counter, theRemittanceTransaction, response);
+                break;
+
+            case "PAYMENT_GO":
+                PaymentGoData paymentGoTransaction = ssotToPaymentGoMapper.MapSSOT(theRemittanceTransaction);
+                response = sandboxAPIService.sendTransactionToSandbox(paymentGoTransaction, "paymentgo");
+                updateStatus(output, counter, theRemittanceTransaction, response);
+                break;
+
+        }
+    }
+
     private void updateStatus(List<String> output, int counter, RemittanceTransaction theRemittanceTransaction, SandboxResponse response) {
         if (response.getCode() == 1) {
             if (response.getMessage().contains("Rejected")) {

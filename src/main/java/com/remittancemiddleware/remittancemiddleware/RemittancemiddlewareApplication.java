@@ -1,5 +1,8 @@
 package com.remittancemiddleware.remittancemiddleware;
 
+import com.github.pemistahl.lingua.api.LanguageDetector;
+import com.github.pemistahl.lingua.api.LanguageDetectorBuilder;
+import com.github.pemistahl.lingua.api.Language;
 import com.remittancemiddleware.remittancemiddleware.dao.*;
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import com.remittancemiddleware.remittancemiddleware.entity.RemittanceCompany;
@@ -27,7 +30,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Properties;
 
-
+import com.github.pemistahl.lingua.api.Language.*;
 //https://www.javaguides.net/2018/11/spring-data-jpa-query-creation-from-method-names.html
 //spring data jpa reference
 @SpringBootApplication
@@ -66,6 +69,10 @@ public class RemittancemiddlewareApplication {
                 registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "PUT", "POST", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*");
             }
         };
+    }
+    @Bean
+    public LanguageDetector languageDetector() {
+        return  LanguageDetectorBuilder.fromLanguages(Language.ENGLISH,Language.CHINESE).build();
     }
 
     // Note: Take note of input parameters, before you test
