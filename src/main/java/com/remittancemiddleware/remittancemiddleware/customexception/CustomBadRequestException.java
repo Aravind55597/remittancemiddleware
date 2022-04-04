@@ -1,6 +1,7 @@
 package com.remittancemiddleware.remittancemiddleware.customexception;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CustomBadRequestException extends CustomException {
@@ -14,6 +15,10 @@ public class CustomBadRequestException extends CustomException {
     }
 
     public CustomBadRequestException(String message, HashMap<String, String> errors) {
+        super(message, errors);
+    }
+
+    public CustomBadRequestException(String message, ArrayList<String> errors) {
         super(message, errors);
     }
 
