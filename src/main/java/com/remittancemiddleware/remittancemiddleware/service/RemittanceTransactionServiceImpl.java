@@ -168,7 +168,9 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                                 //if setRM.getKey() is amount
                                 // check if double string or integer string
                                 try{
+                                    System.out.println("setRM.getKey() = " + setRM.getKey());
                                     if(setRM.getKey().equals("amount")){
+                                        System.out.println("transactionSet.getValue() =" + transactionSet.getValue());
                                         Double.parseDouble(transactionSet.getValue());
 
                                     }
