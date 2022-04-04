@@ -275,6 +275,8 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                         //if setRM.getKey() is issuingCountry
                         // check if 3 letter ALL caps  string
                         boolean invalidUppercase = false;
+                        System.out.println("setIS.getValue() = " + setIS.getValue());
+                        System.out.println("setIS.getKey() =" + setIS.getKey());
                         if(setIS.getValue() != null && setIS.getKey().equals("issuingCountry")){
                             for (int i = 0; i < transactionSet.getValue().length(); i++) {
                                 char ch = setIS.getValue().charAt(i);
@@ -284,8 +286,10 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                                 }
                             }
 
-                            if (transactionSet.getValue().length() != 3 || invalidUppercase){
-                                output.add("Transaction " + counter + ": error due to " + "issuingCountry is not a 3 letter code");
+                            System.out.println("transactionSet.getValue()" +  transactionSet.getValue());
+
+                            if (transactionSet.getValue().trim().length() != 3 || invalidUppercase){
+                                output.add("Transaction " + counter + ": error due to " + setIS.getValue() + " is not a 3 letter code");
                             }
 
 
@@ -294,7 +298,8 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                         //TODO
                         //if setRM.getKey() is idNumber
                         // check if alphanumeric  string
-
+                        System.out.println("transactionSet.getValue() =" + transactionSet.getValue());
+                        System.out.println("setIS.getKey() = " + setIS.getKey());
                         if (transactionSet.getValue() != null && setIS.getKey().equals("idNumber")){
                             if(!isAlphaNumeric(setIS.getValue())){
                                 output.add("Transaction " + counter + ": error due to " + "idNumber is not AlphaNumeric");
@@ -308,6 +313,12 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 //TODO
                 //if setRM.getKey() is firstName & lastname
                 // check if in english
+                System.out.println("partySet.getValue() = " + partySet.getValue());
+                System.out.println("partySet.getKey() = " + partySet.getKey());
+
+                System.out.println("languageDetector.detectLanguageOf(transactionSet.getValue())) = " +languageDetector.detectLanguageOf(transactionSet.getValue()));
+
+
                 if((partySet.getValue() != null && partySet.getKey().equals("firstName"))
                         || (partySet.getValue() != null && partySet.getKey().equals("lastName")) ){
                     if(languageDetector.detectLanguageOf(transactionSet.getValue())!= Language.ENGLISH){
