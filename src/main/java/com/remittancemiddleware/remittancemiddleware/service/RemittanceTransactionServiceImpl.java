@@ -152,9 +152,9 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                         if (!(setRM.getKey().equals("id"))) {
                             if (setRM.getKey().equals("receiverMap")) {
 
-                                mapReceiver(theRemittanceMap, oMapper, receiver, addressR, bankAccountR, identificationR, set);
+                                mapReceiver(theRemittanceMap, oMapper, receiver, addressR, bankAccountR, identificationR, set, counter, output);
                             } else if (setRM.getKey().equals("senderMap")) {
-                                mapSender(theRemittanceMap, oMapper, sender, addressS, bankAccountS, identificationS, set);
+                                mapSender(theRemittanceMap, oMapper, sender, addressS, bankAccountS, identificationS, set, counter, output);
 
                                 // set -> csv hashmap (key is column name , value is value)
                                 // setRM -> remittance map hashmap (key is ssot field name , value is column name)
@@ -214,7 +214,8 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
     private void mapParty(ObjectMapper oMapper, Map<String, String> party, Map<String, String> address,
                           Map<String, String> bankAccountS, Map<String, String> identificationS,
-                          Map.Entry<String, String> transactionSet, PartyMap partyMap, Map.Entry<String, String> partySet)
+                          Map.Entry<String, String> transactionSet, PartyMap partyMap, Map.Entry<String, String> partySet,
+                        int counter , ArrayList output)
     {
 
         if (!(partySet.getKey().equals("id"))) {
@@ -263,23 +264,23 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
     }
     private void mapSender(RemittanceMap theRemittanceMap, ObjectMapper oMapper, Map<String, String> sender,
                            Map<String, String> addressS, Map<String, String> bankAccountS,
-                           Map<String, String> identificationS, Map.Entry<String, String> set)
+                           Map<String, String> identificationS, Map.Entry<String, String> set , int counter , ArrayList output)
     {
         SenderMap theSenderMap = theRemittanceMap.getSenderMap();
         Map<String, String> senderMap = oMapper.convertValue(theSenderMap, Map.class);
         for (Map.Entry<String, String> senderSet : senderMap.entrySet()) {
-            mapParty(oMapper, sender, addressS, bankAccountS, identificationS, set, (PartyMap) theSenderMap, senderSet);
+            mapParty(oMapper, sender, addressS, bankAccountS, identificationS, set, (PartyMap) theSenderMap, senderSet, counter, output);
         }
     }
 
     private void mapReceiver(RemittanceMap theRemittanceMap, ObjectMapper oMapper, Map<String, String> receiver,
                              Map<String, String> addressR, Map<String, String> bankAccountR,
-                             Map<String, String> identificationR, Map.Entry<String, String> set)
+                             Map<String, String> identificationR, Map.Entry<String, String> set , int counter , ArrayList output)
     {
         ReceiverMap theReceiverMap = theRemittanceMap.getReceiverMap();
         Map<String, String> receiverMap = oMapper.convertValue(theReceiverMap, Map.class);
         for (Map.Entry<String, String> receiverSet : receiverMap.entrySet()) {
-            mapParty(oMapper, receiver, addressR, bankAccountR, identificationR, set, (PartyMap) theReceiverMap, receiverSet);
+            mapParty(oMapper, receiver, addressR, bankAccountR, identificationR, set, (PartyMap) theReceiverMap, receiverSet , counter , output);
         }
     }
 
