@@ -36,9 +36,9 @@ This a Remittance Middleware Programme by G1 Group 6
 5. The setup is now complete and you can now access the application. <br />
 
 6. List of Input Validation Scenarios & Steps <br />
-   Scenarios | Steps | Expected Output
+   Scenarios | Steps | Expected Result
    ------------- | ------------- | -------------
-   Issuing country letter code must be within 3 letters | Upload invalid data using "SMU DUMMY DATA (Issuing Country VALIDATION - within 3 CHARACTERS).csv"  | Invalid Input
+   Issuing country letter code must be within 3 letters | Upload invalid data using "SMU DUMMY DATA (Issuing Country VALIDATION - within 3 CHARACTERS).csv" to the DRP  | Invalid Input
    Id Number must be numeric | Upload invalid data using "SMU DUMMY DATA (IdNumber VALIDATION - only NUMERIC).csv" to the DRP  | Invalid Input
    Account number must be numeric | Upload invalid data using "SMU DUMMY DATA (Account Number VALIDATION - only NUMERIC).csv" to the DRP | Invalid Input
    Amount must be double or integer string | Upload invalid data using "SMU DUMMY DATA (Amount VALIDATION - only DOUBLE or INTEGER).csv" to the DRP | Invalid Input
