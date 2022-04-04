@@ -152,37 +152,57 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
 
                 for (Map.Entry<String, String> transactionSet : t.entrySet()) {
-                    for (Map.Entry<String, String> setRM : remittanceMap.entrySet()) {
-                        if (!(setRM.getKey().equals("id"))) {
-                            if (setRM.getKey().equals("receiverMap")) {
+                    for (Map.Entry<String, String> remittanceMapSet : remittanceMap.entrySet()) {
+                        if (!(remittanceMapSet.getKey().equals("id"))) {
+                            if (remittanceMapSet.getKey().equals("receiverMap")) {
 
                                 mapReceiver(theRemittanceMap, oMapper, receiver, addressR, bankAccountR, identificationR, transactionSet, transactionNumber, output);
-                            } else if (setRM.getKey().equals("senderMap")) {
+                            } else if (remittanceMapSet.getKey().equals("senderMap")) {
                                 mapSender(theRemittanceMap, oMapper, sender, addressS, bankAccountS, identificationS, transactionSet, transactionNumber, output);
 
                                 // transactionSet -> csv hashmap (key is column name , value is value)
                                 // setRM -> remittance map hashmap (key is ssot field name , value is column name)
-                            } else if (transactionSet.getValue() != null && setRM.getKey().equals("amount")
-                                    && transactionSet.getKey().equals(setRM.getValue())) {
-                                System.out.println("testest");
-                                //TODO
-                                //if setRM.getKey() is amount
-                                // check if double string or integer string
-                                try{
-                                    System.out.println("setRM.getKey() = " + setRM.getKey());
-                                    if(setRM.getKey().equals("amount")){
-                                        System.out.println("transactionSet.getValue() =" + transactionSet.getValue());
-                                        double amt = Double.parseDouble(transactionSet.getValue());
-                                        int intamt = Integer.parseInt(transactionSet.getValue());
+                            }
+                            else{
 
+
+                                if (transactionSet.getValue() != null && remittanceMapSet.getKey().equals("amount")
+                                            && transactionSet.getKey().equals(remittanceMapSet.getValue())) {
+                                        System.out.println("testest");
+                                        //TODO
+                                        //if setRM.getKey() is amount
+                                        // check if double string or integer string
+                                        try{
+                                            System.out.println("setRM.getKey() = " + remittanceMapSet.getKey());
+                                            if(remittanceMapSet.getKey().equals("amount")){
+                                                System.out.println("transactionSet.getValue() =" + transactionSet.getValue());
+                                                double amt = Double.parseDouble(transactionSet.getValue());
+                                                int intamt = Integer.parseInt(transactionSet.getValue());
+                                                transaction.put(remittanceMapSet.getKey(), transactionSet.getValue());
+                                            }
+                                        }
+                                        catch(NumberFormatException ex){
+                                            output.add("Transaction " + transactionNumber + ": error due to " + remittanceMapSet.getValue() + " is not a formatted number");
+                                        }
+
+
+                                }
+                                else{
+                                    //get remittancemapset key & value
+                                    //retreive
+
+                                    if( transactionSet.getKey().equals(remittanceMapSet.getValue())){
+                                        transaction.put(remittanceMapSet.getKey(), transactionSet.getValue());
                                     }
                                 }
-                                catch(NumberFormatException ex){
-                                    output.add("Transaction " + transactionNumber + ": error due to " + setRM.getValue() + " is not a formatted number");
-                                }
 
-                                transaction.put(setRM.getKey(), transactionSet.getValue());
+
+
                             }
+
+
+
+
                         }
 
                     }
