@@ -168,6 +168,16 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
                     }
                 }
+                //TODO
+                //check if output list is empty . If it is not , must be a bad request
+
+
+
+
+
+
+
+
 
                 RemittanceTransaction theRemittanceTransaction = oMapper.convertValue(transaction, RemittanceTransaction.class);
                 Receiver theReceiver = oMapper.convertValue(receiver, Receiver.class);
@@ -192,6 +202,10 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 theRemittanceTransaction.setCompany(theCompany);
                 theRemittanceTransaction.setRemittanceCompany(RemittanceCompanyName.valueOf(remittanceCompany));
                 SandboxResponse response = null;
+
+
+
+
 
                 sendToSandbox(remittanceCompany, output, counter, theRemittanceTransaction);
 
