@@ -132,7 +132,6 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
         RemittanceMap theRemittanceMap = null;
 
-
         if (result.isPresent()) {
             theRemittanceMap = result.get();
             List<Map<String, String>> transactions = csvProcessorService.processCsv(csvFile);
@@ -150,7 +149,6 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 Map<String, String> identificationR = new HashMap<>();
                 Map<String, String> identificationS = new HashMap<>();
 
-
                 for (Map.Entry<String, String> transactionSet : t.entrySet()) {
                     for (Map.Entry<String, String> remittanceMapSet : remittanceMap.entrySet()) {
                         if (!(remittanceMapSet.getKey().equals("id"))) {
@@ -160,20 +158,14 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                             } else if (remittanceMapSet.getKey().equals("senderMap")) {
                                 mapSender(theRemittanceMap, oMapper, sender, addressS, bankAccountS, identificationS, transactionSet, transactionNumber, output);
 
-                                // transactionSet -> csv hashmap (key is column name , value is value)
-                                // setRM -> remittance map hashmap (key is ssot field name , value is column name)
                             }
                             else{
 
-
                                 if (transactionSet.getValue() != null && remittanceMapSet.getKey().equals("amount")
                                             && transactionSet.getKey().equals(remittanceMapSet.getValue())) {
-                                        System.out.println("testest");
-                                        //TODO
-                                        //if setRM.getKey() is amount
+
                                         // check if double string or integer string
                                         try{
-                                            System.out.println("setRM.getKey() = " + remittanceMapSet.getKey());
                                             if(remittanceMapSet.getKey().equals("amount")){
                                                 System.out.println("transactionSet.getValue() =" + transactionSet.getValue());
                                                 double amt = Double.parseDouble(transactionSet.getValue());
@@ -184,24 +176,15 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                                         catch(NumberFormatException ex){
                                             output.add("Transaction " + transactionNumber + ": error due to " + remittanceMapSet.getValue() + " is not a formatted number");
                                         }
-
-
                                 }
                                 else{
-                                    //get remittancemapset key & value
-                                    //retreive
 
                                     if( transactionSet.getKey().equals(remittanceMapSet.getValue())){
                                         transaction.put(remittanceMapSet.getKey(), transactionSet.getValue());
                                     }
                                 }
 
-
-
                             }
-
-
-
 
                         }
 
@@ -234,13 +217,10 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 theRemittanceTransaction.setRemittanceCompany(RemittanceCompanyName.valueOf(remittanceCompany));
                 SandboxResponse response = null;
 
-                //TODO
                 //check if output list is empty . If it is not , must be a bad request
                 if(output.size()!=0){
                     throw new CustomBadRequestException("Formatting errors",output);
                 }
-
-
 
                 sendToSandbox(remittanceCompany, output, transactionNumber, theRemittanceTransaction);
 
@@ -284,12 +264,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
                         if (bankAccountMapSet.getValue() != null && bankAccountMapSet.getKey().equals("accountNumber")
                                 && transactionSet.getKey().equals(bankAccountMapSet.getValue())){
-//                            System.out.println("-----------------------");
-//                            System.out.println("bankAccountMapSet.getValue() = " + bankAccountMapSet.getValue());
-//                            System.out.println("bankAccountMapSet.getKey() =" + bankAccountMapSet.getKey());
-//                            System.out.println("transactionSet.getKey() =" + transactionSet.getKey());
-//                            System.out.println("transactionSet.getValue() = "+ transactionSet.getValue());
-//                            System.out.println("-----------------------");
+
 
                             if(bankAccountMapSet.getValue() != null && !isAlphaNumeric(transactionSet.getValue())){
                                 output.add("Transaction " + counter + ": error due to " + "accountNumber is not AlphaNumeric");
@@ -304,16 +279,12 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 for (Map.Entry<String, String> identificationMapSet : identificationMap.entrySet()) {
                     if (!(identificationMapSet.getKey().equals("id"))) {
 
-                        //TODO
-
-                        //if setRM.getKey() is issuingCountry
                         // check if 3 letter ALL caps  string
                         boolean invalidUppercase = false;
 
                         if(identificationMapSet.getValue() != null && identificationMapSet.getKey().equals("issuingCountry")
                                 && transactionSet.getKey().equals(identificationMapSet.getValue()) ){
-//                            System.out.println("identificationMapSet.getValue() = " + identificationMapSet.getValue());
-//                            System.out.println("identificationMapSet.getKey() =" + identificationMapSet.getKey());
+
                             for (int i = 0; i < transactionSet.getValue().length(); i++) {
                                 char ch = transactionSet.getValue().charAt(i);
                                 if (!Character.isUpperCase(ch)){
@@ -321,30 +292,17 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                                     break;
                                 }
                             }
-//                            System.out.println("-------------------------------");
-//                            System.out.println("transactionSet.getKey() =" + transactionSet.getKey());
-//                            System.out.println("transactionSet.getValue()" +  transactionSet.getValue());
-//                            System.out.println(invalidUppercase);
-//                            System.out.println(transactionSet.getValue().trim().length() != 3);
-//                            System.out.println("-------------------------------");
 
                             if (transactionSet.getValue().trim().length() != 3 || invalidUppercase){
                                 output.add("Transaction " + counter + ": error due to " + identificationMapSet.getValue() + " is not a 3 letter code");
                             }
 
-
                         }
 
-                        //TODO
-                        //if setRM.getKey() is idNumber
                         // check if alphanumeric  string
-
                         if (identificationMapSet.getValue() != null && identificationMapSet.getKey().equals("idNumber")
                                 && transactionSet.getKey().equals(identificationMapSet.getValue())){
 
-//                            System.out.println("transactionSet.getValue() =" + transactionSet.getValue());
-//                            System.out.println("identificationMapSet.getKey() = " + identificationMapSet.getKey());
-//                            System.out.println("identificationMapSet.getValue() = " +identificationMapSet.getValue());
                             if(!isAlphaNumeric(transactionSet.getValue())){
                                 output.add("Transaction " + counter + ": error due to " + "idNumber is not AlphaNumeric");
                             }
@@ -354,12 +312,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                     }
                 }
             } else {
-                //TODO
-                //if setRM.getKey() is firstName & lastname
                 // check if in english
-
-
-
                 if((partyMapSet.getValue() != null && partyMapSet.getKey().equals("firstName")
                         && transactionSet.getKey().equals(partyMapSet.getValue())) ||
 
@@ -367,24 +320,6 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                                 && partyMapSet.getKey().equals("lastName")
                                 && transactionSet.getKey().equals(partyMapSet.getValue())) )
                 {
-//                    System.out.println("partyMapSet.getValue() = " + partyMapSet.getValue());
-//                    System.out.println("partyMapSet.getKey() = " + partyMapSet.getKey());
-
-                    System.out.println("----------------------");
-                    System.out.println("partyMapSet.getValue()=" + partyMapSet.getValue());
-                    System.out.println("partyMapSet.getKey() ="+ partyMapSet.getKey());
-                    System.out.println("transactionSet.getKey()=" + transactionSet.getKey());
-                    System.out.println("transactionSet.getValue() =" + transactionSet.getValue());
-                    System.out.println("languageDetector.detectLanguageOf(transactionSet.getValue())) = " +languageDetector.detectLanguageOf(transactionSet.getValue()));
-
-                    System.out.println("----------------------");
-
-                    System.out.println();
-
-                    String var =languageDetector.detectLanguageOf(transactionSet.getValue()).toString();
-                    System.out.println(var);
-                    System.out.println(Language.ENGLISH.toString());
-
 
                     if(!languageDetector.detectLanguageOf(transactionSet.getValue()).toString().equals(Language.ENGLISH.toString())){
                         output.add("Transaction " + counter + ": error due to " + "names must be in English" );

@@ -678,18 +678,13 @@ public class RemittancemiddlewareApplication {
                     System.out.println("Test data ready");
                 }
 
-                //This while loop to get all the user data in the user table
-//				while(resultSet.next()){
-//					String firstName = resultSet.getString("first_name");
-//					System.out.println(firstName);
-//				}
+
 
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 // database "remittance" doesn't exist
 //				if (e.getMessage().equals("Unknown database 'remittance'") ){
-//					cant create schema from here. Once you delete the schema on mySQLworkbench, you can't run the application
-//					connection.createStatement().execute("CREATE SCHEMA `remittance` ;");
+
 //				}
             }
 
@@ -698,9 +693,6 @@ public class RemittancemiddlewareApplication {
     }
 
 
-    //	@Bean
-    //	public mapperService mapperService(){
-    //		return new mapperServiceImpl();
-    //	}
+
 
 }
