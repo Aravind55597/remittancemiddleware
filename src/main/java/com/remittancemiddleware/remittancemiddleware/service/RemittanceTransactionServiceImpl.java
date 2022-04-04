@@ -265,6 +265,13 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                         //TODO
                         //if setRM.getKey() is idNumber
                         // check if alphanumeric  string
+
+                        if (setIS.getKey().equals("idNumber")){
+                            if(!isAlphaNumeric(setIS.getValue())){
+                                output.add("Transaction " + counter + ": error due to " + "idNumber is not AlphaNumeric");
+                            }
+                        }
+
                         addFields(identificationS, setIS, transactionSet);
                     }
                 }
@@ -349,6 +356,10 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
         } else {
             output.add("Transaction " + counter + ": error due to " + response.getError());
         }
+    }
+
+    private boolean isAlphaNumeric(String s) {
+        return s != null && s.matches("^[a-zA-Z0-9]*$");
     }
 
 
