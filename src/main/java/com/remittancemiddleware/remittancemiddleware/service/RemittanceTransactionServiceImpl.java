@@ -342,20 +342,19 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                         (partySet.getValue() != null
                                 && partySet.getKey().equals("lastName")
                                 && transactionSet.getKey().equals(partySet.getValue())) )
-
-
                 {
 //                    System.out.println("partySet.getValue() = " + partySet.getValue());
 //                    System.out.println("partySet.getKey() = " + partySet.getKey());
 
 //                    System.out.println("languageDetector.detectLanguageOf(transactionSet.getValue())) = " +languageDetector.detectLanguageOf(transactionSet.getValue()));
                     System.out.println("----------------------");
-                    System.out.println(partySet.getValue());
-                    System.out.println(partySet.getKey());
-                    System.out.println(transactionSet.getKey());
+                    System.out.println("partySet.getValue()=" + partySet.getValue());
+                    System.out.println("partySet.getKey() ="+ partySet.getKey());
+                    System.out.println("transactionSet.getKey()=" + transactionSet.getKey());
+                    System.out.println("transactionSet.getValue() =" + transactionSet.getValue());
+
                     System.out.println("----------------------");
 
-                    System.out.println();
                     System.out.println();
 
                     String var = Language.ENGLISH.toString();
