@@ -272,16 +272,17 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                     if (!(setIdentification.getKey().equals("id"))) {
 
                         //TODO
-                        
+
                         //if setRM.getKey() is issuingCountry
                         // check if 3 letter ALL caps  string
                         boolean invalidUppercase = false;
 
-                        if(setIdentification.getValue() != null && setIdentification.getKey().equals("issuingCountry") && transactionSet.getKey().equals(setIdentification.getValue()) ){
+                        if(setIdentification.getValue() != null && setIdentification.getKey().equals("issuingCountry")
+                                && transactionSet.getKey().equals(setIdentification.getValue()) ){
                             System.out.println("setIdentification.getValue() = " + setIdentification.getValue());
                             System.out.println("setIdentification.getKey() =" + setIdentification.getKey());
                             for (int i = 0; i < transactionSet.getValue().length(); i++) {
-                                char ch = setIdentification.getValue().charAt(i);
+                                char ch = transactionSet.getValue().charAt(i);
                                 if (!Character.isUpperCase(ch)){
                                     invalidUppercase = true;
                                     break;
@@ -305,7 +306,8 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                         //if setRM.getKey() is idNumber
                         // check if alphanumeric  string
 
-                        if (transactionSet.getValue() != null && setIdentification.getKey().equals("idNumber")){
+                        if (setIdentification.getValue() != null && setIdentification.getKey().equals("idNumber")
+                                && transactionSet.getKey().equals(setIdentification.getValue())){
 //                            System.out.println("transactionSet.getValue() =" + transactionSet.getValue());
 //                            System.out.println("setIdentification.getKey() = " + setIdentification.getKey());
                             if(!isAlphaNumeric(setIdentification.getValue())){
@@ -322,8 +324,17 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 // check if in english
 
 
-                if((partySet.getValue() != null && partySet.getKey().equals("firstName"))
-                        || (partySet.getValue() != null && partySet.getKey().equals("lastName")) ){
+
+                if((partySet.getValue() != null && partySet.getKey().equals("firstName") && transactionSet.getKey().equals(partySet.getValue())) ||
+
+
+
+                        (partySet.getValue() != null
+                                && partySet.getKey().equals("lastName")
+                                && transactionSet.getKey().equals(partySet.getValue() )
+                       )
+                )
+                {
 //                    System.out.println("partySet.getValue() = " + partySet.getValue());
 //                    System.out.println("partySet.getKey() = " + partySet.getKey());
 
