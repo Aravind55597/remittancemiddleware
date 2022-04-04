@@ -329,11 +329,13 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
 
     @Override
     @Transactional
-    public String save(int userId, String destCountry, Map<String,String> mappingDetails) {
+    public List<String> save(int userId, String destCountry, Map<String,String> mappingDetails) {
         User theUser = userDAO.getById(userId);
         int companyId = theUser.getCompanyId();
         Company theCompany = companyDAO.getById(companyId);
         String outcome = "";
+        List<String> outcomeList = new ArrayList<>();
+        ArrayList<String> missingFields = new ArrayList<>();
 
         Optional<RemittanceMap> result = Optional.ofNullable(remittanceMapDAO.findByCompanyAndDestinationCountry(theCompany, destCountry));
         RemittanceMap theRemittanceMap = null;
@@ -349,11 +351,15 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                 for (String s: requiredFields) {
                     if (!mappingDetails.containsKey(s)) {
                         check = false;
-                        throw new CustomBadRequestException("Remittance Map creation failed - all the required fields have not been passed in");
+                        missingFields.add(s);
                     }
                 }
 
-                if (check) {
+                if (!check) {
+                    throw new CustomBadRequestException("Remittance Map creation failed - all the required fields have not been passed in", missingFields);
+                }
+
+                else {
                     ObjectMapper oMapper = new ObjectMapper();
                     theRemittanceMap = new RemittanceMap();
                     ReceiverMap theReceiverMap = new ReceiverMap();
@@ -447,17 +453,19 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
             }
         }
 
+        outcomeList.add(outcome);
 
-        return outcome;
+        return outcomeList;
     }
 
     @Override
     @Transactional
-    public String update(int userId, String destCountry, Map<String,String> mappingDetails) {
+    public List<String> update(int userId, String destCountry, Map<String,String> mappingDetails) {
         User theUser = userDAO.getById(userId);
         int companyId = theUser.getCompanyId();
         Company theCompany = companyDAO.getById(companyId);
         String outcome = "";
+        List<String> outcomeList = new ArrayList<>();
         ObjectMapper oMapper = new ObjectMapper();
 
         Optional<RemittanceMap> result = Optional.ofNullable(remittanceMapDAO.findByCompanyAndDestinationCountry(theCompany, destCountry));
@@ -592,8 +600,9 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
             throw new CustomNotFoundException("There is no existing remittance map for " + destCountry);
         }
 
+        outcomeList.add(outcome);
 
-        return outcome;
+        return outcomeList;
     }
 
     private static void addValuesToMap(Map<String, String> mappingDetails, Map<String, String> SSOTMap, Set<String> keysSSOTMap, String s) {

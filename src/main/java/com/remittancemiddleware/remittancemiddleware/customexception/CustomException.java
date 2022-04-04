@@ -4,6 +4,7 @@ package com.remittancemiddleware.remittancemiddleware.customexception;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Getter
@@ -11,6 +12,7 @@ import java.util.HashMap;
 public abstract class CustomException extends RuntimeException{
 
     private HashMap<String,String> errors;
+    private ArrayList<String> errorsA;
 
     public CustomException(String message) {
         super(message);
@@ -23,6 +25,11 @@ public abstract class CustomException extends RuntimeException{
     public CustomException(String message, HashMap<String, String> errors) {
         super(message);
         this.errors = errors;
+    }
+
+    public CustomException(String message, ArrayList<String> errorsA) {
+        super(message);
+        this.errorsA = errorsA;
     }
 
     public CustomException(String message, Throwable cause, HashMap<String, String> errors) {

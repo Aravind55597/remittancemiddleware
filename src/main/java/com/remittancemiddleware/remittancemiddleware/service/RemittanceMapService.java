@@ -9,7 +9,7 @@ import java.util.Map;
 public interface RemittanceMapService {
     public Map<String,String> findMapByCountry(int theId, String destCountry);
     public List<String> getRequiredFields(String destCountry);
-    public String save(int theId, String destCountry, Map<String,String> theRemittanceMap);
-    public String update(int theId, String destCountry, Map<String,String> theRemittanceMap);
+    public List<String> save(int theId, String destCountry, Map<String,String> theRemittanceMap);
+    public List<String> update(int theId, String destCountry, Map<String,String> theRemittanceMap);
 
 }
