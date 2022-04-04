@@ -236,49 +236,49 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
     private void mapParty(ObjectMapper oMapper, Map<String, String> party, Map<String, String> address,
                           Map<String, String> bankAccountS, Map<String, String> identificationS,
-                          Map.Entry<String, String> transactionSet, PartyMap partyMap, Map.Entry<String, String> partySet,
+                          Map.Entry<String, String> transactionSet, PartyMap partyMap, Map.Entry<String, String> partyMapSet,
                         int counter , ArrayList output)
     {
 
-        if (!(partySet.getKey().equals("id"))) {
-            if (partySet.getKey().equals("addressMap")) {
+        if (!(partyMapSet.getKey().equals("id"))) {
+            if (partyMapSet.getKey().equals("addressMap")) {
                 AddressMap theAddressMap = partyMap.getAddressMap();
                 Map<String, String> addressMap = oMapper.convertValue(theAddressMap, Map.class);
-                for (Map.Entry<String, String> setAS : addressMap.entrySet()) {
-                    if (!(setAS.getKey().equals("id"))) {
-                        addFields(address, setAS, transactionSet);
+                for (Map.Entry<String, String> addressMapSet : addressMap.entrySet()) {
+                    if (!(addressMapSet.getKey().equals("id"))) {
+                        addFields(address, addressMapSet, transactionSet);
                     }
                 }
-            } else if (partySet.getKey().equals("bankAccountMap")) {
+            } else if (partyMapSet.getKey().equals("bankAccountMap")) {
                 BankAccountMap theBankAccountMap = partyMap.getBankAccountMap();
                 Map<String, String> bankAccountMap = oMapper.convertValue(theBankAccountMap, Map.class);
-                for (Map.Entry<String, String> setBankMap : bankAccountMap.entrySet()) {
-                    if (!(setBankMap.getKey().equals("id"))) {
+                for (Map.Entry<String, String> bankAccountMapSet : bankAccountMap.entrySet()) {
+                    if (!(bankAccountMapSet.getKey().equals("id"))) {
                         //TODO
                         //if setRM.getKey() is accountNumber
                         // check if alphanumeric string
 
-                        if (setBankMap.getValue() != null && setBankMap.getKey().equals("accountNumber")
-                                && transactionSet.getKey().equals(setBankMap.getValue())){
-                            System.out.println("-----------------------");
-                            System.out.println("setBankMap.getValue() = " + setBankMap.getValue());
-                            System.out.println("setBankMap.getKey() =" + setBankMap.getKey());
-                            System.out.println("transactionSet.getKey() =" + transactionSet.getKey());
-                            System.out.println("transactionSet.getValue() = "+ transactionSet.getValue());
-                            System.out.println("-----------------------");
+                        if (bankAccountMapSet.getValue() != null && bankAccountMapSet.getKey().equals("accountNumber")
+                                && transactionSet.getKey().equals(bankAccountMapSet.getValue())){
+//                            System.out.println("-----------------------");
+//                            System.out.println("bankAccountMapSet.getValue() = " + bankAccountMapSet.getValue());
+//                            System.out.println("bankAccountMapSet.getKey() =" + bankAccountMapSet.getKey());
+//                            System.out.println("transactionSet.getKey() =" + transactionSet.getKey());
+//                            System.out.println("transactionSet.getValue() = "+ transactionSet.getValue());
+//                            System.out.println("-----------------------");
 
-                            if(setBankMap.getValue() != null && !isAlphaNumeric(transactionSet.getValue())){
+                            if(bankAccountMapSet.getValue() != null && !isAlphaNumeric(transactionSet.getValue())){
                                 output.add("Transaction " + counter + ": error due to " + "accountNumber is not AlphaNumeric");
                             }
                         }
-                        addFields(bankAccountS, setBankMap, transactionSet);
+                        addFields(bankAccountS, bankAccountMapSet, transactionSet);
                     }
                 }
-            } else if (partySet.getKey().equals("identificationMap")) {
+            } else if (partyMapSet.getKey().equals("identificationMap")) {
                 IdentificationMap theIdentificationMap = partyMap.getIdentificationMap();
                 Map<String, String> identificationMap = oMapper.convertValue(theIdentificationMap, Map.class);
-                for (Map.Entry<String, String> setIdentification : identificationMap.entrySet()) {
-                    if (!(setIdentification.getKey().equals("id"))) {
+                for (Map.Entry<String, String> identificationMapSet : identificationMap.entrySet()) {
+                    if (!(identificationMapSet.getKey().equals("id"))) {
 
                         //TODO
 
@@ -286,10 +286,10 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                         // check if 3 letter ALL caps  string
                         boolean invalidUppercase = false;
 
-                        if(setIdentification.getValue() != null && setIdentification.getKey().equals("issuingCountry")
-                                && transactionSet.getKey().equals(setIdentification.getValue()) ){
-//                            System.out.println("setIdentification.getValue() = " + setIdentification.getValue());
-//                            System.out.println("setIdentification.getKey() =" + setIdentification.getKey());
+                        if(identificationMapSet.getValue() != null && identificationMapSet.getKey().equals("issuingCountry")
+                                && transactionSet.getKey().equals(identificationMapSet.getValue()) ){
+//                            System.out.println("identificationMapSet.getValue() = " + identificationMapSet.getValue());
+//                            System.out.println("identificationMapSet.getKey() =" + identificationMapSet.getKey());
                             for (int i = 0; i < transactionSet.getValue().length(); i++) {
                                 char ch = transactionSet.getValue().charAt(i);
                                 if (!Character.isUpperCase(ch)){
@@ -305,7 +305,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 //                            System.out.println("-------------------------------");
 
                             if (transactionSet.getValue().trim().length() != 3 || invalidUppercase){
-                                output.add("Transaction " + counter + ": error due to " + setIdentification.getValue() + " is not a 3 letter code");
+                                output.add("Transaction " + counter + ": error due to " + identificationMapSet.getValue() + " is not a 3 letter code");
                             }
 
 
@@ -315,18 +315,18 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                         //if setRM.getKey() is idNumber
                         // check if alphanumeric  string
 
-                        if (setIdentification.getValue() != null && setIdentification.getKey().equals("idNumber")
-                                && transactionSet.getKey().equals(setIdentification.getValue())){
+                        if (identificationMapSet.getValue() != null && identificationMapSet.getKey().equals("idNumber")
+                                && transactionSet.getKey().equals(identificationMapSet.getValue())){
 
 //                            System.out.println("transactionSet.getValue() =" + transactionSet.getValue());
-//                            System.out.println("setIdentification.getKey() = " + setIdentification.getKey());
-//                            System.out.println("setIdentification.getValue() = " +setIdentification.getValue());
-                            if(!isAlphaNumeric(setIdentification.getValue())){
+//                            System.out.println("identificationMapSet.getKey() = " + identificationMapSet.getKey());
+//                            System.out.println("identificationMapSet.getValue() = " +identificationMapSet.getValue());
+                            if(!isAlphaNumeric(identificationMapSet.getValue())){
                                 output.add("Transaction " + counter + ": error due to " + "idNumber is not AlphaNumeric");
                             }
                         }
 
-                        addFields(identificationS, setIdentification, transactionSet);
+                        addFields(identificationS, identificationMapSet, transactionSet);
                     }
                 }
             } else {
@@ -336,19 +336,19 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
 
 
-                if((partySet.getValue() != null && partySet.getKey().equals("firstName")
-                        && transactionSet.getKey().equals(partySet.getValue())) ||
+                if((partyMapSet.getValue() != null && partyMapSet.getKey().equals("firstName")
+                        && transactionSet.getKey().equals(partyMapSet.getValue())) ||
 
-                        (partySet.getValue() != null
-                                && partySet.getKey().equals("lastName")
-                                && transactionSet.getKey().equals(partySet.getValue())) )
+                        (partyMapSet.getValue() != null
+                                && partyMapSet.getKey().equals("lastName")
+                                && transactionSet.getKey().equals(partyMapSet.getValue())) )
                 {
-//                    System.out.println("partySet.getValue() = " + partySet.getValue());
-//                    System.out.println("partySet.getKey() = " + partySet.getKey());
+//                    System.out.println("partyMapSet.getValue() = " + partyMapSet.getValue());
+//                    System.out.println("partyMapSet.getKey() = " + partyMapSet.getKey());
 
                     System.out.println("----------------------");
-                    System.out.println("partySet.getValue()=" + partySet.getValue());
-                    System.out.println("partySet.getKey() ="+ partySet.getKey());
+                    System.out.println("partyMapSet.getValue()=" + partyMapSet.getValue());
+                    System.out.println("partyMapSet.getKey() ="+ partyMapSet.getKey());
                     System.out.println("transactionSet.getKey()=" + transactionSet.getKey());
                     System.out.println("transactionSet.getValue() =" + transactionSet.getValue());
                     System.out.println("languageDetector.detectLanguageOf(transactionSet.getValue())) = " +languageDetector.detectLanguageOf(transactionSet.getValue()));
@@ -359,13 +359,15 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
                     String var =languageDetector.detectLanguageOf(transactionSet.getValue()).toString();
                     System.out.println(var);
+                    System.out.println(Language.ENGLISH.toString());
+
 
                     if(!languageDetector.detectLanguageOf(transactionSet.getValue()).toString().equals(Language.ENGLISH.toString())){
                         output.add("Transaction " + counter + ": error due to " + "names must be in English" );
                     }
                 }
 
-                addFields(party, partySet, transactionSet);
+                addFields(party, partyMapSet, transactionSet);
             }
         }
     }
