@@ -325,7 +325,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 //                            System.out.println("transactionSet.getValue() =" + transactionSet.getValue());
 //                            System.out.println("identificationMapSet.getKey() = " + identificationMapSet.getKey());
 //                            System.out.println("identificationMapSet.getValue() = " +identificationMapSet.getValue());
-                            if(!isAlphaNumeric(identificationMapSet.getValue())){
+                            if(!isAlphaNumeric(transactionSet.getValue())){
                                 output.add("Transaction " + counter + ": error due to " + "idNumber is not AlphaNumeric");
                             }
                         }
@@ -445,7 +445,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
     }
 
     private boolean isAlphaNumeric(String s) {
-        return s != null && s.matches("^[a-zA-Z0-9]*$");
+        return s.matches("^[a-zA-Z0-9]*$");
     }
 
 
