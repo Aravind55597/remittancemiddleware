@@ -151,25 +151,25 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 Map<String, String> identificationS = new HashMap<>();
                 int counter = 1;
 
-                for (Map.Entry<String, String> set : t.entrySet()) {
+                for (Map.Entry<String, String> transactionSet : t.entrySet()) {
                     for (Map.Entry<String, String> setRM : remittanceMap.entrySet()) {
                         if (!(setRM.getKey().equals("id"))) {
                             if (setRM.getKey().equals("receiverMap")) {
 
-                                mapReceiver(theRemittanceMap, oMapper, receiver, addressR, bankAccountR, identificationR, set, counter, output);
+                                mapReceiver(theRemittanceMap, oMapper, receiver, addressR, bankAccountR, identificationR, transactionSet, counter, output);
                             } else if (setRM.getKey().equals("senderMap")) {
-                                mapSender(theRemittanceMap, oMapper, sender, addressS, bankAccountS, identificationS, set, counter, output);
+                                mapSender(theRemittanceMap, oMapper, sender, addressS, bankAccountS, identificationS, transactionSet, counter, output);
 
-                                // set -> csv hashmap (key is column name , value is value)
+                                // transactionSet -> csv hashmap (key is column name , value is value)
                                 // setRM -> remittance map hashmap (key is ssot field name , value is column name)
-                            } else if (set.getKey().equals(setRM.getValue())) {
+                            } else if (transactionSet.getKey().equals(setRM.getValue())) {
 
                                 //TODO
                                 //if setRM.getKey() is amount
                                 // check if double string or integer string
                                 try{
-                                    if(setRM.getKey()=="amount"){
-                                        Double.parseDouble(set.getValue());
+                                    if(setRM.getKey().equals("amount")){
+                                        Double.parseDouble(transactionSet.getValue());
 
                                     }
                                 }
@@ -177,7 +177,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                                     output.add("Transaction " + counter + ": error due to " + setRM.getValue() + " is not a formatted number");
                                 }
 
-                                transaction.put(setRM.getKey(), set.getValue());
+                                transaction.put(setRM.getKey(), transactionSet.getValue());
                             }
                         }
 
@@ -244,17 +244,17 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
             } else if (partySet.getKey().equals("bankAccountMap")) {
                 BankAccountMap theBankAccountMap = partyMap.getBankAccountMap();
                 Map<String, String> bankAccountMap = oMapper.convertValue(theBankAccountMap, Map.class);
-                for (Map.Entry<String, String> setBS : bankAccountMap.entrySet()) {
-                    if (!(setBS.getKey().equals("id"))) {
+                for (Map.Entry<String, String> setBankMap : bankAccountMap.entrySet()) {
+                    if (!(setBankMap.getKey().equals("id"))) {
                         //TODO
                         //if setRM.getKey() is accountNumber
                         // check if alphanumeric string
-                        if (setBS.getKey().equals("accountNumber")){
-                            if(!isAlphaNumeric(setBS.getValue())){
+                        if (setBankMap.getKey().equals("accountNumber")){
+                            if(setBankMap.getValue() != null && !isAlphaNumeric(transactionSet.getValue())){
                                 output.add("Transaction " + counter + ": error due to " + "accountNumber is not AlphaNumeric");
                             }
                         }
-                        addFields(bankAccountS, setBS, transactionSet);
+                        addFields(bankAccountS, setBankMap, transactionSet);
                     }
                 }
             } else if (partySet.getKey().equals("identificationMap")) {
@@ -266,32 +266,28 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                         //TODO
                         //if setRM.getKey() is issuingCountry
                         // check if 3 letter ALL caps  string
-                        boolean checkUppercase = true;
-                        if(setIS.getKey().equals("issuingCountry")){
-
-                            String issuingCountry = setIS.getValue();
-                            if (!(issuingCountry.length() == 3)){
-                                output.add("Transaction " + counter + ": error due to " + "issuingCountry is not a 3 letter code");
-                            }
-
-                            for (int i = 0; i < issuingCountry.length(); i++) {
-                                char ch = issuingCountry.charAt(i);
+                        boolean invalidUppercase = false;
+                        if(setIS.getValue() != null && setIS.getKey().equals("issuingCountry")){
+                            for (int i = 0; i < transactionSet.getValue().length(); i++) {
+                                char ch = setIS.getValue().charAt(i);
                                 if (!Character.isUpperCase(ch)){
-                                    checkUppercase = false;
+                                    invalidUppercase = true;
                                     break;
                                 }
                             }
 
-                            if (!checkUppercase){
-                                output.add("Transaction " + counter + ": error due to " + "issuingCountry is invalid");
+                            if (transactionSet.getValue().length() != 3 || invalidUppercase){
+                                output.add("Transaction " + counter + ": error due to " + "issuingCountry is not a 3 letter code");
                             }
+
+
                         }
 
                         //TODO
                         //if setRM.getKey() is idNumber
                         // check if alphanumeric  string
 
-                        if (setIS.getKey().equals("idNumber")){
+                        if (transactionSet.getValue() != null && setIS.getKey().equals("idNumber")){
                             if(!isAlphaNumeric(setIS.getValue())){
                                 output.add("Transaction " + counter + ": error due to " + "idNumber is not AlphaNumeric");
                             }
@@ -304,7 +300,8 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                 //TODO
                 //if setRM.getKey() is firstName & lastname
                 // check if in english
-                if(partySet.getKey()=="firstName" ||partySet.getKey()=="lastName" ){
+                if((partySet.getValue() != null && partySet.getKey().equals("firstName"))
+                        || (partySet.getValue() != null && partySet.getKey().equals("lastName")) ){
                     if(languageDetector.detectLanguageOf(transactionSet.getValue())!= Language.ENGLISH){
                         output.add("Transaction " + counter + ": error due to " + "names must be in English" );
                     }
