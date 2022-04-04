@@ -288,7 +288,8 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                             }
 
                             System.out.println("transactionSet.getValue()" +  transactionSet.getValue());
-
+                            System.out.println(invalidUppercase);
+                            System.out.println(transactionSet.getValue().trim().length() != 3);
                             if (transactionSet.getValue().trim().length() != 3 || invalidUppercase){
                                 output.add("Transaction " + counter + ": error due to " + setIS.getValue() + " is not a 3 letter code");
                             }
