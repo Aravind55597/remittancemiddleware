@@ -126,6 +126,9 @@ public class RemittancemiddlewareApplication {
                     User user3 = new User("user3@gmail.com", "abc12345", "Bob", "Tan");
                     User user4 = new User("user4@gmail.com", "abc12345", "Amy", "Lee");
 
+                    Company company3 = new Company();
+                    User user5 = new User("user5@gmail.com", "abc12345", "John", "Cena");
+
                     RemittanceMap remittanceMap = new RemittanceMap();
                     ReceiverMap receiverMap = new ReceiverMap();
                     SenderMap senderMap = new SenderMap();
@@ -409,6 +412,11 @@ public class RemittancemiddlewareApplication {
                     company2.addUser(user3);
                     company2.addUser(user4);
 
+                    user5.setCompany(company3);
+
+                    company3.setCompanyName("ToMoon PTE LTD");
+                    company3.addUser(user5);
+
                     identificationS.setIdNumber("9578660");
                     //			identificationS.setParty(sender);
                     identificationS.setIdType(IdType.NATIONAL_ID);
@@ -653,11 +661,13 @@ public class RemittancemiddlewareApplication {
 
                     companyDAO.save(company1);
                     companyDAO.save(company2);
+                    companyDAO.save(company3);
 
                     userDAO.save(user1);
                     userDAO.save(user2);
                     userDAO.save(user3);
                     userDAO.save(user4);
+                    userDAO.save(user5);
 
                     //			remittanceMapDAO.save(remittanceMap);
 
