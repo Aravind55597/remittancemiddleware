@@ -162,7 +162,7 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
                                 // transactionSet -> csv hashmap (key is column name , value is value)
                                 // setRM -> remittance map hashmap (key is ssot field name , value is column name)
-                            } else if (transactionSet.getValue() != null && transactionSet.getKey().equals("amount")
+                            } else if (transactionSet.getValue() != null && setRM.getKey().equals("amount")
                                     && transactionSet.getKey().equals(setRM.getValue())) {
                                 System.out.println("testest");
                                 //TODO
