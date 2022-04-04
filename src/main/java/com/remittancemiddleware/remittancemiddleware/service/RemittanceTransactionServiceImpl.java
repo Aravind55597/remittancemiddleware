@@ -357,8 +357,10 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
 
                     System.out.println();
 
-                    String var = Language.ENGLISH.toString();
-                    if(!languageDetector.detectLanguageOf(transactionSet.getValue()).equals(Language.ENGLISH.toString())){
+                    String var =languageDetector.detectLanguageOf(transactionSet.getValue()).toString();
+                    System.out.println(var);
+
+                    if(!languageDetector.detectLanguageOf(transactionSet.getValue()).toString().equals(Language.ENGLISH.toString())){
                         output.add("Transaction " + counter + ": error due to " + "names must be in English" );
                     }
                 }
