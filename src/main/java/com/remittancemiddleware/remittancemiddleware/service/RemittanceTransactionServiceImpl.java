@@ -163,6 +163,16 @@ public class RemittanceTransactionServiceImpl implements RemittanceTransactionSe
                                 //TODO
                                 //if setRM.getKey() is amount
                                 // check if double string or integer string
+                                try{
+                                    if(setRM.getKey()=="amount"){
+                                        Double.parseDouble(set.getValue());
+
+                                    }
+                                }
+                                catch(NumberFormatException ex){
+                                    output.add("Transaction " + counter + ": error due to " + setRM.getValue() + " is not a formatted number");
+                                }
+
                                 transaction.put(setRM.getKey(), set.getValue());
                             }
                         }
