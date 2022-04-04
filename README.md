@@ -29,11 +29,19 @@ This a Remittance Middleware Programme by G1 Group 6
        a) Wait for "There is no data in remittance database -- seeding data now.<br />
        b) Please wait for "completed initialisation" message" , data has been seeded <br /><br />
 			 
-3. Open the react app on port 3000 <br /><br />
-4. List of scenarios & steps  <br />
-	Scenarios  		| Steps
-	------------- | -------------
-	Content Cell  | Content Cell
-	Content Cell  | Content Cell
+3. Run the backend by running the RemittancemiddlewareApplication which is located at "G2_T6_OOP_Project/backend/remittancemiddleware/src/main/java/RemittancemiddlewareApplication.java". <br />
+
+4. Run the frontend by running the command "npm serve" in the "G2_T6_OOP_Project/frontend" <br /><br />
+
+5. The setup is now complete and you can now access the application. <br />
+
+6. List of Input Validation Scenarios & Steps <br />
+   Scenarios | Steps | Expected Output
+   ------------- | ------------- | -------------
+   Issuing country letter code must be within 3 letters | Upload invalid data using "SMU DUMMY DATA (Issuing Country VALIDATION - within 3 CHARACTERS).csv"  | Invalid Input
+   Id Number must be numeric | Upload invalid data using "SMU DUMMY DATA (IdNumber VALIDATION - only NUMERIC).csv" to the DRP  | Invalid Input
+   Account number must be numeric | Upload invalid data using "SMU DUMMY DATA (Account Number VALIDATION - only NUMERIC).csv" to the DRP | Invalid Input
+   Amount must be double or integer string | Upload invalid data using "SMU DUMMY DATA (Amount VALIDATION - only DOUBLE or INTEGER).csv" to the DRP | Invalid Input
+   First name and last name must be in english | Upload invalid data using "SMU DUMMY DATA (FirstName LastName VALIDATION - only ENGLISH).csv" to the DRP | Invalid Input
 
 	
