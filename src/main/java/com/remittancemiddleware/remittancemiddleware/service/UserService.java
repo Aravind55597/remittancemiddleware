@@ -6,7 +6,9 @@ import java.util.Map;
 
 
 public interface UserService {
-    public User findById(int theId);
-    public User save(Map<String,String> theUser);
-    public User login(Map<String,String> loginDetails);
+    User findById(int theId);
+
+    User save(Map<String, String> theUser);
+
+    User login(Map<String, String> loginDetails);
 }

@@ -13,20 +13,19 @@ import com.remittancemiddleware.remittancemiddleware.entity.SupportedCountry;
 import com.remittancemiddleware.remittancemiddleware.entity.User;
 import com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap.*;
 import com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 
 @Service
 public class RemittanceMapServiceImpl implements RemittanceMapService {
-    private RemittanceMapDAO remittanceMapDAO;
-    private SupportedCountryDAO supportedCountryDAO;
-    private CompanyDAO companyDAO;
-    private UserDAO userDAO;
+    private final RemittanceMapDAO remittanceMapDAO;
+    private final SupportedCountryDAO supportedCountryDAO;
+    private final CompanyDAO companyDAO;
+    private final UserDAO userDAO;
 
     @Autowired
     public RemittanceMapServiceImpl(RemittanceMapDAO theRemittanceMapDAO, SupportedCountryDAO theSupportedCountryDAO, CompanyDAO theCompanyDAO, UserDAO theUserDAO) {
@@ -37,7 +36,7 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
     }
 
     @Override
-    public Map<String,String> findMapByCountry(int userId, String destCountry) {
+    public Map<String, String> findMapByCountry(int userId, String destCountry) {
         User theUser = userDAO.getById(userId);
         int companyId = theUser.getCompanyId();
         Company theCompany = companyDAO.getById(companyId);
@@ -45,7 +44,7 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
 
         RemittanceMap theRemittanceMap = null;
         Map<String, String> output = new HashMap<>();
-        Map<String,String> processedOutput = new HashMap<>();
+        Map<String, String> processedOutput = new HashMap<>();
 
         if (result.isPresent()) {
             theRemittanceMap = result.get();
@@ -56,86 +55,78 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
             for (Map.Entry<String, String> set : remittanceMap.entrySet()) {
                 if (set.getKey().equals("receiverMap")) {
                     ReceiverMap theReceiverMap = theRemittanceMap.getReceiverMap();
-                    Map<String,String> receiverMap = oMapper.convertValue(theReceiverMap, Map.class);
-                    for (Map.Entry<String,String> setR : receiverMap.entrySet()) {
+                    Map<String, String> receiverMap = oMapper.convertValue(theReceiverMap, Map.class);
+                    for (Map.Entry<String, String> setR : receiverMap.entrySet()) {
                         if (!(setR.getKey().equals("id"))) {
                             if (setR.getKey().equals("addressMap")) {
                                 AddressMap theAddressMap = theReceiverMap.getAddressMap();
-                                Map<String,String> addressMap = oMapper.convertValue(theAddressMap, Map.class);
-                                for (Map.Entry<String,String> setAR : addressMap.entrySet()) {
+                                Map<String, String> addressMap = oMapper.convertValue(theAddressMap, Map.class);
+                                for (Map.Entry<String, String> setAR : addressMap.entrySet()) {
                                     if (!(setAR.getKey().equals("id"))) {
                                         output = showRequiredFieldsR(output, setAR);
                                     }
                                 }
-                            }
-                            else if (setR.getKey().equals("bankAccountMap")) {
+                            } else if (setR.getKey().equals("bankAccountMap")) {
                                 BankAccountMap theBankAccountMap = theReceiverMap.getBankAccountMap();
-                                Map<String,String> bankAccountMap = oMapper.convertValue(theBankAccountMap, Map.class);
-                                for (Map.Entry<String,String> setBR : bankAccountMap.entrySet()) {
+                                Map<String, String> bankAccountMap = oMapper.convertValue(theBankAccountMap, Map.class);
+                                for (Map.Entry<String, String> setBR : bankAccountMap.entrySet()) {
                                     if (!(setBR.getKey().equals("id"))) {
                                         output = showRequiredFieldsR(output, setBR);
                                     }
                                 }
-                            }
-                            else if (setR.getKey().equals("identificationMap")) {
+                            } else if (setR.getKey().equals("identificationMap")) {
                                 IdentificationMap theIdentificationMap = theReceiverMap.getIdentificationMap();
-                                Map<String,String> identificationMap = oMapper.convertValue(theIdentificationMap, Map.class);
-                                for (Map.Entry<String,String> setIR : identificationMap.entrySet()) {
+                                Map<String, String> identificationMap = oMapper.convertValue(theIdentificationMap, Map.class);
+                                for (Map.Entry<String, String> setIR : identificationMap.entrySet()) {
                                     if (!(setIR.getKey().equals("id"))) {
                                         output = showRequiredFieldsR(output, setIR);
                                     }
                                 }
-                            }
-                            else {
+                            } else {
                                 output = showRequiredFieldsR(output, setR);
                             }
                         }
                     }
 
-                }
-                else if(set.getKey().equals("senderMap")) {
+                } else if (set.getKey().equals("senderMap")) {
                     SenderMap theSenderMap = theRemittanceMap.getSenderMap();
-                    Map<String,String> senderMap = oMapper.convertValue(theSenderMap, Map.class);
-                    for (Map.Entry<String,String> setS : senderMap.entrySet()) {
+                    Map<String, String> senderMap = oMapper.convertValue(theSenderMap, Map.class);
+                    for (Map.Entry<String, String> setS : senderMap.entrySet()) {
                         if (!(setS.getKey().equals("id"))) {
                             if (setS.getKey().equals("addressMap")) {
                                 AddressMap theAddressMap = theSenderMap.getAddressMap();
-                                Map<String,String> addressMap = oMapper.convertValue(theAddressMap, Map.class);
-                                for (Map.Entry<String,String> setAS : addressMap.entrySet()) {
+                                Map<String, String> addressMap = oMapper.convertValue(theAddressMap, Map.class);
+                                for (Map.Entry<String, String> setAS : addressMap.entrySet()) {
                                     if (!(setAS.getKey().equals("id"))) {
                                         output = showRequiredFieldsS(output, setAS);
                                     }
                                 }
-                            }
-                            else if (setS.getKey().equals("bankAccountMap")) {
+                            } else if (setS.getKey().equals("bankAccountMap")) {
                                 BankAccountMap theBankAccountMap = theSenderMap.getBankAccountMap();
-                                Map<String,String> bankAccountMap = oMapper.convertValue(theBankAccountMap, Map.class);
-                                for (Map.Entry<String,String> setBS : bankAccountMap.entrySet()) {
+                                Map<String, String> bankAccountMap = oMapper.convertValue(theBankAccountMap, Map.class);
+                                for (Map.Entry<String, String> setBS : bankAccountMap.entrySet()) {
                                     if (!(setBS.getKey().equals("id"))) {
                                         output = showRequiredFieldsS(output, setBS);
                                     }
                                 }
-                            }
-                            else if (setS.getKey().equals("identificationMap")) {
+                            } else if (setS.getKey().equals("identificationMap")) {
                                 IdentificationMap theIdentificationMap = theSenderMap.getIdentificationMap();
-                                Map<String,String> identificationMap = oMapper.convertValue(theIdentificationMap, Map.class);
-                                for (Map.Entry<String,String> setIS : identificationMap.entrySet()) {
+                                Map<String, String> identificationMap = oMapper.convertValue(theIdentificationMap, Map.class);
+                                for (Map.Entry<String, String> setIS : identificationMap.entrySet()) {
                                     if (!(setIS.getKey().equals("id"))) {
                                         output = showRequiredFieldsS(output, setIS);
                                     }
                                 }
-                            }
-                            else {
+                            } else {
                                 output = showRequiredFieldsS(output, setS);
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     output = showRequiredFieldsGen(output, set);
                 }
             }
-            for (Map.Entry<String,String> set0 : output.entrySet()) {
+            for (Map.Entry<String, String> set0 : output.entrySet()) {
                 if (set0.getValue() != null) {
                     processedOutput.put(set0.getKey(), set0.getValue());
                 }
@@ -153,96 +144,88 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
         Map<String, Boolean> map = new HashMap<>();
         List<String> result = new ArrayList<>();
 
-        for (RemittanceCompany aCompany:remittanceCompanyList) {
+        for (RemittanceCompany aCompany : remittanceCompanyList) {
             RemittanceMapApi remittanceMapApi = aCompany.getRemittanceMapApi();
             ObjectMapper oMapper = new ObjectMapper();
-            Map<String,String> remittanceMap = oMapper.convertValue(remittanceMapApi, Map.class);
+            Map<String, String> remittanceMap = oMapper.convertValue(remittanceMapApi, Map.class);
             remittanceMap.remove("id");
-            for (Map.Entry<String,String> set : remittanceMap.entrySet()) {
+            for (Map.Entry<String, String> set : remittanceMap.entrySet()) {
                 if (set.getKey().equals("receiverMapApi")) {
                     ReceiverMapApi receiverMapApi = remittanceMapApi.getReceiverMapApi();
-                    Map<String,String> receiverMap = oMapper.convertValue(receiverMapApi, Map.class);
-                    for (Map.Entry<String,String> setR : receiverMap.entrySet()) {
+                    Map<String, String> receiverMap = oMapper.convertValue(receiverMapApi, Map.class);
+                    for (Map.Entry<String, String> setR : receiverMap.entrySet()) {
                         if (!(setR.getKey().equals("id"))) {
                             if (setR.getKey().equals("addressMapApi")) {
                                 AddressMapApi addressMapApi = receiverMapApi.getAddressMapApi();
-                                Map<String,String> addressMap = oMapper.convertValue(addressMapApi, Map.class);
-                                for (Map.Entry<String,String> setAR : addressMap.entrySet()) {
+                                Map<String, String> addressMap = oMapper.convertValue(addressMapApi, Map.class);
+                                for (Map.Entry<String, String> setAR : addressMap.entrySet()) {
                                     if (!(setAR.getKey().equals("id"))) {
                                         map = addToRequiredFieldsR(map, setAR);
                                     }
                                 }
-                            }
-                            else if (setR.getKey().equals("bankAccountMapApi")) {
+                            } else if (setR.getKey().equals("bankAccountMapApi")) {
                                 BankAccountMapApi bankAccountMapApi = receiverMapApi.getBankAccountMapApi();
-                                Map<String,String> bankAccountMap = oMapper.convertValue(bankAccountMapApi, Map.class);
-                                for (Map.Entry<String,String> setBR : bankAccountMap.entrySet()) {
+                                Map<String, String> bankAccountMap = oMapper.convertValue(bankAccountMapApi, Map.class);
+                                for (Map.Entry<String, String> setBR : bankAccountMap.entrySet()) {
                                     if (!(setBR.getKey().equals("id"))) {
                                         map = addToRequiredFieldsR(map, setBR);
                                     }
                                 }
-                            }
-                            else if (setR.getKey().equals("identificationMapApi")) {
+                            } else if (setR.getKey().equals("identificationMapApi")) {
                                 IdentificationMapApi identificationMapApi = receiverMapApi.getIdentificationMapApi();
-                                Map<String,String> identificationMap = oMapper.convertValue(identificationMapApi, Map.class);
-                                for (Map.Entry<String,String> setIR : identificationMap.entrySet()) {
+                                Map<String, String> identificationMap = oMapper.convertValue(identificationMapApi, Map.class);
+                                for (Map.Entry<String, String> setIR : identificationMap.entrySet()) {
                                     if (!(setIR.getKey().equals("id"))) {
                                         map = addToRequiredFieldsR(map, setIR);
                                     }
                                 }
-                            }
-                            else {
+                            } else {
                                 map = addToRequiredFieldsR(map, setR);
                             }
                         }
                     }
 
-                }
-                else if(set.getKey().equals("senderMapApi")) {
+                } else if (set.getKey().equals("senderMapApi")) {
                     SenderMapApi senderMapApi = remittanceMapApi.getSenderMapApi();
-                    Map<String,String> senderMap = oMapper.convertValue(senderMapApi, Map.class);
-                    for (Map.Entry<String,String> setS : senderMap.entrySet()) {
+                    Map<String, String> senderMap = oMapper.convertValue(senderMapApi, Map.class);
+                    for (Map.Entry<String, String> setS : senderMap.entrySet()) {
                         if (!(setS.getKey().equals("id"))) {
                             if (setS.getKey().equals("addressMapApi")) {
                                 AddressMapApi addressMapApi = senderMapApi.getAddressMapApi();
-                                Map<String,String> addressMap = oMapper.convertValue(addressMapApi, Map.class);
-                                for (Map.Entry<String,String> setAS : addressMap.entrySet()) {
+                                Map<String, String> addressMap = oMapper.convertValue(addressMapApi, Map.class);
+                                for (Map.Entry<String, String> setAS : addressMap.entrySet()) {
                                     if (!(setAS.getKey().equals("id"))) {
                                         map = addToRequiredFieldsS(map, setAS);
                                     }
                                 }
-                            }
-                            else if (setS.getKey().equals("bankAccountMapApi")) {
+                            } else if (setS.getKey().equals("bankAccountMapApi")) {
                                 BankAccountMapApi bankAccountMapApi = senderMapApi.getBankAccountMapApi();
-                                Map<String,String> bankAccountMap = oMapper.convertValue(bankAccountMapApi, Map.class);
-                                for (Map.Entry<String,String> setBS : bankAccountMap.entrySet()) {
+                                Map<String, String> bankAccountMap = oMapper.convertValue(bankAccountMapApi, Map.class);
+                                for (Map.Entry<String, String> setBS : bankAccountMap.entrySet()) {
                                     if (!(setBS.getKey().equals("id"))) {
                                         map = addToRequiredFieldsS(map, setBS);
                                     }
                                 }
-                            }
-                            else if (setS.getKey().equals("identificationMapApi")) {
+                            } else if (setS.getKey().equals("identificationMapApi")) {
                                 IdentificationMapApi identificationMapApi = senderMapApi.getIdentificationMapApi();
-                                Map<String,String> identificationMap = oMapper.convertValue(identificationMapApi, Map.class);
-                                for (Map.Entry<String,String> setIS : identificationMap.entrySet()) {
+                                Map<String, String> identificationMap = oMapper.convertValue(identificationMapApi, Map.class);
+                                for (Map.Entry<String, String> setIS : identificationMap.entrySet()) {
                                     if (!(setIS.getKey().equals("id"))) {
                                         map = addToRequiredFieldsS(map, setIS);
                                     }
                                 }
-                            }
-                            else {
+                            } else {
                                 map = addToRequiredFieldsS(map, setS);
                             }
                         }
                     }
-                }
-                else {
+                } else {
                     map = addToRequiredFieldsGen(map, set);
                 }
 
             }
         }
-        for (Map.Entry<String,Boolean> setMap: map.entrySet()) {
+        for (Map.Entry<String, Boolean> setMap : map.entrySet()) {
             if (setMap.getValue()) {
                 result.add(setMap.getKey());
             }
@@ -250,15 +233,14 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
         return result;
     }
 
-    private static Map<String,Boolean> addToRequiredFieldsGen(Map<String, Boolean> result, Map.Entry<String, String> set) {
+    private static Map<String, Boolean> addToRequiredFieldsGen(Map<String, Boolean> result, Map.Entry<String, String> set) {
         if (result.containsKey(set.getKey())) {
             if (!result.get(set.getKey())) {
                 if (set.getValue() != null) {
                     result.put(set.getKey(), true);
                 }
             }
-        }
-        else {
+        } else {
             if (set.getValue() == null) {
                 result.put(set.getKey(), false);
             } else {
@@ -269,67 +251,65 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
         return result;
     }
 
-    private static Map<String,Boolean> addToRequiredFieldsR(Map<String, Boolean> result, Map.Entry<String, String> set) {
+    private static Map<String, Boolean> addToRequiredFieldsR(Map<String, Boolean> result, Map.Entry<String, String> set) {
         if (result.containsKey(set.getKey())) {
             if (!result.get(set.getKey())) {
                 if (set.getValue() != null) {
-                    result.put("receiver "+set.getKey(), true);
+                    result.put("receiver " + set.getKey(), true);
                 }
             }
-        }
-        else {
+        } else {
             if (set.getValue() == null) {
-                result.put("receiver "+set.getKey(), false);
+                result.put("receiver " + set.getKey(), false);
             } else {
-                result.put("receiver "+set.getKey(), true);
+                result.put("receiver " + set.getKey(), true);
             }
         }
 
         return result;
     }
 
-    private static Map<String,Boolean> addToRequiredFieldsS(Map<String, Boolean> result, Map.Entry<String, String> set) {
+    private static Map<String, Boolean> addToRequiredFieldsS(Map<String, Boolean> result, Map.Entry<String, String> set) {
         if (result.containsKey(set.getKey())) {
             if (!result.get(set.getKey())) {
                 if (set.getValue() != null) {
-                    result.put("sender "+set.getKey(), true);
+                    result.put("sender " + set.getKey(), true);
                 }
             }
-        }
-        else {
+        } else {
             if (set.getValue() == null) {
-                result.put("sender "+set.getKey(), false);
+                result.put("sender " + set.getKey(), false);
             } else {
-                result.put("sender "+set.getKey(), true);
+                result.put("sender " + set.getKey(), true);
             }
         }
 
         return result;
     }
 
-    private static Map<String,String> showRequiredFieldsGen(Map<String, String> result, Map.Entry<String, String> set) {
+    private static Map<String, String> showRequiredFieldsGen(Map<String, String> result, Map.Entry<String, String> set) {
         result.put(set.getKey(), set.getValue());
 
         return result;
     }
 
-    private static Map<String,String> showRequiredFieldsR(Map<String, String> result, Map.Entry<String, String> set) {
+    private static Map<String, String> showRequiredFieldsR(Map<String, String> result, Map.Entry<String, String> set) {
 
-        result.put("receiver "+set.getKey(), set.getValue());
+        result.put("receiver " + set.getKey(), set.getValue());
 
         return result;
     }
 
-    private static Map<String,String> showRequiredFieldsS(Map<String, String> result, Map.Entry<String, String> set) {
+    private static Map<String, String> showRequiredFieldsS(Map<String, String> result, Map.Entry<String, String> set) {
 
-        result.put("sender "+set.getKey(), set.getValue());
+        result.put("sender " + set.getKey(), set.getValue());
 
         return result;
     }
 
     @Override
     @Transactional
-    public List<String> save(int userId, String destCountry, Map<String,String> mappingDetails) {
+    public List<String> save(int userId, String destCountry, Map<String, String> mappingDetails) {
         User theUser = userDAO.getById(userId);
         int companyId = theUser.getCompanyId();
         Company theCompany = companyDAO.getById(companyId);
@@ -342,13 +322,11 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
 
         if (!result.isEmpty()) {
             throw new CustomBadRequestException("Remittance Map creation failed - there is an existing remittance map");
-        }
-
-        else {
+        } else {
             if (!(mappingDetails.isEmpty())) {
                 List<String> requiredFields = this.getRequiredFields(destCountry);
                 boolean check = true;
-                for (String s: requiredFields) {
+                for (String s : requiredFields) {
                     if (!mappingDetails.containsKey(s)) {
                         check = false;
                         missingFields.add(s);
@@ -357,9 +335,7 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
 
                 if (!check) {
                     throw new CustomBadRequestException("Remittance Map creation failed - all the required fields have not been passed in", missingFields);
-                }
-
-                else {
+                } else {
                     ObjectMapper oMapper = new ObjectMapper();
                     theRemittanceMap = new RemittanceMap();
                     ReceiverMap theReceiverMap = new ReceiverMap();
@@ -371,15 +347,15 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                     IdentificationMap theIdentificationMapR = new IdentificationMap();
                     IdentificationMap theIdentificationMapS = new IdentificationMap();
 
-                    Map<String,String> remittanceMap = oMapper.convertValue(theRemittanceMap, Map.class);
-                    Map<String,String> receiverMap = oMapper.convertValue(theReceiverMap, Map.class);
-                    Map<String,String> senderMap = oMapper.convertValue(theSenderMap, Map.class);
-                    Map<String,String> addressMapR = oMapper.convertValue(theAddressMapR, Map.class);
-                    Map<String,String> addressMapS = oMapper.convertValue(theAddressMapS, Map.class);
-                    Map<String,String> bankAccountMapR = oMapper.convertValue(theBankAccountMapR, Map.class);
-                    Map<String,String> bankAccountMapS = oMapper.convertValue(theBankAccountMapS, Map.class);
-                    Map<String,String> identificationMapR = oMapper.convertValue(theIdentificationMapR, Map.class);
-                    Map<String,String> identificationMapS = oMapper.convertValue(theIdentificationMapS, Map.class);
+                    Map<String, String> remittanceMap = oMapper.convertValue(theRemittanceMap, Map.class);
+                    Map<String, String> receiverMap = oMapper.convertValue(theReceiverMap, Map.class);
+                    Map<String, String> senderMap = oMapper.convertValue(theSenderMap, Map.class);
+                    Map<String, String> addressMapR = oMapper.convertValue(theAddressMapR, Map.class);
+                    Map<String, String> addressMapS = oMapper.convertValue(theAddressMapS, Map.class);
+                    Map<String, String> bankAccountMapR = oMapper.convertValue(theBankAccountMapR, Map.class);
+                    Map<String, String> bankAccountMapS = oMapper.convertValue(theBankAccountMapS, Map.class);
+                    Map<String, String> identificationMapR = oMapper.convertValue(theIdentificationMapR, Map.class);
+                    Map<String, String> identificationMapS = oMapper.convertValue(theIdentificationMapS, Map.class);
 
                     remittanceMap.remove("id");
                     receiverMap.remove("id");
@@ -402,20 +378,18 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                     Set<String> keysIdentificationMapS = identificationMapS.keySet();
 
                     Set<String> keys = mappingDetails.keySet();
-                    for (String s:keys) {
+                    for (String s : keys) {
                         if (s.contains("receiver")) {
                             addValuesToMap(mappingDetails, receiverMap, keysReceiverMap, s);
                             addValuesToMap(mappingDetails, addressMapR, keysAddressMapR, s);
                             addValuesToMap(mappingDetails, bankAccountMapR, keysBankAccMapR, s);
                             addValuesToMap(mappingDetails, identificationMapR, keysIdentificationMapR, s);
-                        }
-                        else if (s.contains("sender")) {
+                        } else if (s.contains("sender")) {
                             addValuesToMap(mappingDetails, senderMap, keysSenderMap, s);
                             addValuesToMap(mappingDetails, addressMapS, keysAddressMapS, s);
                             addValuesToMap(mappingDetails, bankAccountMapS, keysBankAccMapS, s);
                             addValuesToMap(mappingDetails, identificationMapS, keysIdentificationMapS, s);
-                        }
-                        else {
+                        } else {
                             addValuesToMap(mappingDetails, remittanceMap, keysRemittanceMap, s);
                         }
                     }
@@ -446,9 +420,7 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                     remittanceMapDAO.save(theRemittanceMap);
                     outcome = "Remittance map creation is successful";
                 }
-            }
-
-            else {
+            } else {
                 throw new CustomBadRequestException("Remittance Map creation failed - no data has been passed in");
             }
         }
@@ -460,7 +432,7 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
 
     @Override
     @Transactional
-    public List<String> update(int userId, String destCountry, Map<String,String> mappingDetails) {
+    public List<String> update(int userId, String destCountry, Map<String, String> mappingDetails) {
         User theUser = userDAO.getById(userId);
         int companyId = theUser.getCompanyId();
         Company theCompany = companyDAO.getById(companyId);
@@ -502,15 +474,15 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                 IdentificationMap theIdentificationMapS = theSenderMap.getIdentificationMap();
                 int isId = theIdentificationMapS.getId();
 
-                Map<String,String> remittanceMap = oMapper.convertValue(theRemittanceMap, Map.class);
-                Map<String,String> receiverMap = oMapper.convertValue(theReceiverMap, Map.class);
-                Map<String,String> senderMap = oMapper.convertValue(theSenderMap, Map.class);
-                Map<String,String> addressMapR = oMapper.convertValue(theAddressMapR, Map.class);
-                Map<String,String> addressMapS = oMapper.convertValue(theAddressMapS, Map.class);
-                Map<String,String> bankAccountMapR = oMapper.convertValue(theBankAccountMapR, Map.class);
-                Map<String,String> bankAccountMapS = oMapper.convertValue(theBankAccountMapS, Map.class);
-                Map<String,String> identificationMapR = oMapper.convertValue(theIdentificationMapR, Map.class);
-                Map<String,String> identificationMapS = oMapper.convertValue(theIdentificationMapS, Map.class);
+                Map<String, String> remittanceMap = oMapper.convertValue(theRemittanceMap, Map.class);
+                Map<String, String> receiverMap = oMapper.convertValue(theReceiverMap, Map.class);
+                Map<String, String> senderMap = oMapper.convertValue(theSenderMap, Map.class);
+                Map<String, String> addressMapR = oMapper.convertValue(theAddressMapR, Map.class);
+                Map<String, String> addressMapS = oMapper.convertValue(theAddressMapS, Map.class);
+                Map<String, String> bankAccountMapR = oMapper.convertValue(theBankAccountMapR, Map.class);
+                Map<String, String> bankAccountMapS = oMapper.convertValue(theBankAccountMapS, Map.class);
+                Map<String, String> identificationMapR = oMapper.convertValue(theIdentificationMapR, Map.class);
+                Map<String, String> identificationMapS = oMapper.convertValue(theIdentificationMapS, Map.class);
 
                 remittanceMap.remove("id");
                 receiverMap.remove("id");
@@ -533,20 +505,18 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
                 Set<String> keysIdentificationMapS = identificationMapS.keySet();
 
                 Set<String> keys = mappingDetails.keySet();
-                for (String s:keys) {
+                for (String s : keys) {
                     if (s.contains("receiver")) {
                         addValuesToMap(mappingDetails, receiverMap, keysReceiverMap, s);
                         addValuesToMap(mappingDetails, addressMapR, keysAddressMapR, s);
                         addValuesToMap(mappingDetails, bankAccountMapR, keysBankAccMapR, s);
                         addValuesToMap(mappingDetails, identificationMapR, keysIdentificationMapR, s);
-                    }
-                    else if (s.contains("sender")) {
+                    } else if (s.contains("sender")) {
                         addValuesToMap(mappingDetails, senderMap, keysSenderMap, s);
                         addValuesToMap(mappingDetails, addressMapS, keysAddressMapS, s);
                         addValuesToMap(mappingDetails, bankAccountMapS, keysBankAccMapS, s);
                         addValuesToMap(mappingDetails, identificationMapS, keysIdentificationMapS, s);
-                    }
-                    else {
+                    } else {
                         addValuesToMap(mappingDetails, remittanceMap, keysRemittanceMap, s);
                     }
                 }
@@ -589,14 +559,11 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
 
                 remittanceMapDAO.save(theRemittanceMap);
                 outcome = "Remittance Map update is successful";
-            }
-            else {
+            } else {
                 throw new CustomBadRequestException("Remittance Map update failed - no data has been passed in");
             }
 
-        }
-
-        else {
+        } else {
             throw new CustomNotFoundException("There is no existing remittance map for " + destCountry);
         }
 
@@ -606,7 +573,7 @@ public class RemittanceMapServiceImpl implements RemittanceMapService {
     }
 
     private static void addValuesToMap(Map<String, String> mappingDetails, Map<String, String> SSOTMap, Set<String> keysSSOTMap, String s) {
-        for (String s1: keysSSOTMap) {
+        for (String s1 : keysSSOTMap) {
             if (s.contains(s1)) {
                 SSOTMap.put(s1, mappingDetails.get(s));
             }

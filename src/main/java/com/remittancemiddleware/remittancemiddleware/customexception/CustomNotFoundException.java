@@ -2,7 +2,7 @@ package com.remittancemiddleware.remittancemiddleware.customexception;
 
 import java.util.HashMap;
 
-public class CustomNotFoundException  extends CustomException{
+public class CustomNotFoundException extends CustomException {
 
     public CustomNotFoundException(String message) {
         super(message);

@@ -15,7 +15,7 @@ public enum PurposeOfRemittanceRN {
     PAYMENT_FOR_GOODS("005-01"),
     ;
 
-    private String data;
+    private final String data;
 
     PurposeOfRemittanceRN(String data) {
         this.data = data;

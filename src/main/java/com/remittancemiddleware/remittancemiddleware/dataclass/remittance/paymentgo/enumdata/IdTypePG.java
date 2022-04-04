@@ -2,10 +2,9 @@ package com.remittancemiddleware.remittancemiddleware.dataclass.remittance.payme
 
 public enum IdTypePG {
     NATIONAL_ID("1"),
-    PASSPORT("2")
-    ;
+    PASSPORT("2");
 
-    private String data;
+    private final String data;
 
     IdTypePG(String data) {
         this.data = data;

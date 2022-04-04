@@ -7,7 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.PrimaryKeyJoinColumn;
 import java.util.Date;
 
 
@@ -16,7 +19,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @PrimaryKeyJoinColumn(name = "party_id")
-public class Sender  extends Party{
+public class Sender extends Party {
 
     @Enumerated(EnumType.STRING)
     public SourceOfFunds sourceOfFunds; //    enum senderSourceOfFunds ; // done
@@ -28,7 +31,7 @@ public class Sender  extends Party{
     @Enumerated(EnumType.STRING)
     public BeneficiaryRelationship beneficiaryRelationship; //    enum senderBeneficiaryRelationship; // done
 
-    public Sender(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, String mobileNumber, SourceOfFunds sourceOfFunds,String senderRemittanceCountry, BeneficiaryRelationship  beneficiaryRelationship) {
+    public Sender(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, String mobileNumber, SourceOfFunds sourceOfFunds, String senderRemittanceCountry, BeneficiaryRelationship beneficiaryRelationship) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationality = nationality;

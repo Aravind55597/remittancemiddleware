@@ -16,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Table(name = "receiver")
 @PrimaryKeyJoinColumn(name = "party_id")
-public class Receiver  extends Party {
+public class Receiver extends Party {
 
 
     private String type; // enum receiverType // nope for enum, hard code default field value "bank_account" from excel
@@ -27,7 +27,7 @@ public class Receiver  extends Party {
     private String receiverRemittanceCountry;
 
 
-    public Receiver(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, String mobileNumber, String receiverType,  String receiverRemittanceCountry) {
+    public Receiver(String firstName, String lastName, String nationality, String currency, Date dateOfBirth, String mobileNumber, String receiverType, String receiverRemittanceCountry) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.nationality = nationality;

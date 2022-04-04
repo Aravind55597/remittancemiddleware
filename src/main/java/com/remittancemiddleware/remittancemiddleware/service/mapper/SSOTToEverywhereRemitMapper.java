@@ -6,13 +6,13 @@ import com.remittancemiddleware.remittancemiddleware.entity.enumdata.IdType;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittancePurpose;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.SourceOfFunds;
 
-public interface SSOTToEverywhereRemitMapper extends SSOTMapper<EverywhereRemitData>{
+public interface SSOTToEverywhereRemitMapper extends SSOTMapper<EverywhereRemitData> {
 
-    public String convertCountry(String countrySSOT) throws CustomMappingException;
+    String convertCountry(String countrySSOT) throws CustomMappingException;
 
-    public String convertIdType(IdType idType);
+    String convertIdType(IdType idType);
 
-    public String convertRemittancePurpose(RemittancePurpose remittancePurpose);
+    String convertRemittancePurpose(RemittancePurpose remittancePurpose);
 
-    public String convertSourceOfFunds(SourceOfFunds sourceOfFunds);
+    String convertSourceOfFunds(SourceOfFunds sourceOfFunds);
 }

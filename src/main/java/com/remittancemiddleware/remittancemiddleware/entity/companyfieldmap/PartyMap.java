@@ -18,9 +18,9 @@ abstract public class PartyMap {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String firstName ;
+    private String firstName;
 
-    private String lastName ;
+    private String lastName;
 
     private String nationality;
 
@@ -31,15 +31,15 @@ abstract public class PartyMap {
     private String mobileNumber;
 
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "identification_map_id")
     private IdentificationMap identificationMap;
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "bank_account_map_id")
     private BankAccountMap bankAccountMap;
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "address_map_id")
     private AddressMap addressMap;
 

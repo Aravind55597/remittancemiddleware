@@ -6,10 +6,9 @@ public enum IdTypeRN {
     COMPANY_REGISTRATION("national"),
     ID_CARD_GOVERNMENT("national"),
     OTHER("national"),
-    PASSPORT("passport")
-    ;
+    PASSPORT("passport");
 
-    private String data;
+    private final String data;
 
     IdTypeRN(String data) {
         this.data = data;

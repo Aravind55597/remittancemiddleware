@@ -1,12 +1,12 @@
 package com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap;
 
 
-import com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap.RemittanceMap;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 import java.io.Serializable;
 
 @Entity
@@ -16,7 +16,7 @@ import java.io.Serializable;
 @PrimaryKeyJoinColumn(name = "party_map_api_id")
 public class ReceiverMapApi extends PartyMapApi implements Serializable {
 
-    private String type ;
+    private String type;
 
 //    private String payoutCurrency;
 
@@ -24,7 +24,6 @@ public class ReceiverMapApi extends PartyMapApi implements Serializable {
 
 //    @OneToOne(mappedBy = "receiverMapApi")
 //    private RemittanceMapApi remittanceMapApi;
-
 
 
 }

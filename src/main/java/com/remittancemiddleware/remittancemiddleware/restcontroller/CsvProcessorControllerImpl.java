@@ -16,39 +16,39 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 public class CsvProcessorControllerImpl implements CsvProcessorController {
-        private final CsvProcessorServiceImpl csvProcessorServiceImpl;
+    private final CsvProcessorServiceImpl csvProcessorServiceImpl;
 
-        @Autowired
-        public CsvProcessorControllerImpl(CsvProcessorServiceImpl theCsvProcessorServiceImpl) {
-            this.csvProcessorServiceImpl = theCsvProcessorServiceImpl;
+    @Autowired
+    public CsvProcessorControllerImpl(CsvProcessorServiceImpl theCsvProcessorServiceImpl) {
+        this.csvProcessorServiceImpl = theCsvProcessorServiceImpl;
+    }
+
+    @PostMapping("/csvProcessor/processCsv")
+    public CustomResponse processCsv(@RequestParam("csvFile") MultipartFile csvFile) throws Exception {
+
+        try {
+            List<Map<String, String>> mapList = csvProcessorServiceImpl.processCsv(csvFile);
+            CustomResponse result = new CustomResponse(mapList);
+            return result;
+        } catch (Exception e) {
+            throw e;
         }
 
-        @PostMapping("/csvProcessor/processCsv")
-        public CustomResponse processCsv(@RequestParam("csvFile") MultipartFile csvFile) throws Exception {
 
-            try {
-                List<Map<String,String>> mapList = csvProcessorServiceImpl.processCsv(csvFile);
-                CustomResponse result = new CustomResponse (mapList);
-                return result;
-            } catch (Exception e) {
-                throw e;
-            }
-
-
-        };
+    }
 
     @PostMapping("/csvProcessor/processCsvHeaders")
     public CustomResponse processCsvHeaders(@RequestParam("csvFile") MultipartFile csvFile) throws Exception {
 
         try {
             List<String> listOfHeaders = csvProcessorServiceImpl.processCsvHeaders(csvFile);
-            CustomResponse result = new CustomResponse (listOfHeaders);
+            CustomResponse result = new CustomResponse(listOfHeaders);
             return result;
         } catch (Exception e) {
             throw e;
         }
 
-    };
+    }
 
 
 }

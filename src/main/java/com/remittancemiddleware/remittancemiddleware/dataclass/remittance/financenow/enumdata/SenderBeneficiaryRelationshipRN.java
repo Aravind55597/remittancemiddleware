@@ -6,13 +6,10 @@ public enum SenderBeneficiaryRelationshipRN {
     FRIENDS("02"),
     OTHERS("99"),
     SELF("03"),
-    SELLER_SERVICE_PROVIDER("09")
-    ;
+    SELLER_SERVICE_PROVIDER("09");
 
 
-
-
-    private String data;
+    private final String data;
 
     SenderBeneficiaryRelationshipRN(String data) {
         this.data = data;

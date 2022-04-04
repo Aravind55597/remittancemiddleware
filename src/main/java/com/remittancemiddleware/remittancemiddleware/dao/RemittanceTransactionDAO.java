@@ -9,5 +9,6 @@ import java.util.List;
 public interface RemittanceTransactionDAO extends JpaRepository<RemittanceTransaction, Integer> {
 
     List<RemittanceTransaction> findByTransactionStatusAndCompanyId(TransactionStatus status, int companyId);
+
     List<RemittanceTransaction> findByCompanyId(int companyId);
 }

@@ -13,24 +13,22 @@ import java.util.HashMap;
 
 //reference: https://www.baeldung.com/exception-handling-for-rest-with-spring
 @ControllerAdvice
-public class        GlobalExceptionHandlerImpl implements GlobalExceptionHandler {
+public class GlobalExceptionHandlerImpl implements GlobalExceptionHandler {
 
     @Override
     @ExceptionHandler
     //BAD REQUEST 400
-    public ResponseEntity<CustomResponse> handleException(CustomBadRequestException exc){
+    public ResponseEntity<CustomResponse> handleException(CustomBadRequestException exc) {
         //create CustomerErrorResponse
         if (exc.getErrors() != null) {
-            CustomResponse<HashMap<String,String>> error = new CustomResponse(
+            CustomResponse<HashMap<String, String>> error = new CustomResponse(
                     exc.getMessage(),
                     HttpStatus.BAD_REQUEST,
                     exc.getErrors()
             );
             //return ResponseEntity
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-        }
-
-        else {
+        } else {
             CustomResponse<ArrayList<String>> error = new CustomResponse(
                     exc.getMessage(),
                     HttpStatus.BAD_REQUEST,
@@ -45,10 +43,10 @@ public class        GlobalExceptionHandlerImpl implements GlobalExceptionHandler
     @Override
     @ExceptionHandler
     //NOT FOUND 404
-    public ResponseEntity<CustomResponse> handleException(CustomNotFoundException exc){
+    public ResponseEntity<CustomResponse> handleException(CustomNotFoundException exc) {
 
         //create CustomerErrorResponse
-        CustomResponse<HashMap<String,String>> error = new CustomResponse(
+        CustomResponse<HashMap<String, String>> error = new CustomResponse(
                 exc.getMessage(),
                 HttpStatus.NOT_FOUND,
                 exc.getErrors()
@@ -61,7 +59,7 @@ public class        GlobalExceptionHandlerImpl implements GlobalExceptionHandler
     @Override
     @ExceptionHandler
     //INTERNAL SERVER ERROR 500
-    public ResponseEntity<CustomResponse> handleException(Exception exc){
+    public ResponseEntity<CustomResponse> handleException(Exception exc) {
 
         //create CustomerErrorResponse
         CustomResponse error = new CustomResponse(

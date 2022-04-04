@@ -60,5 +60,4 @@ public class EverywhereRemitData {
     private String senderCountry; // new field, misplaced previously in receiverCountry
 
 
-
 }

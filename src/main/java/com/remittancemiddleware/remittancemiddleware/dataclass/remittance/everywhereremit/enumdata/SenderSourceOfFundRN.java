@@ -12,7 +12,7 @@ public enum SenderSourceOfFundRN {
     SALARY("06"),
     ;
 
-    private String data;
+    private final String data;
 
     SenderSourceOfFundRN(String data) {
         this.data = data;

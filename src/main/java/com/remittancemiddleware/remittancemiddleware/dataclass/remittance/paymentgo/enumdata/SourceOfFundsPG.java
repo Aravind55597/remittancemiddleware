@@ -9,7 +9,7 @@ public enum SourceOfFundsPG {
     OTHER("99"),
     SALARY_TO_INCLUDE_ANY_WORK_RELATED_COMPENSATION_AND_PENSIONS("01");
 
-    private String data;
+    private final String data;
 
     SourceOfFundsPG(String data) {
         this.data = data;

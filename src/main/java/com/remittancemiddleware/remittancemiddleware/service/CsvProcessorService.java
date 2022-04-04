@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface CsvProcessorService {
-    List<Map<String,String>> processCsv(MultipartFile csvFile) throws Exception;
+    List<Map<String, String>> processCsv(MultipartFile csvFile) throws Exception;
+
     List<String> processCsvHeaders(MultipartFile csvFile) throws Exception;
 }

@@ -1,7 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap;
 
 
-import com.remittancemiddleware.remittancemiddleware.entity.RemittanceCompany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,12 +28,12 @@ public class RemittanceMapApi implements Serializable {
 
     private String segment;
 
-    @OneToOne(cascade=CascadeType.ALL ,orphanRemoval=true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "sender_map_api_id")
     private SenderMapApi senderMapApi;
 
 
-    @OneToOne(cascade=CascadeType.ALL,orphanRemoval=true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "receiver_map_api_id")
     private ReceiverMapApi receiverMapApi;
 

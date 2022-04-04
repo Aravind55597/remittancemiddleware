@@ -1,14 +1,14 @@
 package com.remittancemiddleware.remittancemiddleware.entity;
 
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.ArrayList;
 
 
 @Entity
@@ -29,20 +29,20 @@ public class User {
 
     private String lastName;
 
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="company_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "company_id")
     private Company company;
 
     @JsonBackReference
-    public Company getCompany(){
+    public Company getCompany() {
         return company;
     }
 
-    public Company setCompany(Company theCompany){
+    public Company setCompany(Company theCompany) {
         return this.company = theCompany;
     }
 
-    public int getCompanyId(){
+    public int getCompanyId() {
         return company.getId();
     }
 

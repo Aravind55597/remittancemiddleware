@@ -2,7 +2,10 @@ package com.remittancemiddleware.remittancemiddleware.service.mapper;
 
 import com.remittancemiddleware.remittancemiddleware.customexception.CustomMappingException;
 import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.everywhereremit.EverywhereRemitData;
-import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.everywhereremit.enumdata.*;
+import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.everywhereremit.enumdata.CountryRN;
+import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.everywhereremit.enumdata.IdTypeRN;
+import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.everywhereremit.enumdata.PurposeOfRemittanceRN;
+import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.everywhereremit.enumdata.SenderSourceOfFundRN;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.IdType;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittancePurpose;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.SourceOfFunds;
@@ -17,39 +20,38 @@ import java.text.SimpleDateFormat;
 @Transactional
 public class SSOTToEverywhereRemitMapperImpl implements SSOTToEverywhereRemitMapper {
 
-    private SimpleDateFormat simpleDateFormat;
+    private final SimpleDateFormat simpleDateFormat;
 
     @Autowired
-    public SSOTToEverywhereRemitMapperImpl(SimpleDateFormat simpleDateFormat){
-        this.simpleDateFormat=simpleDateFormat;
+    public SSOTToEverywhereRemitMapperImpl(SimpleDateFormat simpleDateFormat) {
+        this.simpleDateFormat = simpleDateFormat;
     }
 
 
     @Override
     public EverywhereRemitData MapSSOT(RemittanceTransaction ssot) throws CustomMappingException {
-        try{
+        try {
             EverywhereRemitData result = new EverywhereRemitData();
 
             result.setRemittancePurpose(this.convertRemittancePurpose(ssot.getPurpose()));
 
-            this.setSenderValues(ssot,result);
+            this.setSenderValues(ssot, result);
 
-            this.setReceiverValues(ssot,result);
+            this.setReceiverValues(ssot, result);
 
-            this.setRemittanceValues(ssot,result);
+            this.setRemittanceValues(ssot, result);
 
             return result;
         }
         //if SSOT has a null value
-        catch(NullPointerException ex){
+        catch (NullPointerException ex) {
 
             throw new CustomMappingException(ex.getMessage());
         }
     }
 
 
-
-    void setSenderValues(RemittanceTransaction ssot, EverywhereRemitData result) throws NullPointerException , CustomMappingException {
+    void setSenderValues(RemittanceTransaction ssot, EverywhereRemitData result) throws NullPointerException, CustomMappingException {
         result.setSenderAddressLine(ssot.getSender().getAddress().getAddressLine());
 
         result.setSenderAddressCity(ssot.getSender().getAddress().getCity());
@@ -77,9 +79,9 @@ public class SSOTToEverywhereRemitMapperImpl implements SSOTToEverywhereRemitMap
         result.setSenderCountry(ssot.getSender().getSenderRemittanceCountry());
     }
 
-    void setReceiverValues(RemittanceTransaction ssot, EverywhereRemitData result) throws NullPointerException , CustomMappingException{
+    void setReceiverValues(RemittanceTransaction ssot, EverywhereRemitData result) throws NullPointerException, CustomMappingException {
         result.setRecipientAccountNumber(ssot.getReceiver().getBankAccount().getAccountNumber());
-        
+
         result.setRecipientCurrency(ssot.getReceiver().getCurrency());
 
         result.setRecipientCountry(ssot.getReceiver().getReceiverRemittanceCountry());
@@ -97,7 +99,7 @@ public class SSOTToEverywhereRemitMapperImpl implements SSOTToEverywhereRemitMap
     }
 
 
-    void setRemittanceValues(RemittanceTransaction ssot, EverywhereRemitData result) throws NullPointerException , CustomMappingException{
+    void setRemittanceValues(RemittanceTransaction ssot, EverywhereRemitData result) throws NullPointerException, CustomMappingException {
         result.setSourceType(ssot.getSourceType());
         result.setSegment(ssot.getSegment());
         result.setUnits(ssot.getAmount());

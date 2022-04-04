@@ -1,9 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap;
 
 
-import com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap.AddressMap;
-import com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap.BankAccountMap;
-import com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap.IdentificationMap;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,9 +19,9 @@ abstract public class PartyMapApi implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String firstName ;
+    private String firstName;
 
-    private String lastName ;
+    private String lastName;
 
     private String nationality;
 
@@ -35,15 +32,15 @@ abstract public class PartyMapApi implements Serializable {
     private String mobileNumber;
 
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "identification_map_api_id")
     private IdentificationMapApi identificationMapApi;
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "bank_account_map_api_id")
     private BankAccountMapApi bankAccountMapApi;
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "address_map_api_id")
     private AddressMapApi addressMapApi;
 

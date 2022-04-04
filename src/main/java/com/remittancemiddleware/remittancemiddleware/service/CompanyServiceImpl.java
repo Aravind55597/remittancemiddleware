@@ -1,21 +1,18 @@
 package com.remittancemiddleware.remittancemiddleware.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFoundException;
 import com.remittancemiddleware.remittancemiddleware.dao.CompanyDAO;
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
-import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
 
-    private CompanyDAO companyDAO;
+    private final CompanyDAO companyDAO;
 
     @Autowired
     public CompanyServiceImpl(CompanyDAO theCompanyDAO) {
@@ -25,7 +22,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public List<Company> findAll() {
         return companyDAO.findAll();
-    };
+    }
 
     @Override
     public Company findById(int companyId) {
@@ -39,6 +36,6 @@ public class CompanyServiceImpl implements CompanyService {
         }
 
         return theCompany;
-    };
+    }
 
 }

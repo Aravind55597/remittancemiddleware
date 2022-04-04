@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Identification  implements Serializable {
+public class Identification implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -28,7 +28,7 @@ public class Identification  implements Serializable {
 
     private String issuingCountry; //enum issuing country? // nope, using standard country code
 
-    public Identification(IdType idType, String idNumber,  String issuingCountry) {
+    public Identification(IdType idType, String idNumber, String issuingCountry) {
         this.idType = idType;
         this.idNumber = idNumber;
         this.issuingCountry = issuingCountry;

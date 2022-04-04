@@ -2,7 +2,6 @@ package com.remittancemiddleware.remittancemiddleware.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.remittancemiddleware.remittancemiddleware.dataclass.remittance.financenow.FinanceNowData;
 import com.remittancemiddleware.remittancemiddleware.dataclass.sandbox.SandBoxRequest;
 import com.remittancemiddleware.remittancemiddleware.dataclass.sandbox.SandboxResponse;
 import okhttp3.*;
@@ -15,28 +14,27 @@ import java.io.IOException;
 @Service
 public class SandboxAPIServiceImpl implements SandboxAPIService {
 
-    private String sandboxPassword;
+    private final String sandboxPassword;
 
-    private String sandboxUsername;
+    private final String sandboxUsername;
 
-    private String sandboxBaseUrl;
+    private final String sandboxBaseUrl;
 
-    private OkHttpClient okHttpClient;
+    private final OkHttpClient okHttpClient;
 
-    private ObjectMapper objectMapper;
-
+    private final ObjectMapper objectMapper;
 
 
     @Autowired
-    public SandboxAPIServiceImpl(OkHttpClient okHttpClient , ObjectMapper objectMapper,
+    public SandboxAPIServiceImpl(OkHttpClient okHttpClient, ObjectMapper objectMapper,
                                  @Value("${sandbox.password}") String sandboxPassword,
                                  @Value("${sandbox.username}") String sandboxUsername,
-                                 @Value("${sandbox.base.url}") String sandboxBaseUrl){
-        this.okHttpClient=okHttpClient;
-        this.objectMapper=objectMapper;
-        this.sandboxPassword= sandboxPassword;
-        this.sandboxUsername=sandboxUsername;
-        this.sandboxBaseUrl=sandboxBaseUrl;
+                                 @Value("${sandbox.base.url}") String sandboxBaseUrl) {
+        this.okHttpClient = okHttpClient;
+        this.objectMapper = objectMapper;
+        this.sandboxPassword = sandboxPassword;
+        this.sandboxUsername = sandboxUsername;
+        this.sandboxBaseUrl = sandboxBaseUrl;
     }
 
     //works
@@ -80,17 +78,16 @@ public class SandboxAPIServiceImpl implements SandboxAPIService {
     }
 
 
-
-    public <T> SandboxResponse sendTransactionToSandbox(T payload , String apiName) throws IOException {
+    public <T> SandboxResponse sendTransactionToSandbox(T payload, String apiName) throws IOException {
         SandboxResponse sandboxAccessTokenResponse = this.authenticate();
 
         String accessToken = sandboxAccessTokenResponse.getAccessToken();
 
-        SandBoxRequest<T> sandBoxRequest = new SandBoxRequest(accessToken,apiName, payload);
+        SandBoxRequest<T> sandBoxRequest = new SandBoxRequest(accessToken, apiName, payload);
 
         String json = objectMapper.writeValueAsString(sandBoxRequest);
 
-        RequestBody requestBody = RequestBody.create(json,MediaType.parse("application/json; charset=utf-8"));
+        RequestBody requestBody = RequestBody.create(json, MediaType.parse("application/json; charset=utf-8"));
 
         Request request = new Request.Builder()
                 .url(sandboxBaseUrl + "/smu_send_transaction")
@@ -105,11 +102,6 @@ public class SandboxAPIServiceImpl implements SandboxAPIService {
 
         return sandboxResponse;
     }
-
-
-
-
-
 
 
 }

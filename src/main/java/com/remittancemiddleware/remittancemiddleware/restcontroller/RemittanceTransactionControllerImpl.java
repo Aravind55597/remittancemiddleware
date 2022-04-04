@@ -1,7 +1,6 @@
 package com.remittancemiddleware.remittancemiddleware.restcontroller;
 
 import com.remittancemiddleware.remittancemiddleware.dataclass.custom.CustomResponse;
-import com.remittancemiddleware.remittancemiddleware.dataclass.sandbox.SandboxResponse;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.TransactionStatus;
 import com.remittancemiddleware.remittancemiddleware.entity.transaction.RemittanceTransaction;
 import com.remittancemiddleware.remittancemiddleware.service.RemittanceTransactionService;
@@ -10,37 +9,36 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/remittanceTransaction")
 public class RemittanceTransactionControllerImpl implements RemittanceTransactionController {
-    private RemittanceTransactionService remittanceTransactionService;
+    private final RemittanceTransactionService remittanceTransactionService;
 
     @Autowired
-    public RemittanceTransactionControllerImpl(RemittanceTransactionService theRemittanceTransactionService){
+    public RemittanceTransactionControllerImpl(RemittanceTransactionService theRemittanceTransactionService) {
         this.remittanceTransactionService = theRemittanceTransactionService;
     }
 
 
     @GetMapping("/getTransactionsByUser")
-    public CustomResponse getTransactionsByUser(@RequestParam int userId){
+    public CustomResponse getTransactionsByUser(@RequestParam int userId) {
         List<RemittanceTransaction> remittanceTransaction = remittanceTransactionService.findByCompanyId(userId);
-        CustomResponse result = new CustomResponse (remittanceTransaction);
+        CustomResponse result = new CustomResponse(remittanceTransaction);
         return result;
     }
 
     @GetMapping("/getTransactionsByStatus")
-    public CustomResponse getTransactionsByStatus(@RequestParam String status, @RequestParam int userId){
+    public CustomResponse getTransactionsByStatus(@RequestParam String status, @RequestParam int userId) {
         TransactionStatus transactionStatus = remittanceTransactionService.getTransactionStatus(status);
 
         List<RemittanceTransaction> remittanceTransaction = remittanceTransactionService.findByTransactionStatusAndCompanyId(transactionStatus, userId);
-        CustomResponse result = new CustomResponse (remittanceTransaction);
+        CustomResponse result = new CustomResponse(remittanceTransaction);
         return result;
     }
 
     @PostMapping("/processTransactions/{userId}/{destCountry}/{remittanceCompany}")
-    public CustomResponse processTransactions(@PathVariable int userId, @PathVariable String destCountry, @PathVariable String remittanceCompany, @RequestParam("csvFile")MultipartFile csvFile) throws Exception {
+    public CustomResponse processTransactions(@PathVariable int userId, @PathVariable String destCountry, @PathVariable String remittanceCompany, @RequestParam("csvFile") MultipartFile csvFile) throws Exception {
 
         try {
             List<String> response = remittanceTransactionService.processTransactions(userId, destCountry, remittanceCompany, csvFile);
@@ -50,5 +48,6 @@ public class RemittanceTransactionControllerImpl implements RemittanceTransactio
             throw e;
         }
 
-    };
+    }
+
 }

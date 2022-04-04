@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittanceCompanyName;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittancePurpose;
-
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.TransactionStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RemittanceTransaction  implements Serializable{
+public class RemittanceTransaction implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,17 +34,17 @@ public class RemittanceTransaction  implements Serializable{
 
     private String segment; //segment // hard code value, same reason as above
 
-    @OneToOne(cascade = {CascadeType.ALL},orphanRemoval=true)
+    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
     @JoinColumn(name = "sender_id")
     private Sender sender;
 
 
-    @OneToOne(cascade = {CascadeType.ALL},orphanRemoval=true)
+    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
     @JoinColumn(name = "receiver_id")
     private Receiver receiver;
 
     @ManyToOne
-    @JoinColumn(name="company_id")
+    @JoinColumn(name = "company_id")
     private Company company;
 
     //TODO CHANGE THIS TO REMITTANCE COMPANY NAME

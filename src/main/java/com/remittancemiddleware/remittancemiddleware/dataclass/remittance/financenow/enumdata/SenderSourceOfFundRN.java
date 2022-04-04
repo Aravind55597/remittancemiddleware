@@ -8,9 +8,8 @@ public enum SenderSourceOfFundRN {
     FRIENDS_AND_FAMILY("04"),
     OTHER("99"),
     SALARY_COMPENSATION_PENSION("01");
-    ;
 
-    private String data;
+    private final String data;
 
     SenderSourceOfFundRN(String data) {
         this.data = data;

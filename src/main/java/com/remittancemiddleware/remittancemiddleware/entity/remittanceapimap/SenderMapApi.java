@@ -1,12 +1,12 @@
 package com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap;
 
 
-import com.remittancemiddleware.remittancemiddleware.entity.companyfieldmap.RemittanceMap;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
 import java.io.Serializable;
 
 @Entity

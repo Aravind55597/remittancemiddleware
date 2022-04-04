@@ -7,10 +7,10 @@ import com.remittancemiddleware.remittancemiddleware.entity.enumdata.SourceOfFun
 
 public interface SSOTToPaymentGoMapper extends SSOTMapper<PaymentGoData> {
 
-    public String convertIdType(IdType idType);
+    String convertIdType(IdType idType);
 
-    public String convertSourceOfFunds(SourceOfFunds sourceOfFunds);
+    String convertSourceOfFunds(SourceOfFunds sourceOfFunds);
 
-    public String convertRemittancePurpose(RemittancePurpose remittancePurpose);
+    String convertRemittancePurpose(RemittancePurpose remittancePurpose);
 
 }

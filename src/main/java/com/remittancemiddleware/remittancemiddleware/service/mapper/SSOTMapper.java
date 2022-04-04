@@ -6,8 +6,7 @@ import com.remittancemiddleware.remittancemiddleware.entity.transaction.Remittan
 public interface SSOTMapper<T> {
 
 
-  T MapSSOT(RemittanceTransaction ssot) throws CustomMappingException;
-
+    T MapSSOT(RemittanceTransaction ssot) throws CustomMappingException;
 
 
 }

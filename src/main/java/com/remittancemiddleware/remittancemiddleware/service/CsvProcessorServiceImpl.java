@@ -1,25 +1,26 @@
 package com.remittancemiddleware.remittancemiddleware.service;
 
 import com.opencsv.CSVReader;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
-import com.opencsv.bean.HeaderColumnNameMappingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class CsvProcessorServiceImpl implements CsvProcessorService {
 
     @Autowired
-    public CsvProcessorServiceImpl () {
+    public CsvProcessorServiceImpl() {
 
     }
 
-    public List<Map<String,String>> processCsv(MultipartFile csvFile) throws Exception {
+    public List<Map<String, String>> processCsv(MultipartFile csvFile) throws Exception {
 
 
         try {
@@ -31,10 +32,10 @@ public class CsvProcessorServiceImpl implements CsvProcessorService {
             CSVReader csvReader = new CSVReader(reader);
 
             List<String> columnNameArray = null;
-            ArrayList<Map<String,String>>arrayOfCsvRowObjects = new ArrayList<Map<String,String>>();
+            ArrayList<Map<String, String>> arrayOfCsvRowObjects = new ArrayList<Map<String, String>>();
 
             String[] currentRow;
-            while((currentRow = csvReader.readNext()) != null) {
+            while ((currentRow = csvReader.readNext()) != null) {
 
                 // assign first excel row as an array containing a list of column names to create object later e.g. firstName, lastName
                 if (columnNameArray == null) {
@@ -51,7 +52,7 @@ public class CsvProcessorServiceImpl implements CsvProcessorService {
 
                 // create new hashmap using given column labels in columnNameArray
                 int columnIdx = 0;
-                Map<String,String> currentObject = new HashMap<String, String>();
+                Map<String, String> currentObject = new HashMap<String, String>();
                 for (String columnValue : currentRow) {
                     String columnName = columnNameArray.get(columnIdx);
                     currentObject.put(columnName, columnValue);
@@ -64,8 +65,7 @@ public class CsvProcessorServiceImpl implements CsvProcessorService {
 
             // return array of objects
             return arrayOfCsvRowObjects;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw e;
         }
     }
@@ -81,8 +81,8 @@ public class CsvProcessorServiceImpl implements CsvProcessorService {
 
             ArrayList<String> columnNameArray = new ArrayList<String>();
             String[] currentRow;
-            if ((currentRow=csvReader.readNext()) != null) {
-                for (String columnName: currentRow) {
+            if ((currentRow = csvReader.readNext()) != null) {
+                for (String columnName : currentRow) {
                     String cleanedColumnName = columnName.replaceAll("[^a-zA-Z0-9]", ""); // clean column name of special characters
                     columnNameArray.add(cleanedColumnName);
                 }
@@ -91,8 +91,7 @@ public class CsvProcessorServiceImpl implements CsvProcessorService {
             csvReader.close();
 
             return columnNameArray;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw e;
         }
     }

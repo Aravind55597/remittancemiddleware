@@ -14,14 +14,14 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Party  implements Serializable {
+public abstract class Party implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id; // change from private to protected for inheritance
 
-    protected String firstName ;
+    protected String firstName;
 
-    protected String lastName ;
+    protected String lastName;
 
     protected String nationality;
     // what is this currency for btw? there is payoutCurrency, senderCurrency
@@ -31,19 +31,18 @@ public abstract class Party  implements Serializable {
 
     protected String mobileNumber;
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "identification_id")
     protected Identification identification;
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "bank_account_id")
     protected BankAccount bankAccount;
 
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval=true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "address_id")
     protected Address address;
-
 
 
 }

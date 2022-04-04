@@ -1,9 +1,7 @@
 package com.remittancemiddleware.remittancemiddleware.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.remittancemiddleware.remittancemiddleware.entity.enumdata.RemittanceCompanyName;
 import com.remittancemiddleware.remittancemiddleware.entity.remittanceapimap.RemittanceMapApi;
 import lombok.Getter;
@@ -27,11 +25,11 @@ public class RemittanceCompany implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(unique=true)
+    @Column(unique = true)
     private RemittanceCompanyName remittanceCompanyName;
 
 
-    @ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH}, mappedBy = "remittanceCompanies")
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH}, mappedBy = "remittanceCompanies")
 //    @JoinTable(
 //            name="supported_country_remittance_company",
 //            joinColumns=@JoinColumn(name="remittance_company_id"),
@@ -39,19 +37,16 @@ public class RemittanceCompany implements Serializable {
 //    )
     private List<SupportedCountry> supportedCountries;
 
-    @OneToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name="remittance_api_map")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "remittance_api_map")
     private RemittanceMapApi remittanceMapApi;
 
-    public void addSupportedCountries(SupportedCountry theSupportedCountry){
-        if(this.supportedCountries==null){
-            this.supportedCountries=new ArrayList<SupportedCountry>();
+    public void addSupportedCountries(SupportedCountry theSupportedCountry) {
+        if (this.supportedCountries == null) {
+            this.supportedCountries = new ArrayList<SupportedCountry>();
         }
         this.supportedCountries.add(theSupportedCountry);
     }
-
-
-
 
 
 }

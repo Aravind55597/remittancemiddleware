@@ -10,13 +10,13 @@ import com.remittancemiddleware.remittancemiddleware.entity.enumdata.SourceOfFun
 public interface SSOTToFinanceNowMapper extends SSOTMapper<FinanceNowData> {
 
 
-    public String convertCountry(String countrySSOT) throws CustomMappingException;
+    String convertCountry(String countrySSOT) throws CustomMappingException;
 
-    public String convertIdType(IdType idType);
+    String convertIdType(IdType idType);
 
-    public String convertRemittancePurpose(RemittancePurpose remittancePurpose);
+    String convertRemittancePurpose(RemittancePurpose remittancePurpose);
 
-    public String convertBeneficiaryRelationship(BeneficiaryRelationship beneficiaryRelationship);
+    String convertBeneficiaryRelationship(BeneficiaryRelationship beneficiaryRelationship);
 
-    public String convertSourceOfFunds(SourceOfFunds sourceOfFunds);
+    String convertSourceOfFunds(SourceOfFunds sourceOfFunds);
 }

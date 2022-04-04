@@ -17,9 +17,9 @@ import java.text.SimpleDateFormat;
 
 @Service
 @Transactional
-public class SSOTToPaymentGoMapperImpl implements  SSOTToPaymentGoMapper{
+public class SSOTToPaymentGoMapperImpl implements SSOTToPaymentGoMapper {
 
-    private SimpleDateFormat simpleDateFormat;
+    private final SimpleDateFormat simpleDateFormat;
 
     @Autowired
     public SSOTToPaymentGoMapperImpl(SimpleDateFormat simpleDateFormat) {
@@ -28,7 +28,7 @@ public class SSOTToPaymentGoMapperImpl implements  SSOTToPaymentGoMapper{
 
     @Override
     public PaymentGoData MapSSOT(RemittanceTransaction ssot) throws CustomMappingException {
-        try{
+        try {
             PaymentGoData result = new PaymentGoData();
 
             //sender
@@ -66,7 +66,7 @@ public class SSOTToPaymentGoMapperImpl implements  SSOTToPaymentGoMapper{
             return result;
         }
         //if SSOT has a null value
-        catch(NullPointerException ex){
+        catch (NullPointerException ex) {
 
             throw new CustomMappingException(ex.getMessage());
         }

@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.text.SimpleDateFormat;
 
 @Service
@@ -20,37 +19,36 @@ import java.text.SimpleDateFormat;
 public class SSOTToFinanceNowMapperImpl implements SSOTToFinanceNowMapper {
 
 
-    private SimpleDateFormat simpleDateFormat;
+    private final SimpleDateFormat simpleDateFormat;
 
     @Autowired
-    public SSOTToFinanceNowMapperImpl(SimpleDateFormat simpleDateFormat){
-        this.simpleDateFormat=simpleDateFormat;
+    public SSOTToFinanceNowMapperImpl(SimpleDateFormat simpleDateFormat) {
+        this.simpleDateFormat = simpleDateFormat;
     }
 
 
     @Override
-    public FinanceNowData MapSSOT(RemittanceTransaction ssot) throws CustomMappingException{
-        try{
+    public FinanceNowData MapSSOT(RemittanceTransaction ssot) throws CustomMappingException {
+        try {
             FinanceNowData result = new FinanceNowData();
 
-            this.setRemittanceValues(ssot,result);
+            this.setRemittanceValues(ssot, result);
 
-            this.setSenderValues(ssot,result);
+            this.setSenderValues(ssot, result);
 
-            this.setReceiverValues(ssot,result);
+            this.setReceiverValues(ssot, result);
 
             return result;
         }
         //if SSOT has a null value
-        catch(NullPointerException ex){
+        catch (NullPointerException ex) {
 
             throw new CustomMappingException(ex.getMessage());
         }
     }
 
 
-
-    void setSenderValues(RemittanceTransaction ssot, FinanceNowData result) throws NullPointerException , CustomMappingException {
+    void setSenderValues(RemittanceTransaction ssot, FinanceNowData result) throws NullPointerException, CustomMappingException {
 
         //get remittanceMap Object
 
@@ -61,10 +59,6 @@ public class SSOTToFinanceNowMapperImpl implements SSOTToFinanceNowMapper {
         //find value at the index -> get "john"
 
         //transaction.setFIrstName("john)
-
-
-
-
 
 
         //dict.put(remittanceMapDAO.get("financeNow").getSendderFirstNmse(),ssot.getSender().getFirstName())
@@ -89,7 +83,6 @@ public class SSOTToFinanceNowMapperImpl implements SSOTToFinanceNowMapper {
         result.setSenderCountry(this.convertCountry(ssot.getSender().getAddress().getCountry()));
 
 
-
         result.setSenderBeneficiaryRelationship(this.convertBeneficiaryRelationship(ssot.getSender().getBeneficiaryRelationship()));
 
         result.setSenderSourceOfFund(this.convertSourceOfFunds(ssot.getSender().getSourceOfFunds()));
@@ -98,7 +91,7 @@ public class SSOTToFinanceNowMapperImpl implements SSOTToFinanceNowMapper {
 
     }
 
-    void setReceiverValues(RemittanceTransaction ssot, FinanceNowData result) throws NullPointerException , CustomMappingException{
+    void setReceiverValues(RemittanceTransaction ssot, FinanceNowData result) throws NullPointerException, CustomMappingException {
 
         result.setReceiverFirstName(ssot.getReceiver().getFirstName());
 
@@ -121,7 +114,7 @@ public class SSOTToFinanceNowMapperImpl implements SSOTToFinanceNowMapper {
     }
 
 
-    void setRemittanceValues(RemittanceTransaction ssot, FinanceNowData result) throws NullPointerException , CustomMappingException{
+    void setRemittanceValues(RemittanceTransaction ssot, FinanceNowData result) throws NullPointerException, CustomMappingException {
 
         result.setPaymentMode(ssot.getPaymentMode());
 

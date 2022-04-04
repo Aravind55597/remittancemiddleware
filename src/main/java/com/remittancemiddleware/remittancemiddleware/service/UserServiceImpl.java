@@ -1,12 +1,11 @@
 package com.remittancemiddleware.remittancemiddleware.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFoundException;
 import com.remittancemiddleware.remittancemiddleware.dao.CompanyDAO;
 import com.remittancemiddleware.remittancemiddleware.dao.UserDAO;
 import com.remittancemiddleware.remittancemiddleware.entity.Company;
 import com.remittancemiddleware.remittancemiddleware.entity.User;
-import com.remittancemiddleware.remittancemiddleware.customexception.CustomNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,8 +17,8 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserDAO userDAO;
-    private CompanyDAO companyDAO;
+    private final UserDAO userDAO;
+    private final CompanyDAO companyDAO;
 
     @Autowired
     public UserServiceImpl(UserDAO theUserDAO, CompanyDAO theCompanyDAO) {
@@ -43,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User save(Map<String,String> creationDetails) {
+    public User save(Map<String, String> creationDetails) {
         int companyId = Integer.parseInt(creationDetails.get("companyId"));
         Optional<Company> companyResult = companyDAO.findById(companyId);
         Company theCompany = null;
@@ -73,7 +72,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(Map<String,String> loginDetails) {
+    public User login(Map<String, String> loginDetails) {
 
         String email = loginDetails.get("email");
         String password = loginDetails.get("password");

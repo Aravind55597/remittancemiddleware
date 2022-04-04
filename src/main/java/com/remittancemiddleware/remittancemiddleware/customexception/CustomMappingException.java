@@ -2,7 +2,7 @@ package com.remittancemiddleware.remittancemiddleware.customexception;
 
 import java.util.HashMap;
 
-public class CustomMappingException  extends CustomException {
+public class CustomMappingException extends CustomException {
     public CustomMappingException(String message) {
         super(message);
     }

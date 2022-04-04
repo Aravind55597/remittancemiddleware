@@ -10,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class RemittanceCompanyServiceImpl implements RemittanceCompanyService{
+public class RemittanceCompanyServiceImpl implements RemittanceCompanyService {
 
-    private RemittanceCompanyDAO remittanceCompanyDAO;
-    private SupportedCountryDAO supportedCountryDAO;
+    private final RemittanceCompanyDAO remittanceCompanyDAO;
+    private final SupportedCountryDAO supportedCountryDAO;
 
     @Autowired
     public RemittanceCompanyServiceImpl(RemittanceCompanyDAO theRemittanceCompanyDAO, SupportedCountryDAO theSupportedCountryDAO) {

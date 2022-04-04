@@ -7,9 +7,8 @@ public enum IdTypeRN {
     ID_CARD_GOVERNMENT("02"),
     OTHER("99"),
     PASSPORT("01");
-    ;
 
-    private String data;
+    private final String data;
 
     IdTypeRN(String data) {
         this.data = data;

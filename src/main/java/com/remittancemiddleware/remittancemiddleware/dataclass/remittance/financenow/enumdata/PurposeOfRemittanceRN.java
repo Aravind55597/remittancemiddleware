@@ -9,9 +9,8 @@ public enum PurposeOfRemittanceRN {
     OTHER("99"),
     PAYMENT_PRODUCT_SERVICES("06"),
     SELF("10");
-    ;
 
-    private String data;
+    private final String data;
 
     PurposeOfRemittanceRN(String data) {
         this.data = data;

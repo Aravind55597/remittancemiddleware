@@ -9,9 +9,9 @@ import java.util.HashMap;
 
 @Getter
 @Setter
-public abstract class CustomException extends RuntimeException{
+public abstract class CustomException extends RuntimeException {
 
-    private HashMap<String,String> errors;
+    private HashMap<String, String> errors;
     private ArrayList<String> errorsA;
 
     public CustomException(String message) {
