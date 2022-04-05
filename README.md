@@ -1,4 +1,4 @@
-# remittancemiddleware
+# remittancemiddleware G1T6 
 
 This a Remittance Middleware Programme by G1 Group 6 
 
