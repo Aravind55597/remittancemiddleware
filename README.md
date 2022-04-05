@@ -95,4 +95,8 @@ RemittanceMapApi Class
 
 Deployment URL (SWAGGER UI) :  http://remittancemiddlewareg6.us-east-1.elasticbeanstalk.com:5000/swagger-ui/index.html 
 
+Sample Users : 
+
+With mapping done -> Username :  user1@gmail.com   Password : abc12345
+Without mapping -> Username :  user5@gmail.com  Password : abc12345
 	
