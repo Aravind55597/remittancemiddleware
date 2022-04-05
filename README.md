@@ -24,7 +24,7 @@ This a Remittance Middleware Programme by G1 Group 6
 2. If AWS RDS is used for evaluation , skip this step. If localhost , please read the following <br />
 		a. Open MySQL workbench  <br />
 		b. Create a new connection & create a new schema "remittance"  <br /> 
-		c. Run compile.bat <br />
+		c. mvn spring-boot:run <br />
 		e. Tables will be automatically created & data will be automatically seeded <br />
        a) Wait for "There is no data in remittance database -- seeding data now.<br />
        b) Please wait for "completed initialisation" message" , data has been seeded <br /><br />
