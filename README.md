@@ -97,6 +97,6 @@ Deployment URL (SWAGGER UI) :  http://remittancemiddlewareg6.us-east-1.elasticbe
 
 Sample Users : 
 
-With mapping done -> Username :  user1@gmail.com   Password : abc12345
+With mapping done -> Username :  user1@gmail.com   Password : abc12345 <br/>
 Without mapping -> Username :  user5@gmail.com  Password : abc12345
 	
