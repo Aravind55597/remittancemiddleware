@@ -93,8 +93,6 @@ RemittanceMapApi Class
 - Has nested classes similar to RemittanceMap in the form of SenderMapApi, ReceiverMapApi, etc.
 
 
-Deployment URL (SWAGGER UI) :  http://remittancemiddlewareg6.us-east-1.elasticbeanstalk.com:5000/swagger-ui/index.html 
-
 Sample Users : 
 
 With mapping done -> Username :  user1@gmail.com   Password : abc12345 <br/>
